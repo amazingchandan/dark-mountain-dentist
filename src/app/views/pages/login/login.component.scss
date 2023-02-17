@@ -1,0 +1,16 @@
+.login-card{
+    width: 50% !important;
+    flex: none !important;
+}
+.btn{
+    min-width:-moz-available;
+min-width: -webkit-fill-available;
+min-width: fill-available;
+}
+
+@media (min-width:420px)and (max-width:767px){
+
+     .login-card{
+        width: 80% !important;
+     }
+}

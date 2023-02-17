@@ -1,0 +1,50 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="8">
+        <c-card-group class="d-flex justify-content-center">
+          <c-card class="p-4 w-50 mx-5 login-card">
+            <c-card-body>
+              <form cForm>
+                <h2 class="d-flex justify-content-center mb-4"> Dark Mountain</h2>
+               <!-- <p class="text-medium-emphasis">Sign In to your account</p>-->
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input autoComplete="username" cFormControl placeholder="Username" />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    type="password"
+                  />
+                </c-input-group>
+                 <c-row>
+                  <c-col >
+                    <button cButton class="btn btn-primary btn-block mb-4" color="primary">
+                      Login
+                    </button>
+                  </c-col>
+                </c-row>
+               <!-- <c-row>
+                  <c-col class="justify-content-center mx-5" >
+                    <button cButton class="px-0" color="link">
+                      Forgot password?
+                    </button>
+                  </c-col>
+                </c-row>-->
+              </form>
+            </c-card-body>
+          </c-card>
+          
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
