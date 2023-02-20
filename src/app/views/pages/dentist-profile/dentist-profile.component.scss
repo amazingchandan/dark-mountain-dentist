@@ -1,0 +1,25 @@
+.form-group label{
+    position: absolute;
+}
+.form-group input,select{
+    float: right;
+    width: 64%;
+}
+.city-input{
+    position: relative;
+    left:52%
+}
+.state-div{
+    margin-left: 7rem;
+}
+.state-input{
+    position: relative;
+    left: 16%;
+}
+.zip-input{
+    left: 9%;
+    position: relative;
+}
+.save-btn{
+    float: right;
+}

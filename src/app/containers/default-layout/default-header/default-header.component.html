@@ -18,18 +18,18 @@
           Dashboard
         </a>
       </c-nav-item>
-      <c-nav-item>
+    <!--  <c-nav-item>
         <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
       </c-nav-item>
       <c-nav-item>
         <a cNavLink routerLink="/settings" routerLinkActive="active">
           Settings
         </a>
-      </c-nav-item>
+      </c-nav-item>-->
     </c-header-nav>
 
     <c-header-nav class="d-none d-lg-flex">
-      <c-nav-item>
+     <!-- <c-nav-item>
         <a routerLink="./" cNavLink>
           <svg cIcon name="cilBell" size="lg"></svg>
         </a>
@@ -43,16 +43,15 @@
         <a routerLink="./" cNavLink>
           <svg cIcon name="cilEnvelopeOpen" size="lg"></svg>
         </a>
-      </c-nav-item>
+      </c-nav-item>-->
     </c-header-nav>
+   
+
+ 
+    <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
     <c-header-nav class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
-
-  </c-container>
-  <c-header-divider></c-header-divider>
-  <c-container [fluid]="true">
-    <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
   </c-container>
 </ng-container>
 <!--</c-header>-->
@@ -70,12 +69,12 @@
         cTextColor="primary"
         shape="rounded-1"
         size="md"
-        src="./assets/img/avatars/8.jpg"
+        src="./assets/img/avatars/no-logo-icon-1.webp"
         status="success"
       >
       </c-avatar>
     </button>
-    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+   <!-- <ul cDropdownMenu class="pt-0 pr-5 w-auto">
       <li>
         <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
       </li>
@@ -159,7 +158,7 @@
         </a>
       </li>
       <li></li>
-    </ul>
+    </ul>-->
   </c-dropdown>
 </ng-template>
 

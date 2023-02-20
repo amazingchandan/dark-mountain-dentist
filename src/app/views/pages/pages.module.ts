@@ -9,7 +9,12 @@ import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { RegisteredDentistsComponent } from './registered-dentists/registered-dentists.component';
-
+import { DataTablesModule } from 'angular-datatables';
+import { DentistProfileComponent } from './dentist-profile/dentist-profile.component';
+import { UploadedXraysComponent } from './uploaded-xrays/uploaded-xrays.component';
+import { SubscriptionListComponent } from './subscription-list/subscription-list.component';
+import { ManageSubscriptionComponent } from './manage-subscription/manage-subscription.component';
+import { MarkXrayComponent } from './mark-xray/mark-xray.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { RegisteredDentistsComponent } from './registered-dentists/registered-de
     RegisterComponent,
     Page404Component,
     Page500Component,
-    RegisteredDentistsComponent
+    RegisteredDentistsComponent,
+    DentistProfileComponent,
+    UploadedXraysComponent,
+    SubscriptionListComponent,
+    ManageSubscriptionComponent,
+    MarkXrayComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +36,8 @@ import { RegisteredDentistsComponent } from './registered-dentists/registered-de
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,
+    DataTablesModule
   ]
 })
 export class PagesModule {

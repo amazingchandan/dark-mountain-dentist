@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-registered-dentists',
-  templateUrl: './registered-dentists.component.html',
-  styleUrls: ['./registered-dentists.component.scss']
+  selector: 'app-subscription-list',
+  templateUrl: './subscription-list.component.html',
+  styleUrls: ['./subscription-list.component.scss']
 })
-export class RegisteredDentistsComponent {
+export class SubscriptionListComponent {
   dtOptions: DataTables.Settings = {};
  
 
@@ -25,6 +25,4 @@ export class RegisteredDentistsComponent {
   }
   ngOnDestroy(): void {
   }
-
-
 }
