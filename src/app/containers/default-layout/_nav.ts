@@ -4,19 +4,23 @@ export const navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
+    iconComponent: { name: 'cil-speedometer' }
    
   },
   {
     name: 'Registered Dentists',
-    url: '/registered-dentists'
+    url: '/registered-dentists',
+    iconComponent: { name: 'cil-people' }
   },
   {
     name: 'Uploaded X-Rays',
-    url: '/uploaded-xray'
+    url: '/uploaded-xray',
+    iconComponent: { name: 'cil-list-numbered' }
   },
   {
     name: 'Manage Subscription',
-    url: '/subscription-list'
+    url: '/subscription-list',
+    iconComponent: { name: 'cil-list' }
   },
  
 /*  {

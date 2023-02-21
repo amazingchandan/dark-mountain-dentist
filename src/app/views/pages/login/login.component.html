@@ -5,14 +5,18 @@
         <c-card-group class="d-flex justify-content-center">
           <c-card class="p-4 w-50 mx-5 login-card">
             <c-card-body>
-              <form cForm>
+              <form cForm [formGroup]="loginForm" (ngSubmit)="login()">
                 <h2 class="d-flex justify-content-center mb-4"> Dark Mountain</h2>
                <!-- <p class="text-medium-emphasis">Sign In to your account</p>-->
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input autoComplete="username" cFormControl placeholder="Username" 
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -20,16 +24,20 @@
                   </span>
                   <input
                     autoComplete="current-password"
-                    cFormControl
+                    formControlName="password"
+           
+            class="form-control"
                     placeholder="Password"
                     type="password"
                   />
                 </c-input-group>
                  <c-row>
                   <c-col >
-                    <button cButton class="btn btn-primary btn-block mb-4" color="primary">
+                    <app-button cButton class="btn btn-primary btn-block mb-4" color="primary" [type]="'submit'"
+                    loading="isAuthLoading">
                       Login
-                    </button>
+                    </app-button>
+                    
                   </c-col>
                 </c-row>
                <!-- <c-row>

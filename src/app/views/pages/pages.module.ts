@@ -15,7 +15,7 @@ import { UploadedXraysComponent } from './uploaded-xrays/uploaded-xrays.componen
 import { SubscriptionListComponent } from './subscription-list/subscription-list.component';
 import { ManageSubscriptionComponent } from './manage-subscription/manage-subscription.component';
 import { MarkXrayComponent } from './mark-xray/mark-xray.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -37,7 +37,9 @@ import { MarkXrayComponent } from './mark-xray/mark-xray.component';
     GridModule,
     IconModule,
     FormModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule {
