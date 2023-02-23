@@ -1,3 +1,12 @@
-.dt-buttons{
-    float: right;
+.datatables-wrapper .dt-buttons .dt-button{
+    position:relative!important;
+    float: right !important;
+    }
+    .btn i{
+        font-size: 1.3rem;
+    
+         position: relative; 
+         top: 1px;
+        text-align: center;
+        line-height: 1
     }

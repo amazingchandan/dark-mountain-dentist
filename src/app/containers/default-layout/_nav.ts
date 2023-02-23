@@ -4,25 +4,25 @@ export const navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    iconComponent: { name: 'cil-speedometer' }
+    icon:'fa-solid fa-gauge'
    
   },
   {
     name: 'Registered Dentists',
     url: '/registered-dentists',
-    iconComponent: { name: 'cil-people' }
+    icon:'fa-solid fa-users'
   },
   {
     name: 'Uploaded X-Rays',
     url: '/uploaded-xray',
-    iconComponent: { name: 'cil-list-numbered' }
+    icon: 'fa-solid fa-teeth-open'
   },
   {
     name: 'Manage Subscription',
     url: '/subscription-list',
-    iconComponent: { name: 'cil-list' }
+    icon: 'fa-sharp fa-regular fa-rectangle-list'
   },
- 
+
 /*  {
     name: 'Charts',
     url: '/charts',

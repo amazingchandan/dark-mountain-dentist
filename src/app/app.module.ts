@@ -4,12 +4,15 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
   PERFECT_SCROLLBAR_CONFIG,
   PerfectScrollbarConfigInterface,
   PerfectScrollbarModule,
 } from 'ngx-perfect-scrollbar';
 
+import {  } from 'ngx-toastr';
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
 
@@ -86,6 +89,10 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     DataTablesModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right'
+    })
   ],
   providers: [
     {

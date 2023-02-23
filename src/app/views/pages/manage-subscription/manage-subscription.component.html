@@ -1,73 +1,68 @@
-<div class="container mt-2">
+<div class="container">
   <h4 class="well">Configure Subscription Plan</h4>
 
   <div class="row mt-4">
     <div class="card card-primary">
-    <div class="col mt-4 me-3" style="float: right;">
-      <button type="button" class="btn btn-primary save-btn">Add New Plan</button>
+      
+      <form class="form-inline" role="form">
+        <div class="card-body">
+          <div class="row mb-2">
+
+            <div class="col-md-6 form-group">
+              <label class="">Plan Name</label>
+              <input type="text" placeholder="Plan Name" class="form-control">
+            </div>
+            <div class="col-md-3 form-group">
+              <label class="" for="inputState">Type</label>
+              <select id="inputState" class="form-control type-select ">
+                <option selected>Monthly</option>
+                <option>Yearly</option>
+
+              </select>
+            </div>
+            <div class="col-md-3 form-group country-col">
+              <label class="" for="inputState">Country</label>
+              <select id="inputState" class="form-control ">
+                <option selected>India</option>
+                <option>America</option>
+                <option>Japan</option>
+                <option>China</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-2">
+
+
+
+            <div class="col-md-6 form-group">
+              <label class="">Mininmum</label>
+              <input type="text" placeholder="Minimum" class="form-control">
+            </div>
+
+
+
+            <div class="col-md-6 form-group">
+              <label class="">Maximum</label>
+              <input type="text" placeholder="Maximum" class="form-control">
+            </div>
+
+          </div>
+          <div class="row mb-2">
+
+            <div class="col-md-6 form-group">
+              <label class="">Amount</label>
+              <input type="text" placeholder="Amount" class="form-control">
+            </div>
+
+
+            <div class="col-md-6 form-group mt-2">
+              <button type="button" class="btn btn-primary save-btn mt-4">Save</button>
+            </div>
+
+
+          </div>
+        </div>
+      </form>
     </div>
-    <form class="form-inline" role="form">
-      <div class="card-body">
-      <div class="row mb-2">
-
-        <div class="col-md-6 form-group">
-          <label class="float-left">Plan Name</label>
-          <input type="text" placeholder="Plan Name" class="form-control w-75">
-        </div>
-
-      </div>
-      <div class="row mb-2">
-        <div class="col-md-3 form-group">
-          <label class="float-left" for="inputState">Type</label>
-          <select id="inputState" class="form-control type-select w-50">
-            <option selected>Monthly</option>
-            <option>Yearly</option>
-           
-          </select>
-        </div>
-        <div class="col-md-3 form-group">
-          <label class="float-left ms-4" for="inputState">Country</label>
-          <select id="inputState" class="form-control w-50">
-            <option selected>India</option>
-            <option>America</option>
-            <option>Japan</option>
-            <option>China</option>
-          </select>
-        </div>
-      </div>
-      <div class="row mb-2">
-
-        <div class="col-md-6 form-group">
-          <label class="float-left">Mininmum</label>
-          <input type="text" placeholder="Minimum" class="form-control w-75">
-        </div>
-
-      </div>
-      <div class="row mb-2">
-
-        <div class="col-md-6 form-group">
-          <label class="float-left">Maximum</label>
-          <input type="text" placeholder="Maximum" class="form-control w-75">
-        </div>
-
-      </div>
-      <div class="row mb-2">
-
-        <div class="col-md-6 form-group">
-          <label class="float-left">Amount</label>
-          <input type="text" placeholder="Amount" class="form-control w-75">
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <button type="button" class="btn btn-primary save-btn">Save</button>
-        </div>
-      </div>
-
-    </div>
-
-    </form>
-  </div>
   </div>
 </div>

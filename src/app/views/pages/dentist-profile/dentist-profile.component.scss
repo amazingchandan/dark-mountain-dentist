@@ -1,22 +1,42 @@
-.form-group label{
-    position: absolute;
-}
+
 .form-group input,select{
-    float: right;
-    width: 64%;
+   
+    width: 90%;
 }
 
 .save-btn{
     float: right;
 }
 .btn-div{
-    margin-left: -3rem;
+    margin-left: -2.2rem;
 }
 .btn-cancel{
-    margin-top: -2%;
+    margin-top: -5%;
    // margin-left: 2.9rem;
    width: max-content;
 }
 .card{
     width: 73rem;
+}
+.xray-table-container{
+    position: relative;
+    right: 2%;
+
+}
+th{
+    font-weight: 700;
+}
+h5{
+    font-weight: 700;
+}
+.sub-row{
+    margin-left: -1.5rem;
+}
+.xray-row{
+   margin-left:  -0.1rem;
+}
+i{
+   
+    position: relative;
+    top: 1px;
 }

@@ -18,11 +18,12 @@ export class UploadedXraysComponent {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
-      dom: 'Bfrtip',
-      buttons: [ {extends:'copy',
-      className: 'btn btn-primary ',
-                  text:'Export'   
-    }]
+     // dom: 'Bfrtip',
+      /*buttons: [ {extends:'copy',
+      className: 'btn btn-primary position-relative mt-2',
+                  text:'Export' ,
+                  style:"position:relative"  
+    }]*/
     
     };
    

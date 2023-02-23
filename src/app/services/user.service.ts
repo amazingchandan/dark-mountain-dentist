@@ -24,5 +24,8 @@ export class UserService {
   addRole(requestParameters) {
     return this.http.post(`${this.addAdmin}`, requestParameters, {});
   } 
+  onLogout() {
+    return this.http.get(`${this.logout}`);
+  }
 
 }

@@ -16,10 +16,16 @@
 }
 .btn{
     float: right;
+    top: 22%;
+    position: relative;
 }
 label{
     font-weight: 500;
 }
 img{
     height: 22.125rem;
+}
+.btn-div{
+    margin-right: 1rem !important;
+    margin-top: 1.5rem !important;
 }
