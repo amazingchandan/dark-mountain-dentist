@@ -54,7 +54,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'dentist-profile',
+        path: 'dentist-profile/:dentist_id',
         component: DentistProfileComponent,
         data: {
           title: 'Dentist Profile Page'

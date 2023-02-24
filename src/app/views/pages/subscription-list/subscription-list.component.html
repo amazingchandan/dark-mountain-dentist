@@ -75,7 +75,7 @@
     </div>
     </section>
   
-    <!-- Button trigger modal -->
+   
     
     
 <!-- Modal -->
@@ -90,17 +90,17 @@
         <div class="row ">
           
             
-            <form class="form-inline" role="form">
+            <form [formGroup]="addPriceingForm" class="form-inline" role="form">
            
                 <div class="row mb-2">
       
                   <div class="col-md-6 form-group">
                     <label class="">Plan Name</label>
-                    <input type="text" placeholder="Plan Name" class="form-control">
+                    <input type="text" placeholder="Plan Name" formControlName="planName" class="form-control">
                   </div>
                   <div class="col-md-6 form-group">
                     <label class="">Amount</label>
-                    <input type="text" placeholder="Amount" class="form-control">
+                    <input type="text" placeholder="Amount" formControlName="amount" class="form-control">
                   </div>
                   
                   
@@ -111,14 +111,14 @@
       
                   <div class="col-md-6 form-group">
                     <label class="">Mininmum</label>
-                    <input type="text" placeholder="Minimum" class="form-control">
+                    <input type="text"  formControlName="min"placeholder="Minimum" class="form-control">
                   </div>
       
       
       
                   <div class="col-md-6 form-group">
                     <label class="">Maximum</label>
-                    <input type="text" placeholder="Maximum" class="form-control">
+                    <input type="text" formControlName="max"placeholder="Maximum" class="form-control">
                   </div>
       
                 </div>
@@ -126,7 +126,7 @@
       
                   <div class="col-md-6 form-group">
                     <label class="" for="inputState">Type</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" formControlName="type" aria-label="Default select example">
                       <option>Monthly</option>
                       <option>Yearly</option>
       
@@ -134,7 +134,7 @@
                   </div>
                   <div class="col-md-6 form-group country-col">
                     <label class="" for="inputState">Country</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" formControlName="country" aria-label="Default select example">
                       <option>India</option>
                       <option>America</option>
                       <option>Japan</option>
@@ -154,7 +154,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+        <button type="button" class="btn btn-primary" (click)="setPrice()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
       </div>
     </div>
   </div>

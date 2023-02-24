@@ -6,7 +6,7 @@
          
           <div class="card-body pt-3">
            
-            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <table datatable *ngIf="showContent" datatable="ng" [dtOptions]="dtOptions" class="row-border hover">
               <thead>
                 <tr>
                   <th>Dentist Name</th>
@@ -19,8 +19,28 @@
                   <th>Marked</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
+              <tbody  *ngIf="allData?.length != 0">
+                <tr *ngFor="let user of allData; let i = index">
+                  <td>{{user.first_name}} {{user.last_name}}</td>
+                  <td>30</td>
+                  <td>{{user.city}}</td>
+                  <td>{{user.contact_number}}</td>
+                  <td>02/11/2022</td>
+                  <td><button 
+                    title="View"
+                    type="button" 
+                    class="btn btn-primary"
+                     [routerLink]="'/dentist-profile/'+user._id"
+                  ><i class="fa-regular fa-eye"></i></button>
+                  <button 
+                    type="button" 
+                    class="btn btn-danger ms-2"
+                    title="Edit"
+                  ><i class="fa-regular fa-pen-to-square"></i></button></td>
+                  <td>12</td>
+                  <td>5</td>
+                </tr>
+               <!-- <tr>
                   <td>Giacomo Guilizzani</td>
                   <td>35</td>
                   <td>Edison</td>
@@ -81,8 +101,9 @@
                   <td>Giacomo Guilizzani</td>
                   <td>35</td>
                   <td>Edison</td>
-                  <td>02/11/2022</td>
+                  
                   <td>1234567890</td>
+                  <td>02/11/2022</td>
                   <td><a href="/#/dentist-profile"><button 
                     title="View"
                     type="button" 
@@ -95,8 +116,13 @@
                   ><i class="fa-regular fa-pen-to-square"></i></button></td>
                   <td>12</td>
                   <td>3</td>
-                </tr>
+                </tr>-->
                 
+              </tbody>
+              <tbody *ngIf="allData?.length == 0">
+                <tr>
+                  <td colspan="3" class="no-data-available" >No data!</td>
+                </tr>
               </tbody>
               </table>
               
