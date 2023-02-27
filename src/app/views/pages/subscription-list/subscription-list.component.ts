@@ -9,8 +9,9 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { max, min } from 'rxjs';
+import { max, min, Subject } from 'rxjs';
 import { type } from 'jquery';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-subscription-list',
@@ -22,8 +23,18 @@ export class SubscriptionListComponent implements OnInit {
   addPriceingForm: FormGroup;
   private pricingId: any;
   private status: any;
-  allData: any;
+  planName:string;
+  minimum:string;
+  maximum:string;
+  amount:number;
+  type:string;
 
+  allData: any;
+  private isDtInitialized: boolean = false;
+  dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  showContent: boolean;
+  country: any;
   constructor(
     private formBuilder :FormBuilder,
     private userService:UserService,
@@ -32,12 +43,14 @@ export class SubscriptionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(()=>this.showContent=true, 250);
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       //dom: 'Bfrtip',
     
     };
+    this.planList();
 
     this.addPriceingForm =new FormGroup({
       planName : new FormControl(),
@@ -184,8 +197,41 @@ export class SubscriptionListComponent implements OnInit {
         });
     }
   }
-    
+    planList(){
+
+      this.userService.getSubscriptionList().subscribe((res:any)=>{
+        console.log(res,"response")
+        this.allData=res.getData;
+        if (this.isDtInitialized) {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+           // this.dtTrigger.next();
+          });
+        } else {
+          this.isDtInitialized = true;
+          //this.dtTrigger.next();
+        }
+      })
+      
+    }
+   
+    openModal(id){
+      console.log(id,"plan id")
+      for(let i=0;i<this.allData.length;i++)
+   {
+   if(this.allData[i]._id===id){
+    console.log(this.allData[i])
+    this.planName= this.allData[i].plan_name;
+    this.minimum=this.allData[i].minimum;
+    this.maximum=this.allData[i].maximum;
+    this.type=this.allData[i].type;
+    this.amount=this.allData[i].amount;
+    this.country=this.allData[i].country;
+   }
+}  
+ }
   
   ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 }

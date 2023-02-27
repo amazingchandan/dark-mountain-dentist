@@ -9,7 +9,7 @@
         </div>
         <div class="card-body pt-3">
           
-            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <table *ngIf="showContent" datatable="ng" datatable [dtOptions]="dtOptions" class="row-border hover">
               <thead>
                 <tr>
                   <th>Plan Name</th>
@@ -22,19 +22,20 @@
               
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Silver</td>
-                  <td>Monthly</td>
-                  <td>6</td>
-                  <td>12</td>
-                  <td>599.99</td>
+              <tbody *ngIf="allData?.length !=0">
+                <tr *ngFor="let data of allData; let  i= index" >
+                  <td>{{data.plan_name}}</td>
+                  <td>{{data.type}}</td>
+                  <td>{{data.minimum}}</td>
+                  <td>{{data.maximum}}</td>
+                  <td>{{data.amount}}</td>
                   <td>3</td>
                  
                   <td><button 
                     title="View"
                     type="button" 
                     class="btn btn-primary"
+                    (click)="openModal(data._id)"
                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                   ><i class="fa-regular fa-eye"></i></button>
                   <button 
@@ -43,27 +44,7 @@
                     title="Edit"
                   ><i class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
-                <tr>
-                  <td>Gold</td>
-                  <td>Yearly</td>
-                  <td>6</td>
-                  <td>12</td>
-                  <td>125</td>
-                  <td>5</td>
-                  <td><button 
-                    title="View"
-                    type="button" 
-                    class="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                  ><i class="fa-regular fa-eye"></i></button>
-                  <button 
-                    type="button" 
-                    class="btn btn-danger ms-2"
-                    title="Edit"
-                  ><i class="fa-regular fa-pen-to-square"></i></button></td>
-                  
-                </tr>
-                
+               
                 
               </tbody>
               </table>
@@ -79,8 +60,8 @@
     
     
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Configure Subscription Plan</h5>
@@ -94,59 +75,66 @@
            
                 <div class="row mb-2">
       
-                  <div class="col-md-6 form-group">
+                  <div class="col-md-4 form-group">
                     <label class="">Plan Name</label>
-                    <input type="text" placeholder="Plan Name" formControlName="planName" class="form-control">
+                    <input type="text" placeholder="Plan Name" formControlName="planName" class="form-control" [value]="planName">
                   </div>
-                  <div class="col-md-6 form-group">
+                  <div class="col-md-4 form-group">
                     <label class="">Amount</label>
-                    <input type="text" placeholder="Amount" formControlName="amount" class="form-control">
+                    <input type="text" placeholder="Amount" formControlName="amount" class="form-control" [value]="amount">
                   </div>
-                  
-                  
-                </div>
-                <div class="row mb-2">
-      
-      
-      
-                  <div class="col-md-6 form-group">
+                  <div class="col-md-4 form-group">
                     <label class="">Mininmum</label>
-                    <input type="text"  formControlName="min"placeholder="Minimum" class="form-control">
+                    <input type="text"  formControlName="min"placeholder="Minimum" class="form-control" [value]="minimum">
                   </div>
-      
-      
-      
-                  <div class="col-md-6 form-group">
-                    <label class="">Maximum</label>
-                    <input type="text" formControlName="max"placeholder="Maximum" class="form-control">
-                  </div>
-      
+                  
                 </div>
                 <div class="row mb-2">
       
-                  <div class="col-md-6 form-group">
+      
+      
+                 
+      
+      
+      
+                  <div class="col-md-4 form-group">
+                    <label class="">Maximum</label>
+                    <input type="text" formControlName="max"placeholder="Maximum" class="form-control" [value]="maximum">
+                  </div>
+      
+               
+                
+      
+                  <div class="col-md-4 form-group">
                     <label class="" for="inputState">Type</label>
-                    <select class="form-select" formControlName="type" aria-label="Default select example">
+                    <select class="form-select" formControlName="type" aria-label="Default select example" [value]="type">
                       <option>Monthly</option>
                       <option>Yearly</option>
       
                     </select>
                   </div>
-                  <div class="col-md-6 form-group country-col">
+                  <div class="col-md-4 form-group country-col">
                     <label class="" for="inputState">Country</label>
-                    <select class="form-select" formControlName="country" aria-label="Default select example">
+                    <select class="form-select" formControlName="country" aria-label="Default select example" [value]="country">
                       <option>India</option>
                       <option>America</option>
                       <option>Japan</option>
                       <option>China</option>
                     </select>
                   </div>
-      
+                </div>
+                  <div class="row mb-2">
+                  <div class="col-md-4 mt-4 ms-2 ps-1 form-group">
+                    <label class="" for="inputState">Status</label>
+                    <input class="form-check-input status-input" type="checkbox" value="" id="checkbox-1" checked>
+                    
+                  </div>
+                  </div>
       
                  
       
       
-                </div>
+             
             
             </form>
        
@@ -154,7 +142,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="setPrice()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+        <button type="button" class="btn btn-primary btn-save" (click)="setPrice()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
       </div>
     </div>
   </div>

@@ -63,13 +63,13 @@ export class DentistProfileComponent implements OnInit {
       this.dentistId != null &&
       this.dentistId != ''
     ) {
-      this.editadminame(this.dentistId);
+      this.editadmin(this.dentistId);
       console.log("errrr",this.dentistId)
     } else {
      // this.addSuperForm.get('status').setValue('active');
     }
   }
-  editadminame(id) {
+  editadmin(id) {
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res,"*****");
       if (res.success) {
@@ -113,6 +113,9 @@ export class DentistProfileComponent implements OnInit {
       
       }
     });
+  }
+  updateUser(){
+      
   }
 
   }
