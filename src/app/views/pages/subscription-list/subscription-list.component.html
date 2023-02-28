@@ -8,13 +8,8 @@
           <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add New Plan</button>
         </div>
         <div class="card-body pt-3">
-<<<<<<< HEAD
 
-            <table datatable [dtOptions]="dtOptions" class="row-border hover">
-=======
-          
             <table *ngIf="showContent" datatable="ng" datatable [dtOptions]="dtOptions" class="row-border hover">
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
               <thead>
                 <tr>
                   <th>Plan Name</th>
@@ -49,33 +44,8 @@
                     title="Edit"
                   ><i class="fa-regular fa-pen-to-square"></i></button></td>
                 </tr>
-<<<<<<< HEAD
-                <tr>
-                  <td>Gold</td>
-                  <td>Yearly</td>
-                  <td>6</td>
-                  <td>12</td>
-                  <td>125</td>
-                  <td>5</td>
-                  <td><button
-                    title="View"
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
-                  ><i class="fa-regular fa-eye"></i></button>
-                  <button
-                    type="button"
-                    class="btn btn-danger ms-2"
-                    title="Edit"
-                  ><i class="fa-regular fa-pen-to-square"></i></button></td>
-
-                </tr>
 
 
-=======
-               
-                
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
               </tbody>
               </table>
 
@@ -85,17 +55,10 @@
       </div>
     </div>
     </section>
-<<<<<<< HEAD
-
-    <!-- Button trigger modal -->
 
 
-=======
-  
-   
-    
-    
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
+
+
 <!-- Modal -->
 <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -106,53 +69,12 @@
       </div>
       <div class="modal-body">
         <div class="row ">
-<<<<<<< HEAD
 
 
-            <form class="form-inline" role="form">
-
-                <div class="row mb-2">
-
-                  <div class="col-md-6 form-group">
-                    <label class="mb-2">Plan Name<sup>*</sup></label>
-                    <input type="text" placeholder="Plan Name" class="form-control">
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <label class="mb-2">Amount<sup>*</sup></label>
-                    <input type="text" placeholder="Amount" class="form-control">
-                  </div>
-
-
-                </div>
-                <div class="row mb-2">
-
-
-
-                  <div class="col-md-6 form-group">
-                    <label class="mb-2">Mininmum<sup>*</sup></label>
-                    <input type="text" placeholder="Minimum" class="form-control">
-                  </div>
-
-
-
-                  <div class="col-md-6 form-group">
-                    <label class="mb-2">Maximum<sup>*</sup></label>
-                    <input type="text" placeholder="Maximum" class="form-control">
-                  </div>
-
-                </div>
-                <div class="row mb-2">
-
-                  <div class="col-md-6 form-group">
-                    <label class="mb-2" for="inputState">Type<sup>*</sup></label>
-                    <select class="form-select" aria-label="Default select example">
-=======
-          
-            
             <form [formGroup]="addPriceingForm" class="form-inline" role="form">
-           
+
                 <div class="row mb-2">
-      
+
                   <div class="col-md-4 form-group">
                     <label class="">Plan Name</label>
                     <input type="text" placeholder="Plan Name" formControlName="planName" class="form-control" [value]="planName">
@@ -165,72 +87,55 @@
                     <label class="">Mininmum</label>
                     <input type="text"  formControlName="min"placeholder="Minimum" class="form-control" [value]="minimum">
                   </div>
-                  
+
                 </div>
                 <div class="row mb-2">
-      
-      
-      
-                 
-      
-      
-      
+
+
+
+
+
+
+
                   <div class="col-md-4 form-group">
                     <label class="">Maximum</label>
                     <input type="text" formControlName="max"placeholder="Maximum" class="form-control" [value]="maximum">
                   </div>
-      
-               
-                
-      
+
+
+
+
                   <div class="col-md-4 form-group">
                     <label class="" for="inputState">Type</label>
                     <select class="form-select" formControlName="type" aria-label="Default select example" [value]="type">
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
                       <option>Monthly</option>
                       <option>Yearly</option>
 
                     </select>
                   </div>
-<<<<<<< HEAD
-                  <div class="col-md-6 form-group country-col">
-                    <label class="mb-2" for="inputState">Country<sup>*</sup></label>
-                    <select class="form-select" aria-label="Default select example">
-=======
                   <div class="col-md-4 form-group country-col">
                     <label class="" for="inputState">Country</label>
                     <select class="form-select" formControlName="country" aria-label="Default select example" [value]="country">
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
                       <option>India</option>
                       <option>America</option>
                       <option>Japan</option>
                       <option>China</option>
                     </select>
                   </div>
-<<<<<<< HEAD
-
-
-
-
-
-                </div>
-
-=======
                 </div>
                   <div class="row mb-2">
                   <div class="col-md-4 mt-4 ms-2 ps-1 form-group">
                     <label class="" for="inputState">Status</label>
                     <input class="form-check-input status-input" type="checkbox" value="" id="checkbox-1" checked>
-                    
+
                   </div>
                   </div>
-      
-                 
-      
-      
-             
-            
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
+
+
+
+
+
+
             </form>
 
         </div>
