@@ -12,6 +12,7 @@ import { ManageSubscriptionComponent } from './views/pages/manage-subscription/m
 import { SubscriptionListComponent } from './views/pages/subscription-list/subscription-list.component';
 import { UploadedXraysComponent } from './views/pages/uploaded-xrays/uploaded-xrays.component';
 import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
+import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 const routes: Routes = [
   {
     path: '',
@@ -24,7 +25,7 @@ const routes: Routes = [
     data: {
       title: 'Dashboard'
     },
-    
+
     children: [
       {
         path: 'dashboard',
@@ -34,7 +35,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-   
+
       {
         path: 'widgets',
         loadChildren: () =>
@@ -45,7 +46,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-      
+
       {
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,
@@ -54,7 +55,18 @@ const routes: Routes = [
         }
       },
       {
+<<<<<<< HEAD
+        path: 'register-form',
+        component: RegisterFormComponent,
+        data: {
+          title: 'Add Dentist'
+        }
+      },
+      {
+        path: 'dentist-profile',
+=======
         path: 'dentist-profile/:dentist_id',
+>>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
         component: DentistProfileComponent,
         data: {
           title: 'Dentist Profile Page'
@@ -88,10 +100,10 @@ const routes: Routes = [
           title: 'Mark XRay Page'
         }
       },
-      
+
     ]
   },
-  
+
   {
     path: '500',
     component: Page500Component,
@@ -106,7 +118,7 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
- 
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -114,6 +126,7 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+
   {path: '**', redirectTo: 'dashboard'}
 ];
 

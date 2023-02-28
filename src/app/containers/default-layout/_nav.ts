@@ -5,12 +5,16 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/dashboard',
     icon:'fa-solid fa-gauge'
-   
+
   },
   {
     name: 'Registered Dentists',
     url: '/registered-dentists',
     icon:'fa-solid fa-users'
+  },
+  {
+    name: 'Registration Form',
+    url: '/register-form'
   },
   {
     name: 'Uploaded X-Rays',
@@ -28,8 +32,8 @@ export const navItems: INavData[] = [
     url: '/charts',
     iconComponent: { name: 'cil-chart-pie' }
   },
-  
-  
+
+
   {
     name: 'Widgets',
     url: '/widgets',
