@@ -1,10 +1,11 @@
 <section class="content">
-  <div class="row ">
+  <div class="row">
     <div class="col-12">
       <h2 class="mb-3">Subscription Plans</h2>
       <div class="card pt-2">
         <div class="col"></div>
         <div class="col">
+<<<<<<< HEAD
           <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal"
             data-bs-target="#exampleModalCenter">Add New Plan</button>
         </div>
@@ -13,6 +14,25 @@
 
 
           <table *ngIf="showContent" datatable="ng" datatable [dtOptions]="dtOptions" class="row-border hover">
+=======
+          <button
+            type="button"
+            class="btn btn-primary add-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter"
+          >
+            Add New Plan
+          </button>
+        </div>
+        <div class="card-body pt-3">
+          <table
+            *ngIf="showContent"
+            datatable="ng"
+            datatable
+            [dtOptions]="dtOptions"
+            class="row-border hover"
+          >
+>>>>>>> e0ba605fa8b35db053dcdf78e3ad692f72497b55
             <thead>
               <tr>
                 <th>Plan Name</th>
@@ -22,6 +42,7 @@
                 <th>Amount</th>
                 <th># of Subscribers</th>
                 <th>Action</th>
+<<<<<<< HEAD
 
               </tr>
             </thead>
@@ -49,11 +70,47 @@
           </table>
 
 
+=======
+              </tr>
+            </thead>
+            <tbody *ngIf="allData?.length != 0">
+              <tr *ngFor="let data of allData; let i = index">
+                <td>{{ data.plan_name }}</td>
+                <td>{{ data.type }}</td>
+                <td>{{ data.minimum }}</td>
+                <td>{{ data.maximum }}</td>
+                <td>{{ data.amount }}</td>
+                <td>3</td>
+
+                <td>
+                  <button
+                    title="View"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="openModal(data._id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger ms-2"
+                    title="Edit"
+                  >
+                    <i class="fa-regular fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+>>>>>>> e0ba605fa8b35db053dcdf78e3ad692f72497b55
         </div>
       </div>
     </div>
   </div>
 </section>
+<<<<<<< HEAD
 
 <!-- Button trigger modal -->
 
@@ -65,13 +122,27 @@
 <!-- Modal -->
 <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+=======
+
+<!-- Modal -->
+<div
+  class="modal fade modal-lg"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+>>>>>>> e0ba605fa8b35db053dcdf78e3ad692f72497b55
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Configure Subscription Plan</h5>
-
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          Configure Subscription Plan
+        </h5>
       </div>
       <div class="modal-body">
+<<<<<<< HEAD
         <div class="row ">
 
 
@@ -167,3 +238,108 @@
         </div>
       </div>
     </div>
+=======
+        <div class="row">
+          <form [formGroup]="addPriceingForm" class="form-inline" role="form">
+            <div class="row mb-2">
+              <div class="col-md-4 form-group">
+                <label class="">Plan Name</label>
+                <input
+                  type="text"
+                  placeholder="Plan Name"
+                  formControlName="planName"
+                  class="form-control"
+                  [value]="planName"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="">Amount</label>
+                <input
+                  type="text"
+                  placeholder="Amount"
+                  formControlName="amount"
+                  class="form-control"
+                  [value]="amount"
+                />
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="">Mininmum</label>
+                <input
+                  type="text"
+                  formControlName="min"
+                  placeholder="Minimum"
+                  class="form-control"
+                  [value]="minimum"
+                />
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-4 form-group">
+                <label class="">Maximum</label>
+                <input
+                  type="text"
+                  formControlName="max"
+                  placeholder="Maximum"
+                  class="form-control"
+                  [value]="maximum"
+                />
+              </div>
+
+              <div class="col-md-4 form-group">
+                <label class="" for="inputState">Type</label>
+                <select
+                  class="form-select"
+                  formControlName="type"
+                  aria-label="Default select example"
+                  [value]="type"
+                >
+                  <option>Monthly</option>
+                  <option>Yearly</option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group country-col">
+                <label class="" for="inputState">Country</label>
+                <select
+                  class="form-select"
+                  formControlName="country"
+                  aria-label="Default select example"
+                  [value]="country"
+                >
+                  <option>India</option>
+                  <option>America</option>
+                  <option>Japan</option>
+                  <option>China</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-4 mt-4 ms-2 ps-1 form-group">
+                <label class="" for="inputState">Status</label>
+                <input
+                  class="form-check-input status-input"
+                  type="checkbox"
+                  value=""
+                  id="checkbox-1"
+                  checked
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-save"
+          (click)="setPrice()"
+        >
+          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> e0ba605fa8b35db053dcdf78e3ad692f72497b55

@@ -42,20 +42,6 @@ $enable-rtl: true;
 //     border-color: #117a8b;
 // }
 .btn{
-<<<<<<< HEAD
-  color: white !important;
-  background-color: #17A2B8 !important;
-  border-color: #17a2b8 !important;
-  padding-left: 0.60rem !important;
-  padding-right: 0.60rem !important;
-  padding-top: 0.40rem !important;
-  padding-bottom: 0.40rem !important;
-}
-.btn:hover ,.btn:first-child:active ,:not(.btn-check) + .btn:active{
-  color: #fff !important;
-  background-color: #138496 !important;
-  border-color: #117a8b !important;
-=======
     color: white !important;
     background-color: #17A2B8 !important;
     border-color: #17a2b8 !important;
@@ -68,7 +54,6 @@ $enable-rtl: true;
     color: #fff !important;
     background-color: #138496 !important;
     border-color: #117a8b !important;
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
 }
 .card{
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);

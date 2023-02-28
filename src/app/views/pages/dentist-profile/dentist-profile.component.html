@@ -3,95 +3,99 @@
     <div class="card-body p-4">
       <h5 class="well">Personal Information</h5>
 
-     
-  <div class="row">
-    
 
-      <form [formGroup]="addSuperForm"  class="form-inline" role="form">
-       
+      <div class="row">
+
+
+        <form [formGroup]="addSuperForm" class="form-inline" role="form">
+
           <div class="row mb-2 mt-2">
             <div class="col-md-4 form-group">
-             
+
               <label class="mb-2">First Name<sup>*</sup></label>
               <input type="text" placeholder="First Name" formControlName="first_name" class="form-control me-4">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
-              <input type="text" placeholder="Last Name"  formControlName="last_name" class="form-control">
+              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID<sup>*</sup></label>
-              <input type="text" placeholder="Email ID" formControlName="email"class="form-control me-4">
-            </div>
-          </div>
-          <div class="row mb-2"></div>
-          <div class="row mb-2">
-            <div class="col-md-4 form-group">
 
-           <label class="mb-2">Contact Number<sup>*</sup></label>
-              <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
-            </div><div class="col-md-4 form-group">
-              <label class="mb-2">Address1<sup>*</sup></label>
-              <input type="text" placeholder="Address1" formControlName="address1" class="form-control me-4">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class="mb-2">Address2<sup>*</sup></label>
-              <input type="text" placeholder="Address2" formControlName="address2" class="form-control">
-            </div>
-
-          </div>
-          <div class="row mb-2">
-            
-          </div>
-          <div class="row mb-2">
-            <div class="col-md-4 form-group">
-              <label class="mb-2">City<sup>*</sup></label>
-              <input type="text" placeholder="City" formControlName="city"class="form-control me-4">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class="mb-2">State<sup>*</sup></label>
-              <input type="text" placeholder="State" formControlName="state"class="form-control">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class="mb-2">Zip<sup>*</sup></label>
-              <input type="text" placeholder="Zip"  formControlName="pincode" class="form-control me-5">
 
             </div>
-          </div>
-         
-          <div class="row mb-2"></div>
-          <div class="row mb-2">
-            <div class="col-md-4 form-group">
-              
-              <label class="mb-2" for="inputState">Country<sup>*</sup></label>
-              <select class="form-select me-4" aria-label="Default select example" formControlName="country">
-                <option selected>India</option>
-                <option>America</option>
-                <option>Japan</option>
-                <option>China</option>
-              </select>
-            </div>
-            <div class="col-md-8 btn-div">
-              
-              <button type="button" class="btn btn-primary save-btn ms-2 mt-4" (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
-              <button type="button" class="btn btn-primary save-btn mt-4">Reset&nbsp;<i class="fa-solid fa-arrows-rotate"></i></button>
-            </div>
-          </div>
+            <div class="row mb-2"></div>
+            <div class="row mb-2">
+              <div class="col-md-4 form-group">
 
-          <div class="sub-container border-top border-grey mt-3">
-            <div class="sub-container mt-4">
-              <h5>Subscription Details</h5>
-              <div class="row mt-3">
-                <div class="col-sm-3">Current Plan : 200 Days</div>
-                <div class="col-sm-3 me-5">
-                  Subscription End Date : 20/2/2023
-                </div>
-                <div class="col-sm-3 ms-3">Subscription Amount : $9.99</div>
-                <div class="col-sm-2">
-                  <div class="col btn-cancel ms-3 ps-3">
-                    <button type="button" class="btn btn-danger">
-                      Cancel Subscription&nbsp;<i class="fa-solid fa-ban"></i>
-                    </button>
+                <label class="mb-2">Contact Number<sup>*</sup></label>
+                <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="mb-2">Address1<sup>*</sup></label>
+                <input type="text" placeholder="Address1" formControlName="address1" class="form-control me-4">
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="mb-2">Address2<sup>*</sup></label>
+                <input type="text" placeholder="Address2" formControlName="address2" class="form-control">
+              </div>
+
+            </div>
+            <div class="row mb-2">
+
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-4 form-group">
+                <label class="mb-2">City<sup>*</sup></label>
+                <input type="text" placeholder="City" formControlName="city" class="form-control me-4">
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="mb-2">State<sup>*</sup></label>
+                <input type="text" placeholder="State" formControlName="state" class="form-control">
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="mb-2">Zip<sup>*</sup></label>
+                <input type="text" placeholder="Zip" formControlName="pincode" class="form-control me-5">
+
+              </div>
+            </div>
+
+
+            <div class="row mb-2"></div>
+            <div class="row mb-2">
+              <div class="col-md-4 form-group">
+                <label class="" for="inputState">Country</label>
+                <select class="form-select me-4" aria-label="Default select example" formControlName="country">
+                  <option selected>India</option>
+                  <option>America</option>
+                  <option>Japan</option>
+                  <option>China</option>
+                </select>
+              </div>
+              <div class="col-md-8 btn-div">
+
+                <button type="button" class="btn btn-primary save-btn ms-2 mt-4"
+                  (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+                <button type="button" class="btn btn-primary save-btn mt-4">Reset&nbsp;<i
+                    class="fa-solid fa-arrows-rotate"></i></button>
+              </div>
+            </div>
+
+            <div class="sub-container border-top border-grey mt-3">
+              <div class="sub-container mt-4">
+                <h5>Subscription Details</h5>
+                <div class="row mt-3">
+                  <div class="col-sm-3">Current Plan : 200 Days</div>
+                  <div class="col-sm-3 me-5">
+                    Subscription End Date : 20/2/2023
+                  </div>
+                  <div class="col-sm-3 ms-3">Subscription Amount : $9.99</div>
+                  <div class="col-sm-2">
+                    <div class="col btn-cancel ms-3 ps-3">
+                      <button type="button" class="btn btn-danger">
+                        Cancel Subscription&nbsp;<i class="fa-solid fa-ban"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,48 +121,24 @@
                   <tr>
                     <td>15/03/2022</td>
                     <td>
-                      <a href=""
-                        ><button
-                          type="button"
-                          class="btn btn-primary"
-                          title="View"
-                        >
-                          <i class="fa-regular fa-eye"></i></button
-                      ></a>
+                      <a href=""><button type="button" class="btn btn-primary" title="View">
+                          <i class="fa-regular fa-eye"></i></button></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="checkbox-1"
-                          checked
-                        />
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
                       </div>
                     </td>
                   </tr>
                   <tr>
                     <td>15/03/2022</td>
                     <td>
-                      <a href=""
-                        ><button
-                          type="button"
-                          class="btn btn-primary"
-                          title="View"
-                        >
-                          <i class="fa-regular fa-eye"></i></button
-                      ></a>
+                      <a href=""><button type="button" class="btn btn-primary" title="View">
+                          <i class="fa-regular fa-eye"></i></button></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="checkbox-1"
-                          checked
-                        />
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
                       </div>
                     </td>
                   </tr>

@@ -10,13 +10,8 @@ tr .btn{
 .btn i{
     font-size: 16px;
 
-<<<<<<< HEAD
      position: relative;
-     top: 1px;
-=======
-     position: relative; 
      top: -3px;
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
     text-align: center;
     line-height: 1
 }
@@ -30,28 +25,6 @@ select.fade {
     pointer-events: auto;
     opacity: 1;
  }
-<<<<<<< HEAD
-
- .form label {
-  position: relative;
-}
-
-sup {
-  position: relative;
-  top: -2px;
-  color: red;
-  font-weight: 800;
-  font-size: 14px;
-}
-
-.cancel-btn {
-  background-color: var(--bs-gray) !important;
-}
-
-.cancel-btn:hover {
-  background-color: var(--bs-gray-700) !important;
-}
-=======
  .btn-save i{
     top: 0px !important;
  }
@@ -65,4 +38,3 @@ sup {
     margin-top:4rem;
     position: relative;
 }
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa

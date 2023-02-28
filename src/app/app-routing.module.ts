@@ -46,7 +46,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-
+      {
+        path: "register-form",
+        component: RegisterFormComponent,
+        data: {
+          title: "Registration Form"
+        }
+      },
       {
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,
@@ -55,18 +61,7 @@ const routes: Routes = [
         }
       },
       {
-<<<<<<< HEAD
-        path: 'register-form',
-        component: RegisterFormComponent,
-        data: {
-          title: 'Add Dentist'
-        }
-      },
-      {
-        path: 'dentist-profile',
-=======
         path: 'dentist-profile/:dentist_id',
->>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
         component: DentistProfileComponent,
         data: {
           title: 'Dentist Profile Page'
