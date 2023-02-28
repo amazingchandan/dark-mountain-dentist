@@ -77,15 +77,15 @@
       
                   <div class="col-md-4 form-group">
                     <label class="">Plan Name</label>
-                    <input type="text" placeholder="Plan Name" formControlName="planName" class="form-control" [value]="planName">
+                    <input type="text" placeholder="Plan Name" formControlName="plan_name" class="form-control" [value]="plan_name">
                   </div>
                   <div class="col-md-4 form-group">
                     <label class="">Amount</label>
                     <input type="text" placeholder="Amount" formControlName="amount" class="form-control" [value]="amount">
                   </div>
                   <div class="col-md-4 form-group">
-                    <label class="">Mininmum</label>
-                    <input type="text"  formControlName="min"placeholder="Minimum" class="form-control" [value]="minimum">
+                    <label class="">Minimum</label>
+                    <input type="text"  formControlName="minimum"placeholder="Minimum" class="form-control" [value]="minimum">
                   </div>
                   
                 </div>
@@ -99,7 +99,7 @@
       
                   <div class="col-md-4 form-group">
                     <label class="">Maximum</label>
-                    <input type="text" formControlName="max"placeholder="Maximum" class="form-control" [value]="maximum">
+                    <input type="text" formControlName="maximum"placeholder="Maximum" class="form-control" [value]="maximum">
                   </div>
       
                
@@ -141,7 +141,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="launch_ad" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary btn-save" (click)="setPrice()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
       </div>
     </div>
