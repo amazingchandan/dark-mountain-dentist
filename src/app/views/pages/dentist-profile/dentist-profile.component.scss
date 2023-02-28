@@ -1,42 +1,69 @@
+// .form-group input,select{
 
-.form-group input,select{
-   
-    width: 90%;
+//     width: 90%;
+// }
+
+.form label {
+  position: relative;
 }
 
-.save-btn{
-    float: right;
+sup {
+  position: relative;
+  top: -2px;
+  color: red;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.save-btn {
+  background-color: #17a2b8;
+}
+.save-btn:hover {
+  background-color: #138091;
 }
 .btn-div{
-    margin-left: -2.2rem;
+// margin-left: -2.2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
-.btn-cancel{
-    margin-top: -5%;
-   // margin-left: 2.9rem;
-   width: max-content;
+.btn-cancel {
+  margin-top: -5%;
+  margin-left: 2.9rem;
+  width: max-content;
 }
-.card{
-    width: 73rem;
+.card {
+  width: 100%;
 }
-.xray-table-container{
-    position: relative;
-    right: 2%;
+// .xray-table-container {
+  // position: relative;
+  // right: 2%;
+// }
+th {
+  font-weight: 700;
+}
+h5 {
+  font-weight: 700;
+}
+.sub-row {
+  margin-left: -1.5rem;
+}
+// .xray-row {
+  // margin-left: -0.1rem;
+// }
 
+tbody tr td {
+  vertical-align: middle;
 }
-th{
-    font-weight: 700;
+// i {
+//   position: relative;
+//   top: 1px;
+// }
+
+.cancel-btn {
+  background-color: var(--bs-gray) !important;
 }
-h5{
-    font-weight: 700;
-}
-.sub-row{
-    margin-left: -1.5rem;
-}
-.xray-row{
-   margin-left:  -0.1rem;
-}
-i{
-   
-    position: relative;
-    top: 1px;
+
+.cancel-btn:hover {
+  background-color: var(--bs-gray-700) !important;
 }

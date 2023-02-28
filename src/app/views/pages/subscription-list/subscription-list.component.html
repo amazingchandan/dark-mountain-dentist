@@ -8,7 +8,7 @@
           <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add New Plan</button>
         </div>
         <div class="card-body pt-3">
-          
+
             <table datatable [dtOptions]="dtOptions" class="row-border hover">
               <thead>
                 <tr>
@@ -19,7 +19,7 @@
                   <th>Amount</th>
                   <th># of Subscribers</th>
                   <th>Action</th>
-              
+
                 </tr>
               </thead>
               <tbody>
@@ -30,15 +30,15 @@
                   <td>12</td>
                   <td>599.99</td>
                   <td>3</td>
-                 
-                  <td><button 
+
+                  <td><button
                     title="View"
-                    type="button" 
+                    type="button"
                     class="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                   ><i class="fa-regular fa-eye"></i></button>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     class="btn btn-danger ms-2"
                     title="Edit"
                   ><i class="fa-regular fa-pen-to-square"></i></button></td>
@@ -50,90 +50,90 @@
                   <td>12</td>
                   <td>125</td>
                   <td>5</td>
-                  <td><button 
+                  <td><button
                     title="View"
-                    type="button" 
+                    type="button"
                     class="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                   ><i class="fa-regular fa-eye"></i></button>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     class="btn btn-danger ms-2"
                     title="Edit"
                   ><i class="fa-regular fa-pen-to-square"></i></button></td>
-                  
+
                 </tr>
-                
-                
+
+
               </tbody>
               </table>
-              
-            
+
+
           </div>
         </div>
       </div>
     </div>
     </section>
-  
+
     <!-- Button trigger modal -->
-    
-    
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Configure Subscription Plan</h5>
-        
+
       </div>
       <div class="modal-body">
         <div class="row ">
-          
-            
+
+
             <form class="form-inline" role="form">
-           
+
                 <div class="row mb-2">
-      
+
                   <div class="col-md-6 form-group">
-                    <label class="">Plan Name</label>
+                    <label class="mb-2">Plan Name<sup>*</sup></label>
                     <input type="text" placeholder="Plan Name" class="form-control">
                   </div>
                   <div class="col-md-6 form-group">
-                    <label class="">Amount</label>
+                    <label class="mb-2">Amount<sup>*</sup></label>
                     <input type="text" placeholder="Amount" class="form-control">
                   </div>
-                  
-                  
+
+
                 </div>
                 <div class="row mb-2">
-      
-      
-      
+
+
+
                   <div class="col-md-6 form-group">
-                    <label class="">Mininmum</label>
+                    <label class="mb-2">Mininmum<sup>*</sup></label>
                     <input type="text" placeholder="Minimum" class="form-control">
                   </div>
-      
-      
-      
+
+
+
                   <div class="col-md-6 form-group">
-                    <label class="">Maximum</label>
+                    <label class="mb-2">Maximum<sup>*</sup></label>
                     <input type="text" placeholder="Maximum" class="form-control">
                   </div>
-      
+
                 </div>
                 <div class="row mb-2">
-      
+
                   <div class="col-md-6 form-group">
-                    <label class="" for="inputState">Type</label>
+                    <label class="mb-2" for="inputState">Type<sup>*</sup></label>
                     <select class="form-select" aria-label="Default select example">
                       <option>Monthly</option>
                       <option>Yearly</option>
-      
+
                     </select>
                   </div>
                   <div class="col-md-6 form-group country-col">
-                    <label class="" for="inputState">Country</label>
+                    <label class="mb-2" for="inputState">Country<sup>*</sup></label>
                     <select class="form-select" aria-label="Default select example">
                       <option>India</option>
                       <option>America</option>
@@ -141,19 +141,19 @@
                       <option>China</option>
                     </select>
                   </div>
-      
-      
-                 
-      
-      
+
+
+
+
+
                 </div>
-            
+
             </form>
-       
+
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
       </div>
     </div>

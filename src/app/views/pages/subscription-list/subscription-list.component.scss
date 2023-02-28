@@ -6,7 +6,7 @@
 .btn i{
     font-size: 1.3rem;
 
-     position: relative; 
+     position: relative;
      top: 1px;
     text-align: center;
     line-height: 1
@@ -16,8 +16,28 @@ select.fade {
     opacity: 0;
     pointer-events: none;
  }
- 
+
  .show > select.fade {
     pointer-events: auto;
     opacity: 1;
  }
+
+ .form label {
+  position: relative;
+}
+
+sup {
+  position: relative;
+  top: -2px;
+  color: red;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.cancel-btn {
+  background-color: var(--bs-gray) !important;
+}
+
+.cancel-btn:hover {
+  background-color: var(--bs-gray-700) !important;
+}

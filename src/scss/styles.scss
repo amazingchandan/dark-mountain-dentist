@@ -27,19 +27,33 @@ $enable-rtl: true;
 
 
 
+// .btn{
+//     color: white;
+//     background-color: #17A2B8;
+//     border-color: #17a2b8;
+//     padding-left: 0.60rem !important;
+//     padding-right: 0.60rem !important;
+//     padding-top: 0.40rem !important;
+//     padding-bottom: 0.40rem !important;
+// }
+// .btn:hover ,.btn:first-child:active ,:not(.btn-check) + .btn:active{
+//     color: #fff;
+//     background-color: #138496;
+//     border-color: #117a8b;
+// }
 .btn{
-    color: white;
-    background-color: #17A2B8;
-    border-color: #17a2b8;
-    padding-left: 0.60rem !important;
-    padding-right: 0.60rem !important;
-    padding-top: 0.40rem !important;
-    padding-bottom: 0.40rem !important;
+  color: white !important;
+  background-color: #17A2B8 !important;
+  border-color: #17a2b8 !important;
+  padding-left: 0.60rem !important;
+  padding-right: 0.60rem !important;
+  padding-top: 0.40rem !important;
+  padding-bottom: 0.40rem !important;
 }
 .btn:hover ,.btn:first-child:active ,:not(.btn-check) + .btn:active{
-    color: #fff;
-    background-color: #138496;
-    border-color: #117a8b;
+  color: #fff !important;
+  background-color: #138496 !important;
+  border-color: #117a8b !important;
 }
 .card{
     box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
@@ -56,7 +70,7 @@ body{
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 table thead{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black ;
+    // border-top: 1px solid black;
+    // border-bottom: 1px solid black ;
     font-weight: 700;
 }

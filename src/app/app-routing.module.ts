@@ -12,6 +12,7 @@ import { ManageSubscriptionComponent } from './views/pages/manage-subscription/m
 import { SubscriptionListComponent } from './views/pages/subscription-list/subscription-list.component';
 import { UploadedXraysComponent } from './views/pages/uploaded-xrays/uploaded-xrays.component';
 import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
+import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 const routes: Routes = [
   {
     path: '',
@@ -24,7 +25,7 @@ const routes: Routes = [
     data: {
       title: 'Dashboard'
     },
-    
+
     children: [
       {
         path: 'dashboard',
@@ -34,7 +35,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-   
+
       {
         path: 'widgets',
         loadChildren: () =>
@@ -45,12 +46,19 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
-      
+
       {
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,
         data: {
           title: 'Registered Dentists Page'
+        }
+      },
+      {
+        path: 'register-form',
+        component: RegisterFormComponent,
+        data: {
+          title: 'Add Dentist'
         }
       },
       {
@@ -88,10 +96,10 @@ const routes: Routes = [
           title: 'Mark XRay Page'
         }
       },
-      
+
     ]
   },
-  
+
   {
     path: '500',
     component: Page500Component,
@@ -106,7 +114,7 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
- 
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -114,6 +122,7 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+
   {path: '**', redirectTo: 'dashboard'}
 ];
 

@@ -1,0 +1,56 @@
+// .form-group input,select{
+//   // width: 90%;
+// }
+
+.form label {
+  position: relative;
+}
+
+sup {
+  position: relative;
+  top: -2px;
+  color: red;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.register-btn {
+  // float: right;
+  background-color: #17a2b8;
+}
+
+.register-btn:hover {
+  background-color: #138091;
+}
+
+.cancel-btn {
+  background-color: var(--bs-gray) !important;
+}
+
+.cancel-btn:hover {
+  background-color: var(--bs-gray-700) !important;
+}
+
+.btn-div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.card {
+  width: 100%;
+}
+
+h2 {
+  font-weight: 600;
+}
+
+i {
+  position: relative;
+  top: 1px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}

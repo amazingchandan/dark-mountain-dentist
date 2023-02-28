@@ -1,70 +1,78 @@
-<div class="container">
+<div class="container mb-4 p-0">
   <div class="card card-primary">
-    <div class="card-body">
-  <h5 class="well">Personal Information</h5>
+    <div class="card-body p-4">
+      <h5 class="well">Personal Information</h5>
 
-  <div class="row">
-    
-
-      <form class="form-inline" role="form">
-       
+      <div class="row">
+        <form class="form-inline" role="form">
           <div class="row mb-2 mt-2">
-
             <div class="col-md-4 form-group">
-              <label class="">First Name</label>
-              <input type="text" placeholder="First Name" class="form-control me-4">
+              <label class="mb-2">First Name<sup>*</sup></label>
+              <input
+                type="text"
+                placeholder="First Name"
+                class="form-control me-4"
+              />
             </div>
             <div class="col-md-4 form-group">
-              <label class="">Last Name</label>
-              <input type="text" placeholder="Last Name" class="form-control">
+              <label class="mb-2">Last Name<sup>*</sup></label>
+              <input type="text" placeholder="Last Name" class="form-control" />
             </div>
             <div class="col-md-4 form-group">
-              <label class="">Email ID</label>
-              <input type="text" placeholder="Email ID" class="form-control me-4">
-            </div>
-          </div>
-          <div class="row mb-2">
-            
-          </div>
-          <div class="row mb-2">
-            
-            <div class="col-md-4 form-group">
-              <label class="">Contact Number</label>
-              <input type="text" placeholder="Contact Number" class="form-control">
-            </div><div class="col-md-4 form-group">
-              <label class="">Address1</label>
-              <input type="text" placeholder="Address1" class="form-control me-4">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class="">Address2</label>
-              <input type="text" placeholder="Address2" class="form-control">
-            </div>
-
-          </div>
-          <div class="row mb-2">
-            
-          </div>
-          <div class="row mb-2">
-            <div class="col-md-4 form-group">
-              <label class="">City</label>
-              <input type="text" placeholder="City" class="form-control me-4">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class="">State</label>
-              <input type="text" placeholder="State" class="form-control">
-            </div>
-            <div class="col-md-4 form-group">
-              <label class=" ">Zip</label>
-              <input type="text" placeholder="Zip" class="form-control me-5">
+              <label class="mb-2">Email ID<sup>*</sup></label>
+              <input
+                type="text"
+                placeholder="Email ID"
+                class="form-control me-4"
+              />
             </div>
           </div>
-          <div class="row mb-2">
-            
-          </div>
+          <div class="row mb-2"></div>
           <div class="row mb-2">
             <div class="col-md-4 form-group">
-              <label class="" for="inputState">Country</label>
-              <select class="form-select me-4" aria-label="Default select example">
+              <label class="mb-2">Contact Number<sup>*</sup></label>
+              <input
+                type="text"
+                placeholder="Contact Number"
+                class="form-control"
+              />
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Address1<sup>*</sup></label>
+              <input
+                type="text"
+                placeholder="Address1"
+                class="form-control me-4"
+              />
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Address2</label>
+              <input type="text" placeholder="Address2" class="form-control" />
+            </div>
+          </div>
+          <div class="row mb-2"></div>
+          <div class="row mb-2">
+            <div class="col-md-4 form-group">
+              <label class="mb-2">City<sup>*</sup></label>
+              <input type="text" placeholder="City" class="form-control me-4" />
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">State<sup>*</sup></label>
+              <input type="text" placeholder="State" class="form-control" />
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Zip<sup>*</sup></label>
+              <input type="text" placeholder="Zip" class="form-control me-5" />
+            </div>
+          </div>
+          <div class="row mb-2"></div>
+          <div class="row mb-2">
+            <div class="col-md-4 form-group">
+              <label class="mb-2" for="inputState">Country<sup>*</sup></label>
+              <select
+                class="form-select me-4 mb-2"
+                aria-label="Default select example"
+              >
                 <option selected>India</option>
                 <option>America</option>
                 <option>Japan</option>
@@ -72,95 +80,107 @@
               </select>
             </div>
             <div class="col-md-8 btn-div">
-              <button type="button" class="btn btn-primary save-btn ms-2 mt-4">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
-              <button type="button" class="btn btn-primary save-btn mt-4">Reset&nbsp;<i class="fa-solid fa-arrows-rotate"></i></button>
+              <button type="button" class="btn btn-primary save-btn mt-4 cancel-btn">
+                Reset&nbsp;<i class="fa-solid fa-arrows-rotate"></i>
+              </button>
+              <button type="button" class="btn btn-primary save-btn ms-2 mt-4">
+                &nbsp;Save&nbsp;<i
+                  class="fa-sharp fa-regular fa-floppy-disk"
+                ></i>
+              </button>
             </div>
           </div>
 
-       
-
-
-
-      <div class="container border-top border-secondary mt-3">
-        <div class="row mt-4 sub-row">
-          <h5>Subscription Details</h5>
-          <div class="row mt-2">
-            <div class="col-sm-3">
-              Current Plan : 200 Days
-            </div>
-            <div class="col-sm-3 me-5 ">
-              Subscription End Date : 20/2/2023
-            </div>
-            <div class="col-sm-3 ms-3">
-              Subscription Amount : $9.99
-            </div>
-            <div class="col-sm-2 ">
-
-              <div class="col px-2 btn-cancel ms-3">
-                <button type="button" class="btn btn-danger"> Cancel Subscription&nbsp;<i class="fa-solid fa-ban"></i></button>
+          <div class="sub-container border-top border-grey mt-3">
+            <div class="sub-container mt-4">
+              <h5>Subscription Details</h5>
+              <div class="row mt-3">
+                <div class="col-sm-3">Current Plan : 200 Days</div>
+                <div class="col-sm-3 me-5">
+                  Subscription End Date : 20/2/2023
+                </div>
+                <div class="col-sm-3 ms-3">Subscription Amount : $9.99</div>
+                <div class="col-sm-2">
+                  <div class="col btn-cancel ms-3 ps-3">
+                    <button type="button" class="btn btn-danger">
+                      Cancel Subscription&nbsp;<i class="fa-solid fa-ban"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    
 
-  </form>
-   
-  </div>
-
-  <div class="container  mt-3 xray-table-container border-top ">
-    <div class="row mt-4 xray-row">
-      <h5>Uploaded X-ray</h5>
-      <div class="row mt-3">
-        <div class="col-12 pe-0">
-          
-
+      <div class="container mt-3 xray-table-container border-top p-0"> <!--p-0-->
+        <div class="sub-coontainer mt-4 xray-row">
+          <h5>Uploaded X-ray</h5>
+          <div class="row mt-3">
+            <div class="col-12"> <!--pe-0-->
               <table class="table table-bordered row-border hover">
                 <thead>
                   <tr>
                     <th scope="col">X-ray Uploaded Date</th>
                     <th scope="col">View X-ray</th>
                     <th scope="col">Marked</th>
-
                   </tr>
-
                 </thead>
                 <tbody>
                   <tr>
                     <td>15/03/2022</td>
-                    <td><a href=""><button type="button" class="btn btn-primary" title="View"><i class="fa-regular fa-eye"></i></button></a>
+                    <td>
+                      <a href=""
+                        ><button
+                          type="button"
+                          class="btn btn-primary"
+                          title="View"
+                        >
+                          <i class="fa-regular fa-eye"></i></button
+                      ></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="checkbox-1"
+                          checked
+                        />
                       </div>
                     </td>
-
                   </tr>
                   <tr>
                     <td>15/03/2022</td>
-                    <td><a href=""><button type="button" class="btn btn-primary" title="View"><i class="fa-regular fa-eye"></i></button></a>
+                    <td>
+                      <a href=""
+                        ><button
+                          type="button"
+                          class="btn btn-primary"
+                          title="View"
+                        >
+                          <i class="fa-regular fa-eye"></i></button
+                      ></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          value=""
+                          id="checkbox-1"
+                          checked
+                        />
                       </div>
                     </td>
-
                   </tr>
-
-
                 </tbody>
               </table>
-
-
-            
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
