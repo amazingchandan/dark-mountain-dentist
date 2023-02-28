@@ -2,11 +2,15 @@
     position:relative!important;
     float: right !important;
     }
+    tr .btn{
+        height: 28px;
+        width: 28px;
+    }
     .btn i{
-        font-size: 1.3rem;
+        font-size: 16px;
     
          position: relative; 
-         top: 1px;
+         top: -3px;
         text-align: center;
         line-height: 1
     }

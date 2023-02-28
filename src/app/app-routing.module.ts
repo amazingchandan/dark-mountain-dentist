@@ -55,6 +55,7 @@ const routes: Routes = [
         }
       },
       {
+<<<<<<< HEAD
         path: 'register-form',
         component: RegisterFormComponent,
         data: {
@@ -63,6 +64,9 @@ const routes: Routes = [
       },
       {
         path: 'dentist-profile',
+=======
+        path: 'dentist-profile/:dentist_id',
+>>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
         component: DentistProfileComponent,
         data: {
           title: 'Dentist Profile Page'

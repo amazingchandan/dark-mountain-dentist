@@ -3,11 +3,20 @@
     margin-right: 1rem;
     margin-top: 1rem
 }
+tr .btn{
+    height: 28px;
+    width: 28px;
+}
 .btn i{
-    font-size: 1.3rem;
+    font-size: 16px;
 
+<<<<<<< HEAD
      position: relative;
      top: 1px;
+=======
+     position: relative; 
+     top: -3px;
+>>>>>>> d985b38454db21729562682a8b2ff750ccabceaa
     text-align: center;
     line-height: 1
 }
@@ -21,6 +30,7 @@ select.fade {
     pointer-events: auto;
     opacity: 1;
  }
+<<<<<<< HEAD
 
  .form label {
   position: relative;
@@ -41,3 +51,18 @@ sup {
 .cancel-btn:hover {
   background-color: var(--bs-gray-700) !important;
 }
+=======
+ .btn-save i{
+    top: 0px !important;
+ }
+ .status-input{
+    position: relative;
+    top: 3px;
+    left: 13px;
+
+}
+.active-label{
+    margin-top:4rem;
+    position: relative;
+}
+>>>>>>> d985b38454db21729562682a8b2ff750ccabceaa

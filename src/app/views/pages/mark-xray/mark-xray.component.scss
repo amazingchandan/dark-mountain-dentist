@@ -27,5 +27,40 @@ img{
 }
 .btn-div{
     margin-right: 1rem !important;
-    margin-top: 1.5rem !important;
+    margin-top: 1.7rem !important;
+}
+.range-input{
+    top: 10%;
+    margin-left: 1rem;
+    width: 151%;
+    margin-right: -38rem;
+    margin-top: 0.5rem;
+    position: relative;
+    height: 7px;
+    outline: none;
+    border-radius: 3px;
+}
+.range-input ::-webkit-slider-thumb{
+    height:48px;
+    width: 48px;
+    z-index: 3;
+    position: relative;
+}
+.label1{
+    font-size: 18px;
+}
+.label2{
+    float: left;
+    position: relative;
+    top: 22%;
+    margin-left: 2rem;
+    font-size: 18px;
+}
+.tag-input{
+    width: 151%;
+    /* float: right; */
+    /* margin-right: 40.5rem; */
+    margin-left: 5.5rem;
+    position: relative;
+    top: -21%;
 }
