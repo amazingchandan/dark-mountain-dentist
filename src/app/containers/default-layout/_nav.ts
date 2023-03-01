@@ -1,29 +1,33 @@
 import { INavData } from '@coreui/angular';
 
-export const navItems: INavData[] = [
+
+export const navItems:
+ INavData[] =
+  [
+  
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: 'dashboard',
     icon:'fa-solid fa-gauge'
 
   },
   {
     name: 'Registered Dentists',
-    url: '/registered-dentists',
+    url: 'registered-dentists',
     icon:'fa-solid fa-users'
   },
   {
     name: 'Registration Form',
-    url: '/register-form'
+    url: 'register-form'
   },
   {
     name: 'Uploaded X-Rays',
-    url: '/uploaded-xray',
+    url: 'uploaded-xray',
     icon: 'fa-solid fa-teeth-open'
   },
   {
     name: 'Manage Subscription',
-    url: '/subscription-list',
+    url: 'subscription-list',
     icon: 'fa-sharp fa-regular fa-rectangle-list'
   },
 
@@ -71,3 +75,20 @@ export const navItems: INavData[] = [
     ]
   },*/
 ];
+
+export const navItemsUser:
+ INavData[] =
+  [
+    {
+      name: 'Dashboard',
+      url: 'dashboard',
+      icon:'fa-solid fa-gauge'
+  
+    },
+    {
+      name: 'Pricing',
+      url: 'pricing',
+      icon:'fa-solid fa-gauge'
+  
+    },
+  ]

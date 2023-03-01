@@ -3,7 +3,7 @@
   <div class="card card-primary">
     <div class="card-body p-4">
       <div class="row">
-        <form action="" class="form-inline" #register_form="ngForm" (submit)="handleForm(register_form.value)">
+        <form class="form-inline" #register_form="ngForm" [formGroup]="registerForm">
           <div class="row mb-3 mt-2">
             <div class="col-md-4 form-group">
               <label class="mb-2">First Name<sup>*</sup></label>
@@ -11,27 +11,41 @@
                 type="text"
                 class="form-control me-4"
                 placeholder="First Name"
-                name="firstName"
-                ngModel
+                formControlName="first_name"
+              
               />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
-              <input type="text" class="form-control" placeholder="Last Name" name="lastName"
-              ngModel/>
+              <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name"
+            />
             </div>
+          </div>
+          <div class="row mb-3 mt-2">
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID<sup>*</sup></label>
               <input
                 type="email"
                 class="form-control me-4"
                 placeholder="Email ID"
-                name="email"
-                ngModel
+                formControlName="email"
+              
               />
             </div>
           </div>
-          <div class="row mb-3">
+          <div class="row mb-3 mt-2">
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Password<sup>*</sup></label>
+              <input
+                type="password"
+                class="form-control me-4"
+                placeholder="Password"
+                formControlName="password"
+              
+              />
+            </div>
+          </div>
+          <!--<div class="row mb-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">Contact Number<sup>*</sup></label>
               <input
@@ -104,7 +118,7 @@
                 name="amount"
                 ngModel
               />
-            </div>
+            </div>-->
             <div class="col-md-4 btn-div">
               <button class="btn btn-primary register-btn ms-2 mt-4 cancel-btn" title="Cancel">
                 Cancel
@@ -112,12 +126,13 @@
               <button
                 class="btn btn-primary register-btn ms-2 mt-4"
                 title="Register"
+                (click)="register()"
               >
                 Register
                 <i class="fa-solid fa-address-card"></i>
               </button>
             </div>
-          </div>
+          
         </form>
       </div>
     </div>

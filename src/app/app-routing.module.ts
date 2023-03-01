@@ -13,33 +13,127 @@ import { SubscriptionListComponent } from './views/pages/subscription-list/subsc
 import { UploadedXraysComponent } from './views/pages/uploaded-xrays/uploaded-xrays.component';
 import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
 import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
+import { PricingComponent } from './views/userPages/pricing/pricing.component';
+
 const routes: Routes = [
+
+  // {
+  //   path: "register",
+  //   component: RegisterFormComponent,
+  //   data: {
+  //     title: "Registration Form"
+  //   },
+  //   children: [
+  //     {
+  //       path: 'login',
+  //       component: LoginComponent,
+  //       data: {
+  //         title: 'Login Page',
+
+  //       }
+  //     },
+  //     {
+  //       path: 'dashboard',
+  //       component: DefaultLayoutComponent,
+  //       data: {
+  //         title: 'Dashboard'
+  //       },
+  //     },
+  //     // {
+  //     //   path: 'dashboard',
+  //     //   data: {
+  //     //     title: ''
+  //     //   },
+  //     //   loadChildren: () =>
+  //     //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+  //     // },
+
+  //     // {
+  //     //   path: 'widgets',
+  //     //   loadChildren: () =>
+  //     //     import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
+  //     // },
+  //     {
+  //       path: 'pages',
+  //       loadChildren: () =>
+  //         import('./views/pages/pages.module').then((m) => m.PagesModule)
+  //     },
+
+  //     {
+  //       path: 'registered-dentists',
+  //       component: RegisteredDentistsComponent,
+  //       data: {
+  //         title: 'Registered Dentists Page'
+  //       }
+  //     },
+  //     {
+  //       path: 'dentist-profile/:dentist_id',
+  //       component: DentistProfileComponent,
+  //       data: {
+  //         title: 'Dentist Profile Page'
+  //       }
+  //     },
+  //     {
+  //       path: 'manage-subscription',
+  //       component: ManageSubscriptionComponent,
+  //       data: {
+  //         title: 'Manage Subscription Page'
+  //       }
+  //     },
+  //     {
+  //       path: 'subscription-list',
+  //       component: SubscriptionListComponent,
+  //       data: {
+  //         title: 'Subscription List Page'
+  //       }
+  //     },
+  //     {
+  //       path: 'uploaded-xray',
+  //       component: UploadedXraysComponent,
+  //       data: {
+  //         title: 'Uploaded XRay Page'
+  //       }
+  //     },
+  //     {
+  //       path: 'mark-xray',
+  //       component: MarkXrayComponent,
+  //       data: {
+  //         title: 'Mark XRay Page'
+  //       }
+  //     },
+
+  //   ]
+  // },
+
+
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    component: RegisterFormComponent,
+    data: {
+      title: 'Register Page'
+    }
   },
   {
-    path: '',
+    path: 'dashboard',
     component: DefaultLayoutComponent,
-    data: {
-      title: 'Dashboard'
-    },
-
     children: [
-      {
-        path: 'dashboard',
-        data: {
-          title: ''
-        },
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
-
       {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
       {
         path: 'pages',
@@ -47,18 +141,12 @@ const routes: Routes = [
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
       {
-        path: "register-form",
-        component: RegisterFormComponent,
-        data: {
-          title: "Registration Form"
-        }
-      },
-      {
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,
         data: {
           title: 'Registered Dentists Page'
-        }
+        },
+      
       },
       {
         path: 'dentist-profile/:dentist_id',
@@ -67,9 +155,10 @@ const routes: Routes = [
           title: 'Dentist Profile Page'
         }
       },
+
       {
         path: 'manage-subscription',
-        component:ManageSubscriptionComponent,
+        component: ManageSubscriptionComponent,
         data: {
           title: 'Manage Subscription Page'
         }
@@ -95,34 +184,23 @@ const routes: Routes = [
           title: 'Mark XRay Page'
         }
       },
-
+      {
+        path: 'pricing',
+        component: PricingComponent,
+        data: {
+          title: 'Pricing Page'
+        }
+      },
     ]
+   
   },
+  
 
-  {
-    path: '500',
-    component: Page500Component,
-    data: {
-      title: 'Page 500'
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
+  //UserPages
+ 
 
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
 
-  {path: '**', redirectTo: 'dashboard'}
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ export class UserService {
   getPlanById: string;
   updateUserById: string;
   updatePlanById: String;
+  userRegister:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -30,13 +31,14 @@ export class UserService {
     this.getPlanById = this.apiHost + 'getPlanById';
     this.updateUserById = this.apiHost + 'updateUserById';
     this.updatePlanById = this.apiHost + 'updatePlanById';
+    this.userRegister = this.apiHost + 'adminRegistration';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
   }
 
-  addRole(requestParameters) {
-    return this.http.post(`${this.addAdmin}`, requestParameters, {});
+  addUser(requestParameters) {
+    return this.http.post(`${this.userRegister}`, requestParameters, {});
   }
   onLogout() {
     return this.http.get(`${this.logout}`);

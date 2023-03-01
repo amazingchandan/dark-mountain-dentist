@@ -15,11 +15,20 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
-
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   constructor(private classToggler: ClassToggleService,
     private appService:AppService) {
     super();
     
+  }
+  ngOnInit(): void {
+    this.userfirst();
+    //this.admin()
+  }
+
+  userfirst() {
+    this.userInfo;
+    console.log(this.userInfo);
   }
   Logout(){
     Swal.fire({
