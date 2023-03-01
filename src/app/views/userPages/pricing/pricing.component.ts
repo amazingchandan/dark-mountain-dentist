@@ -36,8 +36,22 @@ export class PricingComponent {
 
   }
 
+   addMonths(date, months) {
+    date.setMonth(date.getMonth() + months);
   
-  getSubscription(id){
+    return date;
+  }
+  getSubscription(id ,type){
+ console.log(id,type)
+     if(type=="Monthly"){
+      console.log("dateee")
+     // const date = Date.now().toLocaleDateString('en-ZA')
+
+      //const newDate = this.addMonths(date, 1);
+      
+      // September 17, 2022
+      //console.log(date,"Date");
+     }
     Swal.fire({
       text: "You have successfully subscribed",
       icon: 'success',
