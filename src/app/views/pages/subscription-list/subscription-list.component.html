@@ -7,7 +7,7 @@
         <div class="col">
           <button
             type="button"
-            class="btn btn-primary add-btn"
+            class="btn btn-primary add-btn p-1"
             data-bs-toggle="modal"
             data-bs-target="#exampleModalCenter"
           >
@@ -91,7 +91,7 @@
           <form [formGroup]="addPriceingForm" class="form-inline" role="form">
             <div class="row mb-2">
               <div class="col-md-4 form-group">
-                <label class="">Plan Name</label>
+                <label class="mb-2">Plan Name<sup>*</sup></label>
                 <input
                   type="text"
                   placeholder="Plan Name"
@@ -101,7 +101,7 @@
                 />
               </div>
               <div class="col-md-4 form-group">
-                <label class="">Amount</label>
+                <label class="mb-2">Amount<sup>*</sup></label>
                 <input
                   type="text"
                   placeholder="Amount"
@@ -111,7 +111,7 @@
                 />
               </div>
               <div class="col-md-4 form-group">
-                <label class="">Mininmum</label>
+                <label class="mb-2">Mininmum<sup>*</sup></label>
                 <input
                   type="text"
                   formControlName="min"
@@ -123,7 +123,7 @@
             </div>
             <div class="row mb-2">
               <div class="col-md-4 form-group">
-                <label class="">Maximum</label>
+                <label class="mb-2">Maximum<sup>*</sup></label>
                 <input
                   type="text"
                   formControlName="max"
@@ -134,25 +134,27 @@
               </div>
 
               <div class="col-md-4 form-group">
-                <label class="" for="inputState">Type</label>
+                <label class="mb-2" for="inputState">Type<sup>*</sup></label>
                 <select
                   class="form-select"
                   formControlName="type"
                   aria-label="Default select example"
                   [value]="type"
                 >
+                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
                   <option>Monthly</option>
                   <option>Yearly</option>
                 </select>
               </div>
               <div class="col-md-4 form-group country-col">
-                <label class="" for="inputState">Country</label>
+                <label class="mb-2" for="inputState">Country<sup>*</sup></label>
                 <select
                   class="form-select"
                   formControlName="country"
                   aria-label="Default select example"
                   [value]="country"
                 >
+                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
                   <option>India</option>
                   <option>America</option>
                   <option>Japan</option>
@@ -176,15 +178,15 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary cancel-btn p-1" data-bs-dismiss="modal">
           Close
         </button>
         <button
           type="button"
-          class="btn btn-primary btn-save"
+          class="btn btn-primary btn-save p-1"
           (click)="setPrice()"
         >
-          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i>
+          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i>
         </button>
       </div>
     </div>

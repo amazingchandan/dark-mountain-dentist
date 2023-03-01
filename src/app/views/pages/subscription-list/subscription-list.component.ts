@@ -28,6 +28,7 @@ export class SubscriptionListComponent implements OnInit {
   maximum:string;
   amount:number;
   type:string;
+  defaultType = "-Select-";
 
   allData: any;
   private isDtInitialized: boolean = false;
@@ -48,7 +49,7 @@ export class SubscriptionListComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       //dom: 'Bfrtip',
-    
+
     };
     this.planList();
 
@@ -212,9 +213,9 @@ export class SubscriptionListComponent implements OnInit {
           //this.dtTrigger.next();
         }
       })
-      
+
     }
-   
+
     openModal(id){
       console.log(id,"plan id")
       for(let i=0;i<this.allData.length;i++)
@@ -228,9 +229,9 @@ export class SubscriptionListComponent implements OnInit {
     this.amount=this.allData[i].amount;
     this.country=this.allData[i].country;
    }
-}  
+}
  }
-  
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
