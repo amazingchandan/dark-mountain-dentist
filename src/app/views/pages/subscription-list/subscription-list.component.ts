@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { max, min, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { type } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 
@@ -23,7 +23,7 @@ export class SubscriptionListComponent implements OnInit {
   addPriceingForm: FormGroup;
   private pricingId: any;
   private status: any;
-  planName:string;
+  plan_name: string;
   minimum:string;
   maximum:string;
   amount:number;
@@ -34,17 +34,19 @@ export class SubscriptionListComponent implements OnInit {
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  @ViewChild('close') close: ElementRef;
+
   showContent: boolean;
   country: any;
   constructor(
-    private formBuilder :FormBuilder,
-    private userService:UserService,
-    private router :Router,
-    private route : ActivatedRoute
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 250);
+    setTimeout(() => this.showContent = true, 250);
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -53,21 +55,21 @@ export class SubscriptionListComponent implements OnInit {
     };
     this.planList();
 
-    this.addPriceingForm =new FormGroup({
-      planName : new FormControl(),
-      amount :new FormControl(),
-      max:new FormControl(),
-      min:new FormControl(),
-      type:new FormControl(),
-      country:new FormControl(),
+    this.addPriceingForm = new FormGroup({
+      plan_name: new FormControl(),
+      amount: new FormControl(),
+      maximum: new FormControl(),
+      minimum: new FormControl(),
+      type: new FormControl(),
+      country: new FormControl(),
     });
-    this.addPriceingForm=this.formBuilder.group({
-      planName: ['',[Validators.required]],
-      amount:['',[Validators.required]],
-      max:['',[Validators.required]],
-      min:['',[Validators.required]],
-      type:['',[Validators.required]],
-      country:['',[Validators.required]],
+    this.addPriceingForm = this.formBuilder.group({
+      plan_name: ['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      maximum: ['', [Validators.required]],
+      minimum: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      country: ['', [Validators.required]],
     });
     this.pricingId = this.route.snapshot.paramMap.get('pricing_id');
     if (
@@ -78,29 +80,30 @@ export class SubscriptionListComponent implements OnInit {
       //this.editPricing(this.pricingId);
     } else {
       //this.plandesc();
-     // this.addPriceingForm.get('status').setValue('active');
+      // this.addPriceingForm.get('status').setValue('active');
     }
   }
-/*  plandesc() {
-    this.userService.getPlanActive().subscribe((res: any) => {
-      // console.log(res)
-      // this.allData = res.getData;
-      res.getData.forEach((ele) => {
-        this.planDescription.push({
-          plan_description: ele.plan_description,
-          plan_status: 'Tick',
+  /*  plandesc() {
+      this.userService.getPlanActive().subscribe((res: any) => {
+        // console.log(res)
+        // this.allData = res.getData;
+        res.getData.forEach((ele) => {
+          this.planDescription.push({
+            plan_description: ele.plan_description,
+            plan_status: 'Tick',
+          });
         });
+        this.allData = this.planDescription;
       });
-      this.allData = this.planDescription;
-    });
-  }*/
+    }*/
   setPrice() {
+    console.log(this.addPriceingForm.value)
     if (
-      this.addPriceingForm.value.planName == undefined ||
-      this.addPriceingForm.value.planName.trim() == ''
+      this.addPriceingForm.value.plan_name == undefined ||
+      this.addPriceingForm.value.plan_name.trim() == ''
     ) {
       Swal.fire({
-        text: 'Please enter plan name',
+        text: 'Please enter Plan name',
         icon: 'warning'
       });
       return false;
@@ -121,8 +124,8 @@ export class SubscriptionListComponent implements OnInit {
       // return false;
     }
     if (
-      this.addPriceingForm.value.min == undefined ||
-      this.addPriceingForm.value.min == ''
+      this.addPriceingForm.value.minimum == undefined ||
+      this.addPriceingForm.value.minimum == ''
     ) {
       Swal.fire({
         text: 'Please enter minimum',
@@ -133,8 +136,8 @@ export class SubscriptionListComponent implements OnInit {
       // return false;
     }
     if (
-      this.addPriceingForm.value.max == undefined ||
-      this.addPriceingForm.value.max == ''
+      this.addPriceingForm.value.maximum == undefined ||
+      this.addPriceingForm.value.maximum == ''
     ) {
       Swal.fire({
         text: 'Please enter maximum',
@@ -173,8 +176,10 @@ export class SubscriptionListComponent implements OnInit {
       this.pricingId != null &&
       this.pricingId != ''
     ) {
-      //this.updatePricing(this.pricingId);
-    } else {
+      console.log("update mode",this.pricingId)
+      this.updatePlan(this.pricingId);
+    }
+     else {
       this.userService
         .addPrice(this.addPriceingForm.value)
         .subscribe((res: any) => {
@@ -198,39 +203,78 @@ export class SubscriptionListComponent implements OnInit {
         });
     }
   }
-    planList(){
+  planList() {
 
-      this.userService.getSubscriptionList().subscribe((res:any)=>{
-        console.log(res,"response")
-        this.allData=res.getData;
-        if (this.isDtInitialized) {
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-           // this.dtTrigger.next();
-          });
-        } else {
-          this.isDtInitialized = true;
-          //this.dtTrigger.next();
-        }
-      })
+    this.userService.getSubscriptionList().subscribe((res: any) => {
+      console.log(res, "response")
+      this.allData = res.getData;
+      if (this.isDtInitialized) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          // this.dtTrigger.next();
+        });
+      } else {
+        this.isDtInitialized = true;
+        //this.dtTrigger.next();
+      }
+    })
 
+  }
+
+  openModal(id) {
+    console.log(id, "plan id")
+    for (let i = 0; i < this.allData.length; i++) {
+      if (this.allData[i]._id === id) {
+        console.log(this.allData[i])
+        this.pricingId=id;
+        this.addPriceingForm.patchValue({
+          plan_name: this.allData[i].plan_name,
+        });
+
+        this.addPriceingForm.patchValue({
+          minimum: this.allData[i].minimum,
+        });
+        this.addPriceingForm.patchValue({
+          maximum: this.allData[i].maximum,
+        });
+        this.addPriceingForm.patchValue({
+          type: this.allData[i].type,
+        });
+        this.addPriceingForm.patchValue({
+          amount: this.allData[i].amount,
+        });
+        this.addPriceingForm.patchValue({
+          country: this.allData[i].country,
+        });
+
+      }
     }
+  }
+  updatePlan(id) {
 
-    openModal(id){
-      console.log(id,"plan id")
-      for(let i=0;i<this.allData.length;i++)
-   {
-   if(this.allData[i]._id===id){
-    console.log(this.allData[i])
-    this.planName= this.allData[i].plan_name;
-    this.minimum=this.allData[i].minimum;
-    this.maximum=this.allData[i].maximum;
-    this.type=this.allData[i].type;
-    this.amount=this.allData[i].amount;
-    this.country=this.allData[i].country;
-   }
-}
- }
+    this.userService.updatePlan(this.addPriceingForm.value, id)
+      .subscribe((res: any) => {
+        console.log(res)
+        if (res.success) {
+          //this.toastr.success(res.message);
+          Swal.fire({
+            text: res.message,
+            icon: 'success',
+          });
+          document.getElementById('launch_ad')?.click();
+        }
+         else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error',
+          });
+          //this.toastr.error(res.message);
+        }
+      });
+
+
+  }
+
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();

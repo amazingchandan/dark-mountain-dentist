@@ -2,8 +2,14 @@
 <c-sidebar visible>
   <c-sidebar-brand> <i class="fa-solid fa-tooth me-2 fs-3"></i> Dark Mountain</c-sidebar-brand>
 <c-sidebar-header><img  src="./assets/img/avatars/no-logo-icon-1-green.png">&nbsp;Super Admin</c-sidebar-header>
-  <c-sidebar-nav [navItems]="navItems" dropdownMode="close"></c-sidebar-nav>
+<!-- <c-sidebar-nav [navItems]="navItems" dropdownMode="close"></c-sidebar-nav> -->
 
+<!-- <c-sidebar-brand>Dark Mountain</c-sidebar-brand> -->
+<!-- <c-sidebar-header><img  src="./assets/img/avatars/no-logo-icon-1.webp">&nbsp;Super Admin</c-sidebar-header> -->
+
+<c-sidebar-nav *ngIf='userDetail.role === "admin"' [navItems]="navItems" dropdownMode="close"></c-sidebar-nav>
+
+<c-sidebar-nav  *ngIf='userDetail.role === "dentist"' [navItems]="navItemsUser" dropdownMode="close"></c-sidebar-nav>
 </c-sidebar>
 
 <!--main-->

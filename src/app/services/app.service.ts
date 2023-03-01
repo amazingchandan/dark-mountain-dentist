@@ -22,7 +22,9 @@ export class AppService {
     localStorage.setItem('email', getLoginDetail.userInfo.email);
     localStorage.setItem('role', getLoginDetail.userInfo.role);
     localStorage.setItem('objId', getLoginDetail.userInfo.objId);
-    window.location.href = "/";
+    console.log(getLoginDetail.userInfo.role)
+    
+    this.router.navigateByUrl('dashboard');
   }
 
     addTripData(tripData: any) {

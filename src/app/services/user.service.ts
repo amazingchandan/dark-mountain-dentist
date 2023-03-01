@@ -13,43 +13,55 @@ export class UserService {
   register: string;
   addAdminList: string;
   getUsersRecordById: string;
-  addPricingPlan:string;
-  getPlanList:string;
-  getPlanById:string;
+  addPricingPlan: string;
+  getPlanList: string;
+  getPlanById: string;
+  updateUserById: string;
+  updatePlanById: String;
+  userRegister:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
     this.logout = this.apiHost + `admin/logout`;
-    this.addAdmin = this.apiHost+ 'adminRegister';
+    this.addAdmin = this.apiHost + 'adminRegister';
     this.addAdminList = this.apiHost + `getUserRecordList`;
-    this.getUsersRecordById= this.apiHost + 'getUserRecordById';
+    this.getUsersRecordById = this.apiHost + 'getUserRecordById';
     this.addPricingPlan = this.apiHost + `setPricingPlan`;
-    this.getPlanList=this.apiHost+'getPlanList';
-    this.getPlanById=this.apiHost+'getPlanById';
+    this.getPlanList = this.apiHost + 'getPlanList';
+    this.getPlanById = this.apiHost + 'getPlanById';
+    this.updateUserById = this.apiHost + 'updateUserById';
+    this.updatePlanById = this.apiHost + 'updatePlanById';
+    this.userRegister = this.apiHost + 'adminRegistration';
   }
-   onLogin(requestParameters: string) {
+  onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
   }
 
-  addRole(requestParameters) {
-    return this.http.post(`${this.addAdmin}`, requestParameters, {});
-  } 
+  addUser(requestParameters) {
+    return this.http.post(`${this.userRegister}`, requestParameters, {});
+  }
   onLogout() {
     return this.http.get(`${this.logout}`);
   }
   getUserList() {
     return this.http.get(`${this.addAdminList}`);
   }
-  getUserRecordById(id){
+  getUserRecordById(id) {
     return this.http.get(`${this.getUsersRecordById}?dentist_id=${id}`);
   }
   addPrice(requestParameters) {
     return this.http.post(`${this.addPricingPlan}`, requestParameters, {});
   }
-  getSubscriptionList(){
+  getSubscriptionList() {
     return this.http.get(`${this.getPlanList}`);
   }
-  getSubPlanById(id){
+  getSubPlanById(id) {
     return this.http.get(`${this.getPlanById}?subscription_id=${id}`);
+  }
+  updateUser(requestParameters, id) {
+    return this.http.post(`${this.updateUserById}?dentist_id=${id}`, requestParameters, {});
+  }
+  updatePlan(requestParameters, id) {
+    return this.http.post(`${this.updatePlanById}?id=${id}`, requestParameters, {});
   }
 }

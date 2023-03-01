@@ -3,6 +3,7 @@ import { FormBuilder,FormGroup,Validators,FormControl } from '@angular/forms' ;
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dentist-profile',
   templateUrl: './dentist-profile.component.html',
@@ -39,9 +40,9 @@ export class DentistProfileComponent implements OnInit {
       //user_role: new FormControl(),
     });
     this.addSuperForm = this.formBuilder.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      contact: ['', [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      contact_number: ['', [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       email: [
         '',
 
@@ -53,7 +54,7 @@ export class DentistProfileComponent implements OnInit {
      city: ['', [Validators.required]],
      state: ['', [Validators.required]],
     country: ['', [Validators.required]],
-     zip: ['', [Validators.required]],
+     pincode: ['', [Validators.required]],
   
     });
     this.dentistId=this.route.snapshot.paramMap.get('dentist_id');
@@ -74,15 +75,15 @@ export class DentistProfileComponent implements OnInit {
       console.log(res,"*****");
       if (res.success) {
         this.addSuperForm.patchValue({
-          firstname: res.getData[0].first_name,
+          first_name: res.getData[0].first_name,
         });
 
         this.addSuperForm.patchValue({
-          lastname: res.getData[0].last_name,
+          last_name: res.getData[0].last_name,
         });
 
         this.addSuperForm.patchValue({
-          contact: res.getData[0].contact_number,
+          contact_number: res.getData[0].contact_number,
         });
 
         this.addSuperForm.patchValue({
@@ -106,7 +107,7 @@ export class DentistProfileComponent implements OnInit {
           country: res.getData[0].country,
         });
         this.addSuperForm.patchValue({
-          zip: res.getData[0].pincode,
+          pincode: res.getData[0].pincode,
         });
 
 
@@ -115,6 +116,25 @@ export class DentistProfileComponent implements OnInit {
     });
   }
   updateUser(){
+    if(this.dentistId!="" && this.dentistId!= undefined && this.dentistId != null){
+      this.apiService.updateUser(this.addSuperForm.value ,this.dentistId)
+      .subscribe((res: any) => {
+        if (res.success) {
+          //this.toastr.success(res.message);
+          Swal.fire({
+            text: res.message,
+            icon: 'success',
+          });
+          this.router.navigateByUrl('/registered-dentists');
+        } else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error',
+          });
+          //this.toastr.error(res.message);
+        }
+      });
+    }
       
   }
 
