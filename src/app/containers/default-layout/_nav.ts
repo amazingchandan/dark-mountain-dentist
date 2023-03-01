@@ -1,35 +1,32 @@
 import { INavData } from '@coreui/angular';
-
+const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+console.log(userInfo,"userrrr")
 
 export const navItems:
  INavData[] =
   [
-
+  
   {
     name: 'Dashboard',
-    url: '/dashboard',
-    icon:'fa-solid fa-house-chimney'
+    url: 'dashboard',
+    icon:'fa-solid fa-gauge'
 
   },
   {
     name: 'Registered Dentists',
-    url: '/registered-dentists',
-    icon:'fa-solid fa-user'
+    url: 'registered-dentists',
+    icon:'fa-solid fa-users'
   },
-  {
-    name: 'Registration Form',
-    url: '/register-form',
-    icon: 'fa-solid fa-address-card'
-  },
+ 
   {
     name: 'Uploaded X-Rays',
-    url: '/uploaded-xray',
-    icon: 'fa-solid fa-cloud-arrow-up'
+    url: 'uploaded-xray',
+    icon: 'fa-solid fa-teeth-open'
   },
   {
     name: 'Manage Subscription',
-    url: '/subscription-list',
-    icon: 'fa-solid fa-bookmark'
+    url: 'subscription-list',
+    icon: 'fa-sharp fa-regular fa-rectangle-list'
   },
 
 /*  {
@@ -83,13 +80,13 @@ export const navItemsUser:
     {
       name: 'Dashboard',
       url: 'dashboard',
-      icon:'fa-solid fa-house-chimney'
-
+      icon:'fa-solid fa-gauge'
+  
     },
     {
       name: 'Pricing',
       url: 'pricing',
-      icon:'fa-solid fa-dollar-sign'
-
+      icon:'fa-solid fa-gauge'
+  
     },
   ]
