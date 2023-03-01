@@ -8,14 +8,13 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   templateUrl: './default-layout.component.html',
 })
 
-
 export class DefaultLayoutComponent {
 
 
   public userDetail= userInfo;
   public navItems = navItems;
   public navItemsUser = navItemsUser;
- 
+
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };

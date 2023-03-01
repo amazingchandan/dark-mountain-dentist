@@ -3,49 +3,56 @@
   @include ltr-rtl("padding-left", var(--cui-sidebar-occupy-start, 0));
   @include ltr-rtl("padding-right", var(--cui-sidebar-occupy-end, 0));
   will-change: auto;
-  @include transition(padding .15s);
+  @include transition(padding 0.15s);
 }
-.sidebar-brand{
+.sidebar-brand {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
-  background-color: #17A2B8;
+  background-color: #02d959;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
   padding-right: 0.6rem;
 }
-.sidebar-nav{
+.sidebar-nav {
   background-color: #232937 !important;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
-  color: #C2C7D0;
+  color: #c2c7d0;
 }
-.sidebar-header{
+.sidebar-header {
   background-color: #232937 !important;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
-  color: #C2C7D0;
+  color: #c2c7d0;
   font-size: 1.5rem !important;
   font-weight: 500 !important;
   text-align: unset;
   padding-left: 1rem;
   border-bottom: 1px solid gray;
 }
-.sidebar-header img{
+.sidebar-header img {
   width: 16% !important;
 }
-.user-header{
-  background-color:  #17A2B8;
+.user-header {
+  background-color: #232937;
   align-items: center !important;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.user-header img{
-  margin-left: 5rem;
-    /* border: 3px solid; */
-    /* border-color: rgba(255, 255, 255, 0.2); */
-    border-radius: 50%;
-    width: 29% !important;
-    /* box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%) !important; */
-
+.user-header img {
+  /* border: 3px solid; */
+  /* border-color: rgba(255, 255, 255, 0.2); */
+  border-radius: 50%;
+  width: 29% !important;
+  /* box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%) !important; */
 }
-.dropdown-menu{
+.dropdown-menu {
   border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    width: 270px !important;
+  border-bottom-left-radius: 4px;
+  width: 270px !important;
+  overflow: hidden;
+}
+
+.user-footer {
+  margin: 18px auto 10px auto;
 }

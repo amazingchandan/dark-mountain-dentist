@@ -105,4 +105,5 @@ export class RegisterFormComponent {
   handleForm(data:NgForm){
     console.log(data);
   }
+  countryList = "-Select-";
 }

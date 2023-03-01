@@ -1,12 +1,12 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
- 
-   
+
+
 
   <c-container [fluid]="true">
-<!---->    
+<!---->
     <c-header-nav class="d-none d-lg-flex me-auto">
-    
+
     <!--  <c-nav-item>
         <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
       </c-nav-item>
@@ -34,15 +34,15 @@
         </a>
       </c-nav-item>-->
     </c-header-nav>
-   
 
- 
+
+
   <!--  <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>-->
     <c-header-nav class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
   </c-container>
-  
+
 </ng-container>
 
 <!--</c-header>-->
@@ -60,7 +60,7 @@
         cTextColor="primary"
         shape="rounded-1"
         size="md"
-        src="./assets/img/avatars/no-logo-icon-1.webp"
+        src="./assets/img/avatars/no-logo-icon-1.png"
         status="success"
       >
       </c-avatar>
@@ -144,10 +144,10 @@
       </li>-->
 
 
-      <li class="user-header">
-        <img src="./assets/img/avatars/no-logo-icon-1.webp" alt="User Image" />
-  
-        <h5 class="text-center pb-3">
+      <li class="user-header p-3">
+        <img src="./assets/img/avatars/no-logo-icon-1-green.png" alt="User Image" />
+
+        <h5 class="text-center mt-2">
           Super Admin
           <!-- <small>Brand Banao Admin</small> -->
         </h5>
@@ -172,13 +172,13 @@
         <!-- <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
           Profile
         </a> -->
-        <button class="btn" (click)="Logout()" >Sign out</button>
+        <button class="btn p-1" (click)="Logout()">Sign out <i class="fa-solid fa-right-from-bracket ms-1"></i> </button>
         <!-- <a (click)="Logout()" class="btn btn-default btn-flat "
           >Sign out</a
         > -->
       </li>
 
-     
+
       <li></li>
     </ul>
   </c-dropdown>

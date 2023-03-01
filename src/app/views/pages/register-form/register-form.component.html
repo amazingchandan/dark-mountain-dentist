@@ -12,7 +12,7 @@
                 class="form-control me-4"
                 placeholder="First Name"
                 formControlName="first_name"
-              
+
               />
             </div>
             <div class="col-md-4 form-group">
@@ -29,7 +29,7 @@
                 class="form-control me-4"
                 placeholder="Email ID"
                 formControlName="email"
-              
+
               />
             </div>
           </div>
@@ -41,7 +41,7 @@
                 class="form-control me-4"
                 placeholder="Password"
                 formControlName="password"
-              
+
               />
             </div>
           </div>
@@ -57,18 +57,18 @@
               />
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">Address1<sup>*</sup></label>
+              <label class="mb-2">Address 1<sup>*</sup></label>
               <input
                 type="text"
                 class="form-control me-4"
-                placeholder="Address1"
+                placeholder="Address 1"
                 name="address1"
                 ngModel
               />
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">Address2</label>
-              <input type="text" class="form-control" placeholder="Address2" name="address2"
+              <label class="mb-2">Address 2</label>
+              <input type="text" class="form-control" placeholder="Address 2" name="address2"
               ngModel/>
             </div>
           </div>
@@ -101,9 +101,14 @@
                 class="form-select me-4"
                 aria-label="Default select example"
                 name="country"
+                placeholder="Country"
                 ngModel
+                [(ngModel)]="countryList"
               >
-                <option selected>India</option>
+                <!-- can use ngFor instead of hardcoded value -->
+                <!-- <option *ngFor="let country of countryList" [ngValue]="country" [selected]="country">{{country}}</option> -->
+                <!-- <option [defaultSelected]=true selected=true disabled=true>{{countryList}}</option>
+                <option>India</option>
                 <option>America</option>
                 <option>Japan</option>
                 <option>China</option>
@@ -120,19 +125,19 @@
               />
             </div>-->
             <div class="col-md-4 btn-div">
-              <button class="btn btn-primary register-btn ms-2 mt-4 cancel-btn" title="Cancel">
+              <button class="btn btn-primary register-btn ms-2 mt-4 cancel-btn p-1" title="Cancel">
                 Cancel
               </button>
               <button
-                class="btn btn-primary register-btn ms-2 mt-4"
+                class="btn btn-primary register-btn ms-2 mt-4 p-1"
                 title="Register"
                 (click)="register()"
               >
                 Register
-                <i class="fa-solid fa-address-card"></i>
+                <i class="fa-solid fa-address-card ms-1"></i>
               </button>
             </div>
-          
+
         </form>
       </div>
     </div>

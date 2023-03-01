@@ -24,10 +24,11 @@ export class SubscriptionListComponent implements OnInit {
   private pricingId: any;
   private status: any;
   plan_name: string;
-  minimum: string;
-  maximum: string;
-  amount: number;
-  type: string;
+  minimum:string;
+  maximum:string;
+  amount:number;
+  type:string;
+  defaultType = "-Select-";
 
   allData: any;
   private isDtInitialized: boolean = false;
