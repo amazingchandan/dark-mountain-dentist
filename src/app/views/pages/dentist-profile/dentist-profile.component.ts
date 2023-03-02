@@ -13,7 +13,7 @@ export class DentistProfileComponent implements OnInit {
 
   addSuperForm: FormGroup;
   private dentistId :any;
- 
+  defaultType = "-Select-"
 
    constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
@@ -33,10 +33,10 @@ export class DentistProfileComponent implements OnInit {
       address1: new FormControl(),
       address2: new FormControl(),
       city:new FormControl(),
-      state:new FormControl(),  
+      state:new FormControl(),
       country:new FormControl(),
       zip:new FormControl(),
-     
+
       //user_role: new FormControl(),
     });
     this.addSuperForm = this.formBuilder.group({
@@ -55,7 +55,7 @@ export class DentistProfileComponent implements OnInit {
      state: ['', [Validators.required]],
     country: ['', [Validators.required]],
      pincode: ['', [Validators.required]],
-  
+
     });
     this.dentistId=this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
@@ -111,7 +111,7 @@ export class DentistProfileComponent implements OnInit {
         });
 
 
-      
+
       }
     });
   }
@@ -135,7 +135,7 @@ export class DentistProfileComponent implements OnInit {
         }
       });
     }
-      
+
   }
 
   }
