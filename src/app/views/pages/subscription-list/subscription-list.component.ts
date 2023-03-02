@@ -54,6 +54,7 @@ export class SubscriptionListComponent implements OnInit {
         search:"",
         searchPlaceholder: 'Search ',
       },
+      info:false,
       //dom: 'Bfrtip',
 
     };

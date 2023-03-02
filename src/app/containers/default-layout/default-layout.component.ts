@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { navItems ,navItemsUser } from './_nav';
 
@@ -9,8 +9,7 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 })
 
 export class DefaultLayoutComponent {
-
-
+  public isVisible: boolean = true
   public userDetail= userInfo;
   public navItems = navItems;
   public navItemsUser = navItemsUser;
@@ -22,5 +21,11 @@ export class DefaultLayoutComponent {
   constructor() {}
  ngOnInit(){
   console.log(this.userDetail)
+
  }
+
+ receiveMessage(event: boolean) {
+  this.isVisible = event;
+  // console.log(this.isVisible);
+}
 }

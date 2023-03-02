@@ -1,8 +1,8 @@
 <!--sidebar-->
-<c-sidebar visible>
+<c-sidebar [(visible)]="isVisible">
   <!--<c-sidebar-brand> <i class="fa-solid fa-tooth me-2 fs-3"></i> Dark Mountain</c-sidebar-brand>
 <c-sidebar-header><img  src="./assets/img/avatars/no-logo-icon-1-green.png">&nbsp;{{userDetail.first_name}} {{userDetail.last_name}}</c-sidebar-header>
-  --><c-sidebar-brand> <i class="fa-solid fa-tooth me-2 fs-3"></i> Dark<span class="mountain-color">Mountain</span></c-sidebar-brand>
+  --><c-sidebar-brand>  <i class="fa-solid fa-tooth me-2 fs-3"></i> Dark<div class="mountain-color">Mountain</div></c-sidebar-brand>
 <!-- <c-sidebar-header><img  src="./assets/img/avatars/no-logo-icon-1-green.png">&nbsp;Super Admin</c-sidebar-header> -->
 <!-- <c-sidebar-nav [navItems]="navItems" dropdownMode="close"></c-sidebar-nav> -->
 
@@ -17,7 +17,7 @@
 <!--main-->
 <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
   <!--app-header-->
-  <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-default-header>
+  <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar" (toggleMenuSidebar)="receiveMessage($event)"></app-default-header>
   <!--app-body-->
   <div class="body flex-grow-1">
     <c-container breakpoint="lg" class="h-auto">
