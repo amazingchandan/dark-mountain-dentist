@@ -44,11 +44,11 @@
                 <td>{{data.amount}}</td>
                 <td>3</td>
 
-                <td><button title="View" type="button" class="btn btn-primary" (click)="openModal(data._id)"
-                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
-                      class="fa-regular fa-eye"></i></button>
-                  <button type="button" class="btn btn-danger ms-2" title="Edit"><i
-                      class="fa-regular fa-pen-to-square"></i></button>
+                <td>
+                  <button type="button" class="btn btn-danger edit pt-1" title="Edit"><i
+                    class="fa-regular fa-pen-to-square mt-1"></i></button>
+                  <button title="View" type="button" class="btn btn-primary fs-6 ms-2" (click)="openModal(data._id)"
+                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">View Details</button>
                 </td>
               </tr>
 

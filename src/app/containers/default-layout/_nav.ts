@@ -5,28 +5,33 @@ console.log(userInfo,"userrrr")
 export const navItems:
  INavData[] =
   [
-  
+
   {
     name: 'Dashboard',
     url: 'dashboard',
-    icon:'fa-solid fa-gauge'
+    icon:'fa-solid fa-house-chimney'
 
   },
   {
     name: 'Registered Dentists',
     url: 'registered-dentists',
-    icon:'fa-solid fa-users'
+    icon:'fa-solid fa-user'
   },
- 
+  /*{
+    name: 'Registration Form',
+    url: 'register-form',
+    icon: 'fa-solid fa-address-card'
+  },*/
+
   {
     name: 'Uploaded X-Rays',
     url: 'uploaded-xray',
-    icon: 'fa-solid fa-teeth-open'
+    icon: 'fa-solid fa-cloud-arrow-up'
   },
   {
     name: 'Manage Subscription',
     url: 'subscription-list',
-    icon: 'fa-sharp fa-regular fa-rectangle-list'
+    icon: 'fa-solid fa-bookmark'
   },
 
 /*  {
@@ -80,13 +85,13 @@ export const navItemsUser:
     {
       name: 'Dashboard',
       url: 'dashboard',
-      icon:'fa-solid fa-gauge'
-  
+      icon:'fa-solid fa-house-chimney'
+
     },
     {
-      name: 'Pricing',
+      name: 'Subscription Plans',
       url: 'pricing',
-      icon:'fa-solid fa-gauge'
-  
+      icon:'fa-solid fa-dollar-sign'
+
     },
   ]

@@ -6,6 +6,9 @@
   position: relative;
 }
 
+.a{
+  color: black !important;
+}
 // sup {
 //   position: relative;
 //   top: -2px;
@@ -25,8 +28,8 @@
 
 .btn-div {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
@@ -45,4 +48,20 @@ i {
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+.my-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(69, 69, 69, 0.137);
+}
+
+.icon-position {
+  position: absolute;
+  // right: 24px;
+  top: 0px;
+  bottom: 0px;
+  // color: grey;
 }

@@ -1,12 +1,19 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
 
-
+ 
 
   <c-container [fluid]="true">
 <!---->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenuSidebar.emit()" role="button" id="menu-bar-btn"
+          ><i class="fas fa-bars"></i
+        ></a>
+      </li>
+    </ul>
     <c-header-nav class="d-none d-lg-flex me-auto">
-
+      <c-breadcrumb-router class="ms-2 breadcrumb"></c-breadcrumb-router>
     <!--  <c-nav-item>
         <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
       </c-nav-item>
@@ -42,7 +49,10 @@
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
   </c-container>
-
+  <c-header-divider></c-header-divider>
+  <c-container [fluid]="true">
+   Hello, {{userInfo.first_name}} {{userInfo.last_name}}
+  </c-container>
 </ng-container>
 
 <!--</c-header>-->
@@ -54,7 +64,7 @@
       color=""
       [caret]="false"
       cDropdownToggle
-      class="py-0"
+      class="py-0 icon-btn"
     >
       <c-avatar
         cTextColor="primary"
@@ -172,7 +182,7 @@
         <!-- <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
           Profile
         </a> -->
-        <button class="btn p-1" (click)="Logout()">Sign out <i class="fa-solid fa-right-from-bracket ms-1"></i> </button>
+        <button class="btn p-1" (click)="Logout()">Logout <i class="fa-solid fa-right-from-bracket ms-1"></i> </button>
         <!-- <a (click)="Logout()" class="btn btn-default btn-flat "
           >Sign out</a
         > -->

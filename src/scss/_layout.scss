@@ -5,20 +5,23 @@
   will-change: auto;
   @include transition(padding 0.15s);
 }
+.mountain-color {
+  color: #00d957;
+}
 .sidebar-brand {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
-  background-color: #02d959;
+  background-color: #043049;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
   padding-right: 0.6rem;
 }
 .sidebar-nav {
-  background-color: #232937 !important;
+  background-color: #043049 !important;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
   color: #c2c7d0;
 }
 .sidebar-header {
-  background-color: #232937 !important;
+  background-color: #043049 !important;
   box-shadow: 0 0 22px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
   color: #c2c7d0;
   font-size: 1.5rem !important;
@@ -31,7 +34,7 @@
   width: 16% !important;
 }
 .user-header {
-  background-color: #232937;
+  background-color: #043049;
   align-items: center !important;
   color: white;
   display: flex;
@@ -55,4 +58,23 @@
 
 .user-footer {
   margin: 18px auto 10px auto;
+}
+.breadcrumb a , span{
+  text-decoration: none !important;
+    color: #000000b8;
+    margin-top: -5px;
+    top: 7px;
+    right: -8px;
+    position: relative;
+    font-weight: 700;
+    font-size: 13px !important;
+}
+.header {
+  border-bottom: none !important;
+  color: #000000b8;
+  font-weight: 700;
+  font-size: 18px !important;
+}
+.title{
+  font-size: 10px;
 }

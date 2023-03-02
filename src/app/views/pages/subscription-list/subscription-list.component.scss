@@ -1,15 +1,18 @@
+* {
+  color: #043049;
+}
 .add-btn{
     float: right;
     margin-right: 1rem;
     margin-top: 1rem
 }
 tr .btn{
-    height: 28px;
-    width: 28px;
+    // height: 28px;
+    // width: 28px;
 }
 .btn i{
     font-size: 16px;
-
+    color: #fff;
      position: relative;
      top: -3px;
     text-align: center;

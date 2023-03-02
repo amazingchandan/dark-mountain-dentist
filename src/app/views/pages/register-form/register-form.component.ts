@@ -90,7 +90,7 @@ export class RegisterFormComponent {
           text: res.message,
           icon: 'success',
         });
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/');
       }
        else {
         Swal.fire({

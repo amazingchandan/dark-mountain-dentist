@@ -67,7 +67,8 @@
               <div class="col-md-4 form-group">
                 <label class="" for="inputState">Country</label>
                 <select class="form-select me-4" aria-label="Default select example" formControlName="country">
-                  <option selected>India</option>
+                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
+                  <option >India</option>
                   <option>America</option>
                   <option>Japan</option>
                   <option>China</option>
@@ -75,10 +76,10 @@
               </div>
               <div class="col-md-8 btn-div">
 
-                <button type="button" class="btn btn-primary save-btn ms-2 mt-4"
-                  (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
-                <button type="button" class="btn btn-primary save-btn mt-4">Reset&nbsp;<i
-                    class="fa-solid fa-arrows-rotate"></i></button>
+                <button type="button" class="btn btn-primary save-btn mt-4 cancel-btn p-1">Reset&nbsp;<i
+                  class="fa-solid fa-arrows-rotate ms-1"></i></button>
+                  <button type="button" class="btn btn-primary save-btn ms-2 mt-4 p-1"
+                    (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
               </div>
             </div>
 
@@ -92,9 +93,9 @@
                   </div>
                   <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
                   <div class="col-sm-2">
-                    <div class="col btn-cancel ms-3 ps-3">
-                      <button type="button" class="btn btn-danger">
-                        Cancel Subscription&nbsp;<i class="fa-solid fa-ban"></i>
+                    <div class="col btn-cancel ms-4 ps-3">
+                      <button type="button" class="btn btn-danger ms-1 p-1">
+                        Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                       </button>
                     </div>
                   </div>
@@ -125,7 +126,7 @@
                     <td>15/03/2022</td>
                     <td>
                       <a href=""><button type="button" class="btn btn-primary" title="View">
-                          <i class="fa-regular fa-eye"></i></button></a>
+                          View Details</button></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
@@ -137,7 +138,7 @@
                     <td>15/03/2022</td>
                     <td>
                       <a href=""><button type="button" class="btn btn-primary" title="View">
-                          <i class="fa-regular fa-eye"></i></button></a>
+                        View Details</button></a>
                     </td>
                     <td>
                       <div class="custom-control custom-checkbox">
