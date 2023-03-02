@@ -13,8 +13,13 @@ export class DentistProfileComponent implements OnInit {
 
   addSuperForm: FormGroup;
   private dentistId :any;
- 
-
+  userData:any;
+  planData:any = {};
+  end_date:any;
+  date:any;
+  month:any;
+  year:any;
+  
    constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,
@@ -22,9 +27,9 @@ export class DentistProfileComponent implements OnInit {
     private route: ActivatedRoute)
 
     {
-         this.addSuperForm=this.formBuilder.group({})
+    this.addSuperForm=this.formBuilder.group({})
     }
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.addSuperForm = new FormGroup({
       firstname: new FormControl(),
       lastname: new FormControl(),
@@ -73,6 +78,27 @@ export class DentistProfileComponent implements OnInit {
   editadmin(id) {
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res,"*****");
+      this.userData = res.getData;
+      console.log(this.userData[0].subscription_details.end_date,"***")
+      let date= this.userData[0].subscription_details.end_date
+     this.end_date = new Date(date).toISOString().split('T')[0];
+     this.date =  new Date(date).getDate();
+     this.month =  new Date(date).getMonth()+1;
+     this.year =  new Date(date).getFullYear(); 
+
+     console.log(this.date,"/",this.month,"/",this.year);
+
+      //Plan-details
+   this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((res:any)=>{
+    console.log(res)
+    if(res.success){
+    this.planData = res.getData;
+    console.log(this.planData[0].type)
+    }
+   })
+
+      //--------
+
       if (res.success) {
         this.addSuperForm.patchValue({
           first_name: res.getData[0].first_name,
@@ -110,8 +136,6 @@ export class DentistProfileComponent implements OnInit {
           pincode: res.getData[0].pincode,
         });
 
-
-      
       }
     });
   }

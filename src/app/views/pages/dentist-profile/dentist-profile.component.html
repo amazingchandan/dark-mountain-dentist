@@ -86,11 +86,11 @@
               <div class="sub-container mt-4">
                 <h5>Subscription Details</h5>
                 <div class="row mt-3">
-                  <div class="col-sm-3">Current Plan : 200 Days</div>
+                  <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
                   <div class="col-sm-3 me-5">
-                    Subscription End Date : 20/2/2023
+                    Subscription End Date : {{this.date}}/{{this.month}}/{{this.year}}
                   </div>
-                  <div class="col-sm-3 ms-3">Subscription Amount : $9.99</div>
+                  <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
                   <div class="col-sm-2">
                     <div class="col btn-cancel ms-3 ps-3">
                       <button type="button" class="btn btn-danger">

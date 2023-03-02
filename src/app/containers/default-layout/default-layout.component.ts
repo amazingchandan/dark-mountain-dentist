@@ -21,6 +21,6 @@ export class DefaultLayoutComponent {
 
   constructor() {}
  ngOnInit(){
-  console.log(this.userDetail.role)
+  console.log(this.userDetail)
  }
 }
