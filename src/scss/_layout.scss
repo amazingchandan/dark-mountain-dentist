@@ -7,6 +7,7 @@
 }
 .mountain-color {
   color: #00d957;
+  //font-size: 24px !important;
 }
 .sidebar-brand {
   font-size: 1.5rem !important;
@@ -75,6 +76,11 @@
   font-weight: 700;
   font-size: 18px !important;
 }
-.title{
-  font-size: 10px;
+.nav-item .active {
+  font-weight: 600 !important;
+  background-color: #02d959 !important;
+}
+
+.nav-item .active i {
+  color: white !important;
 }
