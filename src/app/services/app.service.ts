@@ -37,7 +37,7 @@ export class AppService {
     localStorage.removeItem('email');
     localStorage.removeItem('role');
     localStorage.removeItem('objId');
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/');
   }
 
   loggedIn() {

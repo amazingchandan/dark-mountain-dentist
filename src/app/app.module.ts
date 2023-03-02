@@ -45,10 +45,12 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
+import { DentistsComponent } from './views/dentists/dentists.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -61,7 +63,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -111,3 +113,4 @@ const APP_CONTAINERS = [
 })
 export class AppModule {
 }
+

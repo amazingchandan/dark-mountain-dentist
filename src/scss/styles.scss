@@ -62,10 +62,14 @@ $enable-rtl: true;
   background-color: var(--bs-gray-700) !important;
 }
 .card {
-  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+  box-shadow: 0 0 1px rgba(158, 155, 155, 0.2), 0 1px 3px rgba(158, 155, 155, 0.2) !important;
+  border-color: rgb(244 237 237) !important;
+  border-radius: 10px !important;
 }
 .header {
   background-color: #fff;
+  box-shadow: 0 0 1px rgba(158, 155, 155, 0.2), 0 1px 3px rgba(158, 155, 155, 0.2) !important;
+  border-color: rgb(244 237 237) !important;
 }
 label {
   font-weight: 700;
@@ -169,4 +173,20 @@ input[type=text]:focus, input[type=email]:focus, input[type=number]:focus, input
 
 .icon-color {
   color: #043049 !important;
+}
+h5{
+  color: #000000B8 !important;
+  font-size: 18px !important;
+}
+.dataTables_filter {
+  top: -73px;
+    right: -15px;
+    position: relative;
+}
+.dataTables_filter input{
+  background-color: #fff !important;
+  border-color: rgb(244 237 237) !important;
+  box-shadow: 0 0 1px rgba(158, 155, 155, 0.2), 0 1px 3px rgba(158, 155, 155, 0.2) !important;
+  border-radius: 4px !important;
+  width: 16rem;
 }

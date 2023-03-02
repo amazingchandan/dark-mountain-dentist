@@ -14,6 +14,7 @@ import { UploadedXraysComponent } from './views/pages/uploaded-xrays/uploaded-xr
 import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
 import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 const routes: Routes = [
 
@@ -113,7 +114,13 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
-
+  {
+    path: 'dashboard/login',
+    component: LoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
   {
     path: 'register-form',
     component: RegisterFormComponent,
@@ -143,6 +150,15 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: {
+          title: 'Dashboard'
+        },
+      
+      },
+
       {
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,

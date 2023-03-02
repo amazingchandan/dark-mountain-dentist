@@ -13,7 +13,7 @@ export const navItems:
 
   },
   {
-    name: 'Registered Dentists',
+    name: 'Dentists',
     url: 'registered-dentists',
     icon:'fa-solid fa-user'
   },
