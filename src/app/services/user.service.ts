@@ -19,6 +19,7 @@ export class UserService {
   updateUserById: string;
   updatePlanById: String;
   userRegister:string;
+  userSubscription:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -32,6 +33,7 @@ export class UserService {
     this.updateUserById = this.apiHost + 'updateUserById';
     this.updatePlanById = this.apiHost + 'updatePlanById';
     this.userRegister = this.apiHost + 'adminRegistration';
+    this.userSubscription = this.apiHost + 'getSubscriptionDetail';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -63,5 +65,8 @@ export class UserService {
   }
   updatePlan(requestParameters, id) {
     return this.http.post(`${this.updatePlanById}?id=${id}`, requestParameters, {});
+  }
+  getSubscription(requestParameters , id) {
+    return this.http.post(`${this.userSubscription}?id=${id}`,requestParameters,{})
   }
 }
