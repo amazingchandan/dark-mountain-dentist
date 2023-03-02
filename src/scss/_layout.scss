@@ -5,9 +5,6 @@
   will-change: auto;
   @include transition(padding 0.15s);
 }
-.mountain-color {
-  color: #00d957;
-}
 .sidebar-brand {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
@@ -61,7 +58,7 @@
 }
 .breadcrumb a , span{
   text-decoration: none !important;
-    color: #000000b8;
+    color: #043049;
     margin-top: -5px;
     top: 7px;
     right: -8px;
@@ -71,7 +68,7 @@
 }
 .header {
   border-bottom: none !important;
-  color: #000000b8;
+  color: #043049;
   font-weight: 700;
   font-size: 18px !important;
 }
@@ -80,4 +77,8 @@
 }
 .icon-color {
   color: #043049 !important;
+}
+.mountain-color {
+  color: #00d957;
+  font-size: 1.5rem !important;
 }

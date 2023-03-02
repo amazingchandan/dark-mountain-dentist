@@ -12,6 +12,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   @Input() sidebarId: string = "sidebar";
   @Output() toggleMenuSidebar: EventEmitter<any> = new EventEmitter<any>();
+  toggle: boolean = true;
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
@@ -19,7 +20,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   constructor(private classToggler: ClassToggleService,
     private appService:AppService) {
     super();
-    
+
   }
   ngOnInit(): void {
     this.userfirst();
@@ -54,5 +55,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
     });
 
+  }
+
+  toggleSidebar(): boolean {
+    return this.toggle = !this.toggle;
   }
 }

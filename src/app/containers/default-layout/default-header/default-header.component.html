@@ -1,13 +1,13 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
 
- 
+
 
   <c-container [fluid]="true">
 <!---->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" (click)="toggleMenuSidebar.emit()" role="button" id="menu-bar-btn"
+        <a class="nav-link" (click)="toggleMenuSidebar.emit(toggleSidebar())" role="button" id="menu-bar-btn"
           ><i class="fas fa-bars"></i
         ></a>
       </li>
@@ -72,6 +72,7 @@
         size="md"
         src="./assets/img/avatars/no-logo-icon-1.png"
         status="success"
+        class="rounded-circle border border-dark-sublte border-2"
       >
       </c-avatar>
       <i class="fa-solid fa-angle-down icon-color fs-6 ms-2"></i>
