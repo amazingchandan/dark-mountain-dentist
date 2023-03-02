@@ -17,11 +17,11 @@ export const navItems:
     url: 'registered-dentists',
     icon:'fa-solid fa-user'
   },
-  {
+  /*{
     name: 'Registration Form',
     url: 'register-form',
     icon: 'fa-solid fa-address-card'
-  },
+  },*/
 
   {
     name: 'Uploaded X-Rays',
@@ -94,7 +94,7 @@ export const navItemsUser:
 
     },
     {
-      name: 'Pricing',
+      name: 'Subscription Plans',
       url: 'pricing',
       icon:'fa-solid fa-dollar-sign'
 

@@ -1,12 +1,19 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
 
-
+ 
 
   <c-container [fluid]="true">
 <!---->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" (click)="toggleMenuSidebar.emit()" role="button" id="menu-bar-btn"
+          ><i class="fas fa-bars"></i
+        ></a>
+      </li>
+    </ul>
     <c-header-nav class="d-none d-lg-flex me-auto">
-
+      <c-breadcrumb-router class="ms-2 breadcrumb"></c-breadcrumb-router>
     <!--  <c-nav-item>
         <a cNavLink routerLink="/users" routerLinkActive="active">Users</a>
       </c-nav-item>
@@ -42,7 +49,10 @@
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>
   </c-container>
-
+  <c-header-divider></c-header-divider>
+  <c-container [fluid]="true">
+   Hello, {{userInfo.first_name}} {{userInfo.last_name}}
+  </c-container>
 </ng-container>
 
 <!--</c-header>-->
@@ -149,7 +159,7 @@
         <img src="./assets/img/avatars/no-logo-icon-1-green.png" alt="User Image" />
 
         <h5 class="text-center mt-2">
-          Super Admin
+          {{userInfo.first_name}} {{userInfo.last_name}}
           <!-- <small>Brand Banao Admin</small> -->
         </h5>
       </li>

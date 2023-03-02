@@ -107,7 +107,7 @@ const routes: Routes = [
 
 
   {
-    path: 'login',
+    path: '',
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -115,15 +115,18 @@ const routes: Routes = [
   },
 
   {
-    path: '',
+    path: 'register-form',
     component: RegisterFormComponent,
     data: {
-      title: 'Register Page'
+      title: 'Register'
     }
   },
   {
     path: 'dashboard',
     component: DefaultLayoutComponent,
+    data: {
+      title: 'Dashboard'
+    },
     children: [
       {
         path: 'widgets',
@@ -144,7 +147,7 @@ const routes: Routes = [
         path: 'registered-dentists',
         component: RegisteredDentistsComponent,
         data: {
-          title: 'Registered Dentists Page'
+          title: 'Registered Dentists'
         },
       
       },
@@ -152,7 +155,7 @@ const routes: Routes = [
         path: 'dentist-profile/:dentist_id',
         component: DentistProfileComponent,
         data: {
-          title: 'Dentist Profile Page'
+          title: 'Dentist Profile'
         }
       },
 
@@ -160,35 +163,35 @@ const routes: Routes = [
         path: 'manage-subscription',
         component: ManageSubscriptionComponent,
         data: {
-          title: 'Manage Subscription Page'
+          title: 'Manage Subscription'
         }
       },
       {
         path: 'subscription-list',
         component: SubscriptionListComponent,
         data: {
-          title: 'Subscription List Page'
+          title: 'Subscription List'
         }
       },
       {
         path: 'uploaded-xray',
         component: UploadedXraysComponent,
         data: {
-          title: 'Uploaded XRay Page'
+          title: 'Uploaded XRay'
         }
       },
       {
         path: 'mark-xray',
         component: MarkXrayComponent,
         data: {
-          title: 'Mark XRay Page'
+          title: 'Mark XRay'
         }
       },
       {
         path: 'pricing',
         component: PricingComponent,
         data: {
-          title: 'Pricing Page'
+          title: 'Subscription Plans'
         }
       },
     ]

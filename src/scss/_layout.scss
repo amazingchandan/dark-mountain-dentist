@@ -59,7 +59,25 @@
 .user-footer {
   margin: 18px auto 10px auto;
 }
-
+.breadcrumb a , span{
+  text-decoration: none !important;
+    color: #000000b8;
+    margin-top: -5px;
+    top: 7px;
+    right: -8px;
+    position: relative;
+    font-weight: 700;
+    font-size: 13px !important;
+}
+.header {
+  border-bottom: none !important;
+  color: #000000b8;
+  font-weight: 700;
+  font-size: 18px !important;
+}
+.title{
+  font-size: 10px;
+}
 .icon-color {
   color: #043049 !important;
 }
