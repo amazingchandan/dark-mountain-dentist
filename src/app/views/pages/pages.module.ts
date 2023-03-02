@@ -17,6 +17,7 @@ import { ManageSubscriptionComponent } from './manage-subscription/manage-subscr
 import { MarkXrayComponent } from './mark-xray/mark-xray.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -30,6 +31,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     ManageSubscriptionComponent,
     MarkXrayComponent,
     RegisterFormComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule,

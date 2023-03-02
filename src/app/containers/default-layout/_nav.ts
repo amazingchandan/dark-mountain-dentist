@@ -33,6 +33,11 @@ export const navItems:
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
   },
+  {
+    name: 'Logout',
+    url: 'login',
+    icon: 'fa-solid fa-right-from-bracket'
+  }
 
 /*  {
     name: 'Charts',
