@@ -18,6 +18,10 @@ export class UploadedXraysComponent {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
+      language: {
+        search:"",
+        searchPlaceholder: 'Search ',
+      },
      // dom: 'Bfrtip',
       /*buttons: [ {extends:'copy',
       className: 'btn btn-primary position-relative mt-2',
