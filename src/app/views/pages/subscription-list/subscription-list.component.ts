@@ -50,6 +50,10 @@ export class SubscriptionListComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
+      language: {
+        search:"",
+        searchPlaceholder: 'Search ',
+      },
       //dom: 'Bfrtip',
 
     };

@@ -24,7 +24,7 @@ interface IUser {
 export class DashboardComponent implements OnInit {
   constructor(private chartsData: DashboardChartsData) {
   }
-
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public users: IUser[] = [
     {
       name: 'Yiorgos Avraamu',
