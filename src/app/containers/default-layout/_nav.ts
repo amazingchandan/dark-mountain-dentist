@@ -85,13 +85,13 @@ export const navItemsUser:
     {
       name: 'Dashboard',
       url: 'dashboard',
-      icon:'fa-solid fa-gauge'
+      icon:'fa-solid fa-house-chimney'
 
     },
     {
       name: 'Pricing',
       url: 'pricing',
-      icon:'fa-solid fa-gauge'
+      icon:'fa-solid fa-dollar-sign'
 
     },
   ]
