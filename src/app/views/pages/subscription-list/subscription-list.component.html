@@ -94,7 +94,7 @@
                 <input
                   type="text"
                   placeholder="Plan Name"
-                  formControlName="planName"
+                  formControlName="plan_name"
                   class="form-control"
                   [value]="plan_name"
                 />
@@ -113,7 +113,7 @@
                 <label class="mb-2">Mininmum<sup>*</sup></label>
                 <input
                   type="text"
-                  formControlName="min"
+                  formControlName="minimum"
                   placeholder="Minimum"
                   class="form-control"
                   [value]="minimum"
@@ -125,7 +125,7 @@
                 <label class="mb-2">Maximum<sup>*</sup></label>
                 <input
                   type="text"
-                  formControlName="max"
+                  formControlName="maximum"
                   placeholder="Maximum"
                   class="form-control"
                   [value]="maximum"
@@ -176,12 +176,12 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cancel-btn p-1" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary cancel-btn p-2 fw-bold" data-bs-dismiss="modal">
           Close
         </button>
         <button
           type="button"
-          class="btn btn-primary btn-save p-1"
+          class="btn btn-save p-2  fw-bold"
           (click)="setPrice()"
         >
           Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i>
