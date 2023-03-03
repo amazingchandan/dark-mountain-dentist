@@ -130,6 +130,7 @@ sup {
 .body{
   padding-left: 1rem !important;
   padding-right: 1rem !important;
+  padding-top: 1rem !important;
 }
 body {
 
@@ -233,9 +234,10 @@ input[type=text]:focus, input[type=email]:focus, input[type=number]:focus, input
 h5{
   // color: #000000B8 !important;
   font-size: 18px !important;
+  color: #043049 !important;
 }
 .dataTables_filter {
-  top: -32px;
+  top: -30px;
     right: -15px;
     position: relative;
 }
@@ -246,6 +248,7 @@ h5{
   border-radius: 4px !important;
   padding: 8px 10px !important;
   width: 16rem;
+  font-size: 14px;
 
 }
 .view-btn {

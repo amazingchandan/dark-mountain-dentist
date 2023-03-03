@@ -99,4 +99,9 @@ export const navItemsUser:
       icon:'fa-solid fa-dollar-sign'
 
     },
+    {
+      name: 'Logout',
+      url: 'login',
+      icon: 'fa-solid fa-right-from-bracket'
+    }
   ]
