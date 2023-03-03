@@ -86,7 +86,12 @@ sup {
   font-weight: 800;
   font-size: 14px;
 }
+.body{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
 body {
+ 
   font-style: normal;
   --font-family-sans-serif: "Source Sans Pro", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
@@ -127,6 +132,7 @@ table thead {
 
 input:checked {
   background-color: #00d957 !important;
+  border-color: #00d957 !important;
 }
 
 .swal2-actions button {
@@ -188,7 +194,7 @@ h5{
   font-size: 18px !important;
 }
 .dataTables_filter {
-  top: -73px;
+  top: -25px;
     right: -15px;
     position: relative;
 }
@@ -198,6 +204,7 @@ h5{
   box-shadow: 0 0 1px rgba(158, 155, 155, 0.2), 0 1px 3px rgba(158, 155, 155, 0.2) !important;
   border-radius: 4px !important;
   width: 16rem;
+
 }
 .view-btn {
   font-size: 10px !important;

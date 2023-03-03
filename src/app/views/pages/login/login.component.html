@@ -1,4 +1,4 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+<div class="container-fluid bg my-container min-vh-100 d-flex flex-row align-items-center">
   <c-container>
     <c-row class="justify-content-center">
       <c-col md="8">
@@ -6,7 +6,8 @@
           <c-card class="p-4 w-50 mx-5 login-card">
             <c-card-body>
               <form cForm [formGroup]="loginForm" (ngSubmit)="login()">
-                <h2 class="d-flex justify-content-center mb-4"> Dark Mountain</h2>
+                <h2 class="d-flex justify-content-center mb-4 fw-semibold">Dark<div class="mountain-color">Mountain</div>
+             </h2>
                <!-- <p class="text-medium-emphasis">Sign In to your account</p>-->
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
@@ -33,7 +34,7 @@
                 </c-input-group>
                  <c-row>
                   <c-col >
-                    <app-button cButton class="btn btn-primary btn-block mb-4" color="primary" [type]="'submit'" (click)="login()"
+                    <app-button cButton class="btn btn-primary btn-block mb-4 p-2 fw-bold" color="primary" [type]="'submit'" (click)="login()"
                     loading="isAuthLoading">
                       Login
                     </app-button>

@@ -82,12 +82,18 @@ export class DentistProfileComponent implements OnInit {
       console.log(res,"*****");
       this.userData = res.getData;
       console.log(this.userData[0].subscription_details.end_date,"***")
-      let date= this.userData[0].subscription_details.end_date
+      if(this.userData[0].subscription_details.end_date!=null)
+    {  let date= this.userData[0].subscription_details.end_date
      this.end_date = new Date(date).toISOString().split('T')[0];
      this.date =  new Date(date).getDate();
      this.month =  new Date(date).getMonth()+1;
      this.year =  new Date(date).getFullYear(); 
-
+    }
+    else{
+      this.date =  null;
+     this.month =  null;
+     this.year =  null; 
+    }
      console.log(this.date,"/",this.month,"/",this.year);
 
       //Plan-details
