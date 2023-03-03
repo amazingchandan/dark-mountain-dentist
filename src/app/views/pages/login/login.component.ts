@@ -45,10 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(result);
         if (result.success) {
           this.isAuthLoading = false;
-           Swal.fire({
-              text: result.message,
-              icon: 'success',
-            });
+         
           //this.toastr.success(result.message);
           this.appService.login(result);
         } else {

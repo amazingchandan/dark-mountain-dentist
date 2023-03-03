@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AppService } from 'src/app/services/app.service';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import Swal from 'sweetalert2';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
@@ -19,6 +19,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
  
   constructor(private classToggler: ClassToggleService,
+   private router:Router,
     private appService:AppService) {
     super();
 
@@ -56,6 +57,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
     });
 
+  }
+  myProfile(){
+   //this.router.navigateByUrl(`dentist-profile/`+this.userInfo.id)
+   this.router.navigateByUrl('/dashboard/dentist-profile/'+this.userInfo.id);
+  // this.router.navigate([ '/dentist-profile' ], { queryParams: {dentist_id:this.userInfo.id } })
   }
 
   toggleSidebar(): boolean {

@@ -219,15 +219,17 @@ const routes: Routes = [
           title: 'Mark XRay'
         }
       },
-      {
-        path: 'pricing',
-        component: PricingComponent,
-        data: {
-          title: 'Subscription Plans'
-        }
-      },
+
     ]
 
+
+  },
+  {
+    path: 'pricing',
+    component: PricingComponent,
+    data: {
+      title: 'Subscription Plans'
+    }
   },
 
 
