@@ -94,9 +94,9 @@ export const navItemsUser:
 
     },
     {
-      name: 'Subscription Plans',
-      url: 'pricing',
-      icon:'fa-solid fa-dollar-sign'
+      name: 'Upload X-ray',
+      url: 'dentist-profile/',
+      icon:'fa-solid fa-cloud-arrow-up'
 
     },
     {

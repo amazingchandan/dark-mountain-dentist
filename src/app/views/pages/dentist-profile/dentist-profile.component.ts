@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 @Component({
   selector: 'app-dentist-profile',
   templateUrl: './dentist-profile.component.html',
@@ -19,7 +20,7 @@ export class DentistProfileComponent implements OnInit {
   date:any;
   month:any;
   year:any;
-  
+  userInfo:any;
   defaultType = "-Select-"
 
    constructor(private formBuilder: FormBuilder,
@@ -43,9 +44,10 @@ export class DentistProfileComponent implements OnInit {
       state:new FormControl(),
       country:new FormControl(),
       zip:new FormControl(),
-
+    
       //user_role: new FormControl(),
     });
+    this.userInfo=userInfo;
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],

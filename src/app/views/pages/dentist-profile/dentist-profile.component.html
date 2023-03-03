@@ -78,11 +78,14 @@
 
                 <button type="button" class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder">Reset&nbsp;<i
                   class="fa-solid fa-arrows-rotate ms-1"></i></button>
-                  <button type="button" class="btn btn-primary save-btn ms-3 mt-4 pd-1 other-btn fw-bolder"
+                  <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
                     (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
               </div>
             </div>
-
+          </form> 
+        
+          <div *ngIf="this.userInfo.role=='admin'" >
+           
             <div class="sub-container border-top border-grey mt-3">
               <div class="sub-container mt-4">
                 <h5>Subscription Details</h5>
@@ -103,10 +106,10 @@
               </div>
             </div>
 
-        </form>
+          </div>
       </div>
-
-      <div class="container mt-3 xray-table-container border-top p-0">
+      <div *ngIf="this.userInfo.role==='admin'" >
+       <div class="container mt-3 xray-table-container border-top p-0">
         <!--p-0-->
         <div class="sub-coontainer mt-4 xray-row">
           <h5>Uploaded X-ray</h5>
@@ -151,6 +154,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>

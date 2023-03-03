@@ -22,9 +22,20 @@ export class AppService {
     localStorage.setItem('email', getLoginDetail.userInfo.email);
     localStorage.setItem('role', getLoginDetail.userInfo.role);
     localStorage.setItem('objId', getLoginDetail.userInfo.objId);
-    console.log(getLoginDetail.userInfo.role)
-    
-    this.router.navigateByUrl('dashboard');
+    localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);
+    //console.log(getLoginDetail.userInfo.role)
+   console.log(getLoginDetail.userInfo)
+   if(getLoginDetail.userInfo.role==="dentist")
+   {
+    if (getLoginDetail.userInfo.subscribed==true)
+   {
+    this.router.navigateByUrl('dashboard/dashboard');
+  }
+  else{ (this.router.navigateByUrl('pricing'));}
+   }
+   else{
+    this.router.navigateByUrl('dashboard/dashboard');
+   }
   }
 
     addTripData(tripData: any) {
