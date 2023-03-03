@@ -5,8 +5,9 @@
    /* float: right;
     margin-right: 1rem;
     margin-top: 1rem*/
-    margin-bottom: -1.6rem;
-    margin-left: 53.5rem;
+    margin-left: 51.5rem;
+    position: relative;
+    top: -46.5px;
 }
 
 tr .btn{
@@ -43,5 +44,8 @@ select.fade {
 .active-label{
     margin-top:4rem;
     position: relative;
+}
+.head-div{
+    margin-bottom: -2rem;
 }
 
