@@ -19,6 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MarkXrayComponent,
     RegisterFormComponent,
     LogoutComponent,
+    ForgetPasswordComponent,
+    SetNewPasswordComponent,
   ],
   imports: [
     CommonModule,
