@@ -18,6 +18,8 @@ import { MarkXrayComponent } from './mark-xray/mark-xray.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LogoutComponent } from './logout/logout.component';
+import { MatSliderModule } from '@angular/material/slider';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -43,7 +45,8 @@ import { LogoutComponent } from './logout/logout.component';
     FormModule,
     DataTablesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSliderModule
   ]
 })
 export class PagesModule {

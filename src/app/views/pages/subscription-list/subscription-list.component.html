@@ -5,7 +5,7 @@
 
         <button
           type="button"
-          class="btn btn-primary add-btn p-2 other-btn fw-bolder"
+          class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
           data-bs-toggle="modal"
           data-bs-target="#exampleModalCenter"
         >
@@ -13,12 +13,12 @@
         </button>
       </div>
       <h5 class="mb-3 fw-bold">Subscription Plans</h5>
-     
+
       <div class="card ">
-       
-       
+
+
         <div class="card-body">
-          
+
           <table
             *ngIf="showContent"
             datatable="ng"
@@ -50,7 +50,7 @@
                 <td>
                   <button type="button" class="btn btn-danger edit pt-2" title="Edit"><i
                     class="fa-regular fa-pen-to-square"></i></button>
-                  <button title="View" type="button" class="btn btn-primary ms-3 p-2 view-btn fw-bolder" (click)="openModal(data._id)"
+                  <button title="View" type="button" class="btn btn-primary ms-3 pd-1 view-btn fw-bolder" (click)="openModal(data._id)"
                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter">View Details</button>
                 </td>
               </tr>
@@ -176,15 +176,15 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cancel-btn p-2 fw-bold" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary cancel-btn fw-bold pd-1 me-2" data-bs-dismiss="modal">
           Close
         </button>
         <button
           type="button"
-          class="btn btn-save p-2  fw-bold"
+          class="btn btn-save pd-1 fw-bold other-btn ms-2"
           (click)="setPrice()"
         >
-          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i>
+          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
         </button>
       </div>
     </div>
