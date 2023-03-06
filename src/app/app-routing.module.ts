@@ -15,7 +15,8 @@ import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
 import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
+import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
+import { SetNewPasswordComponent } from './views/pages/set-new-password/set-new-password.component';
 
 const routes: Routes = [
 
@@ -130,6 +131,20 @@ const routes: Routes = [
     }
   },
   {
+    path: 'forgot-password',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'Forget password'
+    }
+  },
+  {
+    path: 'set-new-password',
+    component: SetNewPasswordComponent,
+    data: {
+      title: 'Set New Password'
+    }
+  },
+  {
     path: 'dashboard',
     component: DefaultLayoutComponent,
     data: {
@@ -157,7 +172,7 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
-      
+
       },
 
       {
@@ -166,7 +181,7 @@ const routes: Routes = [
         data: {
           title: 'Registered Dentists'
         },
-      
+
       },
       {
         path: 'dentist-profile/:dentist_id',
@@ -204,17 +219,10 @@ const routes: Routes = [
           title: 'Mark XRay'
         }
       },
-      {
-        path: 'upload-xray',
-        component: UploadXrayComponent,
-        data: {
-          title: 'Upload XRay'
-        }
-      },
      
     ]
-    
-   
+
+
   },
   {
     path: 'pricing',
@@ -223,10 +231,10 @@ const routes: Routes = [
       title: 'Subscription Plans'
     }
   },
-  
+
 
   //UserPages
- 
+
 
 
   { path: '**', redirectTo: 'dashboard' }

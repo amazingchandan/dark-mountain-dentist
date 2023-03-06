@@ -12,23 +12,25 @@
                 <div *ngFor="let data of allData; let  i= index" class="col-3">
                     <!-- <div class="col-md-3 mb-3"></div> -->
                     <div class="card h-100 m-2 p-2 hover-effect">
-                            <div class="card-body text-center d-flex flex-column h-100">
+                            <div class="card-body text-start d-flex flex-column h-100">
 
-                                <h3>{{data.plan_name}}</h3>
-                                <p class="m-0">
-                                    <s>₹{{data.maximum}}</s>
-                                </p>
+                                <h4>{{data.plan_name}}</h4>
 
-                                <p class="price m-0 fw-bolder fs-5">₹{{data.amount}}</p>
                                 <p class="m-0 gst-sizing">
-                                    <span>
-                                        {{data.type}}
-                                    </span>
+                                  <i>
+                                    {{data.type}} pack
+                                  </i>
 
                                 </p>
+                                <div class="d-flex justify-content-start align-items-center mt-3">
+                                  <p class="price m-0 fw-bolder fs-5">₹{{data.amount}}</p>
+                                  <p class="m-0 mt-1 ms-2">
+                                      <s>₹{{data.maximum}}</s>
+                                  </p>
+                                </div>
 
-                                <div class="text-center mt-3">
-                                    <button class="p-2 fw-bold btn btn-primary" (click)="getSubscription(data._id,data.type)">
+                                <div class="text-center mt-3 w-100">
+                                    <button class="pd-1 fw-bold btn btn-primary w-100" (click)="getSubscription(data._id,data.type)">
                                         Subscribe
                                     </button>
                                 </div>

@@ -1,9 +1,10 @@
-<div class="container-fluid p-0 vh-100 my-container">
-  <div class="card card-primary  w-25">
-    <div class="card-body p-4">
+<div class="container-fluid p-0 min-vh-100 my-container">
+  <div class="card card-primary width-card">
+    <div class="card-body p-5">
       <div class="row my-2 text-center">
-        <h2 class="well fw-bolder ">Register</h2>
-        <p class="mb-0 ">Create a new account</p>
+        <h2 class="d-flex justify-content-center fw-semibold">Dark<div class="mountain-color">Mountain</div>
+        </h2>
+        <!-- <p class="mb-0 ">Create a new account</p> -->
       </div>
       <div class="row">
         <form class="form-inline" #register_form="ngForm" [formGroup]="registerForm">
@@ -154,9 +155,19 @@
                 <i class="fa-solid fa-address-card ms-1"></i>
               </button>
             </div>
+            <c-row>
+              <c-col class="text-center mt-4">Already a member?
+               <a href="/#/dashboard/login" class="signin fw-semibold">LogIn</a>
+              </c-col>
+            </c-row>
+            <c-row>
+              <c-col class="text-center mt-1">
+               <a href="/#/forgot-password" class="signin fw-semibold">Forgot Password?</a>
+              </c-col>
+            </c-row>
 
         </form>
       </div>
     </div>
-  </div>
+    </div>
 </div>
