@@ -95,7 +95,7 @@ export const navItemsUser:
     },
     {
       name: 'Upload X-ray',
-      url: 'dentist-profile/',
+      url: 'upload-xray',
       icon:'fa-solid fa-cloud-arrow-up'
 
     },

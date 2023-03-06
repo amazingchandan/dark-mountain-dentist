@@ -15,6 +15,7 @@ import { MarkXrayComponent } from './views/pages/mark-xray/mark-xray.component';
 import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
 
 const routes: Routes = [
 
@@ -201,6 +202,13 @@ const routes: Routes = [
         component: MarkXrayComponent,
         data: {
           title: 'Mark XRay'
+        }
+      },
+      {
+        path: 'upload-xray',
+        component: UploadXrayComponent,
+        data: {
+          title: 'Upload XRay'
         }
       },
      

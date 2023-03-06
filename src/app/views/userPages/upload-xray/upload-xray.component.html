@@ -1,0 +1,31 @@
+
+<section class="content">
+    <div class="container">
+      <h5 class=" mb-3 fw-bold">Upload X-Ray</h5>
+
+
+    <div class="card card-primary">
+      <div class="card-body p-4">
+     
+  
+        <div class="row">
+  
+  
+          <form [formGroup]="" class="form-inline" role="form">
+            <div class="row mb-2 mt-2">
+                <div class="col-md-4 form-group">
+                    <label class="mb-2">Choose File<sup>*</sup></label>
+                    
+                  
+                  <input type="file" class="file-upload mb-4 custom-file-input" (change)="uploadFile($event)" multiple onchange="console.log(event.target.files)">  
+                  
+               
+            </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</section>

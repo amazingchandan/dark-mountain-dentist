@@ -20,6 +20,7 @@ export class UserService {
   updatePlanById: String;
   userRegister:string;
   userSubscription:string;
+  uploadXray:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -34,6 +35,7 @@ export class UserService {
     this.updatePlanById = this.apiHost + 'updatePlanById';
     this.userRegister = this.apiHost + 'adminRegistration';
     this.userSubscription = this.apiHost + 'getSubscriptionDetail';
+    this.uploadXray = this.apiHost + 'upload-xray';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -68,5 +70,8 @@ export class UserService {
   }
   getSubscription(requestParameters , id) {
     return this.http.post(`${this.userSubscription}?id=${id}`,requestParameters,{})
+  }
+  addXray(requestParameters){
+    return this.http.post(`${this.uploadXray}`,requestParameters,{});
   }
 }

@@ -25,136 +25,161 @@
 
             </div>
           </div>
-            <div class="row mb-2"></div>
-            <div class="row mb-2">
-              <div class="col-md-4 form-group">
+          <div class="row mb-2"></div>
+          <div class="row mb-2">
+            <div class="col-md-4 form-group">
 
-                <label class="mb-2">Contact Number<sup>*</sup></label>
-                <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
-              </div>
-              <div class="col-md-4 form-group">
-                <label class="mb-2">Address1<sup>*</sup></label>
-                <input type="text" placeholder="Address1" formControlName="address1" class="form-control me-4">
-              </div>
-              <div class="col-md-4 form-group">
-                <label class="mb-2">Address2<sup>*</sup></label>
-                <input type="text" placeholder="Address2" formControlName="address2" class="form-control">
-              </div>
-
+              <label class="mb-2">Contact Number<sup>*</sup></label>
+              <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
             </div>
-            <div class="row mb-2">
-
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Address1<sup>*</sup></label>
+              <input type="text" placeholder="Address1" formControlName="address1" class="form-control me-4">
             </div>
-            <div class="row mb-2">
-              <div class="col-md-4 form-group">
-                <label class="mb-2">City<sup>*</sup></label>
-                <input type="text" placeholder="City" formControlName="city" class="form-control me-4">
-              </div>
-              <div class="col-md-4 form-group">
-                <label class="mb-2">State<sup>*</sup></label>
-                <input type="text" placeholder="State" formControlName="state" class="form-control">
-              </div>
-              <div class="col-md-4 form-group">
-                <label class="mb-2">Zip<sup>*</sup></label>
-                <input type="text" placeholder="Zip" formControlName="pincode" class="form-control me-5">
-
-              </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Address2<sup>*</sup></label>
+              <input type="text" placeholder="Address2" formControlName="address2" class="form-control">
             </div>
 
+          </div>
+          <div class="row mb-2">
 
-            <div class="row mb-2"></div>
-            <div class="row mb-2">
-              <div class="col-md-4 form-group">
-                <label class="" for="inputState">Country</label>
-                <select class="form-select me-4" aria-label="Default select example" formControlName="country">
-                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
-                  <option >India</option>
-                  <option>America</option>
-                  <option>Japan</option>
-                  <option>China</option>
-                </select>
-              </div>
-              <div class="col-md-8 btn-div">
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-4 form-group">
+              <label class="mb-2">City<sup>*</sup></label>
+              <input type="text" placeholder="City" formControlName="city" class="form-control me-4">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">State<sup>*</sup></label>
+              <input type="text" placeholder="State" formControlName="state" class="form-control">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="mb-2">Zip<sup>*</sup></label>
+              <input type="text" placeholder="Zip" formControlName="pincode" class="form-control me-5">
 
-                <button type="button" class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder">Reset&nbsp;<i
+            </div>
+          </div>
+
+
+          <div class="row mb-2"></div>
+          <div class="row mb-2">
+            <div class="col-md-4 form-group">
+              <label class="" for="inputState">Country</label>
+              <select class="form-select me-4" aria-label="Default select example" formControlName="country">
+                <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
+                <option>India</option>
+                <option>America</option>
+                <option>Japan</option>
+                <option>China</option>
+              </select>
+            </div>
+            <div class="col-md-8 btn-div">
+
+              <button type="button"
+                class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder">Reset&nbsp;<i
                   class="fa-solid fa-arrows-rotate ms-1"></i></button>
-                  <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
-                    (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
-              </div>
+              <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
+                (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
             </div>
-          </form> 
-        
-          <div *ngIf="this.userInfo.role=='admin'" >
-           
-            <div class="sub-container border-top border-grey mt-3">
-              <div class="sub-container mt-4">
-                <h5>Subscription Details</h5>
-                <div class="row mt-3">
-                  <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
-                  <div class="col-sm-3 me-5">
-                    Subscription End Date : {{this.date}}/{{this.month}}/{{this.year}}
-                  </div>
-                  <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
-                  <div class="col-sm-2">
-                    <div class="col btn-cancel ms-2 ps-3">
-                      <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder">
-                        Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
-                      </button>
-                    </div>
+          </div>
+        </form>
+
+
+
+        <div class="sub-container border-top border-grey mt-3">
+          <div class="sub-container mt-4">
+            <h5>Subscription Details</h5>
+            <div class="row mt-3">
+              <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
+              <div class="col-sm-3 me-5">
+                Subscription End Date : {{this.date}}/{{this.month}}/{{this.year}}
+              </div>
+              <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
+
+              <div *ngIf="this.userInfo.role=='admin'">
+                <div class="col-sm-2">
+                  <div class="col btn-cancel ms-2 ps-3">
+                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder">
+                      Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
+                    </button>
                   </div>
                 </div>
               </div>
-            </div>
 
-          </div>
-      </div>
-      <div *ngIf="this.userInfo.role==='admin'" >
-       <div class="container mt-3 xray-table-container border-top p-0">
-        <!--p-0-->
-        <div class="sub-coontainer mt-4 xray-row">
-          <h5>Uploaded X-ray</h5>
-          <div class="row mt-3">
-            <div class="col-12">
-              <!--pe-0-->
-              <table class="table table-bordered row-border hover">
-                <thead>
-                  <tr>
-                    <th scope="col">X-ray Uploaded Date</th>
-                    <th scope="col">View X-ray</th>
-                    <th scope="col">Marked</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>15/03/2022</td>
-                    <td>
-                      <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                          View Details</button></a>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>15/03/2022</td>
-                    <td>
-                      <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                        View Details</button></a>
-                    </td>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            </div>
+            <div *ngIf="this.userInfo.role=='dentist'">
+              <div class="row mt-3">
+                <div class="col-sm-3 button-div">
+                  <div class="col btn-cancel ms-2 ps-3">
+                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder">
+                      Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
+                    </button>
+                    <button type="button" class="btn  ms-2 pd-1 other-btn fw-bolder">
+                      Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="custom-control custom-checkbox">
+                  <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
+                 <span class="fw-semibold"> I agree to terms And conditions</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+
       </div>
+      <div *ngIf="this.userInfo.role==='admin'">
+        <div class="container mt-3 xray-table-container border-top p-0">
+          <!--p-0-->
+          <div class="sub-coontainer mt-4 xray-row">
+            <h5>Uploaded X-ray</h5>
+            <div class="row mt-3">
+              <div class="col-12">
+                <!--pe-0-->
+                <table class="table table-bordered row-border hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">X-ray Uploaded Date</th>
+                      <th scope="col">View X-ray</th>
+                      <th scope="col">Marked</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>15/03/2022</td>
+                      <td>
+                        <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
+                            View Details</button></a>
+                      </td>
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                          <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>15/03/2022</td>
+                      <td>
+                        <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
+                            View Details</button></a>
+                      </td>
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                          <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
