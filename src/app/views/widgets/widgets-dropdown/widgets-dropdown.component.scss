@@ -5,3 +5,8 @@
 .rotate svg {
   transform: rotate(45deg);
 }
+
+.myclass div {
+  display: flex !important;
+  background-color: aqua;
+}

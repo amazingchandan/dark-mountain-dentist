@@ -9,28 +9,31 @@
                 <h2 class="d-flex justify-content-center mb-4 fw-semibold">Dark<div class="mountain-color">Mountain</div>
              </h2>
                <!-- <p class="text-medium-emphasis">Sign In to your account</p>-->
-                <c-input-group class="mb-3">
-                  <span cInputGroupText>
-                    <svg cIcon name="cilUser"></svg>
-                  </span>
-                  <input autoComplete="username" cFormControl placeholder="Username"
-                  formControlName="email"
-                  type="email"
-                  class="form-control"
-                  />
+                <c-input-group class="mb-3 input-group">
+                  <div class="d-flex position-relative w-100">
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input autoComplete="username" cFormControl placeholder="Username"
+                    formControlName="email"
+                    type="email"
+                    class="form-control rounded ps-5 w-100"
+                    />
+                  </div>
                 </c-input-group>
                 <c-input-group class="mb-4">
-                  <span cInputGroupText>
-                    <svg cIcon name="cilLockLocked"></svg>
-                  </span>
-                  <input
-                    autoComplete="current-password"
-                    formControlName="password"
-
-            class="form-control"
-                    placeholder="Password"
-                    type="password"
-                  />
+                  <div class="d-flex position-relative w-100">
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilLockLocked"></svg>
+                    </span>
+                    <input
+                      autoComplete="current-password"
+                      formControlName="password"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Password"
+                      type="password"
+                    />
+                  </div>
                 </c-input-group>
                  <c-row>
                   <c-col >
