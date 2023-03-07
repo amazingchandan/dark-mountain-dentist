@@ -18,7 +18,6 @@ import { MarkXrayComponent } from './mark-xray/mark-xray.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LogoutComponent } from './logout/logout.component';
-import { MatSliderModule } from '@angular/material/slider';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 
@@ -49,8 +48,7 @@ import { SetNewPasswordComponent } from './set-new-password/set-new-password.com
     FormModule,
     DataTablesModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatSliderModule
+    ReactiveFormsModule
   ]
 })
 export class PagesModule {

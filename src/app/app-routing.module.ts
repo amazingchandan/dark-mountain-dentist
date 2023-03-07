@@ -17,6 +17,7 @@ import { PricingComponent } from './views/userPages/pricing/pricing.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './views/pages/set-new-password/set-new-password.component';
+import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
 
 const routes: Routes = [
 
@@ -108,9 +109,15 @@ const routes: Routes = [
   //   ]
   // },
 
-
   {
     path: '',
+    component: RegisterFormComponent,
+    data: {
+      title: 'Register'
+    }
+  },
+  {
+    path: 'login',
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -123,13 +130,7 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
-  {
-    path: 'register-form',
-    component: RegisterFormComponent,
-    data: {
-      title: 'Register'
-    }
-  },
+  
   {
     path: 'forgot-password',
     component: ForgetPasswordComponent,
@@ -217,6 +218,13 @@ const routes: Routes = [
         component: MarkXrayComponent,
         data: {
           title: 'Mark XRay'
+        }
+      },
+      {
+        path: 'upload-xray',
+        component: UploadXrayComponent,
+        data: {
+          title: 'Upload XRay'
         }
       },
      

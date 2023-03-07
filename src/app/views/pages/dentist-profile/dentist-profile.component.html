@@ -13,11 +13,11 @@
             <div class="col-md-4 form-group">
 
               <label class="mb-2">First Name<sup>*</sup></label>
-              <input type="text" placeholder="First Name" formControlName="first_name" class="form-control">
+              <input type="text" placeholder="First Name" formControlName="first_name" class="form-control" maxlength="20">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
-              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control">
+              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control" maxlength="20">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID<sup>*</sup></label>
@@ -30,7 +30,7 @@
             <div class="col-md-4 form-group">
 
               <label class="mb-2">Contact Number<sup>*</sup></label>
-              <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
+              <input type="tel" placeholder="Contact Number" formControlName="contact_number" class="form-control"  (keypress)="onlyNumberKey($event)"  maxlength= 10>
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Address1<sup>*</sup></label>

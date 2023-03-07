@@ -12,6 +12,9 @@ export class UploadXrayComponent {
   constructor(private userService:UserService){}
   fileToUpload: File | null = null;
   user=userInfo;
+  url: any; 
+	msg = "";
+  hidden=true;
 
   uploadFile(event:any) {
     console.log('files', event.target.files)
@@ -39,5 +42,27 @@ export class UploadXrayComponent {
         //this.toastr.error(res.message);
       }
     });
+
+    if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+		
+		var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.url = reader.result; 
+		}
+    this.hidden=false;
+	}
   }
-}
+

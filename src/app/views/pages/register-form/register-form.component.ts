@@ -90,7 +90,7 @@ export class RegisterFormComponent {
           text: res.message,
           icon: 'success',
         });
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('pricing');
       }
        else {
         Swal.fire({

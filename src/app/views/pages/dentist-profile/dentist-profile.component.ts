@@ -51,7 +51,7 @@ export class DentistProfileComponent implements OnInit {
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      contact_number: ['', [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      contact_number: ['',[Validators.pattern('[- +()0-9]{10,12}')]],
       email: [
         '',
 
@@ -172,6 +172,11 @@ export class DentistProfileComponent implements OnInit {
       });
     }
 
+  }
+  onlyNumberKey(evt: KeyboardEvent) {
+    // Only ASCII character in that range allowed
+    let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+    return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
   }
 
   }
