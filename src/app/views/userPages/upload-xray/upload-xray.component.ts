@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
 @Component({
   selector: 'app-upload-xray',
   templateUrl: './upload-xray.component.html',
@@ -10,14 +10,18 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 })
 export class UploadXrayComponent {
   constructor(private userService:UserService){}
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
-  user=userInfo;
+  user=this.userInfo;
+  url: any; 
+	msg = "";
+  hidden=true;
 
   uploadFile(event:any) {
     console.log('files', event.target.files)
     var formData = new FormData();
      formData.append('xray_image', event.target.files[0]);
-     formData.append('user_id', userInfo.id);
+     formData.append('user_id', this.userInfo.id);
   //  const formData={
   //    xray_image:event.target.files[0]
   //  }
@@ -39,5 +43,27 @@ export class UploadXrayComponent {
         //this.toastr.error(res.message);
       }
     });
+
+    if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+		
+		var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.url = reader.result; 
+		}
+    this.hidden=false;
+	}
   }
-}
+

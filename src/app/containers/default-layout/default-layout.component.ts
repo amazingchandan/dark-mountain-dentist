@@ -2,15 +2,16 @@ import { Component, Input } from '@angular/core';
 
 import { navItems ,navItemsUser } from './_nav';
 
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html',
 })
 
 export class DefaultLayoutComponent {
+ userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public isVisible: boolean = true
-  public userDetail= userInfo;
+  public userDetail= this.userInfo;
   public navItems = navItems;
   public navItemsUser = navItemsUser;
 

@@ -1,9 +1,9 @@
-
 <section class="content">
-    <div class="container">
-      <h5 class=" mb-3 fw-bold">Upload X-Ray</h5>
+  <div class="container">
+    <h5 class=" mb-3 fw-bold">Upload X-Ray</h5>
 
-
+    <div class="row">
+      <div class="col-md-6">
     <div class="card card-primary">
       <div class="card-body p-4">
 
@@ -11,21 +11,34 @@
         <div class="row">
 
 
+
           <form [formGroup]="" class="form-inline" role="form">
             <div class="row mb-2 mt-2">
-                <div class="col-md-4 form-group">
-                    <label class="mb-2">Choose File<sup>*</sup></label>
+              <div class="col-md-12 form-group">
+                <label class="mb-2">Choose File</label>&nbsp;
 
 
-                  <input type="file" class="file-upload mb-4 custom-file-input" (change)="uploadFile($event)" multiple onchange="console.log(event.target.files)">
+                <input type="file" class="file-upload mb-4 custom-file-input" (change)="uploadFile($event)" multiple
+                  onchange="console.log(event.target.files)">
 
 
-            </div>
+              </div>
+              <div class="col-md-12 mt-4 form-group">
+                <button type="button" class="w-50 btn btn-primary save-btn me-2 fw-bold other-btn pd-1" [disabled]="hidden">Evaluate X-Ray</button>
+
+
+              </div>
             </div>
 
           </form>
+          </div>
         </div>
       </div>
     </div>
-</div>
+    <div class="col-md-6">
+      <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+      <div class="img-div ms-2"><img class="img-div w-100 h-100" [src]="url" *ngIf="url"></div>
+    </div>
+    </div>
+  </div>
 </section>

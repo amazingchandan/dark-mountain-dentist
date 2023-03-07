@@ -13,11 +13,11 @@
             <div class="col-md-4 form-group">
 
               <label class="mb-2">First Name<sup>*</sup></label>
-              <input type="text" placeholder="First Name" formControlName="first_name" class="form-control">
+              <input type="text" placeholder="First Name" formControlName="first_name" class="form-control" maxlength="20">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
-              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control">
+              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control" maxlength="20">
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID<sup>*</sup></label>
@@ -30,7 +30,7 @@
             <div class="col-md-4 form-group">
 
               <label class="mb-2">Contact Number<sup>*</sup></label>
-              <input type="text" placeholder="Contact Number" formControlName="contact_number" class="form-control">
+              <input type="tel" placeholder="Contact Number" formControlName="contact_number" class="form-control"  (keypress)="onlyNumberKey($event)"  maxlength= 10>
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Address1<sup>*</sup></label>
@@ -77,7 +77,7 @@
             <div class="col-md-8 btn-div">
 
               <button type="button"
-                class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder">Reset&nbsp;<i
+                class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder" (click)="resetUser()">Reset&nbsp;<i
                   class="fa-solid fa-arrows-rotate ms-1"></i></button>
               <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
                 (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
@@ -92,27 +92,27 @@
             <h5>Subscription Details</h5>
             <div class="row mt-3">
               <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
-              <div class="col-sm-3 me-5">
-                Subscription End Date : {{this.date}}/{{this.month}}/{{this.year}}
+              <div class="col-sm-3 me-5 w-auto">
+                <span>  Subscription End Date : {{this.userData[0].subscription_details.end_date|date: 'dd/MM/yyyy'}}</span>
               </div>
               <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
 
-              <div *ngIf="this.userInfo.role=='admin'">
-                <div class="col-sm-2">
-                  <div class="col btn-cancel ms-2 ps-3">
-                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder">
+              <div *ngIf="userInfo.role =='admin'">
+                <div class="col-sm-3 ms-5 adminbtn-cancel ps-3">
+                  
+                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder" (click)="cancelSub()">
                       Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                     </button>
-                  </div>
+                 
                 </div>
               </div>
 
             </div>
-            <div *ngIf="this.userInfo.role=='dentist'">
+            <div *ngIf="userInfo.role=='dentist'">
               <div class="row mt-3">
                 <div class="col-sm-3 button-div">
                   <div class="col btn-cancel ms-2 ps-3">
-                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder">
+                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder" (click)="cancelSub()">
                       Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                     </button>
                     <button type="button" class="btn  ms-2 pd-1 other-btn fw-bolder">
@@ -149,9 +149,9 @@
                       <th scope="col">Marked</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>15/03/2022</td>
+                  <tbody  *ngIf="this.xrayData?.length != 0">
+                    <tr *ngFor="let data of this.xrayData; let i = index">
+                      <td>{{ data.created_at| date: 'dd/MM/yyyy' }}</td>
                       <td>
                         <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
                             View Details</button></a>
@@ -162,17 +162,11 @@
                         </div>
                       </td>
                     </tr>
+                   
+                  </tbody>
+                  <tbody *ngIf="this.xrayData?.length == 0">
                     <tr>
-                      <td>15/03/2022</td>
-                      <td>
-                        <a href=""><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                            View Details</button></a>
-                      </td>
-                      <td>
-                        <div class="custom-control custom-checkbox">
-                          <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-                        </div>
-                      </td>
+                      <td colspan="3" class="no-data-available" >No data!</td>
                     </tr>
                   </tbody>
                 </table>

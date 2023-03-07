@@ -25,7 +25,7 @@
                   <td>{{user.city}}</td>
                   <td>{{user.contact_number}}</td>
                   <td>02/11/2022</td>
-                  <td>
+                  <td><div class="d-flex">
                   <button
                     type="button"
                     class="btn btn-danger edit pt-2"
@@ -35,8 +35,8 @@
                     title="View"
                     type="button"
                     class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
-                    [routerLink]="'/dashboard/dentist-profile/'+user._id"
-                  >View Details</button>
+                     [routerLink]="'/dashboard/dentist-profile/'+user._id"
+                  >View Details</button></div>
                 </td>
                   <td>12</td>
                   <td>5</td>
