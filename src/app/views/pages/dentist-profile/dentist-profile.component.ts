@@ -44,7 +44,7 @@ export class DentistProfileComponent implements OnInit {
       state:new FormControl(),
       country:new FormControl(),
       zip:new FormControl(),
-    
+
       //user_role: new FormControl(),
     });
     this.userInfo=userInfo;
@@ -89,12 +89,12 @@ export class DentistProfileComponent implements OnInit {
      this.end_date = new Date(date).toISOString().split('T')[0];
      this.date =  new Date(date).getDate();
      this.month =  new Date(date).getMonth()+1;
-     this.year =  new Date(date).getFullYear(); 
+     this.year =  new Date(date).getFullYear();
     }
     else{
       this.date =  null;
      this.month =  null;
-     this.year =  null; 
+     this.year =  null;
     }
      console.log(this.date,"/",this.month,"/",this.year);
 

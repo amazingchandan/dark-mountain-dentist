@@ -5,8 +5,7 @@
         <div class="card pt-0">
 
           <div class="card-body pt-0 mt-n4">
-
-            <table datatable *ngIf="showContent" datatable="ng" [dtOptions]="dtOptions" class="row-border hover">
+            <table datatable *ngIf="showContent" datatable="ng"  class="row-border hover" [dtOptions]="dtOptions">
               <thead>
                 <tr>
                   <th>Dentist Name</th>
@@ -36,7 +35,7 @@
                     title="View"
                     type="button"
                     class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
-                     [routerLink]="'/dashboard/dentist-profile/'+user._id"
+                    [routerLink]="'/dashboard/dentist-profile/'+user._id"
                   >View Details</button>
                 </td>
                   <td>12</td>

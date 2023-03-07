@@ -6,6 +6,17 @@
   position: relative;
 }
 
+.login-card{
+  width: 50% !important;
+  flex: none !important;
+}
+
+@media (min-width:420px)and (max-width:767px){
+
+  .login-card{
+     width: 80% !important;
+  }
+}
 
 // sup {
 //   position: relative;
@@ -65,7 +76,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .mountain-color {
   color: #00d957;
-  font-size: 2rem !important;
+  font-size: inherit !important;
 }
 .signin {
 color: #00d957;

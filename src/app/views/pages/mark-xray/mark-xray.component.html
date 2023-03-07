@@ -47,7 +47,7 @@
                       <label class="label1 me-4">Accuracy</label>
                       <div class="w-100 position-relative">
                         <input #myinput type="range" min="0" value="25" max="100" (input)="onRangeChange($event)"/>
-                        <span class="inputValue fw-semibold p-1 fs-6 text-center" [ngStyle]="{'left': leftPos}">
+                          <span class="inputValue fw-semibold p-1 fs-6 text-center"  [ngStyle]="{'left': leftPos}">
                           {{valInput}}%
                           <!-- <span class="smallTrianlge"></span> -->
                         </span>

@@ -21,6 +21,9 @@ export class UserService {
   userRegister:string;
   userSubscription:string;
   uploadXray:string;
+  forgotPass: string;
+  otpVerify: string;
+  setNewPass: string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -36,6 +39,9 @@ export class UserService {
     this.userRegister = this.apiHost + 'adminRegistration';
     this.userSubscription = this.apiHost + 'getSubscriptionDetail';
     this.uploadXray = this.apiHost + 'upload-xray';
+    this.forgotPass = this.apiHost + 'auth/forgot-password';
+    this.otpVerify = this.apiHost + 'auth/reset-password';
+    this.setNewPass = this.apiHost + 'auth/update-password';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -73,5 +79,14 @@ export class UserService {
   }
   addXray(requestParameters){
     return this.http.post(`${this.uploadXray}`,requestParameters,{});
+  }
+  forgotPassword(requestParameters){
+    return this.http.post(`${this.forgotPass}`, requestParameters,{});
+  }
+  VerifyingOTP(requestParameters){
+    return this.http.post(`${this.otpVerify}`, requestParameters, {});
+  }
+  setNewPassword(requestParameters){
+    return this.http.put(`${this.setNewPass}`, requestParameters, {});
   }
 }

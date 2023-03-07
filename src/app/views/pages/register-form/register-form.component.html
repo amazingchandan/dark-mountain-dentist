@@ -1,68 +1,74 @@
-<div class="container-fluid p-0 min-vh-100 my-container">
-  <div class="card card-primary width-card">
-    <div class="card-body p-5">
-      <div class="row my-2 text-center">
-        <h2 class="d-flex justify-content-center fw-semibold">Dark<div class="mountain-color">Mountain</div>
-        </h2>
+<!-- <div class="container-fluid p-0 min-vh-100 my-container"> -->
+  <!-- <div class="card card-primary width-card"> -->
+    <!-- <div class="card-body p-5"> -->
+      <!-- <div class="row my-2 text-center"> -->
         <!-- <p class="mb-0 ">Create a new account</p> -->
-      </div>
-      <div class="row">
-        <form class="form-inline" #register_form="ngForm" [formGroup]="registerForm">
-          <div class="row mb-3 mt-2">
-            <div class="w-100 form-group d-flex position-relative">
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+<div class="container-fluid bg my-container min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="8">
+        <c-card-group class="d-flex justify-content-center">
+          <c-card class="p-4 w-50 mx-5 login-card">
+            <c-card-body>
+          <form #register_form="ngForm" [formGroup]="registerForm">
+          <h2 class="d-flex justify-content-center mb-4 fw-semibold">Dark<div class="mountain-color">Mountain</div></h2>
+          <c-input-group class="mb-3 mt-2">
+            <div class="w-100 d-flex position-relative">
               <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
               <span cInputGroupText class="rounded-0 rounded-start icon-position">
                 <svg cIcon name="cilUser"></svg>
               </span>
               <input
                 type="text"
-                class="form-control rounded ps-5"
+                class="form-control rounded ps-5 w-100"
                 placeholder="First Name"
                 formControlName="first_name"
               />
               <!-- <i class="fa-solid fa-user icon-position"></i> -->
             </div>
-          </div>
-          <div class="row mb-3 mt-2">
-            <div class="w-100 form-group d-flex position-relative">
+          </c-input-group>
+          <c-input-group class="mb-3 mt-2">
+            <div class="w-100 d-flex position-relative">
               <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
               <span cInputGroupText class="rounded-0 rounded-start icon-position">
                 <svg cIcon name="cilUser"></svg>
               </span>
-              <input type="text" class="form-control rounded ps-5" placeholder="Last Name" formControlName="last_name"/>
+              <input type="text" class="form-control rounded ps-5 w-100" placeholder="Last Name" formControlName="last_name"/>
               <!-- <i class="fa-solid fa-user icon-position"></i> -->
             </div>
-          </div>
-          <div class="row mb-3 mt-2">
-            <div class="w-100 form-group d-flex position-relative">
+          </c-input-group>
+          <c-input-group class="mb-3 mt-2">
+            <div class="w-100 d-flex position-relative">
               <!-- <label class="mb-2">Email ID<sup>*</sup></label> -->
               <span cInputGroupText class="rounded-0 rounded-start icon-position">
                 <svg cIcon name="cilEnvelopeClosed"></svg>
               </span>
               <input
                 type="email"
-                class="form-control rounded ps-5"
+                class="form-control rounded ps-5 w-100"
                 placeholder="Email ID"
                 formControlName="email"
               />
               <!-- <i class="fa-solid fa-envelope icon-position"></i> -->
             </div>
-          </div>
-          <div class="row mb-3 mt-2">
-            <div class="w-100 form-group d-flex position-relative">
+          </c-input-group>
+          <c-input-group class="mb-3 mt-2">
+            <div class="w-100 d-flex position-relative">
               <!-- <label class="mb-2">Password<sup>*</sup></label> -->
               <span cInputGroupText class="rounded-0 rounded-start icon-position">
                 <svg cIcon name="cilLockLocked"></svg>
               </span>
               <input
                 type="password"
-                class="form-control rounded ps-5"
+                class="form-control rounded ps-5 w-100"
                 placeholder="Password"
                 formControlName="password"
               />
               <!-- <i class="fa-solid fa-lock icon-position"></i> -->
             </div>
-          </div>
+          </c-input-group>
           <!--<div class="row mb-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">Contact Number<sup>*</sup></label>
@@ -157,17 +163,25 @@
             </div>
             <c-row>
               <c-col class="text-center mt-4">Already a member?
-               <a href="/#/dashboard/login" class="signin fw-semibold">LogIn</a>
+                <a href="/#/dashboard/login" class="signin fw-semibold">LogIn</a>
               </c-col>
             </c-row>
-            <c-row>
+            <!-- <c-row>
               <c-col class="text-center mt-1">
-               <a href="/#/forgot-password" class="signin fw-semibold">Forgot Password?</a>
+                <a href="/#/forgot-password" class="signin fw-semibold">Forgot Password?</a>
               </c-col>
-            </c-row>
+            </c-row> -->
 
         </form>
-      </div>
-    </div>
-    </div>
+      </c-card-body>
+    </c-card>
+
+  </c-card-group>
+</c-col>
+</c-row>
+</c-container>
 </div>
+      <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+<!-- </div> -->

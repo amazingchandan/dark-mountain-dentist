@@ -21,7 +21,6 @@
 
 
         <div class="card-body pt-0 mt-n4">
-
           <table
             *ngIf="showContent"
             datatable="ng"
@@ -90,7 +89,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <form [formGroup]="addPriceingForm" class="form-inline" role="form">
+          <form  class="form-inline" role="form" [formGroup]="addPriceingForm">
             <div class="row mb-2">
               <div class="col-md-4 form-group">
                 <label class="mb-2">Plan Name<sup>*</sup></label>

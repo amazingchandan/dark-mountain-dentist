@@ -12,9 +12,7 @@ export class MarkXrayComponent {
   leftPos = `25%`;
 
   onRangeChange(event: any){
-    console.log(event);
     this.valInput = (<HTMLInputElement>event.target).value.trim();
-    console.log((<HTMLInputElement>event.target).value.trim());
     this.leftPos = `${+(<HTMLInputElement>event.target).value.trim() - 5}%`
   }
 
