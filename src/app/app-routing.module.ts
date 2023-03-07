@@ -203,28 +203,28 @@ const routes: Routes = [
         path: 'subscription-list',
         component: SubscriptionListComponent,
         data: {
-          title: 'Subscription List'
+          title: 'Subscription Plans'
         }
       },
       {
         path: 'uploaded-xray',
         component: UploadedXraysComponent,
         data: {
-          title: 'Uploaded XRay'
+          title: 'Uploaded X-Ray'
         }
       },
       {
         path: 'mark-xray',
         component: MarkXrayComponent,
         data: {
-          title: 'Mark XRay'
+          title: 'Mark X-Ray'
         }
       },
       {
         path: 'upload-xray',
         component: UploadXrayComponent,
         data: {
-          title: 'Upload XRay'
+          title: 'Upload X-Ray'
         }
       },
      

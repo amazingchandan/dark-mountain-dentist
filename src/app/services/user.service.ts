@@ -21,6 +21,8 @@ export class UserService {
   userRegister:string;
   userSubscription:string;
   uploadXray:string;
+  cancelUserSub:string;
+  userXrayById:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -36,6 +38,8 @@ export class UserService {
     this.userRegister = this.apiHost + 'adminRegistration';
     this.userSubscription = this.apiHost + 'getSubscriptionDetail';
     this.uploadXray = this.apiHost + 'upload-xray';
+    this.cancelUserSub = this.apiHost + 'cancelUserSub';
+    this.userXrayById = this.apiHost + 'getUserXrayById'
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -62,11 +66,17 @@ export class UserService {
   getSubPlanById(id) {
     return this.http.get(`${this.getPlanById}?subscription_id=${id}`);
   }
+  getUserXrayById(id) {
+    return this.http.get(`${this.userXrayById}?dentist_id=${id}`);
+  }
   updateUser(requestParameters, id) {
     return this.http.post(`${this.updateUserById}?dentist_id=${id}`, requestParameters, {});
   }
   updatePlan(requestParameters, id) {
     return this.http.post(`${this.updatePlanById}?id=${id}`, requestParameters, {});
+  }
+  cancelUserPlan( id) {
+    return this.http.post(`${this.cancelUserSub}?dentist_id=${id}`,{});
   }
   getSubscription(requestParameters , id) {
     return this.http.post(`${this.userSubscription}?id=${id}`,requestParameters,{})

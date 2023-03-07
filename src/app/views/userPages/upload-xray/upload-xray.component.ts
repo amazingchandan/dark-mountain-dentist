@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
 @Component({
   selector: 'app-upload-xray',
   templateUrl: './upload-xray.component.html',
@@ -10,8 +10,9 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 })
 export class UploadXrayComponent {
   constructor(private userService:UserService){}
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
-  user=userInfo;
+  user=this.userInfo;
   url: any; 
 	msg = "";
   hidden=true;
@@ -20,7 +21,7 @@ export class UploadXrayComponent {
     console.log('files', event.target.files)
     var formData = new FormData();
      formData.append('xray_image', event.target.files[0]);
-     formData.append('user_id', userInfo.id);
+     formData.append('user_id', this.userInfo.id);
   //  const formData={
   //    xray_image:event.target.files[0]
   //  }

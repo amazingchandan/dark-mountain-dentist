@@ -4,14 +4,14 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
 @Component({
   selector: 'app-dentist-profile',
   templateUrl: './dentist-profile.component.html',
   styleUrls: ['./dentist-profile.component.scss']
 })
 export class DentistProfileComponent implements OnInit {
-
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   addSuperForm: FormGroup;
   private dentistId :any;
   userData:any;
@@ -20,7 +20,8 @@ export class DentistProfileComponent implements OnInit {
   date:any;
   month:any;
   year:any;
-  userInfo:any;
+  xrayData:any;
+ // userInfo:any;
   defaultType = "-Select-"
 
    constructor(private formBuilder: FormBuilder,
@@ -47,7 +48,7 @@ export class DentistProfileComponent implements OnInit {
     
       //user_role: new FormControl(),
     });
-    this.userInfo=userInfo;
+   // this.userInfo=userInfo;
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
@@ -84,8 +85,9 @@ export class DentistProfileComponent implements OnInit {
       console.log(res,"*****");
       this.userData = res.getData;
       console.log(this.userData[0].subscription_details.end_date,"***")
-      if(this.userData[0].subscription_details.end_date!=null)
-    {  let date= this.userData[0].subscription_details.end_date
+     /* if(this.userData[0].subscription_details.end_date!=null)
+    {  
+     let date= this.userData[0].subscription_details.end_date
      this.end_date = new Date(date).toISOString().split('T')[0];
      this.date =  new Date(date).getDate();
      this.month =  new Date(date).getMonth()+1;
@@ -95,7 +97,7 @@ export class DentistProfileComponent implements OnInit {
       this.date =  null;
      this.month =  null;
      this.year =  null; 
-    }
+    }*/
      console.log(this.date,"/",this.month,"/",this.year);
 
       //Plan-details
@@ -150,6 +152,12 @@ export class DentistProfileComponent implements OnInit {
 
       }
     });
+    this.apiService.getUserXrayById(id).subscribe((res: any) => {
+      console.log(res,"xray");
+      this.xrayData=res.getData;
+      
+      console.log(this.xrayData)
+    })
   }
   updateUser(){
     if(this.dentistId!="" && this.dentistId!= undefined && this.dentistId != null){
@@ -173,10 +181,74 @@ export class DentistProfileComponent implements OnInit {
     }
 
   }
+
+  cancelSub(){
+   
+    if(this.dentistId!="" && this.dentistId!= undefined && this.dentistId != null){
+      this.apiService.cancelUserPlan(this.dentistId)
+      .subscribe((res: any) => {
+        if (res.success) {
+          //this.toastr.success(res.message);
+          Swal.fire({
+            text: res.message,
+            icon: 'success',
+          });
+        //  this.router.navigateByUrl('/registered-dentists');
+        } else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error',
+          });
+          //this.toastr.error(res.message);
+        }
+        });
+  }
+}
+
+
+
   onlyNumberKey(evt: KeyboardEvent) {
     // Only ASCII character in that range allowed
     let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
+  }
+  resetUser(){
+    this.addSuperForm.patchValue({
+      first_name: "",
+    });
+    this.addSuperForm.patchValue({
+      last_name: "",
+    });
+
+    this.addSuperForm.patchValue({
+      contact_number: "",
+    });
+
+    this.addSuperForm.patchValue({
+      email: "",  
+    });
+
+   this.addSuperForm.patchValue({
+      address1:"",
+    });
+
+    this.addSuperForm.patchValue({
+      address2:"",
+    });
+    this.addSuperForm.patchValue({
+      city: "",
+    });
+    this.addSuperForm.patchValue({
+      state:"",
+    });
+    this.addSuperForm.patchValue({
+      country: "",
+    });
+    this.addSuperForm.patchValue({
+      pincode: "",
+    });
+
+
   }
 
   }
