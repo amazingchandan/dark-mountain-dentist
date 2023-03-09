@@ -1,4 +1,5 @@
 import { INavData } from '@coreui/angular';
+import { DefaultHeaderComponent } from '../default-layout/default-header/default-header.component'
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 console.log(userInfo,"userrrr")
 
@@ -32,11 +33,6 @@ export const navItems:
     name: 'Manage Subscription',
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
-  },
-  {
-    name: 'Logout',
-    url: 'login',
-    icon: 'fa-solid fa-right-from-bracket'
   }
 
 /*  {
@@ -105,3 +101,5 @@ export const navItemsUser:
       icon: 'fa-solid fa-right-from-bracket'
     }
   ]
+
+  
