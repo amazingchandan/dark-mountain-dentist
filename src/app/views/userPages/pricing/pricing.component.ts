@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
+import { AppService } from 'src/app/services/app.service';
+
+const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
 @Component({
   selector: 'app-pricing',
@@ -17,15 +20,41 @@ export class PricingComponent {
   userPlanData: any;
   userInfo:any;
   constructor(private router: Router,
-    private userService: UserService,) {
+    private userService: UserService,
+    private appService:AppService) {
 
       this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
   ngOnInit() {
 
-    
+
     this.planList();
     console.log(this.userInfo.id)
+  }
+  Logout(){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be Logout!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          title: 'Success!',
+          text: 'You Have Been Successfully Logged-out',
+          icon: 'success',
+        });
+        this.appService.logout();
+      }
+    });
+
   }
   planList() {
 
@@ -48,8 +77,8 @@ export class PricingComponent {
 
     return date;
       }
-  getSubscription(id, type) 
-  
+  getSubscription(id, type)
+
   {
       this.userService.getUserRecordById(this.userInfo.id).subscribe((res: any) =>
  {
@@ -66,7 +95,7 @@ export class PricingComponent {
         return false;
       }
 
-      else 
+      else
       {
 
         var end_date;
@@ -115,12 +144,12 @@ export class PricingComponent {
       }
     }
     })
-    
+
   }
 
 }
 
 
-  
+
 
 
