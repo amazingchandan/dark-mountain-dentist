@@ -1,6 +1,6 @@
 import { INavData } from '@coreui/angular';
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-console.log(userInfo,"userrrr")
+//const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+//console.log(userInfo,"userrrr")
 
 export const navItems:
  INavData[] =
