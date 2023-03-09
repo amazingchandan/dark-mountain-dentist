@@ -130,7 +130,7 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
-  
+
   {
     path: 'forgot-password',
     component: ForgetPasswordComponent,
@@ -227,7 +227,7 @@ const routes: Routes = [
           title: 'Upload X-Ray'
         }
       },
-     
+
     ]
 
 

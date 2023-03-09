@@ -1,7 +1,6 @@
 import { INavData } from '@coreui/angular';
-import { DefaultHeaderComponent } from '../default-layout/default-header/default-header.component'
-const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-console.log(userInfo,"userrrr")
+//const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+//console.log(userInfo,"userrrr")
 
 export const navItems:
  INavData[] =
