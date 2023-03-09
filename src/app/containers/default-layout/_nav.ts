@@ -1,6 +1,4 @@
 import { INavData } from '@coreui/angular';
-//const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-//console.log(userInfo,"userrrr")
 
 export const navItems:
  INavData[] =
@@ -101,7 +99,34 @@ export const navItemsUser:
     },
     {
       name: 'Logout',
-      url: 'login',
+     
+      
+    /* :`${  Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be Logout!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            title: 'Success!',
+            text: 'You Have Been Successfully Logged-out',
+            icon: 'success',
+          });
+        
+        }
+      })}`*/
+      url:'login',
       icon: 'fa-solid fa-right-from-bracket'
     }
   ]
+
+
+

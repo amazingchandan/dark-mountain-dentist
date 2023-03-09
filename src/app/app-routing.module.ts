@@ -130,6 +130,7 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
+
   
   {
     path: 'forgot-password',
