@@ -22,6 +22,7 @@ export class DefaultLayoutComponent {
   constructor() {}
  ngOnInit(){
   console.log(this.userDetail)
+  // console.log(navItems[4]);
 
  }
 

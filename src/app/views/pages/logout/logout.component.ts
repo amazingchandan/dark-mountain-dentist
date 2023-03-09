@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class LogoutComponent {
   constructor(private appService:AppService) {
     // super();
+
   }
   Logout(){
     Swal.fire({
