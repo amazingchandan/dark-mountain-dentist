@@ -93,11 +93,6 @@ export const navItemsUser:
       url: 'upload-xray',
       icon:'fa-solid fa-cloud-arrow-up'
 
-    },
-    {
-      name: 'Logout',
-      url: 'login',
-      icon: 'fa-solid fa-right-from-bracket'
     }
   ]
 
