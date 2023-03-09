@@ -147,7 +147,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DefaultLayoutComponent,
+    component: DefaultLayoutComponent, 
     data: {
       title: 'Dashboard'
     },
