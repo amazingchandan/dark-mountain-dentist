@@ -5,7 +5,7 @@
       <div class="card pt-0">
 
         <div class="card-body pt-0 mt-n4">
-            <table datatable  class="row-border hover" [dtOptions]="dtOptions">
+          <table datatable *ngIf="showContent" datatable="ng"  class="row-border hover" [dtOptions]="dtOptions">
                 <thead>
                   <tr>
                     <th>Dentist Name</th>
@@ -18,13 +18,13 @@
                     <th>Marked</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>Giacomo Guilizzani</td>
+                <tbody  *ngIf="allData?.length != 0">
+                  <tr *ngFor="let data of this.allData; let i = index">
+                    <td>{{data.user_id.first_name}} {{data.user_id.last_name}}</td>
                     <td>35</td>
-                    <td>Edison</td>
-                    <td>1234567890</td>
-                    <td>02/11/2022</td>
+                    <td>{{data.user_id.city}}</td>
+                    <td>{{data.user_id.contact_number}}</td>
+                    <td>{{data.created_at | date : 'dd/MM/yyyy'}}</td>
 
                     <td><button
                       type="button"
@@ -39,68 +39,13 @@
                     <td>12</td>
                     <td>3</td>
                   </tr>
-                  <tr>
-                    <td>Giacomo Guilizzani</td>
-                    <td>35</td>
-                    <td>Edison</td>
-                    <td>1234567890</td>
-                    <td>02/11/2022</td>
-                    <td><button
-                      type="button"
-                      class="btn btn-danger edit pt-2"
-                      title="Edit"
-                    ><i class="fa-regular fa-pen-to-square"></i></button>
-                    <a href="/#/dashboard/mark-xray"><button
-                      title="View"
-                      type="button"
-                      class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
-                    >View Details</button></a></td>
-                    <td>12</td>
-                    <td>3</td>
-                  </tr>
-                  <tr>
-                    <td>Giacomo Guilizzani</td>
-                    <td>35</td>
-                    <td>Edison</td>
-                    <td>1234567890</td>
-                    <td>02/11/2022</td>
-                    <td><button
-                      type="button"
-                      class="btn btn-danger edit pt-2"
-                      title="Edit"
-                    ><i class="fa-regular fa-pen-to-square"></i></button>
-                    <a href="/#/dashboard/mark-xray"><button
-                      title="View"
-                      type="button"
-                      class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
-                    >View Details</button></a></td>
-                    <td>12</td>
-                    <td>3</td>
-                  </tr>
-                  <tr>
-                    <td>Giacomo Guilizzani</td>
-                    <td>35</td>
-                    <td>Edison</td>
+                  
 
-                    <td>1234567890</td>
-                    <td>02/11/2022</td>
-                    <td>
-
-                    <button
-                      type="button"
-                      class="btn btn-danger edit pt-2"
-                      title="Edit"
-                    ><i class="fa-regular fa-pen-to-square"></i></button>
-                    <a href="/#/dashboard/mark-xray"><button
-                      title="View"
-                      type="button"
-                      class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
-                    >View Details</button></a>
-                    </td>
-                    <td>12</td>
-                    <td>3</td>
+                </tbody>
+                <tbody *ngIf="this.allData?.length == 0">
+                  <tr>
+                    <td colspan="3" class="no-data-available" >No data!</td>
                   </tr>
-
                 </tbody>
               </table>
 

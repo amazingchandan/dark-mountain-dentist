@@ -286,3 +286,6 @@ tr td {
 input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
   appearance: none !important;
 }
+.dataTables_wrapper .dataTables_paginate .paginate_button .override{
+  color: black !important;
+}

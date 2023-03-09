@@ -14,13 +14,13 @@ export class DentistProfileComponent implements OnInit {
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   addSuperForm: FormGroup;
   private dentistId :any;
-  userData:any;
+  userData:any={};
   planData:any = {};
   end_date:any;
   date:any;
   month:any;
   year:any;
-  xrayData:any;
+  xrayData:any ={};
  // userInfo:any;
   defaultType = "-Select-"
 

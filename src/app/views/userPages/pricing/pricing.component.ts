@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
@@ -13,18 +14,22 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
 
 export class PricingComponent {
-
+ // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   allData: any;
   userData: any;
   userPlanData: any;
+  userInfo:any;
   constructor(private router: Router,
     private userService: UserService,
     private appService:AppService) {
 
+      this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
   ngOnInit() {
+
+
     this.planList();
-    console.log(userInfo.id)
+    console.log(this.userInfo.id)
   }
   Logout(){
     Swal.fire({
@@ -75,7 +80,7 @@ export class PricingComponent {
   getSubscription(id, type)
 
   {
-      this.userService.getUserRecordById(userInfo.id).subscribe((res: any) =>
+      this.userService.getUserRecordById(this.userInfo.id).subscribe((res: any) =>
  {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
@@ -117,7 +122,7 @@ export class PricingComponent {
           end_date: end_date,
           start_date: Date.now(),
         }
-        this.userService.getSubscription(this.userPlanData, userInfo.id).subscribe((res: any) => {
+        this.userService.getSubscription(this.userPlanData, this.userInfo.id).subscribe((res: any) => {
           console.log(res)
           if (res.success) {
             //this.toastr.success(res.message);

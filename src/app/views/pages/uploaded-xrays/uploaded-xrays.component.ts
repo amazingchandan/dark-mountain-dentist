@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-uploaded-xrays',
@@ -8,29 +11,48 @@ import { Component } from '@angular/core';
 export class UploadedXraysComponent {
 
   dtOptions: any = {};
- 
+  
+  public allData: any;
+  public userData : any;
 
-  constructor(
+  private isDtInitialized: boolean = false;
+   dtTrigger: Subject<any> = new Subject<any>();
+   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  showContent: boolean;
+  constructor( private userService : UserService,
     
   ) { }
 
   ngOnInit(): void {
+    setTimeout(()=>this.showContent=true, 250);
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
       },
-     // dom: 'Bfrtip',
-      /*buttons: [ {extends:'copy',
-      className: 'btn btn-primary position-relative mt-2',
-                  text:'Export' ,
-                  style:"position:relative"  
-    }]*/
-    
+      pagingType: 'full_numbers',
+      pageLength: 10,
+
+      //dom: 'Bfrtip',
+
     };
-   
+    this.xrayList();
+  }
+
+  xrayList(){
+    this.userService.getXrayList().subscribe((res:any) => {
+      console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+      this.allData = res.getData;
+         if (this.isDtInitialized) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+         // this.dtTrigger.next();
+        });
+      } else {
+        this.isDtInitialized = true;
+        //this.dtTrigger.next();
+      }
+    })
     
   }
   ngOnDestroy(): void {
