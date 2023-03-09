@@ -32,11 +32,6 @@ export const navItems:
     name: 'Manage Subscription',
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
-  },
-  {
-    name: 'Logout',
-    url: 'login',
-    icon: 'fa-solid fa-right-from-bracket'
   }
 
 /*  {
@@ -105,3 +100,5 @@ export const navItemsUser:
       icon: 'fa-solid fa-right-from-bracket'
     }
   ]
+
+  
