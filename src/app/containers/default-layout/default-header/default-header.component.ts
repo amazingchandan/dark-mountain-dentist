@@ -17,7 +17,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
- 
+
   constructor(private classToggler: ClassToggleService,
    private router:Router,
     private appService:AppService) {
@@ -28,7 +28,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.userfirst();
     //this.admin()
   }
-  
+
   userfirst() {
     this.userInfo;
     console.log(this.userInfo);
