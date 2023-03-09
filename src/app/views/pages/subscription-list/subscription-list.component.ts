@@ -197,7 +197,8 @@ export class SubscriptionListComponent implements OnInit {
               text: res.message,
               icon: 'success',
             });
-            this.router.navigateByUrl('/subscription-list');
+            //this.router.navigateByUrl('/subscription-list');
+            document.getElementById('launch_ad')?.click();
           } else {
             Swal.fire({
               text: res.message,
