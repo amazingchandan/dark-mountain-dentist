@@ -26,6 +26,7 @@ export class UserService {
   setNewPass: string;
   cancelUserSub:string;
   userXrayById:string;
+  xrayList:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -45,7 +46,8 @@ export class UserService {
     this.otpVerify = this.apiHost + 'auth/reset-password';
     this.setNewPass = this.apiHost + 'auth/update-password';
     this.cancelUserSub = this.apiHost + 'cancelUserSub';
-    this.userXrayById = this.apiHost + 'getUserXrayById'
+    this.userXrayById = this.apiHost + 'getUserXrayById';
+    this.xrayList = this.apiHost + 'getXrayList';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -74,6 +76,9 @@ export class UserService {
   }
   getUserXrayById(id) {
     return this.http.get(`${this.userXrayById}?dentist_id=${id}`);
+  }
+  getXrayList() {
+    return this.http.get(`${this.xrayList}`);
   }
   updateUser(requestParameters, id) {
     return this.http.post(`${this.updateUserById}?dentist_id=${id}`, requestParameters, {});

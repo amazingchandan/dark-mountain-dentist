@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, NgForm, ValidationErrors, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
+import { AppService } from 'src/app/services/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -17,13 +18,15 @@ const ALPHA_NUMERIC_VALIDATION_ERROR = { alphaNumericError: 'only alpha numeric 
 
 export class RegisterFormComponent {
   public registerForm: FormGroup;
-  
+  newUser:any;
+  isAuthLoading: boolean;
   constructor(
   
     private toastr: ToastrService,
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appService: AppService
   ) {}
 
   ngOnInit() {
@@ -39,7 +42,7 @@ export class RegisterFormComponent {
      
     });
   }
-  register(){
+   register(){
     console.log(this.registerForm.value)
     if (
       this.registerForm.value.first_name == undefined ||
@@ -96,7 +99,8 @@ export class RegisterFormComponent {
       });
       return false;
     }
-
+   // this.newUser= this.registerForm.value;
+    console.log()
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);
@@ -104,7 +108,28 @@ export class RegisterFormComponent {
           text: res.message,
           icon: 'success',
         });
-        this.router.navigateByUrl('pricing');
+        let loginData = {
+          email: this.registerForm.value.email,
+          password: this.registerForm.value.password
+        };
+
+       this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
+          console.log(result);
+          if (result.success) {
+            this.isAuthLoading = false;
+           
+            //this.toastr.success(result.message);
+          this.appService.login(result);
+          this.router.navigateByUrl('pricing');
+          }})
+     //   this.appService.login(result);
+       /*localStorage.setItem('userInfo', JSON.stringify(this.registerForm.value['userInfo']));
+        localStorage.setItem('id', getLoginDetail.userInfo.id);
+        localStorage.setItem('email', getLoginDetail.userInfo.email);
+        localStorage.setItem('role', getLoginDetail.userInfo.role);
+        localStorage.setItem('objId', getLoginDetail.userInfo.objId);
+        localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
+        
       }
        else {
         Swal.fire({

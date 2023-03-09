@@ -91,9 +91,10 @@
           <div class="sub-container mt-4">
             <h5>Subscription Details</h5>
             <div class="row mt-3">
+        
               <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
               <div class="col-sm-3 me-5 w-auto">
-                <span>  Subscription End Date : {{this.userData[0].subscription_details.end_date|date: 'dd/MM/yyyy'}}</span>
+                <span>  Subscription End Date : {{this.userData[0]?.subscription_details.end_date|date: 'dd/MM/yyyy'}}</span>
               </div>
               <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
 
