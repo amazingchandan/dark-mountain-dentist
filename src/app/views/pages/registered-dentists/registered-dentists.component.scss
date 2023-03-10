@@ -1,11 +1,11 @@
-.btn{
-    color: white;
-}
+// .btn{
+//     color: white;
+// }
 
-tr .btn{
+// tr .btn{
     // height: 28px;
     // width: 28px;
-}
+// }
 .btn i{
     font-size: 16px;
 
@@ -17,4 +17,11 @@ tr .btn{
 
 * {
   color: #043049;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #fff!important;
+}
+a.current{
+  color: #fff!important;
 }

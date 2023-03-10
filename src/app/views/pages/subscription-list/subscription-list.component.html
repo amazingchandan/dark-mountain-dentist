@@ -36,7 +36,7 @@
                 <th>Max</th>
                 <th>Amount</th>
                 <th># of Subscribers</th>
-                <th>Action</th>
+                <th style="min-width: 155px;">Action</th>
 
               </tr>
             </thead>
@@ -50,8 +50,8 @@
                 <td>3</td>
 
                 <td>
-                  <button type="button" class="btn btn-danger edit pt-2" title="Edit"><i
-                    class="fa-regular fa-pen-to-square"></i></button>
+                  <button type="button" class="btn btn-danger edit" title="Edit"><i
+                    class="fa-regular fa-pen-to-square mt-2"></i></button>
                   <button title="View" type="button" class="btn btn-primary ms-3 pd-1 view-btn fw-bolder" (click)="openModal(data._id)"
                     data-bs-toggle="modal" data-bs-target="#exampleModalCenter">View Details</button>
                 </td>
@@ -61,6 +61,18 @@
 
 
             </tbody>
+            <!-- removed the below code for getting normal error in table or you can add number of td equal to th -->
+                <!-- <tbody *ngIf="this.allData?.length == 0">
+                  <tr>
+                    <td colspan="8" class="no-data-available text-center" >No data available in table</td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
+                  </tr>
+                </tbody> -->
           </table>
 
 
