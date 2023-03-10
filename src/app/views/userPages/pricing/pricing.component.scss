@@ -1,12 +1,12 @@
 .hover-effect:hover {
   box-shadow: 0px 0px 2px 4px #02d9583e !important;
-  // background-color: #02d959;
-  // color: #fff;
+  background-color: #02d959;
+  color: #fff;
   transform: scale(1.02);
-}
-button:hover {
-  background-color: #02c24f !important;
-  // color: #02d959 !important;
+  button {
+    background-color: #fff !important;
+    color: #02d959 !important;
+  }
 }
 // h4 {
 //   height: 20px !important;
