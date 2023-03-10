@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
@@ -14,24 +14,28 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
 
 export class PricingComponent {
- // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   allData: any;
   userData: any;
   userPlanData: any;
-  userInfo:any;
+  userInfo: any;
+  userId: any;
+  //route: any;
   constructor(private router: Router,
     private userService: UserService,
-    private appService:AppService) {
+    private appService: AppService,
+    private route: ActivatedRoute) {
 
-      this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
   ngOnInit() {
 
 
     this.planList();
-    console.log(this.userInfo.id)
+    //  console.log(this.userInfo)
+    this.userId = this.route.snapshot.paramMap.get('dentist_id');
   }
-  Logout(){
+  Logout() {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be Logout!",
@@ -76,73 +80,70 @@ export class PricingComponent {
     date.setMonth(date.getMonth() + months);
 
     return date;
-      }
-  getSubscription(id, type)
+  }
+    
 
-  {
-      this.userService.getUserRecordById(this.userInfo.id).subscribe((res: any) =>
- {
+  getSubscription(id, type) {
+    this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
-      console.log(this.userData)
-      if (res.success)
-   {
-        if (this.userData[0].subscription_details.status == true)
-        {  Swal.fire({
+      console.log(this.userData, this.userInfo.id)
+      if (res.success) {
+        if (this.userData[0].subscription_details.status == true) {
+          Swal.fire({
             text: "You have already subscribed",
             icon: 'error',
           });
-        return false;
-      }
-
-      else
-      {
-
-        var end_date;
-        var now = new Date();
-        console.log(id, type)
-        if (type == "Monthly") {
-
-
-          end_date = new Date(now.setMonth(now.getMonth() + 1));
-          //end_date = new Date(now.setMinutes(now.getMinutes() + 5));
-          console.log(end_date, "Date", new Date());
-
-         }
-        else if (type === "Yearly") {
-
-
-          end_date = new Date(now.setMonth(now.getMonth() + 12));
-
-          console.log(end_date, "Date", new Date());
-
-          }
-        this.userPlanData = {
-          sub_id: id,
-          end_date: end_date,
-          start_date: Date.now(),
+          return false;
         }
-        this.userService.getSubscription(this.userPlanData, this.userInfo.id).subscribe((res: any) => {
-          console.log(res)
-          if (res.success) {
-            //this.toastr.success(res.message);
-            Swal.fire({
-              text: "You have successfully subscribed",
-              icon: 'success',
-            });
-            this.router.navigateByUrl("/login")
-           }
-          else {
-            Swal.fire({
-              text: res.message,
-              icon: 'error',
-            });
-            //this.toastr.error(res.message);
-          }
-        });
 
+        else {
+
+          var end_date;
+          var now = new Date();
+          console.log(id, type)
+          if (type == "Monthly") {
+
+
+            end_date = new Date(now.setMonth(now.getMonth() + 1));
+            //end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+            console.log(end_date, "Date", new Date());
+
+          }
+          else if (type === "Yearly") {
+
+
+            end_date = new Date(now.setMonth(now.getMonth() + 12));
+
+            console.log(end_date, "Date", new Date());
+
+          }
+          this.userPlanData = {
+            sub_id: id,
+            end_date: end_date,
+            start_date: Date.now(),
+          }
+          this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+            console.log(res)
+            if (res.success) {
+              //this.toastr.success(res.message);
+              Swal.fire({
+                text: "You have successfully subscribed",
+                icon: 'success',
+              });
+              this.router.navigateByUrl("/login")
+            }
+            else {
+              Swal.fire({
+                text: res.message,
+                icon: 'error',
+              });
+              //this.toastr.error(res.message);
+            }
+          });
+
+        }
       }
-    }
     })
 
   }

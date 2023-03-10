@@ -240,7 +240,7 @@ const routes: Routes = [
   },
  
   {
-    path: 'pricing',
+    path: 'pricing/:dentist_id',
     component: PricingComponent,
     data: {
       title: 'Subscription Plans'

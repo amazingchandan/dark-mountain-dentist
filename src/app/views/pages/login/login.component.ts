@@ -21,29 +21,36 @@ export class LoginComponent implements OnInit, OnDestroy {
     private apiService: UserService,
     public router : Router,
   ) { }
-
+  regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   ngOnInit() {
     this.renderer.addClass(document.querySelector('app-root'), 'login-page');
     this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, Validators.required),
     });
   }
 
-  async login() {
+   login() {
+    console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
+     
       const testBy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       let isValid = testBy.test(this.loginForm.get("email").value.toLowerCase());
       if (!isValid) {
-        this.toastr.error('Invalid Email Address');
+       
+        Swal.fire({
+          text: 'Please enter valid email',
+          icon: 'warning'
+        });
         return false;
       }
+      console.log(this.loginForm.value.email)
       this.isAuthLoading = true;
       let loginData = {
         email: this.loginForm.get("email").value,
         password: this.loginForm.get("password").value
       };
-      await this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
+     this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
         console.log(result.userInfo.id);
         let id= result.userInfo.id;
         if (result.success) {
@@ -57,7 +64,8 @@ export class LoginComponent implements OnInit, OnDestroy {
                }
                else
                {
-                this.router.navigateByUrl("/pricing");
+                this.router.navigateByUrl("/pricing/"+result.userInfo.id);
+               // [routerLink]="'/dentist-profile/'+user._id"
                }
                 
           }
@@ -69,7 +77,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           
           //this.toastr.success(result.message);
         // 
-        } else {
+        } 
+
+        else {
           this.isAuthLoading = false;
           //this.toastr.error(result.message);
           Swal.fire({
@@ -78,13 +88,39 @@ export class LoginComponent implements OnInit, OnDestroy {
           });
         }
       });
-    } else {
+    } 
+    if (
+      this.loginForm.value.email == undefined ||
+      this.loginForm.value.email.trim() == ''
+    ) {
       Swal.fire({
-        text: 'Please enter email/password',
-        icon: 'error',
+        text: 'Please enter email',
+        icon: 'warning'
       });
-      //this.toastr.error('Please enter email/password');
-
+      return false;
+      // this.toastr.error('Please enter plan name');
+      // return false;
+    }
+    if (!this.regex.test(this.loginForm.value.email)) {
+      Swal.fire({
+        text: 'Please enter valid email',
+        icon: 'warning'
+      });
+      return false;
+      // this.toastr.error('Please enter plan name');
+      // return false;
+    }
+    if (
+      this.loginForm.value.password == undefined ||
+      this.loginForm.value.password.trim() == ''
+    ) {
+      Swal.fire({
+        text: 'Please enter password',
+        icon: 'warning'
+      });
+      return false;
+      // this.toastr.error('Please enter plan name');
+      // return false;
     }
   }
 

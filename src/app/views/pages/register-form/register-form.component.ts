@@ -49,7 +49,7 @@ export class RegisterFormComponent {
       this.registerForm.value.first_name.trim() == ''
     ) {
       Swal.fire({
-        text: 'Please enter First name',
+        text: 'Please enter first name',
         icon: 'warning'
       });
       return false;
@@ -61,7 +61,7 @@ export class RegisterFormComponent {
       this.registerForm.value.last_name.trim() == ''
     ) {
       Swal.fire({
-        text: 'Please enter Last name',
+        text: 'Please enter last name',
         icon: 'warning'
       });
       return false;
