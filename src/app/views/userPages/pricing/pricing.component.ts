@@ -130,7 +130,7 @@ export class PricingComponent {
               text: "You have successfully subscribed",
               icon: 'success',
             });
-            this.router.navigateByUrl("/dashboard")
+            this.router.navigateByUrl("/login")
            }
           else {
             Swal.fire({

@@ -159,7 +159,7 @@
         <img src="./assets/img/avatars/no-logo-icon-1-green.png" alt="User Image" />
 
         <h5 class="text-center mt-2" style="color:white !important">
-          {{userInfo.first_name}} {{userInfo.last_name}}
+          {{this.fName}} {{this.lName}}
           <!-- <small>Brand Banao Admin</small> -->
         </h5>
       </li>
@@ -184,7 +184,7 @@
           Profile
         </a> -->
         <button class="btn fw-bold other-btn pd-1" (click)="myProfile()" >My Profile <i class="fa fa-user ms-1"></i> </button>
-        
+
         <button class="btn fw-bold other-btn pd-1 ms-2" (click)="Logout()">Logout <i class="fa-solid fa-right-from-bracket ms-1"></i> </button><!-- <a (click)="Logout()" class="btn btn-default btn-flat "
           >Sign out</a
         > -->

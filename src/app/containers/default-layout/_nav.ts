@@ -30,11 +30,6 @@ export const navItems:
     name: 'Manage Subscription',
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
-  },
-  {
-    name: 'Logout',
-    url: 'login',
-    icon: 'fa-solid fa-right-from-bracket'
   }
 
 /*  {
@@ -97,36 +92,9 @@ export const navItemsUser:
       icon:'fa-solid fa-cloud-arrow-up'
 
     },
-    {
-      name: 'Logout',
-     
-      
-    /* :`${  Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be Logout!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, logout!',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            title: 'Success!',
-            text: 'You Have Been Successfully Logged-out',
-            icon: 'success',
-          });
-        
-        }
-      })}`*/
-      url:'login',
-      icon: 'fa-solid fa-right-from-bracket'
-    }
+   
   ]
 
 
 
+  

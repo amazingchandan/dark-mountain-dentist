@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 
@@ -22,9 +23,12 @@ interface IUser {
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private chartsData: DashboardChartsData) {
+  constructor(private chartsData: DashboardChartsData,
+    private userService : UserService) {
   }
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  fName:string;
+  lName:string;
   public users: IUser[] = [
     {
       name: 'Yiorgos Avraamu',
@@ -113,6 +117,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCharts();
+    console.log(this.userInfo)
+    let id= this.userInfo.id;
+    this.userService.getUserRecordById(id).subscribe((res: any) =>{
+      console.log(res,"++++++")
+      if(res.success){
+  this.fName= res.getData[0]?.first_name;
+  this.lName = res.getData[0]?.last_name;
+      }
+    })
+    console.log(this.fName)
   }
 
   initCharts(): void {

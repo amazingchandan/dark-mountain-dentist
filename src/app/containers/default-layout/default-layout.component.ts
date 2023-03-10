@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
+import Swal from 'sweetalert2';
 
 import { navItems ,navItemsUser } from './_nav';
 
@@ -14,19 +16,49 @@ export class DefaultLayoutComponent {
   public userDetail= this.userInfo;
   public navItems = navItems;
   public navItemsUser = navItemsUser;
+  public role :string;
 
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };
 
-  constructor() {}
- ngOnInit(){
-  console.log(this.userDetail)
+  constructor( private appService:AppService) {}
+  ngOnInit(){
+    console.log(this.userDetail)
+    let jwt = this.userDetail.token
 
- }
+let jwtData = jwt.split('.')[1]
+let decodedJwtJsonData = window.atob(jwtData)
+let decodedJwtData = JSON.parse(decodedJwtJsonData);
+this.role=decodedJwtData.role;
+  }
 
  receiveMessage(event: boolean) {
   this.isVisible = event;
   // console.log(this.isVisible);
 }
+  logout(){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be Logout!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          title: 'Success!',
+          text: 'You Have Been Successfully Logged-out',
+          icon: 'success',
+        });
+        this.appService.logout();
+      }
+    });
+  }
 }

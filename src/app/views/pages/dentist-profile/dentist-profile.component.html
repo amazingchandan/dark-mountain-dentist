@@ -109,7 +109,7 @@
               </div>
 
             </div>
-            <div *ngIf="userInfo.role=='dentist'">
+            <div *ngIf="this.role=='dentist'">
               <div class="row mt-3">
                 <div class="col-sm-3 button-div">
                   <div class="col btn-cancel ms-2 ps-3">
@@ -134,7 +134,7 @@
 
 
       </div>
-      <div *ngIf="this.userInfo.role==='admin'">
+      <div *ngIf="this.role==='admin'">
         <div class="container mt-3 xray-table-container border-top p-0">
           <!--p-0-->
           <div class="sub-coontainer mt-4 xray-row">
