@@ -21,8 +21,9 @@ export class DentistProfileComponent implements OnInit {
   month:any;
   year:any;
   xrayData:any ={};
+  country:any;
  // userInfo:any;
-  defaultType = "-Select-"
+  defaultType = "-Select-";
   role: any;
 
    constructor(private formBuilder: FormBuilder,
@@ -68,6 +69,8 @@ export class DentistProfileComponent implements OnInit {
      pincode: ['', [Validators.required]],
 
     });
+    this.addSuperForm.controls['email'].disable();
+
     this.dentistId=this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
     if (

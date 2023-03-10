@@ -37,7 +37,7 @@
               <input type="text" placeholder="Address1" formControlName="address1" class="form-control me-4">
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">Address2<sup>*</sup></label>
+              <label class="mb-2">Address2</label>
               <input type="text" placeholder="Address2" formControlName="address2" class="form-control">
             </div>
 
@@ -56,7 +56,7 @@
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Zip<sup>*</sup></label>
-              <input type="text" placeholder="Zip" formControlName="pincode" class="form-control me-5">
+              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5">
 
             </div>
           </div>
@@ -66,7 +66,7 @@
           <div class="row mb-2">
             <div class="col-md-4 form-group">
               <label class="" for="inputState">Country</label>
-              <select class="form-select me-4" aria-label="Default select example" formControlName="country">
+              <select class="form-select me-4" aria-label="Default select example" formControlName="country" [value]="country">
                 <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
                 <option>India</option>
                 <option>America</option>
@@ -125,7 +125,7 @@
               <div class="row mt-2">
                 <div class="custom-control custom-checkbox">
                   <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-                 <span class="fw-semibold"> I agree to terms And conditions</span>
+                 <span class="fw-semibold"> I agree to terms and conditions</span>
                 </div>
               </div>
             </div>
