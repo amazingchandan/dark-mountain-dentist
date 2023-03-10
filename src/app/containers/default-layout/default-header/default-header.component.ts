@@ -4,6 +4,7 @@ import { AppService } from 'src/app/services/app.service';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
@@ -17,10 +18,13 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  lName: any;
+  fName: any;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
-    private appService:AppService) {
+    private appService:AppService,
+    private userService :UserService) {
     super();
 
   }
@@ -32,6 +36,16 @@ export class DefaultHeaderComponent extends HeaderComponent {
   userfirst() {
     this.userInfo;
     console.log(this.userInfo);
+    console.log(this.userInfo)
+    let id= this.userInfo.id;
+    this.userService.getUserRecordById(id).subscribe((res: any) =>{
+      console.log(res,"++++++")
+      if(res.success){
+  this.fName= res.getData[0]?.first_name;
+  this.lName = res.getData[0]?.last_name;
+      }
+    })
+    console.log(this.fName)
   }
   Logout(){
     Swal.fire({

@@ -16,6 +16,7 @@ export class DefaultLayoutComponent {
   public userDetail= this.userInfo;
   public navItems = navItems;
   public navItemsUser = navItemsUser;
+  public role :string;
 
   public perfectScrollbarConfig = {
     suppressScrollX: true,
@@ -24,6 +25,12 @@ export class DefaultLayoutComponent {
   constructor( private appService:AppService) {}
   ngOnInit(){
     console.log(this.userDetail)
+    let jwt = this.userDetail.token
+
+let jwtData = jwt.split('.')[1]
+let decodedJwtJsonData = window.atob(jwtData)
+let decodedJwtData = JSON.parse(decodedJwtJsonData);
+this.role=decodedJwtData.role;
   }
 
  receiveMessage(event: boolean) {

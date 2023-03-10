@@ -23,19 +23,34 @@ export class AppService {
     localStorage.setItem('role', getLoginDetail.userInfo.role);
     localStorage.setItem('objId', getLoginDetail.userInfo.objId);
     localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);
+    localStorage.setItem('token',getLoginDetail.userInfo.token);
+
     //console.log(getLoginDetail.userInfo.role)
-   console.log(getLoginDetail.userInfo)
+   console.log(getLoginDetail.userInfo.token)
    if(getLoginDetail.userInfo.role==="dentist")
    {
     if (getLoginDetail.userInfo.subscribed==true)
    {
-    this.router.navigateByUrl('dashboard/dashboard');
+    this.router.navigateByUrl('/');
   }
   else{ (this.router.navigateByUrl('pricing'));}
    }
    else{
-    this.router.navigateByUrl('dashboard/dashboard');
+    this.router.navigateByUrl('/');
    }
+   
+   let jwt = getLoginDetail.userInfo.token
+
+let jwtData = jwt.split('.')[1]
+let decodedJwtJsonData = window.atob(jwtData)
+let decodedJwtData = JSON.parse(decodedJwtJsonData)
+
+let isAdmin = decodedJwtData.admin
+
+console.log('jwtData: ' + jwtData)
+console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
+console.log('decodedJwtData: ' + decodedJwtData.role)
+console.log('Is admin: ' + isAdmin)
   }
 
     addTripData(tripData: any) {
@@ -48,11 +63,12 @@ export class AppService {
     localStorage.removeItem('email');
     localStorage.removeItem('role');
     localStorage.removeItem('objId');
-    this.router.navigateByUrl('/');
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('login');
   }
 
   loggedIn() {
-    return (!!localStorage.getItem("id") && !!localStorage.getItem("email") && !!localStorage.getItem("objId") && !!localStorage.getItem("role"));
+    return (!!localStorage.getItem("token"));
   }
 
   private _listners = new Subject<any>();

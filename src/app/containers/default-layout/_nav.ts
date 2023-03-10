@@ -1,6 +1,4 @@
 import { INavData } from '@coreui/angular';
-//const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-//console.log(userInfo,"userrrr")
 
 export const navItems:
  INavData[] =
@@ -94,11 +92,10 @@ export const navItemsUser:
       icon:'fa-solid fa-cloud-arrow-up'
 
     },
-    {
-      name: 'Logout',
-      url: 'login',
-      icon: 'fa-solid fa-right-from-bracket'
-    }
+   
+    
   ]
+
+
 
   

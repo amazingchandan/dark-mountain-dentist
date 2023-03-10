@@ -18,6 +18,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './views/pages/set-new-password/set-new-password.component';
 import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
+import {UserAuthGuard} from './guard/user-auth.guard';
 
 const routes: Routes = [
 
@@ -110,7 +111,7 @@ const routes: Routes = [
   // },
 
   {
-    path: '',
+    path: 'register',
     component: RegisterFormComponent,
     data: {
       title: 'Register'
@@ -123,14 +124,15 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
-  {
+ /* {
     path: 'dashboard/login',
     component: LoginComponent,
     data: {
       title: 'Login Page'
     }
-  },
+  },*/
 
+  
   {
     path: 'forgot-password',
     component: ForgetPasswordComponent,
@@ -146,11 +148,12 @@ const routes: Routes = [
     }
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Dashboard'
+      title: ''
     },
+    canActivate:[UserAuthGuard],
     children: [
       {
         path: 'widgets',
@@ -173,17 +176,10 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
-
+       
       },
 
-      {
-        path: 'registered-dentists',
-        component: RegisteredDentistsComponent,
-        data: {
-          title: 'Registered Dentists'
-        },
-
-      },
+     
       {
         path: 'dentist-profile/:dentist_id',
         component: DentistProfileComponent,
@@ -227,11 +223,22 @@ const routes: Routes = [
           title: 'Upload X-Ray'
         }
       },
+      {
+        path: 'registered-dentists',
+        component: RegisteredDentistsComponent,
+        data: {
+          title: 'Registered Dentists'
+        },
+      //  canActivate :[UserAuthGuard]
+      },
 
-    ]
+    ],
+    
+    //canActivate :[UserAuthGuard]
 
 
   },
+ 
   {
     path: 'pricing',
     component: PricingComponent,
@@ -245,7 +252,7 @@ const routes: Routes = [
 
 
 
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

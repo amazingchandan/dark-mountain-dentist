@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  API_HOST: 'https://apidarkmountain.blahworks.tech/'
-  // API_HOST: 'http://localhost:3100/'
+ API_HOST: 'http://localhost:3100/'
+// API_HOST : 'https://apidarkmountain.blahworks.tech/',
+ // API_HOST: 'https://apidarkmountain.blahworks.tech/'
 };
 
 /*

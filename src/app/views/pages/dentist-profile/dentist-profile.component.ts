@@ -23,6 +23,7 @@ export class DentistProfileComponent implements OnInit {
   xrayData:any ={};
  // userInfo:any;
   defaultType = "-Select-"
+  role: any;
 
    constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
@@ -79,6 +80,16 @@ export class DentistProfileComponent implements OnInit {
     } else {
      // this.addSuperForm.get('status').setValue('active');
     }
+
+    console.log(this.userInfo)
+    let jwt = this.userInfo.token
+
+let jwtData = jwt.split('.')[1]
+let decodedJwtJsonData = window.atob(jwtData)
+let decodedJwtData = JSON.parse(decodedJwtJsonData);
+this.role=decodedJwtData.role;
+
+
   }
   editadmin(id) {
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
