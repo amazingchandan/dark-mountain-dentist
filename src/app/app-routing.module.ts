@@ -160,11 +160,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
       },
-      {
+    /*  {
         path: '',
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },
+      },*/
       {
         path: 'pages',
         loadChildren: () =>
@@ -176,6 +176,13 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
+        children:[
+          {
+            path: '',
+            loadChildren: () =>
+              import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          }
+        ]
        
       },
 

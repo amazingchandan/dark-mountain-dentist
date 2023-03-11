@@ -33,7 +33,7 @@ export class SubscriptionListComponent implements OnInit {
   allData: any;
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
-  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
   @ViewChild('close') close: ElementRef;
 
   showContent: boolean;
@@ -199,8 +199,9 @@ export class SubscriptionListComponent implements OnInit {
             });
             //this.router.navigateByUrl('/subscription-list');
             document.getElementById('launch_ad')?.click();
+           this.isDtInitialized= false;
             this.planList();
-
+              
           } else {
             Swal.fire({
               text: res.message,
@@ -219,11 +220,11 @@ export class SubscriptionListComponent implements OnInit {
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
-          // this.dtTrigger.next();
+         this.dtTrigger.next(undefined);
         });
       } else {
         this.isDtInitialized = true;
-        //this.dtTrigger.next();
+        this.dtTrigger.next(undefined);
       }
     })
 
@@ -270,7 +271,9 @@ export class SubscriptionListComponent implements OnInit {
             icon: 'success',
           });
           document.getElementById('launch_ad')?.click();
-          this.planList();
+           this.isDtInitialized = false;
+           this.planList();
+       
         }
          else {
           Swal.fire({
@@ -286,6 +289,7 @@ export class SubscriptionListComponent implements OnInit {
 
 
   ngOnDestroy(): void {
+    this.planList();
     this.dtTrigger.unsubscribe();
   }
 }

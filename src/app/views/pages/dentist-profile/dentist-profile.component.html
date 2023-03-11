@@ -98,7 +98,7 @@
               </div>
               <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
 
-              <div *ngIf="userInfo.role =='admin'">
+              <div *ngIf="this.role =='admin'">
                 <div class="col-sm-3 ms-5 adminbtn-cancel ps-3">
 
                     <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder" (click)="cancelSub()">

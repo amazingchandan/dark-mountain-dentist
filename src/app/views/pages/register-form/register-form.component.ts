@@ -115,12 +115,17 @@ export class RegisterFormComponent {
 
        this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
           console.log(result);
+          
+        let id= result.userInfo.id;
           if (result.success) {
+          //  this.userService.getUserRecordById(id).subscribe((res: any) => {
+              console.log(res,"*****");
             this.isAuthLoading = false;
            
             //this.toastr.success(result.message);
-          this.appService.login(result);
-          this.router.navigateByUrl('pricing');
+         // this.appService.login(result);})
+         this.router.navigateByUrl('/pricing/'+id);
+      
           }})
      //   this.appService.login(result);
        /*localStorage.setItem('userInfo', JSON.stringify(this.registerForm.value['userInfo']));
@@ -130,7 +135,7 @@ export class RegisterFormComponent {
         localStorage.setItem('objId', getLoginDetail.userInfo.objId);
         localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
         
-      }
+        }
        else {
         Swal.fire({
           text: res.message,

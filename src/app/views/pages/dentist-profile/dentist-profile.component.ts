@@ -240,9 +240,9 @@ this.role=decodedJwtData.role;
       contact_number: "",
     });
 
-    this.addSuperForm.patchValue({
+   /* this.addSuperForm.patchValue({
       email: "",
-    });
+    });*/
 
    this.addSuperForm.patchValue({
       address1:"",

@@ -19,25 +19,14 @@ export class AppService {
   login(getLoginDetail) {
     localStorage.setItem('userInfo', JSON.stringify(getLoginDetail['userInfo']));
     localStorage.setItem('id', getLoginDetail.userInfo.id);
-    localStorage.setItem('email', getLoginDetail.userInfo.email);
-    localStorage.setItem('role', getLoginDetail.userInfo.role);
-    localStorage.setItem('objId', getLoginDetail.userInfo.objId);
-    localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);
+   // localStorage.setItem('email', getLoginDetail.userInfo.email);
+   // localStorage.setItem('role', getLoginDetail.userInfo.role);
+   // localStorage.setItem('objId', getLoginDetail.userInfo.objId);
+    //localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);
     localStorage.setItem('token',getLoginDetail.userInfo.token);
 
     //console.log(getLoginDetail.userInfo.role)
-   console.log(getLoginDetail.userInfo.token)
-   if(getLoginDetail.userInfo.role==="dentist")
-   {
-    if (getLoginDetail.userInfo.subscribed==true)
-   {
-    this.router.navigateByUrl('/');
-  }
-  else{ (this.router.navigateByUrl('pricing'));}
-   }
-   else{
-    this.router.navigateByUrl('/');
-   }
+   
    
    let jwt = getLoginDetail.userInfo.token
 
@@ -51,6 +40,20 @@ console.log('jwtData: ' + jwtData)
 console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
 console.log('decodedJwtData: ' + decodedJwtData.role)
 console.log('Is admin: ' + isAdmin)
+
+console.log(getLoginDetail.userInfo.token)
+  /* if(decodedJwtData.role==="dentist")
+   {
+    if (getLoginDetail.userInfo.subscribed==true)
+   {
+    this.router.navigateByUrl('/');
+  }
+  else{ (this.router.navigateByUrl('pricing'));}
+   }
+   else{
+    this.router.navigateByUrl('/');
+   }*/
+   this.router.navigateByUrl('/');
   }
 
     addTripData(tripData: any) {

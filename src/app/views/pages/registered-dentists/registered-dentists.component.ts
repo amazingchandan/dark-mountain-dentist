@@ -24,7 +24,7 @@ export class RegisteredDentistsComponent {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 250);
+    setTimeout(()=>this.showContent=true, 350);
     this.dtOptions = {
       language: {
         search:"",
