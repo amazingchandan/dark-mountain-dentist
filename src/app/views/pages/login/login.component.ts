@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
     });
+    if(localStorage.getItem('token')){
+      this.router.navigateByUrl("/dashboard")
+    }
   }
 
   async login() {
@@ -54,21 +57,21 @@ export class LoginComponent implements OnInit, OnDestroy {
              console.log(status)
                if(status==true){
                 this.appService.login(result);
-               }
-               else
-               {
+              }
+              else
+              {
                 this.router.navigateByUrl("/pricing");
-               }
-                
-          }
-          else{
-            this.appService.login(result);
+              }
+
+            }
+            else{
+              this.appService.login(result);
           }
 
           })
-          
+
           //this.toastr.success(result.message);
-        // 
+        //
         } else {
           this.isAuthLoading = false;
           //this.toastr.error(result.message);
