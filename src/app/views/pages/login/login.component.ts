@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
    login() {
+    this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
     console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
 
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log(this.loginForm.value.email)
       this.isAuthLoading = true;
       let loginData = {
-        email: this.loginForm.get("email").value,
+        email: this.loginForm.get("email").value.toLowerCase(),
         password: this.loginForm.get("password").value
       };
      this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
