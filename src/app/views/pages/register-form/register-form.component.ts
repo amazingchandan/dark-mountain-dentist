@@ -141,7 +141,7 @@ export class RegisterFormComponent {
         
         }
 
-      }
+      
        else {
         Swal.fire({
           text: res.message,

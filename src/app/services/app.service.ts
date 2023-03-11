@@ -63,9 +63,9 @@ console.log(getLoginDetail.userInfo.token)
   logout() {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('id');
-    localStorage.removeItem('email');
-    localStorage.removeItem('role');
-    localStorage.removeItem('objId');
+   // localStorage.removeItem('email');
+   // localStorage.removeItem('role');
+    //localStorage.removeItem('objId');
     localStorage.removeItem('token');
     this.router.navigateByUrl('login');
   }

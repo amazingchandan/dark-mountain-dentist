@@ -153,7 +153,7 @@ const routes: Routes = [
     data: {
       title: ''
     },
-    canActivate:[UserAuthGuard],
+      canActivate:[UserAuthGuard],
     children: [
       {
         path: 'widgets',

@@ -18,7 +18,7 @@
                 <label class="mb-2">Choose File</label>&nbsp;
 
 
-                <input type="file" class="file-upload mb-4 custom-file-input" (change)="uploadFile($event)" multiple
+                <input type="file" class="file-upload mb-4 custom-file-input" (change)="uploadFile($event)" multiple onclick="this.value = null"
                   onchange="console.log(event.target.files)">
 
 

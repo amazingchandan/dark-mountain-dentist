@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-dentist-profile',
@@ -30,7 +31,8 @@ export class DentistProfileComponent implements OnInit {
     private apiService: UserService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    private appService :AppService)
 
     {
     this.addSuperForm=this.formBuilder.group({})
@@ -100,6 +102,7 @@ export class DentistProfileComponent implements OnInit {
       this.apiService.getUserRecordById(id).subscribe((res: any) => {
         console.log(res,"*****");
         this.userData = res.getData;
+        this.end_date=this.userData[0].subscription_details.end_date;
         console.log(this.userData[0].subscription_details.end_date,"***")
         /* if(this.userData[0].subscription_details.end_date!=null)
         {
@@ -187,7 +190,7 @@ export class DentistProfileComponent implements OnInit {
             text: res.message,
             icon: 'success',
           });
-          this.router.navigateByUrl('/registered-dentists');
+        //  this.router.navigateByUrl('/registered-dentists');
         } else {
           Swal.fire({
             text: res.message,
@@ -200,7 +203,7 @@ export class DentistProfileComponent implements OnInit {
 
   }
 
-  cancelSub(){
+  cancelSub(event){
 
     if(this.dentistId!="" && this.dentistId!= undefined && this.dentistId != null){
       this.apiService.cancelUserPlan(this.dentistId)
@@ -211,6 +214,17 @@ export class DentistProfileComponent implements OnInit {
             text: res.message,
             icon: 'success',
           });
+          this.apiService.getUserRecordById(this.dentistId).subscribe((res: any) => {
+            console.log(res,"*****");
+            this.userData = res.getData;
+              if(this.userData[0]?.subscription_details.status==false){
+                this.planData="";
+                this.end_date= " ";
+              }
+              console.log(this.end_date,"date")
+            
+          })
+          event.target.disable=true;
         //  this.router.navigateByUrl('/registered-dentists');
         } else {
           Swal.fire({
@@ -221,6 +235,29 @@ export class DentistProfileComponent implements OnInit {
         }
         });
   }
+}
+cancelSubfromUser(){
+
+  if(this.dentistId!="" && this.dentistId!= undefined && this.dentistId != null){
+    this.apiService.cancelUserPlan(this.dentistId)
+    .subscribe((res: any) => {
+      if (res.success) {
+        //this.toastr.success(res.message);
+        Swal.fire({
+          text: res.message,
+          icon: 'success',
+        });
+       //this.router.navigateByUrl('/registered-dentists');
+       this.appService.logout();
+      } else {
+        Swal.fire({
+          text: res.message,
+          icon: 'error',
+        });
+        //this.toastr.error(res.message);
+      }
+      });
+}
 }
 
 
