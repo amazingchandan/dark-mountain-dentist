@@ -132,7 +132,7 @@ const routes: Routes = [
     }
   },*/
 
-  
+
   {
     path: 'forgot-password',
     component: ForgetPasswordComponent,
@@ -184,9 +184,10 @@ const routes: Routes = [
           }
         ]
        
+
       },
 
-     
+
       {
         path: 'dentist-profile/:dentist_id',
         component: DentistProfileComponent,
@@ -213,7 +214,7 @@ const routes: Routes = [
         path: 'uploaded-xray',
         component: UploadedXraysComponent,
         data: {
-          title: 'Uploaded X-Ray'
+          title: 'Uploaded X-Rays'
         }
       },
       {
@@ -240,12 +241,12 @@ const routes: Routes = [
       },
 
     ],
-    
+
     //canActivate :[UserAuthGuard]
 
 
   },
- 
+
   {
     path: 'pricing/:dentist_id',
     component: PricingComponent,

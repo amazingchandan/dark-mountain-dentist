@@ -21,7 +21,7 @@ export class RegisterFormComponent {
   newUser:any;
   isAuthLoading: boolean;
   constructor(
-  
+
     private toastr: ToastrService,
     private userService: UserService,
     private router: Router,
@@ -39,10 +39,14 @@ export class RegisterFormComponent {
       last_name: new FormControl(null, Validators.required),
       email: new FormControl(null,  [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]),
       password: new FormControl(null, [Validators.required, Validators.minLength(7),Validators.maxLength(10), alphaNumericValidator]),
-     
+
     });
+    if(localStorage.getItem('token')){
+      this.router.navigateByUrl("/dashboard")
+    }
   }
    register(){
+    this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
     console.log(this.registerForm.value)
     if (
       this.registerForm.value.first_name == undefined ||
@@ -121,7 +125,7 @@ export class RegisterFormComponent {
           //  this.userService.getUserRecordById(id).subscribe((res: any) => {
               console.log(res,"*****");
             this.isAuthLoading = false;
-           
+
             //this.toastr.success(result.message);
          // this.appService.login(result);})
          this.router.navigateByUrl('/pricing/'+id);
@@ -136,6 +140,8 @@ export class RegisterFormComponent {
         localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
         
         }
+
+      }
        else {
         Swal.fire({
           text: res.message,

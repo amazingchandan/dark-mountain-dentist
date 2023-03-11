@@ -13,7 +13,7 @@ export class UploadXrayComponent {
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
   user=this.userInfo;
-  url: any; 
+  url: any;
 	msg = "";
   hidden=true;
 
@@ -34,7 +34,7 @@ export class UploadXrayComponent {
           text: res.message,
           icon: 'success',
         });
-      
+
       } else {
         Swal.fire({
           text: res.message,
@@ -45,23 +45,31 @@ export class UploadXrayComponent {
     });
 
     if(!event.target.files[0] || event.target.files[0].length == 0) {
+      // Swal.fire({
+      //   text: "You must select an image",
+      //   icon: 'error',
+      // });
 			this.msg = 'You must select an image';
 			return;
 		}
-		
+
 		var mimeType = event.target.files[0].type;
-		
+
 		if (mimeType.match(/image\/*/) == null) {
+      // Swal.fire({
+      //   text: "Only images are supported",
+      //   icon: 'error',
+      // });
 			this.msg = "Only images are supported";
 			return;
 		}
-		
+
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
-		
+
 		reader.onload = (_event) => {
 			this.msg = "";
-			this.url = reader.result; 
+			this.url = reader.result;
 		}
     this.hidden=false;
 	}

@@ -69,6 +69,8 @@ export class DentistProfileComponent implements OnInit {
      pincode: ['', [Validators.required]],
 
     });
+
+
     this.addSuperForm.controls['email'].disable();
 
     this.dentistId=this.route.snapshot.paramMap.get('dentist_id');
@@ -77,53 +79,53 @@ export class DentistProfileComponent implements OnInit {
       this.dentistId != undefined &&
       this.dentistId != null &&
       this.dentistId != ''
-    ) {
-      this.editadmin(this.dentistId);
-      console.log("errrr",this.dentistId)
-    } else {
-     // this.addSuperForm.get('status').setValue('active');
+      ) {
+        this.editadmin(this.dentistId);
+        console.log("errrr",this.dentistId)
+      } else {
+        // this.addSuperForm.get('status').setValue('active');
+      }
+
+      console.log(this.userInfo)
+      let jwt = this.userInfo.token
+
+      let jwtData = jwt.split('.')[1]
+      let decodedJwtJsonData = window.atob(jwtData)
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      this.role=decodedJwtData.role;
+
+
     }
-
-    console.log(this.userInfo)
-    let jwt = this.userInfo.token
-
-let jwtData = jwt.split('.')[1]
-let decodedJwtJsonData = window.atob(jwtData)
-let decodedJwtData = JSON.parse(decodedJwtJsonData);
-this.role=decodedJwtData.role;
-
-
-  }
-  editadmin(id) {
-    this.apiService.getUserRecordById(id).subscribe((res: any) => {
-      console.log(res,"*****");
-      this.userData = res.getData;
-      console.log(this.userData[0].subscription_details.end_date,"***")
-     /* if(this.userData[0].subscription_details.end_date!=null)
-    {
-     let date= this.userData[0].subscription_details.end_date
-     this.end_date = new Date(date).toISOString().split('T')[0];
-     this.date =  new Date(date).getDate();
-     this.month =  new Date(date).getMonth()+1;
-     this.year =  new Date(date).getFullYear();
-    }
-    else{
-      this.date =  null;
-     this.month =  null;
-     this.year =  null;
-    }
-     this.year =  null;
-    }*/
-     console.log(this.date,"/",this.month,"/",this.year);
+    editadmin(id) {
+      this.apiService.getUserRecordById(id).subscribe((res: any) => {
+        console.log(res,"*****");
+        this.userData = res.getData;
+        console.log(this.userData[0].subscription_details.end_date,"***")
+        /* if(this.userData[0].subscription_details.end_date!=null)
+        {
+          let date= this.userData[0].subscription_details.end_date
+          this.end_date = new Date(date).toISOString().split('T')[0];
+          this.date =  new Date(date).getDate();
+          this.month =  new Date(date).getMonth()+1;
+          this.year =  new Date(date).getFullYear();
+        }
+        else{
+          this.date =  null;
+          this.month =  null;
+          this.year =  null;
+        }
+        this.year =  null;
+      }*/
+      console.log(this.date,"/",this.month,"/",this.year);
 
       //Plan-details
-   this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((res:any)=>{
-    console.log(res)
-    if(res.success){
-    this.planData = res.getData;
-    console.log(this.planData[0].type)
-    }
-   })
+      this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((res:any)=>{
+        console.log(res)
+        if(res.success){
+          this.planData = res.getData;
+          console.log(this.planData[0].type)
+        }
+      })
 
       //--------
 
@@ -243,6 +245,7 @@ this.role=decodedJwtData.role;
    /* this.addSuperForm.patchValue({
       email: "",
     });*/
+    
 
    this.addSuperForm.patchValue({
       address1:"",

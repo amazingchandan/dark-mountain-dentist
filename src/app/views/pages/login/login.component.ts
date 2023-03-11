@@ -28,16 +28,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, Validators.required),
     });
+    if(localStorage.getItem('token')){
+      this.router.navigateByUrl("/dashboard")
+    }
   }
 
    login() {
+    this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
     console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
-     
+
       const testBy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       let isValid = testBy.test(this.loginForm.get("email").value.toLowerCase());
       if (!isValid) {
-       
+
         Swal.fire({
           text: 'Please enter valid email',
           icon: 'warning'
@@ -47,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log(this.loginForm.value.email)
       this.isAuthLoading = true;
       let loginData = {
-        email: this.loginForm.get("email").value,
+        email: this.loginForm.get("email").value.toLowerCase(),
         password: this.loginForm.get("password").value
       };
      this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
@@ -67,17 +71,17 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.router.navigateByUrl("/pricing/"+result.userInfo.id);
                // [routerLink]="'/dentist-profile/'+user._id"
                }
-                
+
           }
           else{
             this.appService.login(result);
           }
 
           })
-          
+
           //this.toastr.success(result.message);
-        // 
-        } 
+        //
+        }
 
         else {
           this.isAuthLoading = false;
@@ -88,7 +92,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           });
         }
       });
-    } 
+    }
     if (
       this.loginForm.value.email == undefined ||
       this.loginForm.value.email.trim() == ''
