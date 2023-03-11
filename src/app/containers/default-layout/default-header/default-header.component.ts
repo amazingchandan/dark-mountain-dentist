@@ -74,7 +74,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
   myProfile(){
    //this.router.navigateByUrl(`dentist-profile/`+this.userInfo.id)
-   this.router.navigateByUrl('/dashboard/dentist-profile/'+this.userInfo.id);
+   this.router.navigateByUrl('/dentist-profile/'+this.userInfo.id);
   // this.router.navigate([ '/dentist-profile' ], { queryParams: {dentist_id:this.userInfo.id } })
   }
 

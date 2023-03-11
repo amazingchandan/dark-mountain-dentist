@@ -199,6 +199,8 @@ export class SubscriptionListComponent implements OnInit {
             });
             //this.router.navigateByUrl('/subscription-list');
             document.getElementById('launch_ad')?.click();
+            this.planList();
+
           } else {
             Swal.fire({
               text: res.message,
@@ -268,6 +270,7 @@ export class SubscriptionListComponent implements OnInit {
             icon: 'success',
           });
           document.getElementById('launch_ad')?.click();
+          this.planList();
         }
          else {
           Swal.fire({
