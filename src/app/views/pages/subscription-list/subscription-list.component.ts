@@ -86,6 +86,9 @@ export class SubscriptionListComponent implements OnInit {
     } else {
       //this.plandesc();
       // this.addPriceingForm.get('status').setValue('active');
+      this.addPriceingForm.patchValue({
+        plan_name: "",
+      });;
     }
   }
   /*  plandesc() {
@@ -232,6 +235,7 @@ export class SubscriptionListComponent implements OnInit {
 
   openModal(id) {
     console.log(id, "plan id")
+    if(id!=null && id != undefined && id != ''){
     for (let i = 0; i < this.allData.length; i++) {
       if (this.allData[i]._id === id) {
         console.log(this.allData[i])
@@ -258,6 +262,30 @@ export class SubscriptionListComponent implements OnInit {
 
       }
     }
+  }
+  else{
+    console.log("no id")
+    this.addPriceingForm.patchValue({
+      plan_name: '',
+    });
+
+    this.addPriceingForm.patchValue({
+      minimum: '',
+    });
+    this.addPriceingForm.patchValue({
+      maximum: '',
+    });
+    this.addPriceingForm.patchValue({
+      type: '',
+    });
+    this.addPriceingForm.patchValue({
+      amount: '',
+    });
+    this.addPriceingForm.patchValue({
+      country: '',
+    });
+
+  }
   }
   updatePlan(id) {
 

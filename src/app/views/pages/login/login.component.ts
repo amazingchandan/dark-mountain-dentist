@@ -57,9 +57,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       };
       this.appService.updateApprovalMessage(loginData)
      this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
-        console.log(result.userInfo.id);
-        let id= result.userInfo.id;
+       // console.log(result);
+       // let id= result.userInfo.id;
         if (result.success) {
+          let id= result.userInfo.id;
           this.apiService.getUserRecordById(id).subscribe((res: any) => {
             console.log(res,"*****");
              if(res.getData[0]?.role=='dentist'){
