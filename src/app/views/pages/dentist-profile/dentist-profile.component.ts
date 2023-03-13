@@ -262,15 +262,15 @@ export class DentistProfileComponent implements OnInit {
           this.apiService.cancelUserPlan(this.dentistId)
             .subscribe((res: any) => {
               if (res.success) {
-                Swal.fire({
+              /*  Swal.fire({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
                   timer: 3000,
                   title: 'Success!',
-                  text: res.success,
+                  text: "You have been log out",
                   icon: 'success',
-                });
+                });*/
                 this.appService.logout();
               }
               else {
