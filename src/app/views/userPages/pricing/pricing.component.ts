@@ -89,7 +89,7 @@ export class PricingComponent {
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
-      console.log(this.userData, this.userInfo.id)
+      console.log(this.userData, this.userInfo,this.userInfo.token)
       if (res.success) {
         if (this.userData[0].subscription_details.status == true) {
           Swal.fire({
@@ -134,7 +134,7 @@ export class PricingComponent {
                 icon: 'success',
               });
               //! changed here
-              this.userService.onLogin(JSON.stringify(this.appService.currentApprovalStageMessage.source['_value'])).subscribe((result: any) => {
+             /* this.userService.onLogin(this.appService.currentApprovalStageMessage.source['_value']).subscribe((result: any) => {
                 console.log(result.userInfo.id);
                 let id= result.userInfo.id;
                 if (result.success) {
@@ -171,9 +171,14 @@ export class PricingComponent {
                     icon: 'error',
                   });
                 }
-              });
-              this.router.navigateByUrl("/dashboard")
+              });*/
+              if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+              {this.router.navigateByUrl("/dashboard")
             }
+            else{
+              this.router.navigateByUrl("/login")
+            }
+          }
             else {
               Swal.fire({
                 text: res.message,

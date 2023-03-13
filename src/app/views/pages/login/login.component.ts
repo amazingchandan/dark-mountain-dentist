@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         email: this.loginForm.get("email").value.toLowerCase(),
         password: this.loginForm.get("password").value
       };
-      this.appService.updateApprovalMessage(loginData)
-     this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
-       // console.log(result);
+     // this.appService.updateApprovalMessage(loginData)
+       this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
+        console.log(result);
        // let id= result.userInfo.id;
         if (result.success) {
           let id= result.userInfo.id;
@@ -71,8 +71,14 @@ export class LoginComponent implements OnInit, OnDestroy {
                }
                else
                {
+                localStorage.setItem('userInfo', JSON.stringify(result['userInfo']));
+                localStorage.setItem('id', result.userInfo.id);
+               
+                localStorage.setItem('token',result.userInfo.token);
+            
                 this.router.navigateByUrl("/pricing/"+result.userInfo.id);
-               // [routerLink]="'/dentist-profile/'+user._id"
+                 
+                // [routerLink]="'/dentist-profile/'+user._id"
                }
 
           }

@@ -86,9 +86,7 @@ export class SubscriptionListComponent implements OnInit {
     } else {
       //this.plandesc();
       // this.addPriceingForm.get('status').setValue('active');
-      this.addPriceingForm.patchValue({
-        plan_name: "",
-      });;
+     
     }
   }
   /*  plandesc() {

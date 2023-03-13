@@ -66,7 +66,13 @@ console.log(getLoginDetail.userInfo.token)
    }*/
   // ! changed here
   //  this.router.navigateByUrl('/');
+  if(getLoginDetail.userInfo.token!=undefined && getLoginDetail.userInfo.token !=null && getLoginDetail.userInfo.token != ""){
    this.router.navigateByUrl('/dashboard');
+  }
+  else
+  {
+    this.router.navigateByUrl('/login');
+  }
   }
 
     addTripData(tripData: any) {
