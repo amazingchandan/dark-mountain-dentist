@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject  } from 'rxjs';
+// import { FormGroup } from '@angular/forms';
+
 
 
 @Injectable({
@@ -14,7 +16,16 @@ export class AppService {
     image: 'assets/img/user2-160x160.jpg',
   };
 
+  private approvalStageMessage = new BehaviorSubject({});
+  currentApprovalStageMessage = this.approvalStageMessage.asObservable();
+
   constructor(private router: Router) {}
+
+  updateApprovalMessage(message: {}) {
+    this.approvalStageMessage.next(message)
+    console.log(message);
+
+    }
 
   login(getLoginDetail) {
     localStorage.setItem('userInfo', JSON.stringify(getLoginDetail['userInfo']));
@@ -26,8 +37,8 @@ export class AppService {
     localStorage.setItem('token',getLoginDetail.userInfo.token);
 
     //console.log(getLoginDetail.userInfo.role)
-   
-   
+
+
    let jwt = getLoginDetail.userInfo.token
 
 let jwtData = jwt.split('.')[1]
@@ -53,7 +64,9 @@ console.log(getLoginDetail.userInfo.token)
    else{
     this.router.navigateByUrl('/');
    }*/
-   this.router.navigateByUrl('/');
+  // ! changed here
+  //  this.router.navigateByUrl('/');
+   this.router.navigateByUrl('/dashboard');
   }
 
     addTripData(tripData: any) {

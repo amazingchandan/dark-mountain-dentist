@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, Validators.required),
     });
+    // this.appService.currentApprovalStageMessage.subscribe(msg => this. = msg);
     if(localStorage.getItem('token')){
       this.router.navigateByUrl("/dashboard")
     }
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         email: this.loginForm.get("email").value.toLowerCase(),
         password: this.loginForm.get("password").value
       };
+      this.appService.updateApprovalMessage(loginData)
      this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
         console.log(result.userInfo.id);
         let id= result.userInfo.id;

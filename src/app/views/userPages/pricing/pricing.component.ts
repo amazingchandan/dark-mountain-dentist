@@ -15,6 +15,7 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
 export class PricingComponent {
   // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  public isAuthLoading = false;
   allData: any;
   userData: any;
   userPlanData: any;
@@ -30,6 +31,7 @@ export class PricingComponent {
   }
   ngOnInit() {
 
+    // console.log(this.appService.currentApprovalStageMessage.source['_value'], "------------");
 
     this.planList();
     //  console.log(this.userInfo)
@@ -81,7 +83,7 @@ export class PricingComponent {
 
     return date;
   }
-    
+
 
   getSubscription(id, type) {
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
@@ -131,7 +133,46 @@ export class PricingComponent {
                 text: "You have successfully subscribed",
                 icon: 'success',
               });
-              this.router.navigateByUrl("/login")
+              //! changed here
+              this.userService.onLogin(JSON.stringify(this.appService.currentApprovalStageMessage.source['_value'])).subscribe((result: any) => {
+                console.log(result.userInfo.id);
+                let id= result.userInfo.id;
+                if (result.success) {
+                  this.userService.getUserRecordById(id).subscribe((res: any) => {
+                    console.log(res,"*****");
+                     if(res.getData[0]?.role=='dentist'){
+                    let status = res.getData[0]?.subscription_details.status;
+                     console.log(status)
+                       if(status==true){
+                        this.appService.login(result);
+                       }
+                       else
+                       {
+                        this.router.navigateByUrl("/pricing/"+result.userInfo.id);
+                       // [routerLink]="'/dentist-profile/'+user._id"
+                       }
+
+                  }
+                  else{
+                    this.appService.login(result);
+                  }
+
+                  })
+
+                  //this.toastr.success(result.message);
+                //
+                }
+
+                else {
+                  this.isAuthLoading = false;
+                  //this.toastr.error(result.message);
+                  Swal.fire({
+                    text: result.message,
+                    icon: 'error',
+                  });
+                }
+              });
+              this.router.navigateByUrl("/dashboard")
             }
             else {
               Swal.fire({

@@ -119,7 +119,7 @@ export class RegisterFormComponent {
 
        this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
           console.log(result);
-          
+
         let id= result.userInfo.id;
           if (result.success) {
           //  this.userService.getUserRecordById(id).subscribe((res: any) => {
@@ -128,8 +128,10 @@ export class RegisterFormComponent {
 
             //this.toastr.success(result.message);
          // this.appService.login(result);})
+        //!  changed here
          this.router.navigateByUrl('/pricing/'+id);
-      
+        //  this.router.navigateByUrl('/login');
+
           }})
      //   this.appService.login(result);
        /*localStorage.setItem('userInfo', JSON.stringify(this.registerForm.value['userInfo']));
@@ -138,10 +140,10 @@ export class RegisterFormComponent {
         localStorage.setItem('role', getLoginDetail.userInfo.role);
         localStorage.setItem('objId', getLoginDetail.userInfo.objId);
         localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
-        
+
         }
 
-      
+
        else {
         Swal.fire({
           text: res.message,
