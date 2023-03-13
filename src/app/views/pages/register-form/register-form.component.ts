@@ -98,7 +98,7 @@ export class RegisterFormComponent {
     }
     if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password)|| this.registerForm.value.password.length < 7) {
       Swal.fire({
-        text: 'Password must be contains atleats 7 characters and atleast one letter and one number',
+        text: 'Password must be contains atleast 7 characters and atleast one letter and one number',
         icon: 'warning'
       });
       return false;

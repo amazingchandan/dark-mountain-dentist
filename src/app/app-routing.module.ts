@@ -19,7 +19,8 @@ import { ForgetPasswordComponent } from './views/pages/forget-password/forget-pa
 import { SetNewPasswordComponent } from './views/pages/set-new-password/set-new-password.component';
 import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
 import {UserAuthGuard} from './guard/user-auth.guard';
-
+import {SubscribeAuthGuard} from './guard/subscribe-auth.guard'
+import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
 const routes: Routes = [
 
   // {
@@ -153,7 +154,7 @@ const routes: Routes = [
     data: {
       title: ''
     },
-      canActivate:[UserAuthGuard],
+      canActivate:[UserAuthGuard,SubscribeAuthGuard],
     children: [
       {
         path: 'widgets',
@@ -236,6 +237,14 @@ const routes: Routes = [
         component: RegisteredDentistsComponent,
         data: {
           title: 'Registered Dentists'
+        },
+      //  canActivate :[UserAuthGuard]
+      },
+      {
+        path: 'evaluate-x-ray',
+        component: EvaluateXrayComponent,
+        data: {
+          title: 'Evaluate X-Ray'
         },
       //  canActivate :[UserAuthGuard]
       },

@@ -16,9 +16,28 @@ export class UploadXrayComponent {
   url: any;
 	msg = "";
   hidden=true;
-
+ fileStyle={
+  color:"black",
+  title :"myy"
+ };
   uploadFile(event:any) {
     console.log('files', event.target.files)
+    console.log(event.target.files[0].name.split(".")[1],"type")
+    let allImages: Array<string> = ['png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG'];
+   
+    if (allImages.indexOf(event.target.files[0].name.split(".")[1]) === -1) {
+
+      Swal.fire({
+        text: 'Only images are allowed',
+        icon: 'warning'
+      });
+      this.fileStyle={
+         color:"transparent",
+        title:"",
+      }
+      return false;
+
+    }else{
     var formData = new FormData();
      formData.append('xray_image', event.target.files[0]);
      formData.append('user_id', this.userInfo.id);
@@ -44,7 +63,7 @@ export class UploadXrayComponent {
       }
     });
 
-    if(!event.target.files[0] || event.target.files[0].length == 0) {
+   /* if(!event.target.files[0] || event.target.files[0].length == 0) {
       // Swal.fire({
       //   text: "You must select an image",
       //   icon: 'error',
@@ -55,15 +74,15 @@ export class UploadXrayComponent {
 
 		var mimeType = event.target.files[0].type;
 
-		if (mimeType.match(/image\/*/) == null) {
+		if (mimeType.match(/image\/*///) == null) {
       // Swal.fire({
       //   text: "Only images are supported",
       //   icon: 'error',
       // });
-			this.msg = "Only images are supported";
+		/*	this.msg = "Only images are supported";
 			return;
 		}
-
+*/
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
 
@@ -73,5 +92,7 @@ export class UploadXrayComponent {
 		}
     this.hidden=false;
 	}
-  }
+ 
+}
 
+}
