@@ -219,7 +219,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'mark-xray',
+        path: 'mark-xray/:xray_id',
         component: MarkXrayComponent,
         data: {
           title: 'Mark X-Ray'
@@ -241,7 +241,7 @@ const routes: Routes = [
       //  canActivate :[UserAuthGuard]
       },
       {
-        path: 'evaluate-x-ray',
+        path: 'evaluate-x-ray/:xray_id',
         component: EvaluateXrayComponent,
         data: {
           title: 'Evaluate X-Ray'

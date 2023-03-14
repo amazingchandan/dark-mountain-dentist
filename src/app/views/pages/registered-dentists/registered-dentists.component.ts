@@ -32,14 +32,17 @@ export class RegisteredDentistsComponent {
       },
       pagingType: 'full_numbers',
       pageLength: 10,
-
+     
       //dom: 'Bfrtip',
+      
 
     };
-    this.admin()
+    
+this.admin()
 
   }
   admin() {
+
     this.apiService.getUserList().subscribe((res:any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
@@ -47,9 +50,16 @@ export class RegisteredDentistsComponent {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
          // this.dtTrigger.next();
+         
+         this.isDtInitialized = true;
+        // var p = document.getElementsByClassName("paginate_button current").length;
+        // console.log(p,"ppp")
         });
       } else {
+        
         this.isDtInitialized = true;
+      //  var p = document.getElementsByClassName("paginate_button current");
+       // console.log(p,"ppp")
         //this.dtTrigger.next();
       }
     })

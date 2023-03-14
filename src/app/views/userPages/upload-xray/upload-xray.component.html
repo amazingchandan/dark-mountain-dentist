@@ -24,7 +24,7 @@
 
               </div>
               <div class="col-md-12 mt-4 form-group">
-                <button type="button" class="w-50 btn btn-primary save-btn me-2 fw-bold other-btn pd-1" [routerLink]="'/evaluate-x-ray'" [disabled]="hidden">Evaluate X-Ray</button>
+                <button type="button" class="w-50 btn btn-primary save-btn me-2 fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
 
 
               </div>
@@ -37,7 +37,8 @@
     </div>
     <div class="col-md-6">
       <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-      <div class="img-div ms-2"><img class="img-div w-100 h-100" [src]="url" *ngIf="url"></div>
+      <div class="img-div ms-2"><img class="img-div w-100 h-100" [src]="url" *ngIf="url" >
+        </div>
     </div>
     </div>
   </div>
