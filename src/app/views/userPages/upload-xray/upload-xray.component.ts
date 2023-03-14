@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-xray',
@@ -9,7 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./upload-xray.component.scss']
 })
 export class UploadXrayComponent {
-  constructor(private userService:UserService){}
+  constructor(private userService:UserService,
+  public router : Router){}
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
   user=this.userInfo;
@@ -18,8 +20,11 @@ export class UploadXrayComponent {
   hidden=true;
  fileStyle={
   color:"black",
-  title :"myy"
+ 
  };
+
+ xRayData:any=[];
+
   uploadFile(event:any) {
     console.log('files', event.target.files)
     console.log(event.target.files[0].name.split(".")[1],"type")
@@ -33,7 +38,7 @@ export class UploadXrayComponent {
       });
       this.fileStyle={
          color:"transparent",
-        title:"",
+      
       }
       return false;
 
@@ -47,8 +52,10 @@ export class UploadXrayComponent {
   console.log(event.target.files[0],formData)
     this.userService.addXray(formData)
     .subscribe((res: any) => {
+      console.log(res)
       if (res.success) {
         //this.toastr.success(res.message);
+        this.xRayData=res.getData;
         Swal.fire({
           text: res.message,
           icon: 'success',
@@ -94,5 +101,12 @@ export class UploadXrayComponent {
 	}
  
 }
+evaluate(){
+ // [routerLink]="'/evaluate-x-ray'"
+ console.log(this.xRayData._id)
+ let id =this.xRayData._id
+ this.router.navigateByUrl('/evaluate-x-ray/' + id);
+}
+
 
 }

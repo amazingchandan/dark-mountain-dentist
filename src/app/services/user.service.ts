@@ -27,6 +27,11 @@ export class UserService {
   cancelUserSub:string;
   userXrayById:string;
   xrayList:string;
+  getXrayById: string;
+  setEvalData: string;
+  setEvalDataFromAdmin: any;
+
+
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -48,6 +53,10 @@ export class UserService {
     this.cancelUserSub = this.apiHost + 'cancelUserSub';
     this.userXrayById = this.apiHost + 'getUserXrayById';
     this.xrayList = this.apiHost + 'getXrayList';
+    this.getXrayById = this.apiHost + 'getXrayById';
+    this.setEvalData = this.apiHost + 'setEvaluatedData';
+    this.setEvalDataFromAdmin = this.apiHost + 'setEvaluatedDataFromAdmin'
+
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -94,6 +103,15 @@ export class UserService {
   }
   addXray(requestParameters){
     return this.http.post(`${this.uploadXray}`,requestParameters,{});
+  }
+  getXray(id){
+    return this.http.get(`${this.getXrayById}?xray_id=${id}`);
+  }
+  addEvalData(requestParameters) {
+    return this.http.post(`${this.setEvalData}`, requestParameters, {});
+  }
+  addEvalDataFromAdmin(requestParameters) {
+    return this.http.post(`${this.setEvalDataFromAdmin}`, requestParameters, {});
   }
   forgotPassword(requestParameters){
     return this.http.post(`${this.forgotPass}`, requestParameters,{});
