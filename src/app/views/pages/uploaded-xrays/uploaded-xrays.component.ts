@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UploadedXraysComponent {
 
   dtOptions: any = {};
-  
+
   public allData: any;
   public userData : any;
 
@@ -20,11 +20,11 @@ export class UploadedXraysComponent {
    @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   showContent: boolean;
   constructor( private userService : UserService,
-    
+
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 450);
+    // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
       language: {
         search:"",
@@ -32,7 +32,7 @@ export class UploadedXraysComponent {
       },
       pagingType: 'full_numbers',
       pageLength: 10,
-     
+
 
       //dom: 'Bfrtip',
 
@@ -44,6 +44,7 @@ export class UploadedXraysComponent {
     this.userService.getXrayList().subscribe((res:any) => {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      this.showContent=true;
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -54,7 +55,7 @@ export class UploadedXraysComponent {
         //this.dtTrigger.next();
       }
     })
-    
+
   }
   ngOnDestroy(): void {
   }

@@ -45,7 +45,7 @@ export class SubscriptionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => this.showContent = true, 350);
+    // setTimeout(() => this.showContent = true, 350);
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -217,6 +217,7 @@ export class SubscriptionListComponent implements OnInit {
     this.userService.getSubscriptionList().subscribe((res: any) => {
       console.log(res, "response")
       this.allData = res.getData;
+      this.showContent = true;
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -238,7 +239,7 @@ export class SubscriptionListComponent implements OnInit {
         console.log(this.allData[i])
         this.pricingId=id;
         this.addPriceingForm.patchValue({
-          plan_name: this.allData[i].plan_name,
+          plan_name: this.allData[i].plan_name.toLowerCase().trim(),
         });
 
         this.addPriceingForm.patchValue({

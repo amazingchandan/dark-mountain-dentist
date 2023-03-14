@@ -24,7 +24,7 @@ export class RegisteredDentistsComponent {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 450);
+    // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
       language: {
         search:"",
@@ -37,12 +37,12 @@ export class RegisteredDentistsComponent {
 
     };
     this.admin()
-
   }
   admin() {
     this.apiService.getUserList().subscribe((res:any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      this.showContent=true
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
