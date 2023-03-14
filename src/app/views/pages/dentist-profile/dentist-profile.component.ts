@@ -24,7 +24,6 @@ export class DentistProfileComponent implements OnInit {
   xrayData: any = {};
   country: any;
   // userInfo:any;
-  defaultType = "-Select-";
   role: any;
 
   constructor(private formBuilder: FormBuilder,
@@ -230,7 +229,7 @@ export class DentistProfileComponent implements OnInit {
                   this.end_date = " ";
                 }
                 console.log(this.end_date, "date")
-  
+
               })
               event.target.disable = true;
               //  this.router.navigateByUrl('/registered-dentists');
@@ -244,7 +243,7 @@ export class DentistProfileComponent implements OnInit {
           });
       }}})
 
-   
+
   }
   cancelSubfromUser() {
     Swal.fire({

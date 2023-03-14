@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
    login() {
-    this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
     console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
 
@@ -73,11 +72,11 @@ export class LoginComponent implements OnInit, OnDestroy {
                {
                 localStorage.setItem('userInfo', JSON.stringify(result['userInfo']));
                 localStorage.setItem('id', result.userInfo.id);
-               
+
                 localStorage.setItem('token',result.userInfo.token);
-            
+
                 this.router.navigateByUrl("/pricing/"+result.userInfo.id);
-                 
+
                 // [routerLink]="'/dentist-profile/'+user._id"
                }
 

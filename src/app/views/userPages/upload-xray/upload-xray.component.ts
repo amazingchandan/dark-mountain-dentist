@@ -53,7 +53,7 @@ export class UploadXrayComponent {
 			return;
 		}
 
-		var mimeType = event.target.files[0].type;
+    var mimeType = event.target.files[0].type;
 
 		if (mimeType.match(/image\/*/) == null) {
       // Swal.fire({

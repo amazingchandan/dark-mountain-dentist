@@ -28,7 +28,6 @@ export class SubscriptionListComponent implements OnInit {
   maximum:string;
   amount:number;
   type:string;
-  defaultType = "-Select-";
 
   allData: any;
   private isDtInitialized: boolean = false;
@@ -86,7 +85,7 @@ export class SubscriptionListComponent implements OnInit {
     } else {
       //this.plandesc();
       // this.addPriceingForm.get('status').setValue('active');
-     
+
     }
   }
   /*  plandesc() {
@@ -202,7 +201,7 @@ export class SubscriptionListComponent implements OnInit {
             document.getElementById('launch_ad')?.click();
            this.isDtInitialized= false;
             this.planList();
-              
+
           } else {
             Swal.fire({
               text: res.message,
@@ -299,7 +298,7 @@ export class SubscriptionListComponent implements OnInit {
           document.getElementById('launch_ad')?.click();
            this.isDtInitialized = false;
            this.planList();
-       
+
         }
          else {
           Swal.fire({
