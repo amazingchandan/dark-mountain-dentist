@@ -57,7 +57,7 @@ export class ForgetPasswordComponent implements OnInit {
         catchError(err => of([err]))
       ).subscribe((res: any) => {
         if(res.data){
-          console.log("Email done!", res.otp);
+          console.log(`Email done! ${res.otp} is the OTP`);
           this.data = res.data;
           this.resetState = true;
           this.timePassed = false;
