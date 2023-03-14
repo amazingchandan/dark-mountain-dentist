@@ -177,6 +177,11 @@ export class ForgetPasswordComponent implements OnInit {
       if (seconds == 0) {
         this.timePassed = true;
         console.log('finished', this.timePassed);
+        Swal.fire({
+          text: 'OTP expired, please try again',
+          icon: 'error'
+        });
+        this.router.navigateByUrl("/forgot-password")
         clearInterval(timer);
       }
     }, 1000);
