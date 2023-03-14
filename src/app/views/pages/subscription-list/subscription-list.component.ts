@@ -45,7 +45,7 @@ export class SubscriptionListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => this.showContent = true, 250);
+    setTimeout(() => this.showContent = true, 350);
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -311,7 +311,9 @@ export class SubscriptionListComponent implements OnInit {
 
 
   }
-
+ openModal1(){
+  console.log("helo")
+ }
 
   ngOnDestroy(): void {
     this.planList();

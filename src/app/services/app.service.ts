@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject, BehaviorSubject  } from 'rxjs';
+import { UserService } from './user.service';
 // import { FormGroup } from '@angular/forms';
 
 
@@ -19,8 +20,10 @@ export class AppService {
   private approvalStageMessage = new BehaviorSubject({});
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
 
-  constructor(private router: Router) {}
-
+  constructor(private router: Router,
+   private UserService: UserService) {}
+ userData:any={};
+ role:string;
   updateApprovalMessage(message: {}) {
     this.approvalStageMessage.next(message)
     console.log(message);
@@ -43,14 +46,14 @@ export class AppService {
 
 let jwtData = jwt.split('.')[1]
 let decodedJwtJsonData = window.atob(jwtData)
-let decodedJwtData = JSON.parse(decodedJwtJsonData)
-
-let isAdmin = decodedJwtData.admin
+  let decodedJwtData = JSON.parse(decodedJwtJsonData)
+this.role= decodedJwtData.role;
+//let isAdmin = decodedJwtData.admin
 
 console.log('jwtData: ' + jwtData)
 console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
-console.log('decodedJwtData: ' + decodedJwtData.role)
-console.log('Is admin: ' + isAdmin)
+console.log('decodedJwtData: ' + this.role)
+
 
 console.log(getLoginDetail.userInfo.token)
   /* if(decodedJwtData.role==="dentist")
@@ -92,7 +95,30 @@ console.log(getLoginDetail.userInfo.token)
   loggedIn() {
     return (!!localStorage.getItem("token"));
   }
-
+  
+  isSubscribed(){
+   
+    let jwt = localStorage.getItem('token');
+    let jwtData = jwt.split('.')[1]
+let decodedJwtJsonData = window.atob(jwtData)
+  let decodedJwtData = JSON.parse(decodedJwtJsonData)
+this.role= decodedJwtData.role;
+    console.log("role",this.role)
+    if(this.role==='dentist'){
+    const id=localStorage.getItem('id');
+    this.UserService.getUserRecordById(id).subscribe((res: any) => {
+      console.log(res)
+      if(res.success){
+       this.userData = res.getData;
+       
+      }
+    })
+      return (!!this.userData[0]?.subscription_details.status);
+  }
+  else{
+  return true;
+  }
+  }
   private _listners = new Subject<any>();
 
     listen(): Observable<any> {
