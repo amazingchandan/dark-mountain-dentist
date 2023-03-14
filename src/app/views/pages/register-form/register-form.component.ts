@@ -46,7 +46,6 @@ export class RegisterFormComponent {
     }
   }
    register(){
-    this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
     console.log(this.registerForm.value)
     if (
       this.registerForm.value.first_name == undefined ||
@@ -98,13 +97,14 @@ export class RegisterFormComponent {
     }
     if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password)|| this.registerForm.value.password.length < 7) {
       Swal.fire({
-        text: 'Password must be contains atleast 7 characters and atleast one letter and one number',
+        text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
         icon: 'warning'
       });
       return false;
     }
    // this.newUser= this.registerForm.value;
     console.log()
+    this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);
@@ -113,7 +113,7 @@ export class RegisterFormComponent {
           icon: 'success',
         });
         let loginData = {
-          email: this.registerForm.value.email,
+          email: this.registerForm.value.email.toLowerCase(),
           password: this.registerForm.value.password
         };
 

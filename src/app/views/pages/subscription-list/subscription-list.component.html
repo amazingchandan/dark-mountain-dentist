@@ -27,7 +27,7 @@
             datatable="ng"
             datatable
             [dtOptions]="dtOptions"
-            
+
             class="row-border hover"
           >
             <thead>
@@ -155,9 +155,9 @@
                   aria-label="Default select example"
                   [value]="type"
                 >
-                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
-                  <option>Monthly</option>
-                  <option>Yearly</option>
+                  <option value="" [selected]="true" [disabled]="true">Select option</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Yearly">Yearly</option>
                 </select>
               </div>
               <div class="col-md-4 form-group country-col">
@@ -168,11 +168,11 @@
                   aria-label="Default select example"
                   [value]="country"
                 >
-                  <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
-                  <option>India</option>
-                  <option>America</option>
-                  <option>Japan</option>
-                  <option>China</option>
+                  <option value="" [selected]="true" [disabled]="true">Select option</option>
+                  <option value="India">India</option>
+                  <option value="America">America</option>
+                  <option value="Japan">Japan</option>
+                  <option value="China">China</option>
                 </select>
               </div>
             </div>

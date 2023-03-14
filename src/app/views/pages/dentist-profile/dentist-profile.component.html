@@ -67,11 +67,11 @@
             <div class="col-md-4 form-group">
               <label class="" for="inputState">Country<sup>*</sup></label>
               <select class="form-select me-4" aria-label="Default select example" formControlName="country" [value]="country">
-                <option [defaultSelected]=true selected=true disabled=true>{{defaultType}}</option>
-                <option>India</option>
-                <option>America</option>
-                <option>Japan</option>
-                <option>China</option>
+                <option value="" [selected]="true" [disabled]="true">Select option</option>
+                <option value="India">India</option>
+                <option value="America">America</option>
+                <option value="Japan">Japan</option>
+                <option value="China">China</option>
               </select>
             </div>
             <div class="col-md-8 btn-div">
