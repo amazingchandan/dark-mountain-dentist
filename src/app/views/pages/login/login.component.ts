@@ -34,6 +34,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSomeAction(event: any){
+    if(event.key == "Enter"){
+      this.login()
+    }
+  }
+
    login() {
     console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {

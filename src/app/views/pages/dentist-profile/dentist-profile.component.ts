@@ -65,7 +65,7 @@ export class DentistProfileComponent implements OnInit {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      pincode: ['', [Validators.required]],
+      pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
 
     });
 

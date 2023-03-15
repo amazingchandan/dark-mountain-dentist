@@ -45,7 +45,7 @@ export class ForgetPasswordComponent implements OnInit {
         // }
     if(this.emailReset !== ''){
 
-      let isValid = testBy.test(this.emailReset.toLowerCase());
+      let isValid = testBy.test(this.emailReset.toLowerCase().trim());
       if (!isValid) {
         Swal.fire({
           text: 'Please enter valid email',
@@ -53,9 +53,11 @@ export class ForgetPasswordComponent implements OnInit {
         });
         return false;
       }
-      this.apiService.forgotPassword({email: this.emailReset}).pipe(
+      this.apiService.forgotPassword({email: this.emailReset.toLowerCase().trim()}).pipe(
         catchError(err => of([err]))
       ).subscribe((res: any) => {
+        console.log(res);
+
         if(res.data){
           console.log(`Email done! ${res.otp} is the OTP`);
           this.data = res.data;
@@ -94,7 +96,7 @@ export class ForgetPasswordComponent implements OnInit {
   otpVerify(){
     if(this.otp !== ''){
       try {
-        this.apiService.VerifyingOTP({email: this.emailReset, token: this.data, otp: this.otp}).pipe(
+        this.apiService.VerifyingOTP({email: this.emailReset.toLowerCase().trim(), token: this.data, otp: this.otp}).pipe(
           catchError(err => of([err]))
         ).subscribe((res:any) => {
           if(res.success){
@@ -121,7 +123,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
   setNew(){
     if(this.newPass !== "" && this.cnfPass !== "" && this.newPass == this.cnfPass){
-      this.apiService.setNewPassword({email: this.emailReset, newPass: this.newPass, cnfPass: this.cnfPass}).subscribe((res:any) => {
+      this.apiService.setNewPassword({email: this.emailReset.toLowerCase().trim(), newPass: this.newPass, cnfPass: this.cnfPass}).subscribe((res:any) => {
         console.log("Password changes");
         this.router.navigateByUrl("/login")
       })
@@ -190,5 +192,20 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit(): void {
 
     // console.log(this.resetState);
+  }
+  onSomeActionReset(event: any){
+    if(event.key == "Enter"){
+      this.handleReset()
+    }
+  }
+  onSomeActionOTP(event: any){
+    if(event.key == "Enter" && this.resetState){
+      this.otpVerify()
+    }
+  }
+  onSomeActionNew(event: any){
+    if(event.key == "Enter" && this.setNewPass){
+      this.setNew()
+    }
   }
 }

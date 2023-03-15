@@ -38,7 +38,7 @@
                  <c-row>
                   <c-col >
                     <app-button cButton class="btn btn-primary btn-block mb-4 p-2 fw-bold" color="primary" [type]="'submit'" (click)="login()"
-                    loading="isAuthLoading">
+                    loading="isAuthLoading" (window:keypress)="onSomeAction($event)">
                       Login
                     </app-button>
 

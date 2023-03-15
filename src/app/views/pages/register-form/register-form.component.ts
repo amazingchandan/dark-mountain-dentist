@@ -45,6 +45,11 @@ export class RegisterFormComponent {
       this.router.navigateByUrl("/dashboard")
     }
   }
+  onSomeAction(event: any){
+    if(event.key == "Enter"){
+      this.register()
+    }
+  }
    register(){
     console.log(this.registerForm.value)
     if (
@@ -104,7 +109,7 @@ export class RegisterFormComponent {
     }
    // this.newUser= this.registerForm.value;
     console.log()
-    this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
+    this.registerForm.value.email = this.registerForm.value.email.toLowerCase().trim();
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);
@@ -113,7 +118,7 @@ export class RegisterFormComponent {
           icon: 'success',
         });
         let loginData = {
-          email: this.registerForm.value.email.toLowerCase(),
+          email: this.registerForm.value.email.toLowerCase().trim(),
           password: this.registerForm.value.password
         };
 

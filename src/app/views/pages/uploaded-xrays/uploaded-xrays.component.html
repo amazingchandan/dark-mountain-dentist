@@ -20,9 +20,9 @@
                 </thead>
                 <tbody  *ngIf="allData?.length != 0">
                   <tr *ngFor="let data of this.allData; let i = index">
-                    <td>{{data.user_id.first_name}} {{data.user_id.last_name}}</td>
+                    <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
                     <td>35</td>
-                    <td>{{data.user_id.city}}</td>
+                    <td>{{data.user_id.city | titlecase}}</td>
                     <td>{{data.user_id.contact_number}}</td>
                     <td>{{data.created_at | date : 'dd/MM/yyyy'}}</td>
 

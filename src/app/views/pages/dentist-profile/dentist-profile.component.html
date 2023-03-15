@@ -56,7 +56,7 @@
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Zip<sup>*</sup></label>
-              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10">
+              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10" (keypress)="onlyNumberKey($event)">
 
             </div>
           </div>

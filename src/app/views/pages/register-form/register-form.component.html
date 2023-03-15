@@ -75,7 +75,7 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">Contact Number<sup>*</sup></label>
               <input
-                type="number"
+                type="tel"
                 class="form-control"
                 placeholder="Contact Number"
                 name="number"
@@ -158,6 +158,8 @@
                 class="btn btn-primary register-btn mt-2 p-2 fw-bold w-100"
                 title="Register"
                 (click)="register()"
+
+                (window:keypress)="onSomeAction($event)"
               >
                 Register
                 <i class="fa-solid fa-address-card ms-1"></i>
