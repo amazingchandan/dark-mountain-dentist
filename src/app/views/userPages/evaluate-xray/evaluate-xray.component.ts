@@ -73,7 +73,8 @@ saveMarks(){
   const xray_info={
     xray_id: this.id,
     user_id: this.xRayData[0]?.user_id,
-    marker:this.marker
+    marker:this.marker,
+    accuracy_per: this.valInput,
      
   }
   console.log(xray_info)

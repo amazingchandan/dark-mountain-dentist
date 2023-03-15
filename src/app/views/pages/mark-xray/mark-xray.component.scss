@@ -155,8 +155,16 @@ input[type='range']::-webkit-slider-thumb {
     background-color: rgb(91, 91, 159);
     transform: translate(-50%, -50%);
 }
+.user-marker{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(69, 159, 109);
+    transform: translate(-50%, -50%);
+}
 .markDiv{
     position: absolute;
-    top: 30%;
+    top: 19%;
 
 }

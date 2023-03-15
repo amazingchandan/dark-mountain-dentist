@@ -26,12 +26,15 @@ export class RegisteredDentistsComponent {
   ngOnInit(): void {
     // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
+       search:true,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
       },
       pagingType: 'full_numbers',
       pageLength: 10,
+    
+     
 
       //dom: 'Bfrtip',
 

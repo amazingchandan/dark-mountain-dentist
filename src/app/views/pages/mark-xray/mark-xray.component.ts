@@ -9,9 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./mark-xray.component.scss']
 })
 export class MarkXrayComponent {
-  xRayData: any;
+  xRayData: any=[];
   id: string;
-
+  markData :any =[];
+  userMark:any;
   constructor(private route: ActivatedRoute,
     private userService : UserService){
   
@@ -23,17 +24,21 @@ export class MarkXrayComponent {
   leftPos = `25%`;
   marker:any=[];
   baseLink: string = environment.API_HOST;
+  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
-
-  onRangeChange(event: any){
-    this.valInput = (<HTMLInputElement>event.target).value.trim();
-    this.leftPos = `${+(<HTMLInputElement>event.target).value.trim() - 5}%`
-  }
+ 
 
   ngOnInit(){
     this.id = this.route.snapshot.paramMap.get('xray_id');
     this.getXray(this.id);
+    this.getMark(this.id);
   }
+  onRangeChange(event: any){
+    this.valInput = (<HTMLInputElement>event.target).value.trim();
+    this.leftPos = `${+(<HTMLInputElement>event.target).value.trim() - 5}%`
+    console.log(this.valInput,this.leftPos)
+  }
+
   getXray(id){
     this.userService.getXray(id).subscribe((res:any)=>{
       if(res.success)
@@ -46,7 +51,16 @@ export class MarkXrayComponent {
       }
     })
    }
-
+getMark(id){
+  this.userService.getEvalById(id).subscribe((res:any)=>{
+    if(res.success)
+    {
+this.markData=res.getData;
+console.log(this.markData.dentist_correction)
+this.userMark = this.markData.dentist_correction
+    }
+  })
+}
 
   save(){
     Swal.fire({
@@ -72,8 +86,9 @@ export class MarkXrayComponent {
 
     const xray_info={
       xray_id: this.id,
-      user_id: this.xRayData[0]?.user_id,
-      marker:this.marker
+      user_id: this.userInfo.id,
+      marker:this.marker,
+      accuracy_per: this.valInput,
        
     }
     console.log(xray_info)
@@ -98,7 +113,7 @@ export class MarkXrayComponent {
     if (img) {
       return this.baseLink + img;
     } else {
-      return '../assets/images/no-image.jpg';
+      return '../assets/images/edit.png';
     }
   }
 }
