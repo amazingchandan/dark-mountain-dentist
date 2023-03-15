@@ -24,7 +24,7 @@ export class RegisteredDentistsComponent {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(()=>this.showContent=true, 450);
+    // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
        search:true,
       language: {
@@ -35,11 +35,12 @@ export class RegisteredDentistsComponent {
       pageLength: 10,
     
      
+
       //dom: 'Bfrtip',
-      
+
 
     };
-    
+
 this.admin()
 
   }
@@ -48,17 +49,18 @@ this.admin()
     this.apiService.getUserList().subscribe((res:any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      this.showContent=true
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
          // this.dtTrigger.next();
-         
+
          this.isDtInitialized = true;
         // var p = document.getElementsByClassName("paginate_button current").length;
         // console.log(p,"ppp")
         });
       } else {
-        
+
         this.isDtInitialized = true;
       //  var p = document.getElementsByClassName("paginate_button current");
        // console.log(p,"ppp")

@@ -43,7 +43,7 @@
             </thead>
             <tbody *ngIf="allData?.length !=0">
               <tr *ngFor="let data of allData; let  i= index">
-                <td>{{data.plan_name}}</td>
+                <td>{{data.plan_name | titlecase}}</td>
                 <td>{{data.type}}</td>
                 <td>{{data.minimum}}</td>
                 <td>{{data.maximum}}</td>
@@ -116,7 +116,7 @@
               <div class="col-md-4 form-group">
                 <label class="mb-2">Amount<sup>*</sup></label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Amount"
                   formControlName="amount"
                   class="form-control"
