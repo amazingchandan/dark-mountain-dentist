@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
+import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+declare var Razorpay: any;
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
@@ -22,10 +24,35 @@ export class PricingComponent {
   userInfo: any;
   userId: any;
   //route: any;
+  private razorPayOptions: any = {
+    key: 'rzp_test_llXrMfq95r3LMF', // Enter the test Key ID generated from the Dashboard
+    //key: 'rzp_live_bGBd6XL9krEnCa', // Enter the Key live ID generated from the Dashboard
+    amount: '',
+    currency: 'INR',
+    name: 'Dark Mountain',
+    description: 'Dark Mountain Subscription payment',
+    order_id: 'ORDERID_FROM_BACKEND',
+   // image: 'https://digitalpehchan.in/assets/images/DP%20LOGO%20BW.png',
+    handler: function (response) {
+      console.log('this is the response ', response);
+    },
+    notes: {
+      address: 'Thank you for saving people in need',
+    },
+    theme: {
+      color: '#ff9920',
+    },
+    // http_post: this.userService
+  };
+
+
+
+
   constructor(private router: Router,
     private userService: UserService,
     private appService: AppService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService) {
 
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
@@ -85,7 +112,7 @@ export class PricingComponent {
   }
 
 
-  getSubscription(id, type) {
+  getSubscription(id, type,pricing_amount) {
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
@@ -120,7 +147,101 @@ export class PricingComponent {
             console.log(end_date, "Date", new Date());
 
           }
-          this.userPlanData = {
+     
+         //razorpay code
+
+         const subscriptiondetails = {
+          amount: pricing_amount * 100,
+          user_id: this.userId,
+          receipt: 'Receipt #' + (Math.floor(Math.random() * 10000000) + 1),
+        };
+        console.log(subscriptiondetails);
+        this.spinner.show();
+        this.userService.order(subscriptiondetails).subscribe(
+          (response: any) => {
+            this.spinner.hide();
+            if(response.success){
+                  
+            }else{
+              Swal.fire({
+                title: 'Error!',
+                width: 400,
+                text: response.message,
+                icon: 'error',
+                confirmButtonText: 'Ok',
+              });
+              return false;
+            }
+            //console.log(response, 'iiiiiiii');
+            console.error('response for purchase ', response);
+            let order = response?.order;
+            this.razorPayOptions.order_id = order?.id;
+            this.razorPayOptions.amount = order?.amount_due;
+            const that = this;
+            this.razorPayOptions.handler = (response: any, error: any) => {
+              console.error(response);
+              // console.error(error);
+              if (!error) {
+                const allVarificationData = {
+                  sub_id: id,
+                  end_date: end_date,
+                  start_date: Date.now(),
+                  user_id: this.userId,
+                  pricing_plan_id:id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                };
+                console.log(allVarificationData, 'hiiiiiii');
+                //return;
+                this.spinner.show();
+                that.userService
+                  .ordercomplete(allVarificationData)
+                  .subscribe((res: any) => {
+                    if (res.success) {
+                      this.spinner.hide();
+                      Swal.fire({
+                        title: 'Success',
+                        width: 400,
+                        text: 'Payment successful',
+                        icon: 'success',
+                        confirmButtonText: 'Ok',
+                      });
+                      if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+                      {
+                        this.router.navigateByUrl("/dashboard")
+                    }
+                    else{
+                      this.router.navigateByUrl("/login")
+                    }
+                    } else {
+                      this.spinner.hide();
+                      Swal.fire({
+                        title: 'Error!',
+                        width: 400,
+                        text: 'Payment unsuccessful, please try again',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                      });
+                      console.error(res.message);
+                      // this.router.navigate(['/profile']);
+                    }
+                  });
+              }
+            };
+            console.error('op', this.razorPayOptions);
+    
+            let rzp1 = new Razorpay(this.razorPayOptions);
+            rzp1.open();
+            console.error('opened');
+          },
+          (error) => {
+            console.error('error', error);
+          }
+        );
+          //razorpay code ends
+
+      /*  this.userPlanData = {
             sub_id: id,
             end_date: end_date,
             start_date: Date.now(),
@@ -172,7 +293,7 @@ export class PricingComponent {
                   });
                 }
               });*/
-              if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+           /* if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
               {this.router.navigateByUrl("/dashboard")
             }
             else{
@@ -186,7 +307,7 @@ export class PricingComponent {
               });
               //this.toastr.error(res.message);
             }
-          });
+          });*/
 
         }
       }

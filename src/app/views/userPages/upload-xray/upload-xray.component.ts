@@ -43,6 +43,10 @@ export class UploadXrayComponent {
       return false;
 
     }else{
+      this.fileStyle={
+        color:"black",
+     
+     }
     var formData = new FormData();
      formData.append('xray_image', event.target.files[0]);
      formData.append('user_id', this.userInfo.id);
