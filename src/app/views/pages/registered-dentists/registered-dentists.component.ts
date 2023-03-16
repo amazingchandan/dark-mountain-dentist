@@ -24,26 +24,51 @@ export class RegisteredDentistsComponent {
   ) { }
 
   ngOnInit(): void {
+    console.log($.fn['dataTable'].ext);
+
+    // $.fn['dataTable'].ext.search.push((settings, data, dataIndex) => {
+      // const id = parseFloat(data[0]) || 0; // use data for the id column
+      // if ((isNaN(this.min) && isNaN(this.max)) ||
+      //   (isNaN(this.min) && id <= this.max) ||
+      //   (this.min <= id && isNaN(this.max)) ||
+      //   (this.min <= id && id <= this.max)) {
+      //   return true;
+      // }
+    //   return false;
+    // });
     // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
-       search:true,
+      // order: [[0, "asc"]],
+      search:true,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
       },
+      paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
-    
-     
+      ordering: false,
+      responsive:true,
 
-      //dom: 'Bfrtip',
+
+
+      // dom: 'Bfrtip',
 
 
     };
 
 this.admin()
 
+    // this.filterById()
+
   }
+
+  // filterById(): void {
+  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //     dtInstance.draw();
+  //   });
+  // }
+
   admin() {
 
     this.apiService.getUserList().subscribe((res:any) => {
@@ -53,9 +78,9 @@ this.admin()
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
-         // this.dtTrigger.next();
+        //  this.dtTrigger.next(this.allData);
 
-         this.isDtInitialized = true;
+        //  this.isDtInitialized = true;
         // var p = document.getElementsByClassName("paginate_button current").length;
         // console.log(p,"ppp")
         });

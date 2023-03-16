@@ -20,6 +20,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SetNewPasswordComponent } from './set-new-password/set-new-password.com
     LogoutComponent,
     ForgetPasswordComponent,
     SetNewPasswordComponent,
+    TestComponent,
   ],
   imports: [
     CommonModule,

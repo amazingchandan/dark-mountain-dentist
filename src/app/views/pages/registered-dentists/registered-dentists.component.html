@@ -2,21 +2,23 @@
     <div class="row">
       <div class="col-12">
         <h5 class="mb-n5 fw-bold">Registered Dentists</h5>
-        <div class="table-responsive">
+        <div class="table-responsive" style="position: relative;">
         <div class="card pt-0 table-card">
 
-              
-              <div class="card-body pt-0">
-            <table datatable *ngIf="showContent" datatable="ng" id="datatable" class="row-border hover" [dtOptions]="dtOptions">
+
+          <div class="card-body pt-0" style="overflow-x: auto;">
+            <table datatable *ngIf="showContent" datatable="ng" id="datatable" class="row-border hover"
+            [dtOptions]="dtOptions"
+            >
               <thead>
                 <tr>
-                  <th>Dentist Name</th>
+                  <th>Dentist&nbsp;Name</th>
                   <th>Age</th>
                   <th>City</th>
-                  <th>Contact Number</th>
-                  <th>X-Ray Uploaded</th>
-                  <th style="min-width: 155px;">Action</th>
-                  <th>Uploaded X-Ray</th>
+                  <th>Contact&nbsp;Number</th>
+                  <th>X-Ray&nbsp;Uploaded</th>
+                  <th style="min-width: 157px;">Action</th>
+                  <th>Uploaded&nbsp;X-Ray</th>
                   <th>Marked</th>
                 </tr>
               </thead>
@@ -47,7 +49,7 @@
                   <td>5</td>
                 </tr>
                <!-- <tr>
-                  
+
                 </tr>-->
 
               </tbody>
@@ -69,5 +71,5 @@
           </div>
         </div>
       </div>
-   
+
     </section>

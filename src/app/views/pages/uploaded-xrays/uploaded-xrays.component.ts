@@ -26,12 +26,16 @@ export class UploadedXraysComponent {
   ngOnInit(): void {
     // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
+      search:true,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
       },
+      paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
+      ordering: false,
+      responsive:true,
 
 
       //dom: 'Bfrtip',

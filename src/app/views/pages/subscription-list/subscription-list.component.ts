@@ -54,6 +54,9 @@ export class SubscriptionListComponent implements OnInit {
         searchPlaceholder: 'Search ',
       },
       info:false,
+      ordering: false,
+      responsive:true,
+      search:true
       //dom: 'Bfrtip',
 
     };
@@ -108,7 +111,7 @@ export class SubscriptionListComponent implements OnInit {
       this.addPriceingForm.value.plan_name.trim() == ''
     ) {
       Swal.fire({
-        text: 'Please enter Plan name',
+        text: 'Please enter plan name',
         icon: 'warning'
       });
       return false;
