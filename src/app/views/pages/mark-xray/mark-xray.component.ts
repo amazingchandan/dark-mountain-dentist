@@ -98,7 +98,7 @@ this.userMark = this.markData.dentist_correction
           text: res.message,
           icon: 'success',
         });
-  
+        document.getElementById('close')?.click();
       } else {
         Swal.fire({
           text: res.message,
