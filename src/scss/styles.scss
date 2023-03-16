@@ -234,8 +234,8 @@ h5 {
 }
 .dataTables_filter {
   top: -55px;
-  right: -15px;
-  position: relative;
+  right: 0px;
+  position: absolute;
 }
 .dataTables_filter input {
   background-color: #fff !important;
@@ -385,4 +385,8 @@ a.current{
 }
 .swal2-actions button.swal2-cancel {
   background-color: var(--bs-gray) !important;
+}
+.dataTables_wrapper {
+  position: unset !important;
+  clear: both;
 }

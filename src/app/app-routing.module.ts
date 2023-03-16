@@ -21,6 +21,7 @@ import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.c
 import {UserAuthGuard} from './guard/user-auth.guard';
 import {SubscribeAuthGuard} from './guard/subscribe-auth.guard'
 import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
+import { TestComponent } from './views/pages/test/test.component';
 const routes: Routes = [
 
   // {
@@ -125,6 +126,13 @@ const routes: Routes = [
       title: 'Login Page'
     }
   },
+  {
+    path: 'test',
+    component: TestComponent,
+    data: {
+      title: "Test"
+    }
+  },
  /* {
     path: 'dashboard/login',
     component: LoginComponent,
@@ -184,7 +192,7 @@ const routes: Routes = [
               import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
           }
         ]
-       
+
 
       },
 

@@ -20,6 +20,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   lName: any;
   fName: any;
+  routerTo: any;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,

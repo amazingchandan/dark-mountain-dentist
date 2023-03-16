@@ -31,6 +31,7 @@ export class UserService {
   setEvalData: string;
   setEvalDataFromAdmin: any;
   getEvaluationById:string;
+  testApi: string;
 
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
@@ -57,7 +58,7 @@ export class UserService {
     this.setEvalData = this.apiHost + 'setEvaluatedData';
     this.setEvalDataFromAdmin = this.apiHost + 'setEvaluatedDataFromAdmin'
     this.getEvaluationById = this.apiHost +'getEvaluationById';
-
+    this.testApi = this.apiHost + 'testApi';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -125,5 +126,8 @@ export class UserService {
   }
   setNewPassword(requestParameters){
     return this.http.put(`${this.setNewPass}`, requestParameters, {});
+  }
+  allWebUser(){
+    return this.http.get(`https://api.glabol.com/admin/get-all-website-user`);
   }
 }
