@@ -404,7 +404,9 @@ a.current{
   font-size: 12px !important;
   font-weight: bolder !important;
 }
-
+.buttons-copy, .buttons-print {
+  display: none;
+}
 
 @media (max-width: 645px){
   .resposive-table {

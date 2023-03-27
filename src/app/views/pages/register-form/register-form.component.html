@@ -191,20 +191,19 @@
                         aria-label="Default select example"
                         name="country"
                         placeholder="Country"
-                        [(ngModel)]="countryList"
                         formControlName="country"
                       >
                         <!-- can use ngFor instead of hardcoded value -->
-                        <option
+                        <!-- <option
                           *ngFor="let country of countryList"
                           [ngValue]="country"
                           [selected]="country"
                         >
                           {{ country }}
-                        </option>
+                        </option> -->
                         <option
                           [defaultSelected]="true"
-                          selected="true"
+                          [selected]="true"
                           disabled="true"
                         >
                           {{ countryList }}

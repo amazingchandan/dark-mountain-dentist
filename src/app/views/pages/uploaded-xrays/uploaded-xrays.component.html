@@ -14,7 +14,7 @@
                     <th>Age</th>
                     <th>City</th>
                     <th>Phone</th>
-                    <th>X-Ray&nbsp;Uploaded</th>
+                    <th>Subscription&nbsp;End&nbsp;Date</th>
                     <th style="min-width: 157px;">Action</th>
                     <th>Uploaded&nbsp;X-Ray</th>
                     <th>Marked</th>
@@ -26,7 +26,7 @@
                     <td>35</td>
                     <td>{{data.user_id.city | titlecase}}</td>
                     <td>{{data.user_id.contact_number}}</td>
-                    <td>{{data.created_at | date : 'dd/MM/yyyy'}}</td>
+                    <td style="padding-left: 5.25%;">{{data.user_id.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td>
 
                     <td>
                       <!-- <button
