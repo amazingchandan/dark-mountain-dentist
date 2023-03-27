@@ -18,7 +18,7 @@
       </div>
 
 
-      <div class="table-responsive" style="position: relative;">
+      <div class="table-responsive resposive-table" style="position: relative;">
         <div class="card pt-0 table-card">
           <div class="card-body pt-0" style="overflow-x: auto;">
           <table
@@ -48,13 +48,13 @@
                 <td>{{data.minimum}}</td>
                 <td>{{data.maximum}}</td>
                 <td>{{data.amount}}</td>
-                <td>3</td>
+                <td style="padding-left: 7.25%;">3</td>
 
                 <td>
-                  <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
-                    class="fa-regular fa-pen-to-square mt-2" ></i></button>
-                  <button title="View" type="button" class="btn btn-primary ms-3 pd-1 view-btn fw-bolder" (click)="openModal(data._id)"
-                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">View Details</button>
+                  <!-- <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
+                    class="fa-regular fa-pen-to-square mt-2" ></i></button> -->
+                  <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder" (click)="openModal(data._id)"
+                    data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Edit</button>
                 </td>
               </tr>
 

@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-12">
         <h5 class="mb-n5 fw-bold">Registered Dentists</h5>
-        <div class="table-responsive" style="position: relative;">
+        <div class="table-responsive resposive-table" style="position: relative;">
         <div class="card pt-0 table-card">
 
 
@@ -15,8 +15,8 @@
                   <th>Dentist&nbsp;Name</th>
                   <th>Age</th>
                   <th>City</th>
-                  <th>Contact&nbsp;Number</th>
-                  <th>X-Ray&nbsp;Uploaded</th>
+                  <th>Phone</th>
+                  <th>Subscription&nbsp;End&nbsp;Date</th>
                   <th style="min-width: 157px;">Action</th>
                   <th>Uploaded&nbsp;X-Ray</th>
                   <th>Marked</th>
@@ -28,21 +28,21 @@
                   <td>30</td>
                   <td>{{user.city | titlecase}}</td>
                   <td>{{user.contact_number}}</td>
-                  <td>02/11/2022</td>
+                  <td>{{user.subscription_details.end_date | date : 'shortDate'}}</td>
                   <td>
                     <!-- <div class="d-flex align-items-center"> -->
-                      <button
+                      <!-- <button
                         type="button"
                         class="btn btn-danger edit"
                         title="Edit"
                         [routerLink]="'/dentist-profile/'+user._id"
-                      ><i class="fa-regular fa-pen-to-square mt-2"></i></button>
+                      ><i class="fa-regular fa-pen-to-square mt-2"></i></button> -->
                       <button
                         title="View"
                         type="button"
-                        class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
+                        class="btn btn-primary pd-1 view-btn fw-bolder"
                         [routerLink]="'/dentist-profile/'+user._id"
-                      >View Details</button>
+                      >Edit</button>
                     <!-- </div> -->
                   </td>
                   <td>12</td>

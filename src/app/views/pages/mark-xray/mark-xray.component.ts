@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-mark-xray',
@@ -14,10 +14,11 @@ export class MarkXrayComponent {
   markData :any =[];
   userMark:any;
   constructor(private route: ActivatedRoute,
-    private userService : UserService){
-  
+    private userService : UserService,
+    private router: Router){
+
   }
-  
+
 
   // is equal to default value of input range
   valInput = '25';
@@ -26,7 +27,7 @@ export class MarkXrayComponent {
   baseLink: string = environment.API_HOST;
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
- 
+
 
   ngOnInit(){
     this.id = this.route.snapshot.paramMap.get('xray_id');
@@ -78,18 +79,18 @@ this.userMark = this.markData.dentist_correction
     };
     this.marker.push(position);
     console.log(this.marker,"---")
-   
-  
+
+
   }
   saveMarks(){
- 
+
 
     const xray_info={
       xray_id: this.id,
       user_id: this.userInfo.id,
       marker:this.marker,
       accuracy_per: this.valInput,
-       
+
     }
     console.log(xray_info)
     this.userService.addEvalDataFromAdmin(xray_info).subscribe((res:any)=>{
@@ -104,9 +105,9 @@ this.userMark = this.markData.dentist_correction
           text: res.message,
           icon: 'error',
         });
-      
+
       }
-      
+
     })
   }
   renderImage(img: string) {
@@ -115,5 +116,8 @@ this.userMark = this.markData.dentist_correction
     } else {
       return '../assets/images/edit.png';
     }
+  }
+  handleClick(){
+    this.router.navigateByUrl('/uploaded-xray');
   }
 }

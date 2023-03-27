@@ -36,9 +36,9 @@ export class UploadedXraysComponent {
       pageLength: 10,
       ordering: false,
       responsive:true,
+      dom: 'Bfrtip',
 
 
-      //dom: 'Bfrtip',
 
     };
     this.xrayList();

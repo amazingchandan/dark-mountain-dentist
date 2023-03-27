@@ -49,15 +49,15 @@ export class RegisteredDentistsComponent {
       pageLength: 10,
       ordering: false,
       responsive:true,
+      dom: 'Bfrtip',
 
 
 
-      // dom: 'Bfrtip',
 
 
     };
 
-this.admin()
+    this.admin()
 
     // this.filterById()
 
@@ -72,7 +72,7 @@ this.admin()
   admin() {
 
     this.apiService.getUserList().subscribe((res:any) => {
-      //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+      console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
       this.showContent=true
          if (this.isDtInitialized) {

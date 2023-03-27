@@ -7,7 +7,7 @@
 }
 
 .login-card{
-  width: 50% !important;
+  // width: 50% !important;
   flex: none !important;
 }
 
@@ -84,4 +84,27 @@ color: #00d957;
 }
 .width-card {
   width: 30%;
+}
+
+.inputContainer {
+  display: flex;
+  // flex-wrap: wrap;
+  input {
+    width: 50%;
+  }
+}
+.inputContainer input {
+  // min-width: 200px !important;
+}
+
+@media (min-width:320px)and (max-width:900px){
+  .inputContainer {
+    flex-direction: column;
+    c-input-group {
+      margin-left: 0% !important;
+    }
+  }
+  .btn-div button {
+    width: 100% !important;
+  }
 }

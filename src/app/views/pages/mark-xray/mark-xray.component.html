@@ -1,27 +1,30 @@
 <section class="content">
     <div class="container">
-      <h5 class=" mb-3 fw-bold">X-ray Evaluation Result</h5>
+      <h5 class=" mb-3 fw-bold position-relative">
+        X-ray Evaluation Result
+        <button class="cancel-btn rounded text-light fw-bold back-btn" (click)="handleClick()">Back</button>
+      </h5>
 
         <div class="row">
             <div class="col-12">
                 <div class="col-md-6 left-img ">
                   <div class="ms-2 markDiv">
-                    <div *ngFor="let marker of this.userMark" class="user-marker" [style.left.px]="marker.x" [style.top.px]="marker.y">  
+                    <div *ngFor="let marker of this.userMark" class="user-marker" [style.left.px]="marker.x" [style.top.px]="marker.y">
                 </div>
-            </div> 
+            </div>
                     <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
                     <label class="text-center w-100 mt-2 fw-bold">Dentist X-ray</label>
                 </div>
                 <div class="col-md-6 right-img">
                   <div class="ms-2 markDiv">
-                    <div *ngFor="let marker of this.userMark" class="user-marker ms-1" [style.left.px]="marker.x" [style.top.px]="marker.y">  
+                    <div *ngFor="let marker of this.userMark" class="user-marker ms-1" [style.left.px]="marker.x" [style.top.px]="marker.y">
                 </div>
-            </div> 
+            </div>
                     <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100 ms-2"
                     (click)="addMarker($event)" > <div class="ms-2 markDiv">
-                          <div *ngFor="let marker of marker" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">  
+                          <div *ngFor="let marker of marker" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">
                       </div>
-                  </div> 
+                  </div>
                         <label class="text-center w-100 mt-2 fw-bold ">Admin Marking</label>
                 </div>
             </div>
@@ -34,11 +37,11 @@
                 <div class="col-md-4 btn-div ">
 
 
-                        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn"   data-bs-toggle="modal" data-bs-target="#exampleModalCenter" 
+                        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn"   data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
                         >Save Result&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
 
 
-                        <button type="button" class="btn btn-primary save-btn me-2 cancel-btn fw-bold other-btn pd-1">Reevaluate</button>
+                        <!-- <button type="button" class="btn btn-primary save-btn me-2 cancel-btn fw-bold other-btn pd-1">Reevaluate</button> -->
 
                 </div>
             </div>
