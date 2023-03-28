@@ -3,7 +3,7 @@
     <div class="card-body p-4">
       <h5 class="well position-relative">
         Personal Information
-        <button class="cancel-btn rounded text-light fw-bold back-btn" (click)="handleClick()">Back</button>
+        <button class="cancel-btn rounded text-light fw-bold back-btn" (click)="handleClick()" *ngIf="this.role == 'admin'">Back</button>
       </h5>
 
 

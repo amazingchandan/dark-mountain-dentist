@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 const ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
 const ALPHA_NUMERIC_VALIDATION_ERROR = { alphaNumericError: 'only alpha numeric values are allowed' }
-
+const REGEX = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
 @Component({
   selector: 'app-register-form',
@@ -39,14 +39,14 @@ export class RegisterFormComponent {
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
-      repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       contact_number: new FormControl(null, Validators.required),
       address1: new FormControl(null, Validators.required),
       pincode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       state: new FormControl(null, Validators.required),
       country: new FormControl(null, Validators.required),
+      password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
+      repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
     });
     if (localStorage.getItem('token')) {
       this.router.navigateByUrl("/dashboard")
@@ -57,8 +57,13 @@ export class RegisterFormComponent {
       this.register()
     }
   }
+  onlyNumberKey(evt: KeyboardEvent) {
+    // Only ASCII character in that range allowed
+    let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+    return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
+  }
   register() {
-    console.log(this.registerForm.value)
+    console.log(this.registerForm.value, !this.registerForm.value.email != true)
     if (
       this.registerForm.value.first_name == undefined ||
       this.registerForm.value.first_name.trim() == ''
@@ -95,13 +100,12 @@ export class RegisterFormComponent {
       // this.toastr.error('Please enter plan name');
       // return false;
     }
-    if(this.registerForm.value.repassword == undefined ||
-      this.registerForm.value.repassword.trim() == '') {
-        Swal.fire({
-          text: 'Please enter both password field',
-          icon: 'warning'
-        });
-        return false;
+    if(!REGEX.test(this.registerForm.value.email.trim())){
+      Swal.fire({
+        text: 'Invalid email address',
+        icon: 'warning'
+      });
+      return false;
     }
     if(this.registerForm.value.contact_number == undefined ||
       this.registerForm.value.contact_number == '') {
@@ -111,6 +115,7 @@ export class RegisterFormComponent {
         });
         return false;
     }
+
     if(this.registerForm.value.address1 == undefined ||
       this.registerForm.value.address1.trim() == '') {
         Swal.fire({
@@ -144,9 +149,9 @@ export class RegisterFormComponent {
         return false;
     }
     if(this.registerForm.value.country == undefined ||
-      this.registerForm.value.country.trim() == '') {
+      this.registerForm.value.country == '-Select-') {
         Swal.fire({
-          text: 'Please enter country',
+          text: 'Please select country',
           icon: 'warning'
         });
         return false;
@@ -163,23 +168,35 @@ export class RegisterFormComponent {
       // this.toastr.error('Please enter plan name');
       // return false;
     }
+    if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password) || this.registerForm.value.password.length < 7) {
+      Swal.fire({
+        text: 'Password must contain atleast 7 characters, one letter and one number',
+        icon: 'warning'
+      });
+      return false;
+    }
+    if(this.registerForm.value.repassword == undefined ||
+      this.registerForm.value.repassword.trim() == '') {
+        Swal.fire({
+          text: 'Please enter confirm password',
+          icon: 'warning'
+        });
+        return false;
+    }
     if(this.registerForm.value.password.trim() !== this.registerForm.value.repassword.trim()){
         Swal.fire({
           text: 'Password does not match with confirm password.',
           icon: 'error'
         });
       return false;
-      }
-    if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password) || this.registerForm.value.password.length < 7) {
-      Swal.fire({
-        text: 'Password must contain atleast 7 characters and atleast one letter and one number',
-        icon: 'warning'
-      });
-      return false;
     }
+
     // this.newUser= this.registerForm.value;
     console.log()
-    this.registerForm.value.email = this.registerForm.value.email.toLowerCase().trim();
+    if(!this.registerForm.value.email != true){
+      this.registerForm.value.email = this.registerForm.value.email.toLowerCase().trim();
+    }
+
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);

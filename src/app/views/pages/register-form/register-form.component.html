@@ -93,6 +93,7 @@
                         class="form-control rounded ps-5 w-100"
                         placeholder="Contact Number"
                         formControlName="contact_number"
+                        (keypress)="onlyNumberKey($event)"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
@@ -129,6 +130,7 @@
                         class="form-control rounded ps-5 w-100"
                         placeholder="Zip"
                         formControlName="pincode"
+                        (keypress)="onlyNumberKey($event)"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
@@ -235,9 +237,10 @@
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
+                    <small>* Password must contain atleast 7 characters, 1 letter and 1 number</small>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
-                    <div class="w-100 d-flex position-relative">
+                    <div class="w-100 d-flex position-relative cnf_password">
                       <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                       <span
                         cInputGroupText
@@ -248,7 +251,7 @@
                       <input
                         type="password"
                         class="form-control rounded ps-5 w-100"
-                        placeholder="Retype-Password"
+                        placeholder="Confirm Password"
                         formControlName="repassword"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
