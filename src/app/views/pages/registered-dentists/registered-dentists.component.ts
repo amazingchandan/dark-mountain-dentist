@@ -17,6 +17,8 @@ export class RegisteredDentistsComponent {
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   showContent: boolean;
+  xrayData: any;
+  count: any;
 
   constructor(
     private router: Router,
@@ -74,6 +76,8 @@ export class RegisteredDentistsComponent {
     this.apiService.getUserList().subscribe((res:any) => {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      this.count= res.xrayCount
+      console.log(this.allData,"count",this.count)
       this.showContent=true
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
