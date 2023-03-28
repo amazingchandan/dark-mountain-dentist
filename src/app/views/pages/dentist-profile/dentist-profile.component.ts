@@ -95,6 +95,9 @@ export class DentistProfileComponent implements OnInit {
 
 
   }
+  handleClick(){
+    this.router.navigateByUrl('/registered-dentists');
+  }
   editadmin(id) {
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res, "*****");

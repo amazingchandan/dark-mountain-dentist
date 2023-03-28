@@ -56,8 +56,8 @@ export class SubscriptionListComponent implements OnInit {
       info:false,
       ordering: false,
       responsive:true,
-      search:true
-      //dom: 'Bfrtip',
+      search:true,
+      dom: 'Bfrtip',
 
     };
     this.planList();

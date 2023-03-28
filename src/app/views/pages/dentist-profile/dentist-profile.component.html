@@ -1,7 +1,10 @@
 <div class="container mb-4 p-0">
   <div class="card card-primary">
     <div class="card-body p-4">
-      <h5 class="well">Personal Information</h5>
+      <h5 class="well position-relative">
+        Personal Information
+        <button class="cancel-btn rounded text-light fw-bold back-btn" (click)="handleClick()">Back</button>
+      </h5>
 
 
       <div class="row">
@@ -20,7 +23,7 @@
               <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control" maxlength="20">
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">Email ID<sup>*</sup></label>
+              <label class="mb-2">Email ID/Username<sup>*</sup></label>
               <input type="text" placeholder="Email" formControlName="email" class="form-control" maxlength="100">
 
             </div>

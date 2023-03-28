@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <h5 class="mb-n5 fw-bold">Uploaded X-Rays</h5>
-        <div class="table-responsive" style="position: relative;">
+        <div class="table-responsive resposive-table" style="position: relative;">
         <div class="card pt-0 table-card">
 
 
@@ -13,8 +13,8 @@
                     <th>Dentist&nbsp;Name</th>
                     <th>Age</th>
                     <th>City</th>
-                    <th>Contact&nbsp;Number</th>
-                    <th>X-Ray&nbsp;Uploaded</th>
+                    <th>Phone</th>
+                    <th>Subscription&nbsp;End&nbsp;Date</th>
                     <th style="min-width: 157px;">Action</th>
                     <th>Uploaded&nbsp;X-Ray</th>
                     <th>Marked</th>
@@ -26,19 +26,20 @@
                     <td>35</td>
                     <td>{{data.user_id.city | titlecase}}</td>
                     <td>{{data.user_id.contact_number}}</td>
-                    <td>{{data.created_at | date : 'dd/MM/yyyy'}}</td>
+                    <td style="padding-left: 5.25%;">{{data.user_id.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td>
 
-                    <td><button
+                    <td>
+                      <!-- <button
                       type="button"
                       class="btn btn-danger edit"
                       title="Edit"
-                    ><i class="fa-regular fa-pen-to-square mt-2"></i></button>
+                    ><i class="fa-regular fa-pen-to-square mt-2"></i></button> -->
                    <button
                       title="View"
                       type="button"
-                      class="btn btn-primary ms-3 pd-1 view-btn fw-bolder"
+                      class="btn btn-primary pd-1 view-btn fw-bolder"
                       [routerLink]="'/mark-xray/'+data._id"
-                    >View Details</button></td>
+                    >Edit</button></td>
                     <td>12</td>
                     <td>3</td>
                   </tr>

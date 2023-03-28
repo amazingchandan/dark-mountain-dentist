@@ -89,6 +89,11 @@ i {
     /* padding-bottom: 25px; */
     margin-bottom: 0px;
 }
+.back-btn {
+  position: absolute;
+  right: 0%;
+  top: -10px;
+}
 
 @media (min-width: 410px) and (max-width : 820px){
     .button-div{

@@ -79,7 +79,7 @@ $enable-rtl: true;
 //     background-color: #138496;
 //     border-color: #117a8b;
 // }
-.btn {
+.btn, .dt-button {
   color: white !important;
   background-color: #00d957 !important;
   border-color: #00d957 !important;
@@ -88,7 +88,7 @@ $enable-rtl: true;
   padding-top: 3px !important;
   padding-bottom: 3px !important;
 }
-.btn:hover {
+.btn:hover, .dt-button:hover {
   color: #fff !important;
   background-color: #02c24f !important;
   border-color: #02c24f !important;
@@ -389,4 +389,33 @@ a.current{
 .dataTables_wrapper {
   position: unset !important;
   clear: both;
+}
+.dt-buttons {
+  margin-top: 15px;
+}
+.dt-button {
+  border-radius: 4px !important;
+  padding: 8px 12px !important;
+  box-shadow: none !important;
+  margin-right: 6px;
+  border: none !important;
+}
+.dt-button span {
+  font-size: 12px !important;
+  font-weight: bolder !important;
+}
+.buttons-copy, .buttons-print {
+  display: none;
+}
+
+@media (max-width: 645px){
+  .resposive-table {
+    margin-top: 50px;
+  }
+  .dataTables_filter {
+    top: -55px;
+    left: -5px;
+    right: auto;
+    position: absolute;
+  }
 }

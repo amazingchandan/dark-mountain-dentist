@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, NgForm, ValidationErrors, Validators} from '@angular/forms';
+import { FormControl, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
@@ -18,8 +18,9 @@ const ALPHA_NUMERIC_VALIDATION_ERROR = { alphaNumericError: 'only alpha numeric 
 
 export class RegisterFormComponent {
   public registerForm: FormGroup;
-  newUser:any;
+  newUser: any;
   isAuthLoading: boolean;
+  countryList = "-Select-";
   constructor(
 
     private toastr: ToastrService,
@@ -27,30 +28,36 @@ export class RegisterFormComponent {
     private router: Router,
     private route: ActivatedRoute,
     private appService: AppService
-  ) {}
+  ) { }
 
   ngOnInit() {
     function alphaNumericValidator(control: FormControl): ValidationErrors | null {
       return ALPHA_NUMERIC_REGEX.test(control.value) ? null : ALPHA_NUMERIC_VALIDATION_ERROR;
     }
-   // this.renderer.addClass(document.querySelector('app-root'), 'register-page');
+    // this.renderer.addClass(document.querySelector('app-root'), 'register-page');
     this.registerForm = new FormGroup({
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
-      email: new FormControl(null,  [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(7),Validators.maxLength(10), alphaNumericValidator]),
-
+      email: new FormControl(null, [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
+      repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
+      contact_number: new FormControl(null, Validators.required),
+      address1: new FormControl(null, Validators.required),
+      pincode: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
+      state: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required),
     });
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
       this.router.navigateByUrl("/dashboard")
     }
   }
-  onSomeAction(event: any){
-    if(event.key == "Enter"){
+  onSomeAction(event: any) {
+    if (event.key == "Enter") {
       this.register()
     }
   }
-   register(){
+  register() {
     console.log(this.registerForm.value)
     if (
       this.registerForm.value.first_name == undefined ||
@@ -88,6 +95,62 @@ export class RegisterFormComponent {
       // this.toastr.error('Please enter plan name');
       // return false;
     }
+    if(this.registerForm.value.repassword == undefined ||
+      this.registerForm.value.repassword.trim() == '') {
+        Swal.fire({
+          text: 'Please enter both password field',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.contact_number == undefined ||
+      this.registerForm.value.contact_number == '') {
+        Swal.fire({
+          text: 'Please enter contact number',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.address1 == undefined ||
+      this.registerForm.value.address1.trim() == '') {
+        Swal.fire({
+          text: 'Please enter address',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.pincode == undefined ||
+      this.registerForm.value.pincode == '') {
+        Swal.fire({
+          text: 'Please enter zip',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.city == undefined ||
+      this.registerForm.value.city.trim() == '') {
+        Swal.fire({
+          text: 'Please enter city',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.state == undefined ||
+      this.registerForm.value.state.trim() == '') {
+        Swal.fire({
+          text: 'Please enter state',
+          icon: 'warning'
+        });
+        return false;
+    }
+    if(this.registerForm.value.country == undefined ||
+      this.registerForm.value.country.trim() == '') {
+        Swal.fire({
+          text: 'Please enter country',
+          icon: 'warning'
+        });
+        return false;
+    }
     if (
       this.registerForm.value.password == undefined ||
       this.registerForm.value.password.trim() == ''
@@ -100,14 +163,21 @@ export class RegisterFormComponent {
       // this.toastr.error('Please enter plan name');
       // return false;
     }
-    if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password)|| this.registerForm.value.password.length < 7) {
+    if(this.registerForm.value.password.trim() !== this.registerForm.value.repassword.trim()){
+        Swal.fire({
+          text: 'Password does not match with confirm password.',
+          icon: 'error'
+        });
+      return false;
+      }
+    if (!ALPHA_NUMERIC_REGEX.test(this.registerForm.value.password) || this.registerForm.value.password.length < 7) {
       Swal.fire({
-        text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
+        text: 'Password must contain atleast 7 characters and atleast one letter and one number',
         icon: 'warning'
       });
       return false;
     }
-   // this.newUser= this.registerForm.value;
+    // this.newUser= this.registerForm.value;
     console.log()
     this.registerForm.value.email = this.registerForm.value.email.toLowerCase().trim();
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
@@ -119,48 +189,49 @@ export class RegisterFormComponent {
         });
         let loginData = {
           email: this.registerForm.value.email.toLowerCase().trim(),
-          password: this.registerForm.value.password
+          password: this.registerForm.value.password.trim()
         };
 
-       this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
+        this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
           console.log(result);
 
-        let id= result.userInfo.id;
+          let id = result.userInfo.id;
           if (result.success) {
-          //  this.userService.getUserRecordById(id).subscribe((res: any) => {
-              console.log(res,"*****");
+            //  this.userService.getUserRecordById(id).subscribe((res: any) => {
+            console.log(res, "*****");
             this.isAuthLoading = false;
 
             //this.toastr.success(result.message);
-         // this.appService.login(result);})
-        //!  changed here
-         this.router.navigateByUrl('/pricing/'+id);
-        //  this.router.navigateByUrl('/login');
+            // this.appService.login(result);})
+            //!  changed here
+            this.router.navigateByUrl('/pricing/' + id);
+            //  this.router.navigateByUrl('/login');
 
-          }})
-     //   this.appService.login(result);
-       /*localStorage.setItem('userInfo', JSON.stringify(this.registerForm.value['userInfo']));
-        localStorage.setItem('id', getLoginDetail.userInfo.id);
-        localStorage.setItem('email', getLoginDetail.userInfo.email);
-        localStorage.setItem('role', getLoginDetail.userInfo.role);
-        localStorage.setItem('objId', getLoginDetail.userInfo.objId);
-        localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
+          }
+        })
+        //   this.appService.login(result);
+        /*localStorage.setItem('userInfo', JSON.stringify(this.registerForm.value['userInfo']));
+         localStorage.setItem('id', getLoginDetail.userInfo.id);
+         localStorage.setItem('email', getLoginDetail.userInfo.email);
+         localStorage.setItem('role', getLoginDetail.userInfo.role);
+         localStorage.setItem('objId', getLoginDetail.userInfo.objId);
+         localStorage.setItem('isSub', getLoginDetail.userInfo.subscribed);*/
 
-        }
+      }
 
 
-       else {
+      else {
         Swal.fire({
           text: res.message,
           icon: 'error',
         });
         //this.toastr.error(res.message);
       }
-  })
-}
+    })
+  }
 
-  handleForm(data:NgForm){
+  handleForm(data: NgForm) {
     console.log(data);
   }
-  countryList = "-Select-";
+  // countryList = "-Select-";
 }

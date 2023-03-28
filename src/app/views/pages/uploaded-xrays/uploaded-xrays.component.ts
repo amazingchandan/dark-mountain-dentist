@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UploadedXraysComponent {
 
   dtOptions: any = {};
-
+  public subsEndDate: any[] = [];
   public allData: any;
   public userData : any;
 
@@ -36,9 +36,9 @@ export class UploadedXraysComponent {
       pageLength: 10,
       ordering: false,
       responsive:true,
+      dom: 'Bfrtip',
 
 
-      //dom: 'Bfrtip',
 
     };
     this.xrayList();
@@ -48,6 +48,11 @@ export class UploadedXraysComponent {
     this.userService.getXrayList().subscribe((res:any) => {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      console.log(this.allData);
+
+      for(let x = 0; x < this.allData.length; x++){
+        console.log(this.allData[x].user_id._id);
+      }
       this.showContent=true;
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

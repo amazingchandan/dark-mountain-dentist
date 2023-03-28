@@ -40,7 +40,7 @@ export class PricingComponent {
       address: 'Thank you for saving people in need',
     },
     theme: {
-      color: '#ff9920',
+      color: '#00d957',
     },
     // http_post: this.userService
   };
