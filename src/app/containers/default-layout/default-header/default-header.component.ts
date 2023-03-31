@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Pipe } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppService } from 'src/app/services/app.service';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
@@ -21,13 +22,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
   lName: any;
   fName: any;
   routerTo: any;
+  public _router: any = "";
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
     private appService:AppService,
     private userService :UserService) {
     super();
-
+    this._router = this.router.url
   }
   ngOnInit(): void {
     this.userfirst();

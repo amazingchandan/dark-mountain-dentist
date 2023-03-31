@@ -407,6 +407,19 @@ a.current{
 .buttons-copy, .buttons-print {
   display: none;
 }
+.owl-prev{
+  position: absolute !important;
+  top: 44% !important;
+  left: -20px !important;
+}
+.owl-next {
+  position: absolute !important;
+  top: 44% !important;
+  right: -20px !important;
+}
+// .owl-item  {
+//   max-width: 320px;
+// }
 
 @media (max-width: 645px){
   .resposive-table {

@@ -1,4 +1,4 @@
-<section class="content">
+<!-- <section class="content">
   <div class="container">
     <h5 class=" mb-3 fw-bold">Upload X-Ray</h5>
 
@@ -42,4 +42,123 @@
     </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<section class="content ps-2">
+  <div class="row">
+    <div class="col-12">
+      <h5 class="mb-n5 fw-bold position-relative">
+        Registered Dentists
+        <input type="file" class="file-upload custom-file-input fw-semibold inputFile" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null" [ngStyle]="fileStyle"  >
+      </h5>
+      <div class="table-responsive resposive-table" style="position: relative;">
+      <div class="card pt-0 table-card">
+
+
+        <div class="card-body pt-0" style="overflow-x: auto;">
+          <table datatable *ngIf="showContent" datatable="ng" id="datatable" class="row-border hover"
+          [dtOptions]="dtOptions"
+          >
+            <thead>
+              <tr>
+                <th class="text-nowrap">Uploaded Date</th>
+                <th class="text-nowrap">Evaluated Date</th>
+                <!-- <th>Subscription&nbsp;End Date</th> -->
+                <th>Action</th>
+                <!-- <th>Upload</th> -->
+                <th>Evaluation</th>
+                <!-- <th>Result</th> -->
+              </tr>
+            </thead>
+            <tbody  *ngIf="allData?.length != 0">
+              <tr *ngFor="let user of allData; let i = index">
+                <td>01/01/2023</td>
+                <td>05/05/2023</td>
+                <!-- <td>{{user.city | titlecase}}</td> -->
+                <!-- <td>{{user.contact_number}}</td> -->
+                <!-- <td>{{user.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                <td>
+                  <!-- <input class="custom-file-input2" type="file" [ngStyle]="fileStyle" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null"> -->
+                  <button
+                    type="button"
+                    class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter"
+                    (click)="openModal()"
+                  >
+                    View
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
+                </td>
+                <!-- <td>
+                  <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
+                </td> -->
+                <!-- <td>85%</td> -->
+              </tr>
+             <!-- <tr>
+
+              </tr>-->
+
+            </tbody>
+              <tbody *ngIf="this.allData?.length == 0">
+                <tr>
+                  <td colspan="8" class="no-data-available text-center" >No data available in table</td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="exampleModalLongTitle">
+          View Uploaded Image
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="modal-dialog">
+          <!-- <div class="modal-content"> -->
+            <!-- <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> -->
+            <div class="modal-body">
+              <img src="../../../../assets/images/xray.jpg" alt="" width="100%">
+              <div class="mt-4">
+                <span class="fw-bold me-4">Re-upload:</span>
+                <input type="file" class="file-upload custom-file-input fw-semibold" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null" [ngStyle]="fileStyle"  >
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button  id="launch_ad" type="button" class="btn btn-secondary cancel-btn fw-bold pd-1 " data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-save pd-1 fw-bold other-btn "
+        >
+          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
+        </button>
+      </div>
+    </div>

@@ -31,14 +31,13 @@
           >
             <thead>
               <tr>
-                <th>Plan&nbsp;Name</th>
+                <th class="text-nowrap">Plan Name</th>
                 <th>Type</th>
                 <th>Min</th>
                 <th>Max</th>
                 <th>Amount</th>
-                <th>#&nbsp;of&nbsp;Subscribers</th>
-                <th style="min-width: 157px;">Action</th>
-
+                <th class="text-nowrap"># of Subscribers</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody *ngIf="allData?.length !=0">
@@ -48,8 +47,7 @@
                 <td>{{data.minimum}}</td>
                 <td>{{data.maximum}}</td>
                 <td>{{data.amount}}</td>
-                <td style="padding-left: 7.25%;">3</td>
-
+                <td class="paddingForCenter">3</td>
                 <td>
                   <!-- <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
                     class="fa-regular fa-pen-to-square mt-2" ></i></button> -->

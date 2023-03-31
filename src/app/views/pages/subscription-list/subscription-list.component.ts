@@ -237,56 +237,56 @@ export class SubscriptionListComponent implements OnInit {
   openModal(id) {
     console.log(id, "plan id")
     if(id!=null && id != undefined && id != ''){
-    for (let i = 0; i < this.allData.length; i++) {
-      if (this.allData[i]._id === id) {
-        console.log(this.allData[i])
-        this.pricingId=id;
-        this.addPriceingForm.patchValue({
-          plan_name: this.allData[i].plan_name.toLowerCase().trim(),
-        });
+      for (let i = 0; i < this.allData.length; i++) {
+        if (this.allData[i]._id === id) {
+          console.log(this.allData[i])
+          this.pricingId=id;
+          this.addPriceingForm.patchValue({
+            plan_name: this.allData[i].plan_name.toLowerCase().trim(),
+          });
 
-        this.addPriceingForm.patchValue({
-          minimum: this.allData[i].minimum,
-        });
-        this.addPriceingForm.patchValue({
-          maximum: this.allData[i].maximum,
-        });
-        this.addPriceingForm.patchValue({
-          type: this.allData[i].type,
-        });
-        this.addPriceingForm.patchValue({
-          amount: this.allData[i].amount,
-        });
-        this.addPriceingForm.patchValue({
-          country: this.allData[i].country,
-        });
+          this.addPriceingForm.patchValue({
+            minimum: this.allData[i].minimum,
+          });
+          this.addPriceingForm.patchValue({
+            maximum: this.allData[i].maximum,
+          });
+          this.addPriceingForm.patchValue({
+            type: this.allData[i].type,
+          });
+          this.addPriceingForm.patchValue({
+            amount: this.allData[i].amount,
+          });
+          this.addPriceingForm.patchValue({
+            country: this.allData[i].country,
+          });
 
+        }
       }
     }
-  }
-  else{
-    console.log("no id")
-    this.addPriceingForm.patchValue({
-      plan_name: '',
-    });
+    else{
+      console.log("no id")
+      this.addPriceingForm.patchValue({
+        plan_name: '',
+      });
 
-    this.addPriceingForm.patchValue({
-      minimum: '',
-    });
-    this.addPriceingForm.patchValue({
-      maximum: '',
-    });
-    this.addPriceingForm.patchValue({
-      type: '',
-    });
-    this.addPriceingForm.patchValue({
-      amount: '',
-    });
-    this.addPriceingForm.patchValue({
-      country: '',
-    });
+      this.addPriceingForm.patchValue({
+        minimum: '',
+      });
+      this.addPriceingForm.patchValue({
+        maximum: '',
+      });
+      this.addPriceingForm.patchValue({
+        type: '',
+      });
+      this.addPriceingForm.patchValue({
+        amount: '',
+      });
+      this.addPriceingForm.patchValue({
+        country: '',
+      });
 
-  }
+    }
   }
   updatePlan(id) {
 

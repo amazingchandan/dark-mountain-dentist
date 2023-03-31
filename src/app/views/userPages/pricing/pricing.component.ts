@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
@@ -18,12 +19,53 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 export class PricingComponent {
   // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public isAuthLoading = false;
-  allData: any;
+  public allData: any = [];
   userData: any;
   userPlanData: any;
   userInfo: any;
   userId: any;
+  fname: any;
+  lname: any;
+  checked: any;
+  public monthlyAllData: any = [];
+  public yearlyAllData: any = [];
+  public monthlyPlan: any = false;
+  public yearlyPlan: any = false;
   //route: any;
+  public customOptions: OwlOptions = {
+    center: true,
+    // items: 3,
+    margin: 15,
+    // animateOut: 'fadeOut',
+    loop: true,
+    // autoWidth: true,
+    // autoHeight: true,
+    autoplay: false,
+    autoplayTimeout: 1000,
+    autoplaySpeed: 6000,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 1500,
+    navText: ['<i class="fa fa-angle-left left-arrow" aria-hidden="true"></i>', '<i class="fa fa-angle-right right-arrow" aria-hidden="true"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      950: {
+        items: 3
+      },
+      2400: {
+        items: 5
+      }
+    },
+    nav: true,
+  }
+
   private razorPayOptions: any = {
     key: 'rzp_test_llXrMfq95r3LMF', // Enter the test Key ID generated from the Dashboard
     //key: 'rzp_live_bGBd6XL9krEnCa', // Enter the Key live ID generated from the Dashboard
@@ -57,12 +99,40 @@ export class PricingComponent {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
   ngOnInit() {
+    console.log(this.checked);
+    this.userService.getSubscriptionList().subscribe((res: any) => {
+      console.log(res, "response")
+      if (res.success) {
+        console.log("plan fetched successfully")
+        this.allData = res.getData
+      }
+      else {
+        console.log("plan not fetched successfully")
+      }
+    })
 
     // console.log(this.appService.currentApprovalStageMessage.source['_value'], "------------");
-
-    this.planList();
-    //  console.log(this.userInfo)
+    // this.planList();
+    setTimeout(() => {
+      console.log(this.allData)
+    }, 1000)
     this.userId = this.route.snapshot.paramMap.get('dentist_id');
+    this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
+      // console.log(res.getData[0].first_name, res.getData[0].last_name);
+      this.fname = res.getData[0].first_name;
+      this.lname = res.getData[0].last_name;
+    })
+    this.monthlyPlan= true;
+    this.yearlyPlan = false;
+    if(this.monthlyPlan){
+      setTimeout(() => {
+        this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly");
+      }, 1000)
+    }
+  }
+  checking(event){
+    this.checked = event.target.checked
+    console.log(event.target.checked, this.checked);
   }
   Logout() {
     Swal.fire({
@@ -105,6 +175,22 @@ export class PricingComponent {
 
   }
 
+  monthly(){
+    this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly")
+    this.yearlyAllData = []
+    this.monthlyPlan= true;
+    this.yearlyPlan = false;
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData);
+  }
+
+  yearly(){
+    this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly")
+    this.monthlyAllData = [];
+    this.monthlyPlan= false;
+    this.yearlyPlan = true;
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan);
+  }
+
   addMonths(date, months) {
     date.setMonth(date.getMonth() + months);
 
@@ -113,6 +199,12 @@ export class PricingComponent {
 
 
   getSubscription(id, type,pricing_amount) {
+    if(!this.checked){
+      return Swal.fire({
+        text: "Please accept the terms and conditions.",
+        icon: 'error',
+      });
+    }
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
