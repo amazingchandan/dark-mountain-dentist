@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(localStorage.getItem('token')){
       this.router.navigateByUrl("/dashboard")
     }
+   
   }
 
   onSomeAction(event: any){

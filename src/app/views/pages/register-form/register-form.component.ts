@@ -195,7 +195,7 @@ export class RegisterFormComponent {
         this.userService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
           console.log(result);
 
-          let id = result.userInfo.id;
+        //  let id = result.userInfo.id;
           if (result.success) {
             //  this.userService.getUserRecordById(id).subscribe((res: any) => {
             console.log(res, "*****");
@@ -204,9 +204,9 @@ export class RegisterFormComponent {
             //this.toastr.success(result.message);
             // this.appService.login(result);})
             //!  changed here
-            this.router.navigateByUrl('/pricing/' + id);
+           // this.router.navigateByUrl('/pricing/' + id);
             //  this.router.navigateByUrl('/login');
-
+            this.appService.login(result)
           }
         })
         //   this.appService.login(result);

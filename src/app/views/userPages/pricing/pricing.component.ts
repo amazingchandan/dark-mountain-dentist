@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { DatePipe } from '@angular/common';
 declare var Razorpay: any;
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
@@ -98,7 +99,7 @@ export class PricingComponent {
         this.allData = res.getData
       }
       else {
-        console.log("plan not fetched successfully")
+         console.log("plan not fetched successfully")
 
       }
     })
@@ -117,6 +118,7 @@ export class PricingComponent {
       //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.userData = res.getData;
       console.log(this.userData, this.userInfo,this.userInfo.token)
+
       if (res.success) {
         if (this.userData[0].subscription_details.status == true) {
           Swal.fire({
@@ -194,6 +196,8 @@ export class PricingComponent {
                 };
                 console.log(allVarificationData, 'hiiiiiii');
                 //return;
+                let startDate= new DatePipe('en-US').transform(Date.now(), 'dd-MM-yyyy hh:mm a');
+                let endDate = new DatePipe('en-US').transform(end_date, 'dd-MM-yyyy hh:mm a')
                 this.spinner.show();
                 that.userService
                   .ordercomplete(allVarificationData)
@@ -201,20 +205,28 @@ export class PricingComponent {
                     if (res.success) {
                       this.spinner.hide();
                       Swal.fire({
-                        title: 'Success',
+                        title: 'Thank You for subscribe',
                         width: 400,
-                        text: 'Payment successful',
+                        text: 'Thank You for subscription',
+                        html:'<strong>Your subscription details are :</strong><br><br>'
+                        +"<strong>Start Date : </strong>"+startDate+ '<br>'
+                        +'<strong>End Date : </strong>'+endDate+'<br>'
+                        +'<strong>Order Id : </strong>'+response.razorpay_order_id+'<br>'
+                        +'<strong>Transaction Id : </strong>'+response.razorpay_payment_id+'<br>',
                         icon: 'success',
                         confirmButtonText: 'Ok',
                       });
                       if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
-                      {
+                      {console.log("iff")
                         this.router.navigateByUrl("/dashboard")
                     }
                     else{
+                      console.log("elseee")
                       this.router.navigateByUrl("/login")
                     }
-                    } else {
+                 } 
+                 else
+                  {
                       this.spinner.hide();
                       Swal.fire({
                         title: 'Error!',

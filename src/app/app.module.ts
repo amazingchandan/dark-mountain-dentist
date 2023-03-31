@@ -12,6 +12,7 @@ import {
   PerfectScrollbarModule,
 } from 'ngx-perfect-scrollbar';
 
+
 import {  } from 'ngx-toastr';
 // Import routing module
 import { AppRoutingModule } from './app-routing.module';
@@ -47,6 +48,8 @@ import {
   UtilitiesModule,
 
 } from '@coreui/angular';
+//label studio
+import LabelStudio from "label-studio";
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
@@ -95,9 +98,11 @@ const APP_CONTAINERS = [
     CardModule,
     DataTablesModule,
     HttpClientModule,
+    
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
     })
+    ,
   ],
   providers: [
     {

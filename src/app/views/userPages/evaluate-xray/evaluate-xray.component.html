@@ -6,16 +6,19 @@
             <div class="col-12">
                 <div class="col-md-6 left-img ">
                     <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
-                    <label class="text-center w-100 mt-2 fw-bold">Original X-ray</label>
+                    <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>
                 </div>
                 <div class="col-md-6 right-img">
-                   
+                   <!--
                     <img  [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100 ms-2"
                     (click)="addMarker($event)" >
                     <div class="ms-2 markDiv">
                     <div *ngFor="let marker of marker" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">  
                 </div>
-            </div> <label class="text-center w-100 mt-2 fw-bold ">Marked Cavities</label>
+            </div>-->
+            <div id="label-studio"></div>
+
+             <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
               --> </div>
         <div class="modal-footer">
           <button type="button" id="close" class="btn btn-secondary cancel-btn other-btn pd-1 fw-bold me-2" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary other-btn pd-1 fw-bold " (click)="saveMarks()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
+          <button type="button" class="btn btn-primary other-btn pd-1 fw-bold " (click)="save()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
         </div>
       </div>
     </div>

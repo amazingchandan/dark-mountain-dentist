@@ -39,7 +39,8 @@
               "./node_modules/font-awesome/css/font-awesome.css",
               "./node_modules/@coreui/icons/css/all.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "./node_modules/label-studio/build/static/css/main.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -49,7 +50,8 @@
               "node_modules/datatables.net-buttons/js/buttons.flash.js",
               "node_modules/datatables.net-buttons/js/buttons.html5.js",
               "node_modules/datatables.net-buttons/js/buttons.print.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/label-studio/build/static/js/main.js"
             ],
             "allowedCommonJsDependencies": [
               "chart.js",
