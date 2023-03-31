@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Observable } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -10,8 +11,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./upload-xray.component.scss']
 })
 export class UploadXrayComponent {
+  public allData: Array<any> = [];
+  dtOptions: DataTables.Settings = {};
+  private isDtInitialized: boolean = false;
+  dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  showContent: boolean;
+
   constructor(private userService:UserService,
   public router : Router){}
+
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
   user=this.userInfo;
@@ -20,16 +29,43 @@ export class UploadXrayComponent {
   hidden=true;
  fileStyle={
   color:"black",
- 
  };
 
  xRayData:any=[];
 
+ ngOnInit(): void {
+  this.dtOptions = {
+    search: false,
+    searching: false,
+    language: {
+      search:"",
+      searchPlaceholder: 'Search ',
+    },
+    paging: true,
+    pagingType: 'full_numbers',
+    pageLength: 10,
+    ordering: false,
+    responsive:true,
+    // dom: 'Bfrtip',
+  };
+  this.showContent = true;
+  this.allData = [
+    {
+
+    },
+    {
+
+    }
+  ]
+}
+openModal(){
+
+  }
   uploadFile(event:any) {
     console.log('files', event.target.files)
     console.log(event.target.files[0].name.split(".")[1],"type")
     let allImages: Array<string> = ['png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG'];
-   
+
     if (allImages.indexOf(event.target.files[0].name.split(".")[1]) === -1) {
 
       Swal.fire({
@@ -38,14 +74,14 @@ export class UploadXrayComponent {
       });
       this.fileStyle={
          color:"transparent",
-      
+
       }
       return false;
 
     }else{
       this.fileStyle={
         color:"black",
-     
+
      }
     var formData = new FormData();
      formData.append('xray_image', event.target.files[0]);
@@ -103,7 +139,7 @@ export class UploadXrayComponent {
 		}
     this.hidden=false;
 	}
- 
+
 }
 evaluate(){
  // [routerLink]="'/evaluate-x-ray'"

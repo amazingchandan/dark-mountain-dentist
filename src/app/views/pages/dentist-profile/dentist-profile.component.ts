@@ -13,8 +13,9 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class DentistProfileComponent implements OnInit {
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  public userID = localStorage.getItem('id') || "";
   addSuperForm: FormGroup;
-  private dentistId: any;
+  public dentistId: any;
   userData: any = {};
   planData: any = {};
   end_date: any;
@@ -25,6 +26,7 @@ export class DentistProfileComponent implements OnInit {
   country: any;
   // userInfo:any;
   role: any;
+  age: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
@@ -46,10 +48,13 @@ export class DentistProfileComponent implements OnInit {
       state: new FormControl(),
       country: new FormControl(),
       zip: new FormControl(),
+      age: new FormControl()
 
       //user_role: new FormControl(),
     });
     // this.userInfo=userInfo;
+    console.log(this.userID);
+
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
@@ -66,6 +71,7 @@ export class DentistProfileComponent implements OnInit {
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
+      age: ['', [Validators.required]],
 
     });
 
@@ -97,6 +103,7 @@ export class DentistProfileComponent implements OnInit {
   }
   handleClick(){
     this.router.navigateByUrl('/registered-dentists');
+    console.log(this.role);
   }
   editadmin(id) {
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
@@ -126,7 +133,7 @@ export class DentistProfileComponent implements OnInit {
         console.log(res)
         if (res.success) {
           this.planData = res.getData;
-          console.log(this.planData[0].type)
+          // console.log(this.planData[0].type)
         }
       })
 
@@ -168,6 +175,9 @@ export class DentistProfileComponent implements OnInit {
         this.addSuperForm.patchValue({
           pincode: res.getData[0].pincode,
         });
+        this.addSuperForm.patchValue({
+          age: res.getData[0].age
+        })
 
 
 
@@ -336,6 +346,9 @@ export class DentistProfileComponent implements OnInit {
     this.addSuperForm.patchValue({
       pincode: "",
     });
+    this.addSuperForm.patchValue({
+      age: '',
+    })
 
 
   }

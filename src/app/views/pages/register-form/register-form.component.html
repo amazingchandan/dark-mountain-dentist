@@ -93,6 +93,7 @@
                         class="form-control rounded ps-5 w-100"
                         placeholder="Contact Number"
                         formControlName="contact_number"
+                        (keypress)="onlyNumberKey($event)"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
@@ -129,6 +130,7 @@
                         class="form-control rounded ps-5 w-100"
                         placeholder="Zip"
                         formControlName="pincode"
+                        (keypress)="onlyNumberKey($event)"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
@@ -235,9 +237,10 @@
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
+                    <small>* Password must contain atleast 7 characters, 1 letter and 1 number</small>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
-                    <div class="w-100 d-flex position-relative">
+                    <div class="w-100 d-flex position-relative cnf_password">
                       <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                       <span
                         cInputGroupText
@@ -248,38 +251,28 @@
                       <input
                         type="password"
                         class="form-control rounded ps-5 w-100"
-                        placeholder="Retype-Password"
+                        placeholder="Confirm Password"
                         formControlName="repassword"
                       />
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
-                    <div class="w-100 d-flex position-relative">
-                      <!-- <button
-                      class="btn btn-primary register-btn p-2 fw-bold w-100"
-                      title="Register"
-                      (click)="register()"
-                      (window:keypress)="onSomeAction($event)"
-                      >
-                        Register
-                        <i class="fa-solid fa-address-card ms-1"></i>
-                      </button> -->
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
-                      <!-- <span
+                    <!-- <div class="w-100 d-flex position-relative cnf_password">
+                      <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
                       >
-                        <svg cIcon name="cilLockLocked"></svg>
-                      </span> -->
-                      <!-- <input
-                        type="password"
+                        <svg cIcon name="cilNotes"></svg>
+                      </span>
+                      <input
+                        type="number"
                         class="form-control rounded ps-5 w-100"
-                        placeholder="Re-Password"
-                        formControlName="repassword"
-                      /> -->
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
-                    </div>
+                        placeholder="Age"
+                        formControlName="age"
+                        (keypress)="onlyNumberKey($event)"
+                      />
+                    </div> -->
                   </c-input-group>
                 </div>
                 <!-- <div class="row mb-3">

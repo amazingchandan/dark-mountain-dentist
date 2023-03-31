@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {  LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -26,6 +26,9 @@ import {
   DefaultHeaderComponent,
   DefaultLayoutComponent,
 } from './containers';
+
+// import owl
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {
   AvatarModule,
@@ -98,11 +101,11 @@ const APP_CONTAINERS = [
     CardModule,
     DataTablesModule,
     HttpClientModule,
-    
+    FormsModule,
+    CarouselModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
-    })
-    ,
+    }),
   ],
   providers: [
     {
