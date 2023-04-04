@@ -417,6 +417,16 @@ a.current{
   top: 44% !important;
   right: -20px !important;
 }
+.d-none {
+  display: none !important;
+}
+.paypal-button-number-1, .paypal-button-tagline, .paypal-button-label-container {
+  display: none !important;
+}
+.paypal-btn .paypal-logo{
+  display: none !important;
+}
+
 // .owl-item  {
 //   max-width: 320px;
 // }

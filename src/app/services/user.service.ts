@@ -35,6 +35,8 @@ export class UserService {
   subscriptionorderuser: string;
   subscriptioncompleteorder: string;
 
+  paypalReq: string;
+
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -63,6 +65,8 @@ export class UserService {
     this.testApi = this.apiHost + 'testApi';
     this.subscriptionorderuser = this.apiHost + 'order';
     this.subscriptioncompleteorder = this.apiHost + 'subscriptionOrder';
+
+    this.paypalReq = this.apiHost + 'create_payment';
 
   }
   onLogin(requestParameters: string) {
@@ -141,5 +145,9 @@ export class UserService {
 
   ordercomplete(requestParameter: any) {
     return this.http.post(`${this.subscriptioncompleteorder}`, requestParameter, {});
+  }
+
+  paypalOrderReq(requestParameter: any){
+    return this.http.post(`${this.paypalReq}`, requestParameter, {})
   }
 }

@@ -47,7 +47,7 @@ export class RegisterFormComponent {
       country: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
-      age: new FormControl(null, Validators.required)
+      // age: new FormControl(null, Validators.required)
     });
     if (localStorage.getItem('token')) {
       this.router.navigateByUrl("/dashboard")
@@ -157,13 +157,13 @@ export class RegisterFormComponent {
         });
         return false;
     }
-    if(this.registerForm.value.age == undefined || this.registerForm.value.age == ''){
-      Swal.fire({
-        text: 'Please enter age',
-        icon: 'warning'
-      });
-      return false;
-    }
+    // if(this.registerForm.value.age == undefined || this.registerForm.value.age == ''){
+    //   Swal.fire({
+    //     text: 'Please enter age',
+    //     icon: 'warning'
+    //   });
+    //   return false;
+    // }
     if (
       this.registerForm.value.password == undefined ||
       this.registerForm.value.password.trim() == ''

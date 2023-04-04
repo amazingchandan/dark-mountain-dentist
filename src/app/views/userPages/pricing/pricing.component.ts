@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
+import {
+  IPayPalConfig,
+  ICreateOrderRequest,
+  IPayPalButtonStyle
+} from 'ngx-paypal';
 declare var Razorpay: any;
+// declare var Paypal: any;
+// declare global {
+//   interface Window {
+//     paypal:any;
+//   }
+// }
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
@@ -17,7 +28,7 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 })
 
 
-export class PricingComponent {
+export class PricingComponent implements OnInit, AfterViewInit {
   // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public isAuthLoading = false;
   public allData: any = [];
@@ -32,6 +43,16 @@ export class PricingComponent {
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
   public yearlyPlan: any = false;
+  showSuccess: any;
+  showCancel: any;
+  showError: any;
+  public payPalConfig ? : IPayPalConfig;
+  public subsId: any = 0;
+  public subsType: any;
+  public subsPrice: any;
+  public subsTitle: any;
+  public paypalView: any = false;
+  public payData: any;
   //route: any;
   public customOptions: OwlOptions = {
     center: true,
@@ -99,8 +120,11 @@ export class PricingComponent {
 
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
-  ngOnInit() {
-    console.log(this.checked);
+  // @ViewChild('paypalRef',{static: true}) public paypalRef: ElementRef;
+  ngOnInit(): void {
+    console.log(this.checked, this.subsId);
+    // console.log(window.paypal);
+
     this.userService.getSubscriptionList().subscribe((res: any) => {
       console.log(res, "response")
       if (res.success) {
@@ -130,6 +154,103 @@ export class PricingComponent {
         this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly");
       }, 1000)
     }
+    this.initConfig();
+  }
+  ngAfterViewInit(): void {
+    // if(this.checked && this.subsId != 0){
+    //   console.log(this.paypalRef.nativeElement);
+
+    //   window.paypal.Buttons(
+    //     {
+    //       style: {
+    //         layout: "vertical"
+    //       }
+    //     }
+    //   ).render(this.paypalRef.nativeElement)
+    // }
+  }
+  private initConfig(): void {
+
+    this.payPalConfig = {
+        currency: 'EUR',
+        clientId: 'Abah--H0KR5c54b_YianWFSKudOeRtX_a-xgswRJGHXIARFe4ZEQqA6mznnzL4Qn4V2BYUC9YK1bMH4M',
+        // ! for orders on client side
+        createOrderOnClient: (data) => < ICreateOrderRequest > {
+
+            intent: 'CAPTURE',
+            purchase_units: [{
+              amount: {
+                  currency_code: 'EUR',
+                  value: this.subsPrice.toString(),
+                  breakdown: {
+                      item_total: {
+                          currency_code: 'EUR',
+                          value: this.subsPrice.toString()
+                      }
+                  }
+              },
+              items: [{
+                  name: this.subsTitle,
+                  quantity: '1',
+                  category: 'DIGITAL_GOODS',
+                  unit_amount: {
+                      currency_code: 'EUR',
+                      value: this.subsPrice.toString(),
+                  },
+              }]
+            }]
+        },
+        advanced: {
+            commit: 'true',
+        },
+        style: {
+          layout: 'horizontal',
+          tagline: false,
+          shape: 'pill',
+          color: 'white',
+        },
+        onApprove: (data, actions) => {
+          console.log('onApprove - transaction was approved, but not authorized', data, actions);
+          actions.order.get().then(details => {
+              console.log('onApprove - you can get full order details inside onApprove: ', details);
+          });
+        },
+        // ! for orders on server side
+        // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
+        //         .then((res) => res.json())
+        //         .then((order) => order.orderID),
+        //     onApprove: (data, actions) => {
+        //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        //         actions.order.get().then(details => {
+        //             console.log('onApprove - you can get full order details inside onApprove: ', details);
+        //         });
+
+        // },
+        onClientAuthorization: (data) => {
+            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+            this.showSuccess = true;
+        },
+        onCancel: (data, actions) => {
+            console.log('OnCancel', data, actions);
+            // this.checked = false;
+            this.showCancel = true;
+        },
+        onError: err => {
+            console.log('OnError', err);
+            this.showError = true;
+        },
+        onClick: (data, actions) => {
+            console.log('onClick', data, actions);
+            this.resetStatus();
+        }
+    };
+  }
+  resetStatus(){
+    console.log("THIS IS RESET FOR PAYPAL");
+    console.log(this.subsPrice.toString(), this.subsTitle, this.subsType);
+  }
+  handleClose(){
+    // this.checked = false;
   }
   checking(event){
     this.checked = event.target.checked
@@ -181,7 +302,7 @@ export class PricingComponent {
     this.yearlyAllData = []
     this.monthlyPlan= true;
     this.yearlyPlan = false;
-    console.log(this.allData, this.yearlyAllData, this.monthlyAllData);
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId);
   }
 
   yearly(){
@@ -189,7 +310,7 @@ export class PricingComponent {
     this.monthlyAllData = [];
     this.monthlyPlan= false;
     this.yearlyPlan = true;
-    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan);
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
 
   addMonths(date, months) {
@@ -198,225 +319,256 @@ export class PricingComponent {
     return date;
   }
 
+  getSubscription(id, type,pricing_amount, title) {
+    console.log(id, type, pricing_amount);
+    this.subsId = id;
+    this.subsType = type;
+    this.subsPrice = pricing_amount;
+    this.subsTitle = title;
+    // if(!this.checked){
+    //   return Swal.fire({
+    //     text: "Please accept the terms and conditions.",
+    //     icon: 'error',
+    //   });
+    // }
+    // this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
+    //   //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+    //   this.userData = res.getData;
+    //   console.log(this.userData, this.userInfo,this.userInfo.token)
 
-  getSubscription(id, type,pricing_amount) {
-    if(!this.checked){
-      return Swal.fire({
-        text: "Please accept the terms and conditions.",
-        icon: 'error',
-      });
+    //   if (res.success) {
+    //     if (this.userData[0].subscription_details.status == true) {
+    //       Swal.fire({
+    //         text: "You have already subscribed",
+    //         icon: 'error',
+    //       });
+    //       return false;
+    //     }
+
+    //     else {
+
+    //       var end_date;
+    //       var now = new Date();
+    //       console.log(id, type)
+    //       if (type == "Monthly") {
+
+
+    //         end_date = new Date(now.setMonth(now.getMonth() + 1));
+    //         //end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+    //         console.log(end_date, "Date", new Date());
+
+    //       }
+    //       else if (type === "Yearly") {
+
+
+    //         end_date = new Date(now.setMonth(now.getMonth() + 12));
+
+    //         console.log(end_date, "Date", new Date());
+
+    //       }
+
+    //      //razorpay code
+
+    //      const subscriptiondetails = {
+    //       amount: pricing_amount * 100,
+    //       user_id: this.userId,
+    //       receipt: 'Receipt #' + (Math.floor(Math.random() * 10000000) + 1),
+    //     };
+    //     console.log(subscriptiondetails);
+    //     this.spinner.show();
+    //     this.userService.order(subscriptiondetails).subscribe(
+    //       (response: any) => {
+    //         this.spinner.hide();
+    //         if(response.success){
+
+    //         }else{
+    //           Swal.fire({
+    //             title: 'Error!',
+    //             width: 400,
+    //             text: response.message,
+    //             icon: 'error',
+    //             confirmButtonText: 'Ok',
+    //           });
+    //           return false;
+    //         }
+    //         //console.log(response, 'iiiiiiii');
+    //         console.error('response for purchase ', response);
+    //         let order = response?.order;
+    //         this.razorPayOptions.order_id = order?.id;
+    //         this.razorPayOptions.amount = order?.amount_due;
+    //         const that = this;
+    //         this.razorPayOptions.handler = (response: any, error: any) => {
+    //           console.error(response);
+    //           // console.error(error);
+    //           if (!error) {
+    //             const allVarificationData = {
+    //               sub_id: id,
+    //               end_date: end_date,
+    //               start_date: Date.now(),
+    //               user_id: this.userId,
+    //               pricing_plan_id:id,
+    //               razorpay_order_id: response.razorpay_order_id,
+    //               razorpay_payment_id: response.razorpay_payment_id,
+    //               razorpay_signature: response.razorpay_signature,
+    //             };
+    //             console.log(allVarificationData, 'hiiiiiii');
+    //             //return;
+    //             let startDate= new DatePipe('en-US').transform(Date.now(), 'dd-MM-yyyy hh:mm a');
+    //             let endDate = new DatePipe('en-US').transform(end_date, 'dd-MM-yyyy hh:mm a')
+    //             this.spinner.show();
+    //             that.userService
+    //               .ordercomplete(allVarificationData)
+    //               .subscribe((res: any) => {
+    //                 if (res.success) {
+    //                   this.spinner.hide();
+    //                   Swal.fire({
+    //                     title: 'Thank You for subscribe',
+    //                     width: 400,
+    //                     text: 'Thank You for subscription',
+    //                     html:'<strong>Your subscription details are :</strong><br><br>'
+    //                     +"<strong>Start Date : </strong>"+startDate+ '<br>'
+    //                     +'<strong>End Date : </strong>'+endDate+'<br>'
+    //                     +'<strong>Order Id : </strong>'+response.razorpay_order_id+'<br>'
+    //                     +'<strong>Transaction Id : </strong>'+response.razorpay_payment_id+'<br>',
+    //                     icon: 'success',
+    //                     confirmButtonText: 'Ok',
+    //                   });
+    //                   if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+    //                   {console.log("iff")
+    //                     this.router.navigateByUrl("/dashboard")
+    //                 }
+    //                 else{
+    //                   console.log("elseee")
+    //                   this.router.navigateByUrl("/login")
+    //                 }
+    //              }
+    //              else
+    //               {
+    //                   this.spinner.hide();
+    //                   Swal.fire({
+    //                     title: 'Error!',
+    //                     width: 400,
+    //                     text: 'Payment unsuccessful, please try again',
+    //                     icon: 'error',
+    //                     confirmButtonText: 'Ok',
+    //                   });
+    //                   console.error(res.message);
+    //                   // this.router.navigate(['/profile']);
+    //                 }
+    //               });
+    //           }
+    //         };
+    //         console.error('op', this.razorPayOptions);
+
+    //         let rzp1 = new Razorpay(this.razorPayOptions);
+    //         rzp1.open();
+    //         console.error('opened');
+    //       },
+    //       (error) => {
+    //         console.error('error', error);
+    //       }
+    //     );
+    //       //razorpay code ends
+
+    //   /*  this.userPlanData = {
+    //         sub_id: id,
+    //         end_date: end_date,
+    //         start_date: Date.now(),
+    //       }
+    //       this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+    //         console.log(res)
+    //         if (res.success) {
+    //           //this.toastr.success(res.message);
+    //           Swal.fire({
+    //             text: "You have successfully subscribed",
+    //             icon: 'success',
+    //           });
+    //           //! changed here
+    //          /* this.userService.onLogin(this.appService.currentApprovalStageMessage.source['_value']).subscribe((result: any) => {
+    //             console.log(result.userInfo.id);
+    //             let id= result.userInfo.id;
+    //             if (result.success) {
+    //               this.userService.getUserRecordById(id).subscribe((res: any) => {
+    //                 console.log(res,"*****");
+    //                  if(res.getData[0]?.role=='dentist'){
+    //                 let status = res.getData[0]?.subscription_details.status;
+    //                  console.log(status)
+    //                    if(status==true){
+    //                     this.appService.login(result);
+    //                    }
+    //                    else
+    //                    {
+    //                     this.router.navigateByUrl("/pricing/"+result.userInfo.id);
+    //                    // [routerLink]="'/dentist-profile/'+user._id"
+    //                    }
+
+    //               }
+    //               else{
+    //                 this.appService.login(result);
+    //               }
+
+    //               })
+
+    //               //this.toastr.success(result.message);
+    //             //
+    //             }
+
+    //             else {
+    //               this.isAuthLoading = false;
+    //               //this.toastr.error(result.message);
+    //               Swal.fire({
+    //                 text: result.message,
+    //                 icon: 'error',
+    //               });
+    //             }
+    //           });*/
+    //        /* if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+    //           {this.router.navigateByUrl("/dashboard")
+    //         }
+    //         else{
+    //           this.router.navigateByUrl("/login")
+    //         }
+    //       }
+    //         else {
+    //           Swal.fire({
+    //             text: res.message,
+    //             icon: 'error',
+    //           });
+    //           //this.toastr.error(res.message);
+    //         }
+    //       });*/
+
+    //     }
+    //   }
+    // })
+
+  }
+
+  handleClick(){
+    // if(!this.checked){
+    //   this.displayStyle = "none"
+    //   return Swal.fire({
+    //     text: "Please accept the terms and conditions.",
+    //     icon: 'warning',
+    //   });
+    // }
+    // else if(!this.subsId || this.subsId == 0){
+    //   this.displayStyle = "none"
+    //   return Swal.fire({
+    //     text: "Please choose a plan.",
+    //     icon: 'warning',
+    //   });
+    // }
+  }
+  payView(){
+    this.payData = {
+      price: this.subsPrice
     }
-    this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
-      //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
-      this.userData = res.getData;
-      console.log(this.userData, this.userInfo,this.userInfo.token)
-
-      if (res.success) {
-        if (this.userData[0].subscription_details.status == true) {
-          Swal.fire({
-            text: "You have already subscribed",
-            icon: 'error',
-          });
-          return false;
-        }
-
-        else {
-
-          var end_date;
-          var now = new Date();
-          console.log(id, type)
-          if (type == "Monthly") {
-
-
-            end_date = new Date(now.setMonth(now.getMonth() + 1));
-            //end_date = new Date(now.setMinutes(now.getMinutes() + 5));
-            console.log(end_date, "Date", new Date());
-
-          }
-          else if (type === "Yearly") {
-
-
-            end_date = new Date(now.setMonth(now.getMonth() + 12));
-
-            console.log(end_date, "Date", new Date());
-
-          }
-
-         //razorpay code
-
-         const subscriptiondetails = {
-          amount: pricing_amount * 100,
-          user_id: this.userId,
-          receipt: 'Receipt #' + (Math.floor(Math.random() * 10000000) + 1),
-        };
-        console.log(subscriptiondetails);
-        this.spinner.show();
-        this.userService.order(subscriptiondetails).subscribe(
-          (response: any) => {
-            this.spinner.hide();
-            if(response.success){
-
-            }else{
-              Swal.fire({
-                title: 'Error!',
-                width: 400,
-                text: response.message,
-                icon: 'error',
-                confirmButtonText: 'Ok',
-              });
-              return false;
-            }
-            //console.log(response, 'iiiiiiii');
-            console.error('response for purchase ', response);
-            let order = response?.order;
-            this.razorPayOptions.order_id = order?.id;
-            this.razorPayOptions.amount = order?.amount_due;
-            const that = this;
-            this.razorPayOptions.handler = (response: any, error: any) => {
-              console.error(response);
-              // console.error(error);
-              if (!error) {
-                const allVarificationData = {
-                  sub_id: id,
-                  end_date: end_date,
-                  start_date: Date.now(),
-                  user_id: this.userId,
-                  pricing_plan_id:id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_signature: response.razorpay_signature,
-                };
-                console.log(allVarificationData, 'hiiiiiii');
-                //return;
-                let startDate= new DatePipe('en-US').transform(Date.now(), 'dd-MM-yyyy hh:mm a');
-                let endDate = new DatePipe('en-US').transform(end_date, 'dd-MM-yyyy hh:mm a')
-                this.spinner.show();
-                that.userService
-                  .ordercomplete(allVarificationData)
-                  .subscribe((res: any) => {
-                    if (res.success) {
-                      this.spinner.hide();
-                      Swal.fire({
-                        title: 'Thank You for subscribe',
-                        width: 400,
-                        text: 'Thank You for subscription',
-                        html:'<strong>Your subscription details are :</strong><br><br>'
-                        +"<strong>Start Date : </strong>"+startDate+ '<br>'
-                        +'<strong>End Date : </strong>'+endDate+'<br>'
-                        +'<strong>Order Id : </strong>'+response.razorpay_order_id+'<br>'
-                        +'<strong>Transaction Id : </strong>'+response.razorpay_payment_id+'<br>',
-                        icon: 'success',
-                        confirmButtonText: 'Ok',
-                      });
-                      if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
-                      {console.log("iff")
-                        this.router.navigateByUrl("/dashboard")
-                    }
-                    else{
-                      console.log("elseee")
-                      this.router.navigateByUrl("/login")
-                    }
-                 } 
-                 else
-                  {
-                      this.spinner.hide();
-                      Swal.fire({
-                        title: 'Error!',
-                        width: 400,
-                        text: 'Payment unsuccessful, please try again',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                      });
-                      console.error(res.message);
-                      // this.router.navigate(['/profile']);
-                    }
-                  });
-              }
-            };
-            console.error('op', this.razorPayOptions);
-
-            let rzp1 = new Razorpay(this.razorPayOptions);
-            rzp1.open();
-            console.error('opened');
-          },
-          (error) => {
-            console.error('error', error);
-          }
-        );
-          //razorpay code ends
-
-      /*  this.userPlanData = {
-            sub_id: id,
-            end_date: end_date,
-            start_date: Date.now(),
-          }
-          this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
-            console.log(res)
-            if (res.success) {
-              //this.toastr.success(res.message);
-              Swal.fire({
-                text: "You have successfully subscribed",
-                icon: 'success',
-              });
-              //! changed here
-             /* this.userService.onLogin(this.appService.currentApprovalStageMessage.source['_value']).subscribe((result: any) => {
-                console.log(result.userInfo.id);
-                let id= result.userInfo.id;
-                if (result.success) {
-                  this.userService.getUserRecordById(id).subscribe((res: any) => {
-                    console.log(res,"*****");
-                     if(res.getData[0]?.role=='dentist'){
-                    let status = res.getData[0]?.subscription_details.status;
-                     console.log(status)
-                       if(status==true){
-                        this.appService.login(result);
-                       }
-                       else
-                       {
-                        this.router.navigateByUrl("/pricing/"+result.userInfo.id);
-                       // [routerLink]="'/dentist-profile/'+user._id"
-                       }
-
-                  }
-                  else{
-                    this.appService.login(result);
-                  }
-
-                  })
-
-                  //this.toastr.success(result.message);
-                //
-                }
-
-                else {
-                  this.isAuthLoading = false;
-                  //this.toastr.error(result.message);
-                  Swal.fire({
-                    text: result.message,
-                    icon: 'error',
-                  });
-                }
-              });*/
-           /* if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
-              {this.router.navigateByUrl("/dashboard")
-            }
-            else{
-              this.router.navigateByUrl("/login")
-            }
-          }
-            else {
-              Swal.fire({
-                text: res.message,
-                icon: 'error',
-              });
-              //this.toastr.error(res.message);
-            }
-          });*/
-
-        }
-      }
+    this.userService.paypalOrderReq(this.payData).subscribe((res: any) => {
+      console.log(res, location);
+      location.href = res.link;
+      // this.router.navigateByUrl(res.link)
     })
-
   }
 
 }

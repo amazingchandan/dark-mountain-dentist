@@ -1,12 +1,21 @@
 .hover-effect:hover {
   box-shadow: 0px 0px 2px 4px #02d9583e !important;
   background-color: #02d959;
-  color: #fff;
-  transform: scale(1.05);
+  color: #fff !important;
+  transform: scale(1.03);
+  h4 {
+    color: #fff;
+  }
   button {
     background-color: #fff !important;
     color: #02d959 !important;
   }
+}
+.cancel-selected {
+  background-color: var(--bs-gray) !important;
+  border: var(--bs-gray) !important;
+  font-size: 16px !important;
+  padding: 10px 14px !important;
 }
 // h4 {
 //   height: 20px !important;
@@ -60,18 +69,20 @@ body{
 //   background-color: #45454523 !important;
 // }
 .myCard {
-  min-width: 180px !important;
-  max-width: 240px !important;
-  height: 260px !important;
+  min-width: 220px !important;
+  max-width: 260px !important;
+  // height: 260px !important;
+  // height: 250px;
   margin: 10px auto;
 }
 .sub-container {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 269px);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
   flex-direction: column;
+  margin: 0 0 25px 0;
 }
 .monthly-plans-btn {
   border-top-right-radius: 0% !important;
@@ -121,4 +132,89 @@ body{
 .owlContainer {
   position: relative;
 }
-
+.mountain-color {
+  color: #00d957;
+  font-size: inherit !important;
+}
+.hand {
+  cursor: pointer;
+}
+.paynow, .doitlater {
+  font-size: 15px !important;
+  margin-left: 10px;
+}
+.checkbox {
+  min-height: 16px !important;
+  min-width: 16px !important;
+}
+.inside-sub-container {
+  width: 60%;
+}
+.fontsizeTC {
+  font-size: 1.15rem !important;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  u, span {
+    white-space: nowrap;
+  }
+}
+.closemodal {
+  position: absolute;
+  right: 20px;
+  top: 29px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.pricingFooter {
+  white-space: nowrap;
+}
+.proceed-details {
+  list-style-type: none;
+}
+.proceed-details li {
+  margin: 0 24%;
+}
+.paypal-button-number-1, .paypal-button-tagline  {
+  display: none !important;
+}
+.proceed-details {
+  min-height: 110px !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+// media queries for cards
+@media(max-width: 1240px){
+  .inside-sub-container {
+    width: 80%;
+  }
+}
+@media(max-width: 945px){
+  .inside-sub-container {
+    width: 100%;
+  }
+}
+@media(max-width: 768px){
+  .pricingFooter{
+    flex-direction: column;
+  }
+  .do-later-checkout-btn-container {
+    margin-top: 10px;
+  }
+}
+@media(max-width: 494px){
+  .proceed-details li {
+    margin: 0 19%;
+  }
+}
+@media(max-width: 375px){
+  .proceed-details li {
+    margin: 0 14%;
+  }
+}
+@media(max-width: 320px){
+  .proceed-details li {
+    margin: 0 8%;
+  }
+}

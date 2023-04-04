@@ -52,7 +52,10 @@ import {
 
 } from '@coreui/angular';
 //label studio
-import LabelStudio from "label-studio";
+// import LabelStudio from "label-studio";
+
+// paypal
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
@@ -106,6 +109,7 @@ const APP_CONTAINERS = [
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
     }),
+    NgxPayPalModule,
   ],
   providers: [
     {

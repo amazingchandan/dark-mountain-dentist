@@ -94,14 +94,14 @@
 
 
 
-        <div class="sub-container border-top border-grey mt-3">
+        <div class="sub-container " [classList]="this.role =='admin'? 'border-top border-grey mt-3': ''">
           <div class="sub-container mt-4">
-            <h5>Subscription Details</h5>
+            <h5 *ngIf="this.role =='admin'">Subscription Details</h5>
             <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status==true">
-             
-             
+
+
               <!--new code-->
-              <div class="container mt-3 xray-table-container border-top p-0">
+              <div class="container mt-3 xray-table-container border-top p-0" *ngIf="this.role=='dentist'">
                 <!--p-0-->
                 <div class="sub-coontainer mt-4 xray-row">
                   <h5>Subscription Details</h5>
@@ -131,7 +131,7 @@
                               </div>
                             </td>
                           </tr>
-      
+
                         </tbody>
                         <tbody *ngIf="this.xrayData?.length == 0">
                           <tr>
@@ -144,16 +144,16 @@
                 </div>
               </div>
              <!--new code end-->
-            
-            
-            
-             <div class="col-sm-3">Current Plan : {{this.planData[0]?.type}}</div>
-              <div class="col-sm-3 me-5 w-auto">
+
+
+
+             <div class="col-sm-3" *ngIf="this.role =='admin'">Current Plan : {{this.planData[0]?.type}}</div>
+              <div class="col-sm-3 me-5 w-auto" *ngIf="this.role =='admin'">
                 <span>  Subscription End Date : {{this.end_date| date: 'dd/MM/yyyy'}}</span>
               </div>
-              <div class="col-sm-3 ms-3">Subscription Amount : ${{this.planData[0]?.amount}}</div>
+              <div class="col-sm-3 ms-3" *ngIf="this.role =='admin'">Subscription Amount : ${{this.planData[0]?.amount}}</div>
 
-              <div *ngIf="this.role =='admin'">
+              <!-- <div *ngIf="this.role =='admin'">
                 <div class="col-sm-3 ms-5 adminbtn-cancel ps-3">
 
                     <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder" (click)="cancelSub($event)">
@@ -161,10 +161,10 @@
                     </button>
 
                 </div>
-              </div>
+              </div> -->
 
             </div>
-            <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status==false">
+            <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status==false && this.role =='admin'">
 
               <div class="col-sm-3">Current Plan : </div>
               <div class="col-sm-3 me-5 w-auto">
@@ -184,7 +184,7 @@
 
             </div>
             <div *ngIf="this.role=='dentist'">
-              
+
               <div class="row mt-3">
                 <div class="col-sm-3 button-div">
                   <div class="col btn-cancel ms-2 ps-3">

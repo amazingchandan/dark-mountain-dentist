@@ -102,6 +102,7 @@ export class ForgetPasswordComponent implements OnInit {
           if(res.success){
             console.log("OTP done!", res.success);
             this.setNewPass = true;
+            // this.timer(null);
           } else {
             Swal.fire({
               text: 'Incorrect otp, please try again',
@@ -184,6 +185,10 @@ export class ForgetPasswordComponent implements OnInit {
           icon: 'error'
         });
         this.router.navigateByUrl("/forgot-password")
+        clearInterval(timer);
+      }
+      // console.log(this.setNewPass);
+      if(this.setNewPass){
         clearInterval(timer);
       }
     }, 1000);
