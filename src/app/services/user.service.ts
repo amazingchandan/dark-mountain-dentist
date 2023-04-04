@@ -36,6 +36,7 @@ export class UserService {
   subscriptioncompleteorder: string;
 
   paypalReq: string;
+  getUserAllSubsById: any;
 
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
@@ -65,7 +66,7 @@ export class UserService {
     this.testApi = this.apiHost + 'testApi';
     this.subscriptionorderuser = this.apiHost + 'order';
     this.subscriptioncompleteorder = this.apiHost + 'subscriptionOrder';
-
+    this.getUserAllSubsById = this.apiHost + 'getUserAllSubListById'
     this.paypalReq = this.apiHost + 'create_payment';
 
   }
@@ -84,6 +85,9 @@ export class UserService {
   }
   getUserRecordById(id) {
     return this.http.get(`${this.getUsersRecordById}?dentist_id=${id}`);
+  }
+  getUserAllSubById(id) {
+    return this.http.get(`${this.getUserAllSubsById}?dentist_id=${id}`);
   }
   addPrice(requestParameters) {
     return this.http.post(`${this.addPricingPlan}`, requestParameters, {});
