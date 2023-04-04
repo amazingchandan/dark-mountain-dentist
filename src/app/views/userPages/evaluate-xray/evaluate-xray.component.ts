@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import LabelStudio from 'label-studio';
+import { event } from 'jquery';
 
 @Component({
   selector: 'app-evaluate-xray',
@@ -19,12 +20,14 @@ export class EvaluateXrayComponent {
 
   valInput = '25';
   leftPos = `25%`;
-  marker: any = [];
+  marker: any;
   xRayData: any = [];
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   baseLink: string = environment.API_HOST;
   id: any;
-  labelStudio :any;
+  labelStudio: any;
+  marks_array: any = [];
+  annotations: any;
 
   onRangeChange(event: any) {
     this.valInput = (<HTMLInputElement>event.target).value.trim();
@@ -35,14 +38,12 @@ export class EvaluateXrayComponent {
     this.id = this.route.snapshot.paramMap.get('xray_id');
     this.getXray(this.id);
     setTimeout(() => {
-      this.createLabelStudio();
+      this.createLabelStudio()
     }, 1000);
     //this.createLabelStudio();
-
-
   }
- getXray(id) {
-   this.userService.getXray(id).subscribe((res: any) => {
+  getXray(id) {
+    this.userService.getXray(id).subscribe((res: any) => {
       if (res.success) {
         this.xRayData = res.getData;
         console.log(this.xRayData[0]?.xray_image.path)
@@ -70,19 +71,19 @@ export class EvaluateXrayComponent {
  </View>
  <View style="flex: 10%;float:right">
  <EllipseLabels name="tag" toName="img">
- <Label value="Add Mark" style=""></Label>
-
+ <Label value="Add Mark" fillColor="#52c825" style=""></Label>
+ <Label value="Add Mark1" style=""></Label>
  
  </EllipseLabels>
  </View>
  </View>
  `,
- 
+
       interfaces: [
-       // "panel",
+        // "panel",
         "update",
         "submit",
-         "controls",
+        "controls",
         /*"side-column",
         "annotations:menu",
         "annotations:add-new",
@@ -90,19 +91,20 @@ export class EvaluateXrayComponent {
         "predictions:menu",*/
       ],
 
-     /* user: {
-        pk: 1,
-        firstName: "James",
-        lastName: "Dean"
-      },*/
+      /* user: {
+         pk: 1,
+         firstName: "James",
+         lastName: "Dean"
+       },*/
 
       task: {
-       annotations: [],
-       predictions: [],
-       // id: 1,
+        annotations: [ ],
+        predictions: [],
+        // id: 1,
         data: {
-          image: this.baseLink+this.xRayData[0]?.xray_image.path
+          image: this.baseLink + this.xRayData[0]?.xray_image.path
         }
+
       },
 
       onLabelStudioLoad: function (LS: { annotationStore: { addAnnotation: (arg0: { userGenerate: boolean; }) => any; selectAnnotation: (arg0: any) => void; }; }) {
@@ -111,9 +113,21 @@ export class EvaluateXrayComponent {
         });
         LS.annotationStore.selectAnnotation(c.id);
       },
-        onSubmitAnnotation: async function (LS, annotation) {
-          console.log(annotation.serializeAnnotation()); 
-    
+      onSubmitAnnotation: async function (LS, annotation) {
+
+
+       
+        
+        
+        this.marker = annotation.serializeAnnotation().map(({ id,original_height,original_width,
+          value }) => ({ id,original_height,original_width, value }))
+       console.log(this.marker[0].id)
+      // localStorage.setItem('markInfo', ['markInfo']);
+        localStorage.setItem('markInfo', JSON.stringify(this.marker));
+        
+        console.log(annotation.serializeAnnotation());
+      
+        return annotation.serializeAnnotation();
       },
       onUpdateAnnotation: async function (LS, annotation) {
         console.log(annotation.serializeAnnotation());
@@ -122,38 +136,29 @@ export class EvaluateXrayComponent {
 
 
     });
-    
-   console.log(this.labelStudio)
+
+    console.log(this.labelStudio)
     return this.labelStudio;
-  }
-
-  createLabe(name){
-    console.log(name)
-  }
-
-  submit(){
-    var labelStudio = new LabelStudio('label-studio', {
-
-      onSubmitAnnotation: async function (LS, annotation) {
-        console.log(annotation.serializeAnnotation());
-      },
-    })
 
   }
+
+
   //
 
 
 
   save() {
-    Swal.fire({
+    /*Swal.fire({
       title: "",
       html: '<span> Accuracy    &nbsp<input type="range" min="0" max="100" value="50" style="width:50%;margin-left:0.5rem"></span><br>' +
         '<br><span class="mt-2">Tag  &nbsp &nbsp &nbsp &nbsp &nbsp<input type="text" style="width:52%;margin-left:0.5rem"></span>',
       confirmButtonText: "Save",
       confirmButtonColor: '#321FDB',
-    });
-  
-   (<HTMLElement>document.getElementsByClassName('ls-submit-btn')[0]).click()
+    });*/
+    (<HTMLElement>document.getElementsByClassName('ls-submit-btn')[0]).click()
+   console.log( this.labelStudio.onSubmitAnnotation,"***")
+   console.log(this.marker)
+
   }
   addMarker(event: MouseEvent) {
     const position = {
@@ -166,32 +171,35 @@ export class EvaluateXrayComponent {
 
   }
   saveMarks() {
-
-
+    console.log(this.annotations)
+  
+   var markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
+  console.log(markInfo)
     const xray_info = {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
-      marker: this.marker,
+      marker: markInfo,
       accuracy_per: this.valInput,
 
     }
     console.log(xray_info)
     this.userService.addEvalData(xray_info).subscribe((res: any) => {
-      if (res.success) {
-        Swal.fire({
-          text: res.message,
-          icon: 'success',
-        });
-        document.getElementById('close')?.click();
-      } else {
-        Swal.fire({
-          text: res.message,
-          icon: 'error',
-        });
-
-      }
-
-    })
+        if (res.success) {
+          Swal.fire({
+            text: res.message,
+            icon: 'success',
+          });
+          document.getElementById('close')?.click();
+        } else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error',
+          });
+  
+        }
+  
+      })
+      localStorage.removeItem('markInfo')
   }
   renderImage(img: string) {
     if (img) {
@@ -201,3 +209,33 @@ export class EvaluateXrayComponent {
     }
   }
 }
+
+/*
+ "result":this.userMark.map((element:any) => { [
+          {   
+              "from_name": "tag",
+              "id": "Dx_aB91ISN",
+              
+              "source": "$image",
+              // "original_width":this.userMark[1]?.original_height,
+              "original_width":element?.original_width,
+               "original_height": element?.original_height,
+              "image_rotation": 0,
+              "to_name": "img",
+              "type": "ellipselabels",
+              "value": {
+               
+                "height": 10.458911419423693,
+                "ellipselabels": [
+                  "Add Mark"
+                ],
+               "radiusX":element?.value.radiusX,
+               "radiusY":element?.value.radiusY,
+                "rotation": 0,
+               
+                "x":element?.value.x,
+                "y":element?.value.y
+              }
+          }
+      ]}),
+ */
