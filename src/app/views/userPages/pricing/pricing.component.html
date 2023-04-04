@@ -587,11 +587,12 @@
       <div class="modal-footer justify-content-between">
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
-        <a  class="btn btn-primary pd-1 fw-bold fs-6" (click)="payView()">
+        <!-- (click)="payView()" -->
+        <a  class="btn btn-primary pd-1 fw-bold fs-6" >
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
           Pay
-          <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal> -->
+          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal>
         </a>
         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked && subsId != 0 && paypalView" class="w-100 paypal-btn"></ngx-paypal> -->
       </div>

@@ -173,7 +173,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
     this.payPalConfig = {
         currency: 'EUR',
-        clientId: 'Abah--H0KR5c54b_YianWFSKudOeRtX_a-xgswRJGHXIARFe4ZEQqA6mznnzL4Qn4V2BYUC9YK1bMH4M',
+        clientId: 'sb',
         // ! for orders on client side
         createOrderOnClient: (data) => < ICreateOrderRequest > {
 
@@ -181,21 +181,21 @@ export class PricingComponent implements OnInit, AfterViewInit {
             purchase_units: [{
               amount: {
                   currency_code: 'EUR',
-                  value: this.subsPrice.toString(),
+                  value: '9.99',
                   breakdown: {
                       item_total: {
                           currency_code: 'EUR',
-                          value: this.subsPrice.toString()
+                          value: '9.99'
                       }
                   }
               },
               items: [{
-                  name: this.subsTitle,
+                  name: 'Enterprise Subscription',
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                       currency_code: 'EUR',
-                      value: this.subsPrice.toString(),
+                      value: '9.99',
                   },
               }]
             }]
