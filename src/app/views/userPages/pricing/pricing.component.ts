@@ -108,6 +108,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     },
     // http_post: this.userService
   };
+  toastr: any;
 
 
 
@@ -213,6 +214,71 @@ export class PricingComponent implements OnInit, AfterViewInit {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then(details => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
+
+       
+    //my code
+    this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
+         console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+         this.userData = res.getData;
+         console.log(this.userData, this.userInfo,this.userInfo.token)
+  
+         if (res.success) {
+           if (this.userData[0].subscription_details.status == true) {
+             Swal.fire({
+               text: "You have already subscribed",
+               icon: 'error',
+             });
+             return false;
+           }
+  
+           else {
+  
+             var end_date;
+             var now = new Date();
+             console.log( this.subsType)
+             if (this.subsType == "Monthly") {
+  
+  
+               end_date = new Date(now.setMonth(now.getMonth() + 1));
+               end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+               console.log(end_date, "Date", new Date());
+  
+             }
+             else if (this.subsType === "Yearly") {
+  
+  
+               end_date = new Date(now.setMonth(now.getMonth() + 12));
+  
+               console.log(end_date, "Date", new Date());
+  
+             }
+           }
+          }
+             this.userPlanData = {
+                       sub_id: this.subsId,
+                       end_date: end_date,
+                       start_date: Date.now(),
+                     }
+                     this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+                       console.log(res)
+                       if (res.success) {
+                         //this.toastr.success(res.message);
+                         Swal.fire({
+                           text: "You have successfully subscribed",
+                           icon: 'success',
+                         });
+                         if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+                         {console.log("iff")
+                           this.router.navigateByUrl("/dashboard")
+                       }
+                       else{
+                         console.log("elseee")
+                         this.router.navigateByUrl("/login")
+                       }
+                        }
+                        })
+                       
+                      })
           });
         },
         // ! for orders on server side
