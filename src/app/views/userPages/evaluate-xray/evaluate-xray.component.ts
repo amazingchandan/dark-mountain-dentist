@@ -63,7 +63,7 @@ export class EvaluateXrayComponent {
   <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
   <Style> .Hint_main__1Svrz { display:none; }</Style>
   <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
- <View style="flex: 90%;  
+ <View style="flex: 90%;
  margin-top: -14px;">
  <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
  <Image name="img" value="$image" width="100%" height="100%"></Image>
@@ -72,8 +72,8 @@ export class EvaluateXrayComponent {
  <View style="flex: 10%;float:right">
  <EllipseLabels name="tag" toName="img">
  <Label value="Add Mark" fillColor="#52c825" style=""></Label>
- <Label value="Add Mark1" style=""></Label>
- 
+<!--<Label value="Add Mark1" style=""></Label>-->
+
  </EllipseLabels>
  </View>
  </View>
@@ -116,17 +116,17 @@ export class EvaluateXrayComponent {
       onSubmitAnnotation: async function (LS, annotation) {
 
 
-       
-        
-        
+
+
+
         this.marker = annotation.serializeAnnotation().map(({ id,original_height,original_width,
           value }) => ({ id,original_height,original_width, value }))
        console.log(this.marker[0].id)
       // localStorage.setItem('markInfo', ['markInfo']);
         localStorage.setItem('markInfo', JSON.stringify(this.marker));
-        
+
         console.log(annotation.serializeAnnotation());
-      
+
         return annotation.serializeAnnotation();
       },
       onUpdateAnnotation: async function (LS, annotation) {
@@ -172,7 +172,7 @@ export class EvaluateXrayComponent {
   }
   saveMarks() {
     console.log(this.annotations)
-  
+
    var markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
   console.log(markInfo)
     const xray_info = {
@@ -195,9 +195,9 @@ export class EvaluateXrayComponent {
             text: res.message,
             icon: 'error',
           });
-  
+
         }
-  
+
       })
       localStorage.removeItem('markInfo')
   }
@@ -212,10 +212,10 @@ export class EvaluateXrayComponent {
 
 /*
  "result":this.userMark.map((element:any) => { [
-          {   
+          {
               "from_name": "tag",
               "id": "Dx_aB91ISN",
-              
+
               "source": "$image",
               // "original_width":this.userMark[1]?.original_height,
               "original_width":element?.original_width,
@@ -224,7 +224,7 @@ export class EvaluateXrayComponent {
               "to_name": "img",
               "type": "ellipselabels",
               "value": {
-               
+
                 "height": 10.458911419423693,
                 "ellipselabels": [
                   "Add Mark"
@@ -232,7 +232,7 @@ export class EvaluateXrayComponent {
                "radiusX":element?.value.radiusX,
                "radiusY":element?.value.radiusY,
                 "rotation": 0,
-               
+
                 "x":element?.value.x,
                 "y":element?.value.y
               }
