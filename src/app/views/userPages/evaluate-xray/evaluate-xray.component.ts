@@ -72,7 +72,7 @@ export class EvaluateXrayComponent {
  <View style="flex: 10%;float:right">
  <EllipseLabels name="tag" toName="img">
  <Label value="Add Mark" fillColor="#52c825" style=""></Label>
- <Label value="Add Mark1" style=""></Label>
+ 
  
  </EllipseLabels>
  </View>
