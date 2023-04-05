@@ -49,117 +49,185 @@
     <div class="col-12">
       <h5 class="mb-n5 fw-bold position-relative">
         Registered Dentists
-        <input type="file" class="file-upload custom-file-input fw-semibold inputFile" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null" [ngStyle]="fileStyle"  >
-        <input type="file" class="">
+        <label
+          for="inputFiles"
+          class="inputFile btn btn-primary other-btn pd-1 fw-bold"
+          >Upload X-Ray</label
+        >
+        <input
+          type="file"
+          id="inputFiles"
+          name="inputFiles"
+          class="file-upload custom-file-input fw-semibold inputFile d-none"
+          (change)="uploadFile($event)"
+          accept="image/*"
+          multiple
+          onclick="this.value = null"
+          [ngStyle]="fileStyle"
+        />
       </h5>
-      <div class="table-responsive resposive-table" style="position: relative;">
-      <div class="card pt-0 table-card">
-
-
-        <div class="card-body pt-0" style="overflow-x: auto;">
-          <table datatable *ngIf="showContent" datatable="ng" id="datatable" class="row-border hover"
-          [dtOptions]="dtOptions"
-          >
-            <thead>
-              <tr>
-                <th class="text-nowrap">Uploaded Date</th>
-                <th class="text-nowrap">Evaluated Date</th>
-                <!-- <th>Subscription&nbsp;End Date</th> -->
-                <th>Action</th>
-                <!-- <th>Upload</th> -->
-                <th>Evaluation</th>
-                <!-- <th>Result</th> -->
-              </tr>
-            </thead>
-            <tbody  *ngIf="allData?.length != 0">
-              <tr *ngFor="let user of allData; let i = index">
-                <td>01/01/2023</td>
-                <td>05/05/2023</td>
-                <!-- <td>{{user.city | titlecase}}</td> -->
-                <!-- <td>{{user.contact_number}}</td> -->
-                <!-- <td>{{user.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
-                <td>
-                  <!-- <input class="custom-file-input2" type="file" [ngStyle]="fileStyle" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null"> -->
-                  <button
-                    type="button"
-                    class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModalCenter"
-                    (click)="openModal()"
-                  >
-                    View
-                  </button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
-                </td>
-                <!-- <td>
+      <div class="table-responsive resposive-table" style="position: relative">
+        <div class="card pt-0 table-card">
+          <div class="card-body pt-0" style="overflow-x: auto">
+            <table
+              datatable
+              *ngIf="showContent"
+              datatable="ng"
+              id="datatable"
+              class="row-border hover"
+              [dtOptions]="dtOptions"
+            >
+              <thead>
+                <tr>
+                  <th class="text-nowrap">Uploaded Date</th>
+                  <th class="text-nowrap">Evaluated Date</th>
+                  <!-- <th>Subscription&nbsp;End Date</th> -->
+                  <th>Action</th>
+                  <!-- <th>Upload</th> -->
+                  <th>Evaluation</th>
+                  <!-- <th>Result</th> -->
+                </tr>
+              </thead>
+              <tbody *ngIf="allData?.length != 0">
+                <tr *ngFor="let user of allData; let i = index">
+                  <td>{{user.created_at | date : 'short'}}</td>
+                  <td>{{user?.updated_at | date : 'short'}}</td>
+                  <!-- <td>{{user.city | titlecase}}</td> -->
+                  <!-- <td>{{user.contact_number}}</td> -->
+                  <!-- <td>{{user.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                  <td>
+                    <!-- <input class="custom-file-input2" type="file" [ngStyle]="fileStyle" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null"> -->
+                    <button
+                      type="button"
+                      class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter"
+                      (click)="openModal()"
+                    >
+                      View
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                      (click)="evaluate(user._id)"
+                      [disabled]="hidden"
+                    >
+                      Evaluate X-Ray
+                    </button>
+                  </td>
+                  <!-- <td>
                   <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
                 </td> -->
-                <!-- <td>85%</td> -->
-              </tr>
-             <!-- <tr>
+                  <!-- <td>85%</td> -->
+                </tr>
+                <!-- <tr>
 
               </tr>-->
-
-            </tbody>
+              </tbody>
               <tbody *ngIf="this.allData?.length == 0">
                 <tr>
-                  <td colspan="8" class="no-data-available text-center" >No data available in table</td>
-                  <td colspan="0" class="no-data-available p-0" ></td>
-                  <td colspan="0" class="no-data-available p-0" ></td>
-                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="8" class="no-data-available text-center">
+                    No data available in table
+                  </td>
+                  <td colspan="0" class="no-data-available p-0"></td>
+                  <td colspan="0" class="no-data-available p-0"></td>
+                  <td colspan="0" class="no-data-available p-0"></td>
                   <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
                 </tr>
               </tbody>
             </table>
           </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
 
-  </section>
-
-  <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="exampleModalLongTitle">
+  <div class="backdrop" *ngIf="display">
+    <div class="sub-backdrop-container w-100 h-100">
+      <div class="backdrop-header w-100 d-flex justify-content-between align-items-center">
+        <h3 class="fw-bold m-0">
           View Uploaded Image
-        </h5>
+        </h3>
+        <i
+          class="fa-solid fa-xmark fs-5"
+          style="cursor: pointer;"
+          (click)="backdropModal()"
+          title="Close"
+        ></i>
       </div>
-      <div class="modal-body">
-        <div class="modal-dialog">
-          <!-- <div class="modal-content"> -->
-            <!-- <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> -->
-            <div class="modal-body">
-              <img src="../../../../assets/images/xray.jpg" alt="" width="100%">
-              <div class="mt-4">
-                <span class="fw-bold me-4">Re-upload:</span>
-                <input type="file" class="file-upload custom-file-input fw-semibold" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null" [ngStyle]="fileStyle"  >
-              </div>
-            </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
-          <!-- </div> -->
-        </div>
+      <div class="backdrop-body w-100">
+        <!-- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" > -->
+        <img src={{url}} alt="" class="w-100 h-100" >
       </div>
-      <div class="modal-footer">
-        <button  id="launch_ad" type="button" class="btn btn-secondary cancel-btn fw-bold pd-1 " data-bs-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-save pd-1 fw-bold other-btn "
+      <div class="backdrop-footer w-100 d-flex justify-content-end">
+        <label for="inputFiles" class="btn btn-primary other-btn pd-1 fw-bold re-upload-xray"
+          >Re-Upload X-Ray</label
         >
+        <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
           Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
         </button>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- <div class="backdrop" [ngStyle]="{ 'display': display }"></div>
+  <div
+    class="modal fade modal-lg"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+    [ngStyle]="{'display':display}"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="exampleModalLongTitle">
+            View Uploaded Image
+          </h5>
+        </div>
+        <div class="modal-body">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body forzIndex">
+              <img
+                src="../../../../assets/images/xray.jpg"
+                alt=""
+                width="100%"
+              />
+              <div class="mt-4">
+                <span class="fw-bold me-4">Re-upload:</span>
+                <label for="inputFiles1" class="btn btn-primary other-btn pd-1 fw-bold" style="z-index: 100;">Re-Upload</label>
+                <input type="file" id="inputFiles1" name="inputFiles1" class="file-upload custom-file-input fw-semibold inputFile" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null" [ngStyle]="fileStyle" style="z-index: 100;">
+                <input type="file">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <label for="inputFiles" class="btn btn-primary other-btn pd-1 fw-bold"
+            >Re-Upload</label
+          >
+          <button  id="launch_ad" type="button" class="btn btn-secondary cancel-btn fw-bold pd-1 " data-bs-dismiss="modal">
+          Close
+        </button>
+          <button type="button" class="btn btn-save pd-1 fw-bold other-btn">
+            Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->
