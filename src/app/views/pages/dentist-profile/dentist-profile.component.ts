@@ -27,6 +27,7 @@ export class DentistProfileComponent implements OnInit {
   // userInfo:any;
   role: any;
   age: any;
+  all_subData: any={};
 
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
@@ -136,7 +137,7 @@ export class DentistProfileComponent implements OnInit {
           // console.log(this.planData[0].type)
         }
       })
-
+  
       //--------
 
       if (res.success) {
@@ -183,12 +184,23 @@ export class DentistProfileComponent implements OnInit {
 
       }
     });
+     //allSubscriptionDetail Api
+     this.apiService.getUserAllSubById(id).subscribe((res: any) => {
+      console.log(res, "xray");
+      this.all_subData = res.getData;
+
+      console.log(this.all_subData)
+    })
+
+
     this.apiService.getUserXrayById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.xrayData = res.getData;
 
       console.log(this.xrayData)
     })
+
+   
   }
   updateUser() {
     if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
