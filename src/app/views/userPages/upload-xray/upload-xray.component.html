@@ -108,14 +108,26 @@
                     </button>
                   </td>
                   <td>
+                    <div *ngIf="user.evaluation_status==true">
                     <button
                       type="button"
                       class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                      (click)="evaluate(data?._id)"
-                      [disabled]="hidden"
+                      (click)="evaluate(user._id)"
+                      [disabled]="true"
                     >
                       Evaluate X-Ray
                     </button>
+                  </div>
+                  <div *ngIf="user.evaluation_status==false">
+                    <button
+                      type="button"
+                      class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                      (click)="evaluate(user._id)"
+                      [disabled]="false"
+                    >
+                      Evaluate X-Ray
+                    </button>
+                  </div>
                   </td>
                   <!-- <td>
                   <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>

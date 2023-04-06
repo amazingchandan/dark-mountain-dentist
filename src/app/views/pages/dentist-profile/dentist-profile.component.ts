@@ -29,6 +29,8 @@ export class DentistProfileComponent implements OnInit {
   age: any;
   all_subData: any={};
 
+
+  
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,

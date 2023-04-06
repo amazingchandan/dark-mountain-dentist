@@ -37,9 +37,10 @@ export class EvaluateXrayComponent {
  ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('xray_id');
     this.getXray(this.id);
-    setTimeout(() => {
+   /* setTimeout(() => {
+     
       this.createLabelStudio()
-    }, 1000);
+    }, 1000);*/
     //this.createLabelStudio();
   }
   getXray(id) {
@@ -47,6 +48,7 @@ export class EvaluateXrayComponent {
       if (res.success) {
         this.xRayData = res.getData;
         console.log(this.xRayData[0]?.xray_image.path)
+        this.createLabelStudio()
       }
       else {
         return res.messages;
@@ -71,7 +73,7 @@ export class EvaluateXrayComponent {
  </View>
  <View style="flex: 10%;float:right">
  <EllipseLabels name="tag" toName="img">
- <Label value="Add Mark" fillColor="#52c825" style=""></Label>
+ <Label value="Add Mark" background="green"></Label>
 <!--<Label value="Add Mark1" style=""></Label>-->
 
  </EllipseLabels>
@@ -125,7 +127,7 @@ export class EvaluateXrayComponent {
       // localStorage.setItem('markInfo', ['markInfo']);
         localStorage.setItem('markInfo', JSON.stringify(this.marker));
 
-        console.log(annotation.serializeAnnotation());
+        console.log(annotation.serializeAnnotation(),"original");
 
         return annotation.serializeAnnotation();
       },
