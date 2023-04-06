@@ -93,6 +93,7 @@ export class MarkXrayComponent {
         "to_name": "img",
         "type": "ellipselabels",
         "fillColor": "#00ff00",
+        "background":"green",
         "value": {
           
           
@@ -121,15 +122,16 @@ export class MarkXrayComponent {
   <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
   <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
   <Style> .Hint_main__1Svrz { display:none; }</Style>
-  <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
+  <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; visibility:hidden;}</Style>
  <View style="flex: 90%;  
  margin-top: -14px;">
  <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
  <Image name="img" value="$image" width="100%" height="100%"></Image>
- <Style> canvas { width:594px; height:354px !important }</Style>
+ <Style> canvas { width:594px; height:354px !important; color:green }</Style>
  </View>
  <View style="flex: 10%;float:right">
- <EllipseLabels name="labels" toName="img" style="strokeColor:#00ff00;fillColor:#00ff00">
+ <EllipseLabels name="labels" toName="img" background="green">
+ <Label value="Add Mark" background="green" />
  </EllipseLabels>
  </View>
  </View>

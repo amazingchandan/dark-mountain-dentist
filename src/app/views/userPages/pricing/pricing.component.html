@@ -386,7 +386,7 @@
       <button
         class="btn pd-1 other-btn fw-bold paynow"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModalCenterNext"
+        data-bs-target="#myModal"
         (click)="checked ? '' : handleClick()"
       >
         Checkout
@@ -527,13 +527,13 @@
 
 <div
   class="modal fade modal-md"
-  id="exampleModalCenterNext"
+  id="myModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document" >
     <div class="modal-content modal-tall">
       <div class="modal-header justify-content-between align-items-center">
         <div></div>
@@ -588,11 +588,11 @@
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
-        <a  class="btn btn-primary pd-1 fw-bold fs-6" >
+        <a  class="btn btn-primary pd-1 fw-bold fs-6">
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
           Pay
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal>
+          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn" data-bs-dismiss="modal" >Pay</ngx-paypal>
         </a>
         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked && subsId != 0 && paypalView" class="w-100 paypal-btn"></ngx-paypal> -->
       </div>

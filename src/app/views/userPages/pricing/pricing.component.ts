@@ -171,7 +171,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // }
   }
   private initConfig(): void {
-
+    document.getElementById('launch_ad').click()
     this.payPalConfig = {
         currency: 'EUR',
         clientId: 'sb',
@@ -214,14 +214,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then(details => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
-
-       
+             
+         
     //my code
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
          console.log(res, "resssssssssssssssssssssssssssssssssssssss")
          this.userData = res.getData;
          console.log(this.userData, this.userInfo,this.userInfo.token)
-  
+         
          if (res.success) {
            if (this.userData[0].subscription_details.status == true) {
              Swal.fire({
@@ -261,14 +261,19 @@ export class PricingComponent implements OnInit, AfterViewInit {
                      }
                      this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
                        console.log(res)
+                       
                        if (res.success) {
                          //this.toastr.success(res.message);
                          Swal.fire({
                            text: "You have successfully subscribed",
                            icon: 'success',
                          });
+                        var modal= document.getElementById("launch_ad");
+                         modal.style.display = "none";
                          if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
-                         {console.log("iff")
+                         {
+                          console.log("iff")
+                         
                            this.router.navigateByUrl("/dashboard")
                        }
                        else{
@@ -312,11 +317,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
     };
   }
   resetStatus(){
+    document.getElementById("launch_ad")?.click();
     console.log("THIS IS RESET FOR PAYPAL");
     console.log(this.subsPrice.toString(), this.subsTitle, this.subsType);
   }
   handleClose(){
-    // this.checked = false;
+    this.checked = false;
   }
   checking(event){
     this.checked = event.target.checked
