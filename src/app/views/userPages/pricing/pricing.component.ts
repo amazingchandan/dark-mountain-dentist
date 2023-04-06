@@ -173,7 +173,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   private initConfig(): void {
 
     this.payPalConfig = {
-        currency: 'EUR',
+        currency: 'USD',
         clientId: 'sb',
         // ! for orders on client side
         createOrderOnClient: (data) => < ICreateOrderRequest > {
@@ -181,11 +181,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
             intent: 'CAPTURE',
             purchase_units: [{
               amount: {
-                  currency_code: 'EUR',
+                  currency_code: 'USD',
                   value: '9.99',
                   breakdown: {
                       item_total: {
-                          currency_code: 'EUR',
+                          currency_code: 'USD',
                           value: '9.99'
                       }
                   }
@@ -195,7 +195,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
-                      currency_code: 'EUR',
+                      currency_code: 'USD',
                       value: '9.99',
                   },
               }]
@@ -215,13 +215,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
           actions.order.get().then(details => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
 
-       
+
     //my code
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
          console.log(res, "resssssssssssssssssssssssssssssssssssssss")
          this.userData = res.getData;
          console.log(this.userData, this.userInfo,this.userInfo.token)
-  
+
          if (res.success) {
            if (this.userData[0].subscription_details.status == true) {
              Swal.fire({
@@ -230,27 +230,27 @@ export class PricingComponent implements OnInit, AfterViewInit {
              });
              return false;
            }
-  
+
            else {
-  
+
              var end_date;
              var now = new Date();
              console.log( this.subsType)
              if (this.subsType == "Monthly") {
-  
-  
+
+
                end_date = new Date(now.setMonth(now.getMonth() + 1));
                end_date = new Date(now.setMinutes(now.getMinutes() + 5));
                console.log(end_date, "Date", new Date());
-  
+
              }
              else if (this.subsType === "Yearly") {
-  
-  
+
+
                end_date = new Date(now.setMonth(now.getMonth() + 12));
-  
+
                console.log(end_date, "Date", new Date());
-  
+
              }
            }
           }
@@ -277,7 +277,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                        }
                         }
                         })
-                       
+
                       })
           });
         },

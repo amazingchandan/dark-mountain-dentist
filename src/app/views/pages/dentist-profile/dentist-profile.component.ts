@@ -56,6 +56,21 @@ export class DentistProfileComponent implements OnInit {
     // this.userInfo=userInfo;
     console.log(this.userID);
 
+    // this.dtOptions = {
+    //   pagingType: 'full_numbers',
+    //   pageLength: 10,
+    //   language: {
+    //     search:"",
+    //     searchPlaceholder: 'Search ',
+    //   },
+    //   info:false,
+    //   ordering: false,
+    //   responsive:true,
+    //   search:true,
+    //   dom: 'Bfrtip',
+
+    // };
+
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
@@ -137,7 +152,7 @@ export class DentistProfileComponent implements OnInit {
           // console.log(this.planData[0].type)
         }
       })
-  
+
       //--------
 
       if (res.success) {
@@ -200,7 +215,7 @@ export class DentistProfileComponent implements OnInit {
       console.log(this.xrayData)
     })
 
-   
+
   }
   updateUser() {
     if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {

@@ -3,74 +3,131 @@
     <div class="card-body p-4">
       <h5 class="well position-relative">
         Personal Information
-        <button class="cancel-btn rounded text-light fw-bold back-btn" (click)="handleClick()" *ngIf="this.role == 'admin' && this.dentistId != this.userID">Back</button>
+        <button
+          class="cancel-btn rounded text-light fw-bold back-btn"
+          (click)="handleClick()"
+          *ngIf="this.role == 'admin' && this.dentistId != this.userID"
+        >
+          Back
+        </button>
       </h5>
 
-
       <div class="row">
-
-
         <form [formGroup]="addSuperForm" class="form-inline" role="form">
-
           <div class="row mb-2 mt-2">
             <div class="col-md-4 form-group">
-
               <label class="mb-2">First Name<sup>*</sup></label>
-              <input type="text" placeholder="First Name" formControlName="first_name" class="form-control" maxlength="20">
+              <input
+                type="text"
+                placeholder="First Name"
+                formControlName="first_name"
+                class="form-control"
+                maxlength="20"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
-              <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control" maxlength="20">
+              <input
+                type="text"
+                placeholder="Last Name"
+                formControlName="last_name"
+                class="form-control"
+                maxlength="20"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID/Username<sup>*</sup></label>
-              <input type="text" placeholder="Email" formControlName="email" class="form-control" maxlength="100">
-
+              <input
+                type="text"
+                placeholder="Email"
+                formControlName="email"
+                class="form-control"
+                maxlength="100"
+              />
             </div>
           </div>
           <div class="row mb-2"></div>
           <div class="row mb-2">
             <div class="col-md-4 form-group">
-
               <label class="mb-2">Contact Number<sup>*</sup></label>
-              <input type="tel" placeholder="Contact Number" formControlName="contact_number" class="form-control"  (keypress)="onlyNumberKey($event)"  maxlength= 10>
+              <input
+                type="tel"
+                placeholder="Contact Number"
+                formControlName="contact_number"
+                class="form-control"
+                (keypress)="onlyNumberKey($event)"
+                maxlength="10"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Address 1<sup>*</sup></label>
-              <input type="text" placeholder="Address 1" formControlName="address1" class="form-control me-4" maxlength="70">
+              <input
+                type="text"
+                placeholder="Address 1"
+                formControlName="address1"
+                class="form-control me-4"
+                maxlength="70"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Address 2</label>
-              <input type="text" placeholder="Address 2" formControlName="address2" class="form-control" maxlength="70">
+              <input
+                type="text"
+                placeholder="Address 2"
+                formControlName="address2"
+                class="form-control"
+                maxlength="70"
+              />
             </div>
-
           </div>
-          <div class="row mb-2">
-
-          </div>
+          <div class="row mb-2"></div>
           <div class="row mb-2">
             <div class="col-md-4 form-group">
               <label class="mb-2">City<sup>*</sup></label>
-              <input type="text" placeholder="City" formControlName="city" class="form-control me-4" maxlength="15">
+              <input
+                type="text"
+                placeholder="City"
+                formControlName="city"
+                class="form-control me-4"
+                maxlength="15"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">State<sup>*</sup></label>
-              <input type="text" placeholder="State" formControlName="state" class="form-control" maxlength="20">
+              <input
+                type="text"
+                placeholder="State"
+                formControlName="state"
+                class="form-control"
+                maxlength="20"
+              />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Zip<sup>*</sup></label>
-              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10" (keypress)="onlyNumberKey($event)">
-
+              <input
+                type="number"
+                placeholder="Zip"
+                formControlName="pincode"
+                class="form-control me-5"
+                maxlength="10"
+                (keypress)="onlyNumberKey($event)"
+              />
             </div>
           </div>
-
 
           <div class="row mb-2"></div>
           <div class="row mb-2">
             <div class="col-md-4 form-group">
               <label class="mb-2" for="inputState">Country<sup>*</sup></label>
-              <select class="form-select me-4" aria-label="Default select example" formControlName="country" [value]="country">
-                <option value="" [selected]="true" [disabled]="true">Select option</option>
+              <select
+                class="form-select me-4"
+                aria-label="Default select example"
+                formControlName="country"
+                [value]="country"
+              >
+                <option value="" [selected]="true" [disabled]="true">
+                  Select option
+                </option>
                 <option value="India">India</option>
                 <option value="America">America</option>
                 <option value="Japan">Japan</option>
@@ -79,34 +136,56 @@
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Age<sup>*</sup></label>
-              <input type="number" placeholder="Age" formControlName="age" class="form-control" maxlength="20" (keypress)="onlyNumberKey($event)">
+              <input
+                type="number"
+                placeholder="Age"
+                formControlName="age"
+                class="form-control"
+                maxlength="20"
+                (keypress)="onlyNumberKey($event)"
+              />
             </div>
             <div class="col-md-4 btn-div">
-
-              <button type="button"
-                class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder" (click)="resetUser()">Reset&nbsp;<i
-                  class="fa-solid fa-arrows-rotate ms-1"></i></button>
-              <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
-                (click)="updateUser()">&nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
+              <button
+                type="button"
+                class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder"
+                (click)="resetUser()"
+              >
+                Reset&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
+                (click)="updateUser()"
+              >
+                &nbsp;Save&nbsp;<i
+                  class="fa-sharp fa-regular fa-floppy-disk ms-1"
+                ></i>
+              </button>
             </div>
           </div>
         </form>
 
+        <div
+          class="sub-container"
 
-
-        <div class="sub-container " [classList]="this.role =='admin'? 'border-top border-grey mt-3': ''">
+        >
           <div class="sub-container mt-4">
-            <h5 *ngIf="this.role =='admin'">Subscription Details</h5>
-            <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status==true">
-
-
+            <!-- <h5 *ngIf="this.userID != this.dentistId">Subscription Details THIS</h5> -->
+            <div
+              class="row mt-3"
+              *ngIf="this.userData[0]?.subscription_details.status == true"
+            >
               <!--new code-->
-              <div class="container mt-3 xray-table-container border-top p-0" *ngIf="this.role=='dentist'">
+              <div
+                class="container xray-table-container border-top p-0"
+                *ngIf="this.role == 'dentist'"
+              >
                 <!--p-0-->
                 <div class="sub-coontainer mt-4 xray-row">
                   <h5>Subscription Details</h5>
                   <div class="row mt-3">
-                    <div class="col-12">
+                    <div class="col-12 overflowForScroll">
                       <!--pe-0-->
                       <table class="table table-bordered row-border hover">
                         <thead>
@@ -117,27 +196,51 @@
                             <th scope="col">View Details</th>
                           </tr>
                         </thead>
-                        <tbody  *ngIf="this.all_subData?.all_subscription_details?.length != 0">
-                          <tr *ngFor="let data of this.all_subData?.all_subscription_details; let i = index">
-                            <td> {{data.subscription_id.plan_name}}</td>
-                            <td>{{ data.end_date| date: 'dd/MM/yyyy' }}</td>
-                            <td>{{data.subscription_id.amount}}</td>
+                        <tbody
+                          *ngIf="
+                            this.all_subData?.all_subscription_details
+                              ?.length != 0
+                          "
+                        >
+                          <tr
+                            *ngFor="
+                              let data of this.all_subData
+                                ?.all_subscription_details;
+                              let i = index
+                            "
+                          >
+                            <td>{{ data.subscription_id.plan_name }}</td>
+                            <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
+                            <td>{{ data.subscription_id.amount }}</td>
                             <td>
                               <!-- removed href from <a></a> for now, please add later when using it -->
-                              <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                                  View Details</button></a>
+                              <a
+                                ><button
+                                  type="button"
+                                  class="btn btn-primary pd-1 view-btn fw-bolder"
+                                  title="View"
+                                >
+                                  View Details
+                                </button></a
+                              >
                             </td>
-                           <!-- <td>
+                            <!-- <td>
                               <div class="custom-control custom-checkbox">
                                 <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
                               </div>
                             </td>-->
                           </tr>
-
                         </tbody>
-                        <tbody *ngIf="this.all_subData?.all_subscription_details?.length == 0">
+                        <tbody
+                          *ngIf="
+                            this.all_subData?.all_subscription_details
+                              ?.length == 0
+                          "
+                        >
                           <tr>
-                            <td colspan="3" class="no-data-available" >No data!</td>
+                            <td colspan="3" class="no-data-available">
+                              No data!
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -145,15 +248,22 @@
                   </div>
                 </div>
               </div>
-             <!--new code end-->
+              <!--new code end-->
 
-
-
-             <div class="col-sm-3" *ngIf="this.role =='admin'">Current Plan : {{this.planData[0]?.type}}</div>
-              <div class="col-sm-3 me-5 w-auto" *ngIf="this.role =='admin'">
-                <span>  Subscription End Date : {{this.end_date| date: 'dd/MM/yyyy'}}</span>
+              <!-- old code -->
+              <!-- <div class="col-sm-3" *ngIf="this.role == 'admin'">
+                Current Plan : {{ this.planData[0]?.type }}
               </div>
-              <div class="col-sm-3 ms-3" *ngIf="this.role =='admin'">Subscription Amount : ${{this.planData[0]?.amount}}</div>
+              <div class="col-sm-3 me-5 w-auto" *ngIf="this.role == 'admin'">
+                <span>
+                  Subscription End Date :
+                  {{ this.end_date | date : "dd/MM/yyyy" }}</span
+                >
+              </div>
+              <div class="col-sm-3 ms-3" *ngIf="this.role == 'admin'">
+                Subscription Amount : ${{ this.planData[0]?.amount }}
+              </div> -->
+              <!-- old code end -->
 
               <!-- <div *ngIf="this.role =='admin'">
                 <div class="col-sm-3 ms-5 adminbtn-cancel ps-3">
@@ -164,15 +274,92 @@
 
                 </div>
               </div> -->
-
             </div>
-            <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status==false && this.role =='admin'">
 
-              <div class="col-sm-3">Current Plan : </div>
-              <div class="col-sm-3 me-5 w-auto">
-                <span>  Subscription End Date : </span>
+            <!-- ! new condition for admin to see dentist details -->
+            <div
+                class="container mt-3 xray-table-container border-top p-0"
+                *ngIf="this.userID != this.dentistId"
+              >
+                <!--p-0-->
+                <div class="sub-coontainer mt-4 xray-row">
+                  <h5>Subscription Details</h5>
+                  <div class="row mt-3">
+                    <div class="col-12 overflowForScroll">
+                      <!--pe-0-->
+                      <table class="table table-bordered row-border hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Plan</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">View Details</th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          *ngIf="
+                            this.all_subData?.all_subscription_details
+                              ?.length != 0
+                          "
+                        >
+                          <tr
+                            *ngFor="
+                              let data of this.all_subData
+                                ?.all_subscription_details;
+                              let i = index
+                            "
+                          >
+                            <td>{{ data.subscription_id.plan_name }}</td>
+                            <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
+                            <td>{{ data.subscription_id.amount }}</td>
+                            <td>
+                              <!-- removed href from <a></a> for now, please add later when using it -->
+                              <a
+                                ><button
+                                  type="button"
+                                  class="btn btn-primary pd-1 view-btn fw-bolder"
+                                  title="View"
+                                >
+                                  View Details
+                                </button></a
+                              >
+                            </td>
+                            <!-- <td>
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
+                              </div>
+                            </td>-->
+                          </tr>
+                        </tbody>
+                        <tbody
+                          *ngIf="
+                            this.all_subData?.all_subscription_details
+                              ?.length == 0
+                          "
+                        >
+                          <tr>
+                            <td colspan="3" class="no-data-available">
+                              No data!
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-3 ms-3">Subscription Amount : </div>
+            <div
+              class="row mt-3"
+              *ngIf="
+                this.userData[0]?.subscription_details.status == false &&
+                this.role == 'admin'
+              "
+            >
+              <!-- <div class="col-sm-3">Current Plan :</div>
+              <div class="col-sm-3 me-5 w-auto">
+                <span> Subscription End Date : </span>
+              </div>
+              <div class="col-sm-3 ms-3">Subscription Amount :</div> -->
 
               <!-- <div *ngIf="this.role =='admin'">
                 <div class="col-sm-3 ms-5 adminbtn-cancel ps-3">
@@ -183,35 +370,66 @@
 
                 </div>
               </div> -->
-
             </div>
-            <div *ngIf="this.role=='dentist'">
-
+            <div *ngIf="this.role == 'dentist'">
               <div class="row mt-3">
-                <div class="col-sm-3 button-div">
-                  <div class="col btn-cancel ms-2 ps-3">
-                    <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder" (click)="cancelSubfromUser()">
-                      Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
-                    </button>
-                    <button type="button" class="btn  ms-2 pd-1 other-btn fw-bolder">
-                      Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
-                    </button>
-                  </div>
+                <!-- <div class="col-sm-3 button-div"> -->
+                <!-- <div class="col btn-cancel ms-2 ps-3"> -->
+                <div class="d-flex justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-danger ms-2 pd-1 other-btn fw-bolder"
+                    (click)="cancelSubfromUser()"
+                  >
+                    Cancel Subscription&nbsp;<i
+                      class="fa-solid fa-ban ms-1"
+                    ></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn ms-2 pd-1 other-btn fw-bolder"
+                  >
+                    Renew Subscription&nbsp;<i
+                      class="fa-solid fa-arrows-rotate ms-1"
+                    ></i>
+                  </button>
                 </div>
+                <!-- </div> -->
+                <!-- </div> -->
               </div>
-              <div class="row mt-2">
+              <div class="row mt-3">
                 <div class="custom-control custom-checkbox">
-                  <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
-                 <span class="fw-semibold"> I agree to terms and conditions</span>
+                  <input
+                    class="form-check-input me-1"
+                    type="checkbox"
+                    value=""
+                    id="checkbox-1"
+                    checked
+                  />
+                  <span class="fw-semibold"
+                    ><span>Yes, I agree to</span>&nbsp;<u
+                      class="hand"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter"
+                      >terms</u
+                      >&nbsp;<span>&</span>&nbsp;<u
+                      class="hand"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter"
+                      >conditions</u
+                    >&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span
+                      >website.</span
+                    ></span
+                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
-      <div *ngIf="this.role==='admin'">
+
+      <!-- ! for users uploaded xray -->
+      <div *ngIf="this.userID != this.dentistId">
         <div class="container mt-3 xray-table-container border-top p-0">
           <!--p-0-->
           <div class="sub-coontainer mt-4 xray-row">
@@ -227,25 +445,37 @@
                       <th scope="col">Marked</th>
                     </tr>
                   </thead>
-                  <tbody  *ngIf="this.xrayData?.length != 0">
+                  <tbody *ngIf="this.xrayData?.length != 0">
                     <tr *ngFor="let data of this.xrayData; let i = index">
-                      <td>{{ data.created_at| date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ data.created_at | date : "dd/MM/yyyy" }}</td>
                       <td>
                         <!-- removed href from <a></a> for now, please add later when using it -->
-                        <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                            View Details</button></a>
+                        <a
+                          ><button
+                            type="button"
+                            class="btn btn-primary pd-1 view-btn fw-bolder"
+                            title="View"
+                          >
+                            View Details
+                          </button></a
+                        >
                       </td>
                       <td>
                         <div class="custom-control custom-checkbox">
-                          <input class="form-check-input" type="checkbox" value="" id="checkbox-1" checked />
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="checkbox-1"
+                            checked
+                          />
                         </div>
                       </td>
                     </tr>
-
                   </tbody>
                   <tbody *ngIf="this.xrayData?.length == 0">
                     <tr>
-                      <td colspan="3" class="no-data-available" >No data!</td>
+                      <td colspan="3" class="no-data-available">No data!</td>
                     </tr>
                   </tbody>
                 </table>
@@ -253,6 +483,105 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ! modal -->
+<div
+  class="modal fade modal-lg"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between align-items-center">
+        <div></div>
+        <h2
+          class="modal-title fw-bold d-flex justify-content-center fw-semibold"
+          id="exampleModalLongTitle"
+        >
+          Dark
+          <div class="mountain-color">Mountain</div>
+        </h2>
+        <i
+          id="launch_ad"
+          class="fa-solid fa-xmark fs-5 fontColor"
+          data-bs-dismiss="modal"
+          style="cursor: pointer"
+        ></i>
+      </div>
+      <div class="modal-body">
+        <h5>Terms & Conditions</h5>
+        <ol>
+          <li>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Perferendis quo aspernatur
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia vel
+            molestiae ratione nam ipsam neque porro ipsum quia accusamus eaque
+            molestias assumenda blanditiis obcaecati, dolore archit
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam,
+            minima vel. Ipsum distinctio,
+          </li>
+          <br />
+          <li>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
+            accusantium explicabo amet soluta eum, culpa opt
+          </li>
+          <br />
+          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea
+            ipsa ipsum, reiciendis rem aspernatur, quisquam temporibus nam odio
+            quaerat, fuga voluptate
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+            sapiente nemo, atque, officiis quae, aspernatur acc
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit labore
+            doloremque numquam quibusdam, voluptatum veniam architecto ab autem
+            laboriosam illo quos quam voluptas quasi!
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
+            veniam, dignissimos expedita, veritatis ne
+          </li>
+          <br />
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor
+            commodi beatae odio.
+          </li>
+        </ol>
+        <!-- <div class="d-flex justify-content-center align-items-center mb-3">
+          <input type="checkbox" name="check" id="" class="me-2" (change)="checking($event)" class="form-check-input m-0 me-2" [checked]="checked">
+          <span>I agree to terms and conditions</span>
+        </div> -->
+        <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked"></ngx-paypal> -->
+      </div>
+      <div class="modal-footer justify-content-start">
+        <small>&#169; All rights reserved</small>
+        <!-- <button
+          type="button"
+          class="btn btn-save pd-1 fw-bold other-btn "
+        >
+          Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
+        </button> -->
       </div>
     </div>
   </div>

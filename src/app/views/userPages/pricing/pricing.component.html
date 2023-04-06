@@ -453,7 +453,7 @@
           ></i>
         </div>
         <div class="modal-body">
-          <h3>Terms & Conditions</h3>
+          <h5>Terms & Conditions</h5>
           <ol>
             <li>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -544,7 +544,6 @@
           <div class="mountain-color">Mountain</div>
         </h2>
         <i
-          id="launch_ad"
           class="fa-solid fa-xmark fs-5"
           data-bs-dismiss="modal"
           style="cursor: pointer;"
@@ -588,12 +587,12 @@
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
-        <a  class="btn btn-primary pd-1 fw-bold fs-6" >
+        <button class="btn btn-primary pd-1 fw-bold fs-6" data-bs-dismiss="modal">
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
           Pay
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal>
-        </a>
+          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn" data-bs-dismiss="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"></ngx-paypal>
+        </button>
         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked && subsId != 0 && paypalView" class="w-100 paypal-btn"></ngx-paypal> -->
       </div>
     </div>

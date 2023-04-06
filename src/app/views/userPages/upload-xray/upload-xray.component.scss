@@ -77,15 +77,15 @@
   left: 0%;
   bottom: 0%;
   width:100%;
-  height:100vh;
+  height:100%;
   z-index: 1200;
-  padding: 5% 10%;
+  padding: 1% 10%;
 }
 .sub-backdrop-container{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
+  // display: flex;
+  // align-items: center;
+  // justify-content: flex-start;
+  // flex-direction: column;
   background: white;
   border-radius: 10px;
 }

@@ -30,7 +30,7 @@ sup {
 .btn-cancel {
   margin-top: -5%;
   margin-left: 2.9rem;
-  width: max-content;
+  // width: max-content;
 }
 .adminbtn-cancel{
   margin-top: -3%;
@@ -80,6 +80,19 @@ tbody tr td {
 
 i {
   color: #fff !important;
+}
+.fontColor {
+  color: #043049 !important;
+}
+.mountain-color {
+  color: #00d957;
+  font-size: inherit !important;
+}
+.hand {
+  cursor: pointer;
+}
+.overflowForScroll {
+  overflow-x: scroll;
 }
 .button-div{
   left: 65%;

@@ -240,13 +240,19 @@ export class UploadXrayComponent implements OnInit {
       return '../assets/images/no-image.jpg';
     }
   }
-  evaluate(xId) {
+  evaluate(id) {
     // [routerLink]="'/evaluate-x-ray'"
-    console.log(this.xRayData._id)
-    let id = this.xRayData._id
-    this.router.navigateByUrl('/evaluate-x-ray/' + xId);
+    console.log(this.xRayData._id, id)
+    // let id = this.xRayData._id
+    this.router.navigateByUrl('/evaluate-x-ray/' + id);
     this.hidden = true;
   }
+  // evaluate(){
+  //   // [routerLink]="'/evaluate-x-ray'"
+  //   console.log(this.xRayData._id)
+  //   let id =this.xRayData._id
+  //   this.router.navigateByUrl('/evaluate-x-ray/' + id);
+  //  }
 
 
 }

@@ -48,7 +48,7 @@
   <div class="row">
     <div class="col-12">
       <h5 class="mb-n5 fw-bold position-relative">
-        Registered Dentists
+        Uploaded X-Rays
         <label
           for="inputFiles"
           class="inputFile btn btn-primary other-btn pd-1 fw-bold"
@@ -89,12 +89,12 @@
                 </tr>
               </thead>
               <tbody *ngIf="allData?.length != 0">
-                <tr *ngFor="let user of allData; let i = index">
-                  <td>{{user.created_at | date : 'short'}}</td>
-                  <td>{{user?.updated_at | date : 'short'}}</td>
-                  <!-- <td>{{user.city | titlecase}}</td> -->
-                  <!-- <td>{{user.contact_number}}</td> -->
-                  <!-- <td>{{user.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                <tr *ngFor="let data of allData; let i = index">
+                  <td>{{data.created_at | date : 'short'}}</td>
+                  <td>{{data?.updated_at | date : 'short'}}</td>
+                  <!-- <td>{{data.city | titlecase}}</td> -->
+                  <!-- <td>{{data.contact_number}}</td> -->
+                  <!-- <td>{{data.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
                   <td>
                     <!-- <input class="custom-file-input2" type="file" [ngStyle]="fileStyle" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null"> -->
                     <button
@@ -111,7 +111,7 @@
                     <button
                       type="button"
                       class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                      (click)="evaluate(user._id)"
+                      (click)="evaluate(data?._id)"
                       [disabled]="hidden"
                     >
                       Evaluate X-Ray
@@ -145,11 +145,40 @@
   </div>
 
   <div class="backdrop" *ngIf="display">
-    <div class="sub-backdrop-container w-100 h-100">
+    <div class="modal-dialog modal-dialog-centered modal-lg sub-backdrop-container" role="document">
+      <div class="modal-content">
+        <div class="modal-header backdrop-header">
+          <h5 class="m-0 modal-title fw-bold">
+            View Uploaded Image
+          </h5>
+          <i
+            class="fa-solid fa-xmark fs-5"
+            style="cursor: pointer;"
+            (click)="backdropModal()"
+            title="Close"
+          ></i>
+        </div>
+        <div class="modal-body backdrop-body">
+          <!-- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" > -->
+          <img src={{url}} alt="" class="img-fluid" >
+        </div>
+        <div class="modal-footer backdrop-footer">
+          <label for="inputFiles" class="btn btn-primary other-btn pd-1 fw-bold re-upload-xray"
+            >Re-Upload X-Ray</label
+          >
+          <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
+            Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="backdrop" *ngIf="display">
+    <div class="sub-backdrop-container w-100 container-fluid">
       <div class="backdrop-header w-100 d-flex justify-content-between align-items-center">
-        <h3 class="fw-bold m-0">
+        <h4 class="fw-bold m-0">
           View Uploaded Image
-        </h3>
+        </h4>
         <i
           class="fa-solid fa-xmark fs-5"
           style="cursor: pointer;"
@@ -157,9 +186,8 @@
           title="Close"
         ></i>
       </div>
-      <div class="backdrop-body w-100">
-        <!-- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" > -->
-        <img src={{url}} alt="" class="w-100 h-100" >
+      <div class="backdrop-body col-12">
+        <img src={{url}} alt="" class="img-fluid" >
       </div>
       <div class="backdrop-footer w-100 d-flex justify-content-end">
         <label for="inputFiles" class="btn btn-primary other-btn pd-1 fw-bold re-upload-xray"
@@ -170,7 +198,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
 
 <!-- <div class="backdrop" [ngStyle]="{ 'display': display }"></div>
