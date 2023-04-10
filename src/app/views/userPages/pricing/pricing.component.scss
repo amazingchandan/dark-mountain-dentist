@@ -17,6 +17,9 @@
   font-size: 16px !important;
   padding: 10px 14px !important;
 }
+.text-wrap {
+  word-break: break-all;
+}
 // h4 {
 //   height: 20px !important;
 // }
@@ -144,8 +147,8 @@ body{
   margin-left: 10px;
 }
 .checkbox {
-  min-height: 16px !important;
-  min-width: 16px !important;
+  min-height: 22px !important;
+  min-width: 22px !important;
 }
 .inside-sub-container {
   width: 60%;
@@ -173,7 +176,7 @@ body{
   list-style-type: none;
 }
 .proceed-details li {
-  margin: 0 24%;
+  // margin: 0 24%;
 }
 .paypal-button-number-1, .paypal-button-tagline  {
   display: none !important;
@@ -181,13 +184,44 @@ body{
 .proceed-details {
   min-height: 110px !important;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
   flex-direction: column;
+  width: 100%;
+}
+.icon-position {
+  position: absolute;
+  // right: 24px;
+  top: 0px;
+  bottom: 0px;
+  // color: grey;
+}
+.sub-body-content{
+  min-width: 260px;
+  color: #043049;
+}
+form {
+  width: 100%;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+}
+.inputMargin {
+  margin-left: 20px;
 }
 // media queries for cards
 @media(max-width: 1240px){
   .inside-sub-container {
     width: 80%;
+  }
+}
+@media(max-width: 992px){
+  .body-content {
+    flex-direction: column-reverse;
+  }
+  .sub-body-content, .sub-body-content input {
+    width: 100%;
   }
 }
 @media(max-width: 945px){
@@ -197,27 +231,30 @@ body{
 }
 @media(max-width: 768px){
   .pricingFooter{
-    flex-direction: column;
+    // flex-direction: column;
   }
   .do-later-checkout-btn-container {
-    margin-top: 10px;
+    // margin-top: 10px;
   }
 }
-@media(max-width: 494px){
-  .proceed-details li {
-    margin: 0 19%;
+@media(max-width: 535px){
+  .inputContainer {
+    flex-direction: column;
+  }
+  .inputMargin {
+    margin-left: 0% !important;
   }
 }
-@media(max-width: 375px){
-  .proceed-details li {
-    margin: 0 14%;
-  }
-}
-@media(max-width: 320px){
-  .proceed-details li {
-    margin: 0 8%;
-  }
-}
+// @media(max-width: 375px){
+//   .proceed-details li {
+//     margin: 0 14%;
+//   }
+// }
+// @media(max-width: 320px){
+//   .proceed-details li {
+//     margin: 0 8%;
+//   }
+// }
 .paypal-button > .paypal-button-label-container{
   visibility: hidden !important;
 }

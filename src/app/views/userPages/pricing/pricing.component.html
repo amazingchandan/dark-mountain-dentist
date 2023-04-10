@@ -218,7 +218,14 @@
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
               <button
                 class="pd-1 fw-bold btn btn-primary w-100"
-                (click)="getSubscription(data._id, data.type, data.amount, data.plan_name)"
+                (click)="
+                  getSubscription(
+                    data._id,
+                    data.type,
+                    data.amount,
+                    data.plan_name
+                  )
+                "
               >
                 Subscribe
               </button>
@@ -226,7 +233,9 @@
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button
                 class="pd-1 fw-bold btn btn-primary w-100 cancel-selected"
-                (click)="getSubscription(0, data.type, data.amount, data.plan_name)"
+                (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name)
+                "
               >
                 Selected
               </button>
@@ -271,7 +280,14 @@
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
               <button
                 class="pd-1 fw-bold btn btn-primary w-100"
-                (click)="getSubscription(data._id, data.type, data.amount, data.plan_name)"
+                (click)="
+                  getSubscription(
+                    data._id,
+                    data.type,
+                    data.amount,
+                    data.plan_name
+                  )
+                "
               >
                 Subscribe
               </button>
@@ -279,7 +295,9 @@
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button
                 class="pd-1 fw-bold btn btn-primary w-100 cancel-selected"
-                (click)="getSubscription(0, data.type, data.amount, data.plan_name)"
+                (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name)
+                "
               >
                 Selected
               </button>
@@ -389,7 +407,7 @@
         class="btn pd-1 other-btn fw-bold paynow"
         data-bs-toggle="modal"
         data-bs-target="#myModal"
-        (click)="checked ? '' : handleClick()"
+        (click)="checkoutBtn()"
       >
         Checkout
       </button>
@@ -452,7 +470,7 @@
             id="launch_ad"
             class="fa-solid fa-xmark fs-5"
             data-bs-dismiss="modal"
-            style="cursor: pointer;"
+            style="cursor: pointer"
           ></i>
         </div>
         <div class="modal-body">
@@ -528,15 +546,17 @@
   </div>
 </div>
 
+<!-- ! pricing modal -->
 <div
-  class="modal fade modal-md"
+  class="modal fade modal-lg"
   id="myModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered modal-md" role="document" >
+  >
+  <!-- [hidden]="IsmodelShow" -->
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content modal-tall">
       <div class="modal-header justify-content-between align-items-center">
         <div></div>
@@ -549,29 +569,273 @@
         <i
           class="fa-solid fa-xmark fs-5"
           data-bs-dismiss="modal"
-          style="cursor: pointer;"
+          style="cursor: pointer"
         ></i>
       </div>
-      <div class="modal-body">
-        <div *ngIf="checked && subsId != 0">
-          <h4 class="text-center fw-semibold">Proceed to checkout</h4>
-          <ul class="proceed-details m-0 p-0">
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Plan name:</span>&nbsp;<span>{{subsTitle | titlecase}}</span>
-            </li>
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Plan type:</span>&nbsp;<span>{{subsType | titlecase}}</span>
-            </li>
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Price:</span>&nbsp;<span>₹{{subsPrice}}</span>
-            </li>
-          </ul>
+      <div class="modal-body px-5 py-4">
+        <div
+          *ngIf="checked && subsId != 0"
+          class="d-flex justify-content-evenly align-items-start body-content"
+        >
+          <div class="d-flex align-items-start flex-column sub-body-content">
+            <h5 class="text-center fw-semibold">Billing Details:</h5>
+            <form #register_form="ngForm" [formGroup]="registerForm">
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="First Name"
+                      formControlName="first_name"
+                      maxlength="25"
+                    />
+                    <!-- <i class="fa-solid fa-user icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Last Name"
+                      formControlName="last_name"
+                      maxlength="25"
+                    />
+                    <!-- <i class="fa-solid fa-user icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Email ID<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilEnvelopeClosed"></svg>
+                    </span>
+                    <input
+                      type="email"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Email ID/Username"
+                      formControlName="email"
+                      maxlength="70"
+                    />
+                    <!-- <i class="fa-solid fa-envelope icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input
+                      type="tel"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Contact Number"
+                      formControlName="contact_number"
+                      (keypress)="onlyNumberKey($event)"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilHome"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Address"
+                      formControlName="address1"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="City"
+                      formControlName="city"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="State"
+                      formControlName="state"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilMap"></svg>
+                    </span>
+                    <select
+                      class="form-select ps-5"
+                      aria-label="Default select example"
+                      name="country"
+                      placeholder="Country"
+                      formControlName="country"
+                    >
+                      <option
+                        [defaultSelected]="true"
+                        [selected]="true"
+                        disabled="true"
+                      >
+                        {{ countryList }}
+                      </option>
+                      <option>India</option>
+                      <option>America</option>
+                      <option>Japan</option>
+                      <option>China</option>
+                    </select>
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilNotes"></svg>
+                    </span>
+                    <input
+                      type="number"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Zip"
+                      formControlName="pincode"
+                      (keypress)="onlyNumberKey($event)"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span
+                      cInputGroupText
+                      class="rounded-0 rounded-start icon-position"
+                    >
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control rounded ps-5 w-100"
+                      placeholder="Age"
+                      formControlName="age"
+                    />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+            </form>
+          </div>
+          <div class="d-flex align-items-start flex-column sub-body-content">
+            <h5 class="text-center fw-semibold">Subscription Details:</h5>
+            <ul class="proceed-details m-0 p-0">
+              <!-- <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Name:</span>&nbsp;<span>{{
+                  this.fname | titlecase
+                }} {{
+                  this.lname | titlecase
+                }}</span>
+              </li>
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center text-wrap"
+              >
+                <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
+              </li> -->
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Plan name:</span>&nbsp;<span>{{
+                  subsTitle | titlecase
+                }}</span>
+              </li>
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Plan type:</span>&nbsp;<span>{{
+                  subsType | titlecase
+                }}</span>
+              </li>
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Price:</span>&nbsp;<span>₹{{ subsPrice }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div *ngIf="!checked && subsId != 0">
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
             <div class="swal2-icon-content justify-content-center">!</div>
           </div>
-          <div class="swal2-html-container">Please accept the terms and conditions.</div>
+          <div class="swal2-html-container">
+            Please accept the terms and conditions.
+          </div>
         </div>
         <div *ngIf="subsId == 0 && checked">
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
@@ -583,19 +847,22 @@
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
             <div class="swal2-icon-content justify-content-center">!</div>
           </div>
-          <div class="swal2-html-container">Please choose a plan and accept the terms and conditions.</div>
+          <div class="swal2-html-container">
+            Please choose a plan and accept the terms and conditions.
+          </div>
         </div>
       </div>
       <div class="modal-footer justify-content-between">
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
-        <a  class="btn btn-primary pd-1 fw-bold fs-6" >
+        <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()">
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
-          Pay
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal>
-        </a>
+          Confirm & Pay
+          <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </button>
         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked && subsId != 0 && paypalView" class="w-100 paypal-btn"></ngx-paypal> -->
       </div>
     </div>
