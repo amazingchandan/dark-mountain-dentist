@@ -355,28 +355,30 @@
   </div>
   </section> -->
   <div class="d-flex justify-content-center align-items-center pricingFooter">
+   <div>
     <span class="fontsizeTC">
       <input
         type="checkbox"
         name="check"
         id=""
         (change)="checking($event)"
-        class="form-check-input m-0 me-2 checkbox"
+        class="form-check-input m-0 me-2 checkbox lg-check"
         [(ngModel)]="checked"
       />
       <span>Yes, I agree to</span>&nbsp;<u
         class="hand"
         data-bs-toggle="modal"
         data-bs-target="#exampleModalCenter"
-        >terms</u
+        >Terms</u
       >&nbsp;<span>&</span>&nbsp;<u
         class="hand"
         data-bs-toggle="modal"
         data-bs-target="#exampleModalCenter"
-        >conditions</u
+        >Conditions</u
       >&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span>
-    </span>
-    <div class="do-later-checkout-btn-container">
+    </span><br><br><br><br>
+  </div>
+    <div class="do-later-checkout-btn-container float-right">
       <button
         class="btn pd-1 cancel-btn fw-bold fs-2 doitlater"
         (click)="Logout()"
@@ -393,6 +395,7 @@
       </button>
     </div>
   </div>
+  
   <!-- <div class="container-fluid">
     <owl-carousel-o [options]="customOptions" class="">
         <ng-container *ngFor="let data of yearlyAllData; let i = index">

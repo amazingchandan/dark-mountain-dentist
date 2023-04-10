@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 @Component({
   selector: 'app-upload-xray',
   templateUrl: './upload-xray.component.html',
@@ -24,8 +24,10 @@ export class UploadXrayComponent implements OnInit {
   public uploadedXray: any;
   myFormData: any;
   myFiles: any;
+  apiData: any={};
 
   constructor(private userService: UserService,
+    private spinner: NgxSpinnerService,
     public router: Router) { }
 
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
@@ -41,6 +43,7 @@ export class UploadXrayComponent implements OnInit {
   xRayData: any = [];
 
   public ngOnInit() {
+    
     this.dtOptions = {
       search: false,
       searching: false,
@@ -164,6 +167,14 @@ export class UploadXrayComponent implements OnInit {
         return;
       }
   */
+     
+     
+    
+    
+
+
+
+
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
 
@@ -175,6 +186,35 @@ export class UploadXrayComponent implements OnInit {
       this.display = true;
 
     }
+      var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer my-secret-auth-token");
+    myHeaders.append('Access-Control-Allow-Origin', "*");
+    myHeaders.append('Access-Control-Allow-Headers', "*");
+    myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+    var formdata = new FormData();
+    formdata.append("image",this.myFiles);
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+    
+    fetch("https://admin-scm.blahworks.tech/upload/image", {
+      method: 'POST',
+    
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    })
+      .then(response => response.text())
+      .then(result =>{ console.log(JSON.parse(result));
+        this.apiData= result;
+        console.log(this.apiData)
+      })
+      .catch(error => console.log('error', error));
+    
 
   }
   handleSave() {
@@ -200,6 +240,7 @@ export class UploadXrayComponent implements OnInit {
           // console.log("WORKED", this.display);
           this.display = false;
           this.hidden = false;
+          this.isDtInitialized= false;
           this.getAllXrayOfUserById()
         } else {
           Swal.fire({
@@ -214,8 +255,9 @@ export class UploadXrayComponent implements OnInit {
   getAllXrayOfUserById() {
     this.userService.getUserXrayById(this.userInfo.id).subscribe((res: any) => {
       console.log(res, "!!!!!!!!!!!!!!!!!!!!!!");
-      this.showContent = true;
       this.allData = res.getData
+      this.showContent = true;
+  
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -223,9 +265,11 @@ export class UploadXrayComponent implements OnInit {
           //  this.isDtInitialized = true;
           // var p = document.getElementsByClassName("paginate_button current").length;
           // console.log(p,"ppp")
+          this.dtTrigger.next(undefined);
         });
       } else {
         this.isDtInitialized = true;
+        this.dtTrigger.next(undefined);
         //  var p = document.getElementsByClassName("paginate_button current");
         // console.log(p,"ppp")
         //this.dtTrigger.next();
@@ -253,6 +297,34 @@ export class UploadXrayComponent implements OnInit {
   //   let id =this.xRayData._id
   //   this.router.navigateByUrl('/evaluate-x-ray/' + id);
   //  }
+
+ saveNdEval(){
+  var formData = new FormData();
+    formData.append('xray_image', this.myFiles);
+    formData.append('user_id', this.userInfo.id);
+    this.userService.addXray(formData)
+      .subscribe((res: any) => {
+        console.log(res)
+        if (res.success) {
+          //this.toastr.success(res.message);
+          this.xRayData = res.getData;
+          
+          this.display = false;
+          this.hidden = false;
+          this.isDtInitialized= false;
+          this.getAllXrayOfUserById()
+         this.evaluate(this.xRayData._id)
+          console.log(this.xRayData)
+        } else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error',
+          });
+          this.display = true;
+          //this.toastr.error(res.message);
+        }
+      });
+ }
 
 
 }

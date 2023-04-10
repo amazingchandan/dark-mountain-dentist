@@ -171,7 +171,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // }
   }
   private initConfig(): void {
-    document.getElementById('launch_ad').click()
+    var modal= document.getElementById("launch_ad");
+    modal.style.display = "none";
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'sb',
@@ -268,8 +269,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
                            text: "You have successfully subscribed",
                            icon: 'success',
                          });
-                        var modal= document.getElementById("launch_ad");
-                         modal.style.display = "none";
+                        /*var modal= document.getElementById("launch_ad");
+                         modal.style.display = "none";*/
                          if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
                          {
                           console.log("iff")
@@ -643,6 +644,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
   }
 
+
+  payBtn(){
+    (<HTMLElement>document.getElementsByClassName('paypal-button paypal-button-number-0')[0]).click()
+    console.log("paypal")
+  }
 }
 
 

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import LabelStudio from 'label-studio';
 import { event } from 'jquery';
+import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 
 @Component({
   selector: 'app-evaluate-xray',
@@ -12,9 +13,11 @@ import { event } from 'jquery';
   styleUrls: ['./evaluate-xray.component.scss']
 })
 export class EvaluateXrayComponent {
+  markData: any;
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
-    private userService: UserService) {
+    private userService: UserService,
+    private spinner: NgxSpinnerService) {
 
   }
 
@@ -35,8 +38,13 @@ export class EvaluateXrayComponent {
   }
 
  ngOnInit() {
+ 
+ 
+ 
     this.id = this.route.snapshot.paramMap.get('xray_id');
+    
     this.getXray(this.id);
+  
    /* setTimeout(() => {
      
       this.createLabelStudio()
@@ -44,11 +52,17 @@ export class EvaluateXrayComponent {
     //this.createLabelStudio();
   }
   getXray(id) {
+    
     this.userService.getXray(id).subscribe((res: any) => {
       if (res.success) {
         this.xRayData = res.getData;
-        console.log(this.xRayData[0]?.xray_image.path)
-        this.createLabelStudio()
+        console.log(this.xRayData[0]?.xray_image)
+       fetch(this.xRayData[0]?.xray_image.path)
+      .then(result => console.log(result.url))
+      //console.log(a)
+       this.defaultApi(this.xRayData[0]?.xray_image.path, this.xRayData[0]?.xray_image.mimetype) 
+       this.createLabelStudio()
+      
       }
       else {
         return res.messages;
@@ -56,7 +70,222 @@ export class EvaluateXrayComponent {
     })
   }
 
+  /*async getImageFileFromUrl(url,type){
+    let response = await fetch(url);
+    let data = await response.blob();
+    let metadata = {
+      type: type
+    };
+    return new File([data], "result.jpg", metadata);
+  }
+
+
+ async defaultApi(){
+    var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer my-secret-auth-token");
+myHeaders.append('Access-Control-Allow-Origin', "*");
+myHeaders.append('Access-Control-Allow-Headers', "*");
+myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+
+const file = await this.getImageFileFromUrl(this.xRayData[0]?.xray_image.path, this.xRayData[0]?.xray_image.mimeType);
+console.log(file,"fileObj")
+var formdata = new FormData();
+formdata.append("image", file);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("https://admin-scm.blahworks.tech/upload/image", {
+  method: 'POST',
+
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+})
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  }*/
+
+ async defaultApi(path,type) {
+  this.spinner.show();
+  this.userService.getEvalById(this.id).subscribe((res: any) => {
+    console.log(res)
+    if(!res.success){
+      const  image_data={
+        img_path:path,
+        img_type:type,
+        xray_id:this.id
+      }
+      this.userService.loadAIData(image_data).subscribe((res: any) => {
+         console.log("api",res,image_data)
+       if (res.success) {
+         
+         console.log("API called succefully",res.getData)}
+       else{ this.spinner.hide();
+         console.log("not called",res)
+       }})
+       setTimeout( ()=>{this.getMarks()
+         this.spinner.hide();
+       },2000)
+    }
+    else{
+      if (res.success) {
+        this.markData = res.getData;
+        setTimeout( ()=>{
+          this.spinner.hide();
+        },2000)
+        console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0][2],"record found")
+        
+        this.createLabelStudio1()
+      }
+    }
+  })
+   
+     
+  }
+
+  getMarks()
+  {
+    this.userService.getEvalById(this.id).subscribe((res: any) => {
+      console.log(res)
+      if (res.success) {
+        this.markData = res.getData;
+        console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0][2])
+        //this.userMark = this.markData.dentist_correction
+        //console.log(this.userMark, "***")
+        this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
+          console.log(element[0],element[1],this.markData.ai_identified_cavities.color_labels[1])
+         
+        })
+        this.createLabelStudio1()
+      }
+      else {
+        console.log("error")
+      }
+    })
+  }
+
   //label-studio
+  createLabelStudio1() {
+  
+ 
+    const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
+      let obj = {
+        "from_name": "label",
+        "id": Math.random(),
+        "type": "rectanglelabels",
+        "source": "$image",
+        // "original_width":this.userMark[1]?.original_height,
+        "original_width": "",
+        "original_height": "",
+        "image_rotation": 0,
+        "to_name": "img",
+       
+        "fillColor": "#00ff00",
+        "background":"red",
+        "value":
+       { 
+        "x": element[0],
+        "y": element[1],
+        "width": element[2],
+        "height": element[3],
+        "rotation": 0,
+        "rectanglelabels": [
+            "Add Mark"
+        ]
+    }
+      }
+
+     console.log(obj)
+      return obj;
+      // return element.original_width
+    })
+    this.labelStudio = new LabelStudio('label-studio1',
+
+
+      {
+        config: `
+  <View style="display:row; flex-direction: column;">
+  <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
+  <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
+  <Style> .Hint_main__1Svrz { display:none; }</Style>
+  <Style>#label-studio1 .ant-tag {color:white !important; font-weight:bold !important;border:none !important; visibility:hidden;}</Style>
+ <View style="flex: 90%;  
+ margin-top: -14px;">
+ <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+ <Image name="img" value="$image" width="100%" height="100%"></Image>
+ <Style> canvas { width:594px; height:354px !important; color:green }</Style>
+ </View>
+ <View style="flex: 10%;float:right">
+ <RectangleLabels name="label" toName="img" background="red">
+ <Label value="Add Mark" background="red" />
+ </RectangleLabels>
+ </View>
+ </View>
+ `,
+
+        interfaces: [
+          // "panel",
+          //"update",
+          // "submit",
+          // "controls",
+          /*"side-column",
+          "annotations:menu",
+          "annotations:add-new",
+          "annotations:delete",
+          "predictions:menu",*/
+        ],
+
+        /* user: {
+           pk: 1,
+           firstName: "James",
+           lastName: "Dean"
+         },*/
+
+        task: {
+          annotations:[],
+          predictions:[{
+            result:resultArr
+           
+          }],
+          // id: 1,
+          data: {
+            image: this.baseLink + this.xRayData[0]?.xray_image.path
+          }
+
+        },
+
+        onLabelStudioLoad: function (LS: { annotationStore: { addAnnotation: (arg0: { userGenerate: boolean; }) => any; selectAnnotation: (arg0: any) => void; }; }) {
+          var c = LS.annotationStore.addAnnotation({
+            userGenerate: true
+          });
+
+          LS.annotationStore.selectAnnotation(c.id);
+        },
+        onSubmitAnnotation: async function (LS, annotation) {
+          console.log(annotation.serializeAnnotation());
+
+          
+        },
+        onUpdateAnnotation: async function (LS, annotation) {
+          console.log(annotation.serializeAnnotation());
+
+        }
+
+
+      });
+
+
+    return this.labelStudio;
+
+  }
+
   createLabelStudio() {
     this.labelStudio = new LabelStudio('label-studio', {
       config: `
@@ -72,11 +301,10 @@ export class EvaluateXrayComponent {
  <Style> canvas { width:594px; height:354px !important }</Style>
  </View>
  <View style="flex: 10%;float:right">
- <EllipseLabels name="tag" toName="img">
- <Label value="Add Mark" background="green"></Label>
-<!--<Label value="Add Mark1" style=""></Label>-->
-
- </EllipseLabels>
+ 
+ <RectangleLabels name="tag" toName="img" background="green">
+ <Label value="Add Mark" background="green" />
+ </RectangleLabels>
  </View>
  </View>
  `,
@@ -100,7 +328,7 @@ export class EvaluateXrayComponent {
        },*/
 
       task: {
-        annotations: [ ],
+        annotations: [],
         predictions: [],
         // id: 1,
         data: {
