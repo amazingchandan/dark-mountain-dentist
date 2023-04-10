@@ -37,7 +37,7 @@ export class UserService {
 
   paypalReq: string;
   getUserAllSubsById: any;
-
+  AIData:string;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -68,7 +68,7 @@ export class UserService {
     this.subscriptioncompleteorder = this.apiHost + 'subscriptionOrder';
     this.getUserAllSubsById = this.apiHost + 'getUserAllSubListById'
     this.paypalReq = this.apiHost + 'create_payment';
-
+    this.AIData = this.apiHost +'loadAIMarking';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -154,4 +154,8 @@ export class UserService {
   paypalOrderReq(requestParameter: any){
     return this.http.post(`${this.paypalReq}`, requestParameter, {})
   }
+  loadAIData(requestParameters: any){
+    return this.http.post(`${this.AIData}`, requestParameters, {});
+  }
+
 }

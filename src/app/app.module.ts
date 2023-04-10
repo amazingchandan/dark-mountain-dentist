@@ -57,6 +57,8 @@ import {
 // paypal
 import { NgxPayPalModule } from 'ngx-paypal';
 
+import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
 import { DentistsComponent } from './views/dentists/dentists.component';
@@ -110,6 +112,7 @@ const APP_CONTAINERS = [
       positionClass :'toast-bottom-right'
     }),
     NgxPayPalModule,
+    NgxSpinnerModule,
   ],
   providers: [
     {

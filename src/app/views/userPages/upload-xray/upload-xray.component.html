@@ -112,7 +112,7 @@
                     <button
                       type="button"
                       class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                      (click)="evaluate(data._id)"
+                     
                       [disabled]="true"
                     >
                       Evaluate X-Ray
@@ -180,6 +180,9 @@
           >
           <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
+          </button>
+          <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
+            Save & Evaluate
           </button>
         </div>
       </div>

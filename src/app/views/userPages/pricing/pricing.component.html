@@ -8,8 +8,18 @@
   </h2> -->
 <!-- </div> -->
 <div class="container-fluid min-vh-100 bg m-0 my-container position-relative">
+
   <div class="headingContainer mb-4">
-    <div class="emptyDiv"></div>
+    <div class="emptyDiv">
+      <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold" id="exampleModalLongTitle">
+
+        Dark
+
+        <div class="mountain-color">Mountain</div>
+
+      </h2>
+    </div>
+
     <h2 class="head m-0 text-center fw-bold mt-1">
       Please Choose Your Subscription Plan
     </h2>
@@ -20,44 +30,26 @@
     </div>
   </div>
   <div class="w-100 d-flex justify-content-center mb-4">
-    <button
-      (click)="monthly()"
-      [class]="
+    <button (click)="monthly()" [class]="
         monthlyPlan
           ? 'btn monthly-plans-true pd-1 fw-semibold'
           : 'btn monthly-plans-btn pd-1 fw-semibold'
-      "
-    >
+      ">
       Monthly Plans
     </button>
-    <button
-      (click)="yearly()"
-      [class]="
+    <button (click)="yearly()" [class]="
         yearlyPlan
           ? 'btn yearly-plans-true pd-1 fw-semibold'
           : 'btn yearly-plans-btn pd-1 fw-semibold'
-      "
-    >
+      ">
       Yearly Plans
     </button>
   </div>
   <ng-template #userDropdown>
     <c-dropdown alignment="end" variant="nav-item">
-      <button
-        cButton
-        color=""
-        [caret]="false"
-        cDropdownToggle
-        class="py-0 icon-btn dd-header"
-      >
-        <c-avatar
-          cTextColor="primary"
-          shape="rounded-1"
-          size="md"
-          src="./assets/img/avatars/no-logo-icon-1.png"
-          status="success"
-          class="rounded-circle border border-dark-sublte border-2"
-        >
+      <button cButton color="" [caret]="false" cDropdownToggle class="py-0 icon-btn dd-header">
+        <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/no-logo-icon-1.png"
+          status="success" class="rounded-circle border border-dark-sublte border-2">
         </c-avatar>
         <i class="fa-solid fa-angle-down icon-color fs-6 ms-2"></i>
       </button>
@@ -140,10 +132,7 @@
         </li>-->
 
         <li class="user-header p-3">
-          <img
-            src="./assets/img/avatars/no-logo-icon-1-green.png"
-            alt="User Image"
-          />
+          <img src="./assets/img/avatars/no-logo-icon-1-green.png" alt="User Image" />
 
           <h5 class="text-center mt-2" style="color: white !important">
             {{ this.fname | titlecase }} {{ this.lname | titlecase }}
@@ -173,8 +162,7 @@
           <!-- <button class="btn fw-bold other-btn pd-1" >My Profile <i class="fa fa-user ms-1"></i> </button> -->
 
           <button class="btn fw-bold other-btn pd-1 ms-2" (click)="Logout()">
-            Logout <i class="fa-solid fa-right-from-bracket ms-1"></i></button
-          ><!-- <a (click)="Logout()" class="btn btn-default btn-flat "
+            Logout <i class="fa-solid fa-right-from-bracket ms-1"></i></button><!-- <a (click)="Logout()" class="btn btn-default btn-flat "
             >Sign out</a
           > -->
         </li>
@@ -184,19 +172,12 @@
     </c-dropdown>
   </ng-template>
   <div class="sub-container">
-    <div
-      *ngIf="monthlyAllData?.length != 0"
-      class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container"
-    >
-      <div
-        *ngFor="let data of monthlyAllData; let i = index"
-        class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2"
-      >
+    <div *ngIf="monthlyAllData?.length != 0"
+      class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
+      <div *ngFor="let data of monthlyAllData; let i = index" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
-          <div
-            class="card-body text-start d-flex flex-column justify-content-between"
-          >
+          <div class="card-body text-start d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
 
             <h4>{{ data.plan_name | titlecase }}</h4>
@@ -207,27 +188,28 @@
             <p class="m-0">Country: {{ data.country | titlecase }}</p>
             <p class="m-0">Status: {{ data.status | titlecase }}</p>
             <p>{{ data.currency | titlecase }}</p>
-            <div
-              class="d-flex justify-content-center align-items-start flex-column mt-3"
-            >
+            <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">₹{{ data.amount }}</p>
               <p class="m-0">Max: ₹{{ data.maximum }}</p>
               <p class="m-0">Min: ₹{{ data.minimum }}</p>
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
-              <button
-                class="pd-1 fw-bold btn btn-primary w-100"
-                (click)="getSubscription(data._id, data.type, data.amount, data.plan_name)"
-              >
+              <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+                  getSubscription(
+                    data._id,
+                    data.type,
+                    data.amount,
+                    data.plan_name
+                  )
+                ">
                 Subscribe
               </button>
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
-              <button
-                class="pd-1 fw-bold btn btn-primary w-100 cancel-selected"
-                (click)="getSubscription(0, data.type, data.amount, data.plan_name)"
-              >
+              <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name)
+                ">
                 Selected
               </button>
             </div>
@@ -237,19 +219,12 @@
       </div>
     </div>
 
-    <div
-      *ngIf="yearlyAllData?.length != 0"
-      class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container"
-    >
-      <div
-        *ngFor="let data of yearlyAllData; let i = index"
-        class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2"
-      >
+    <div *ngIf="yearlyAllData?.length != 0"
+      class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
+      <div *ngFor="let data of yearlyAllData; let i = index" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
-          <div
-            class="card-body text-start d-flex flex-column justify-content-between"
-          >
+          <div class="card-body text-start d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
 
             <h4>{{ data.plan_name | titlecase }}</h4>
@@ -260,27 +235,28 @@
             <p class="m-0">Country: {{ data.country | titlecase }}</p>
             <p class="m-0">Status: {{ data.status | titlecase }}</p>
             <p>{{ data.currency | titlecase }}</p>
-            <div
-              class="d-flex justify-content-center align-items-start flex-column mt-3"
-            >
+            <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">₹{{ data.amount }}</p>
               <p class="m-0">Max: ₹{{ data.maximum }}</p>
               <p class="m-0">Min: ₹{{ data.minimum }}</p>
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
-              <button
-                class="pd-1 fw-bold btn btn-primary w-100"
-                (click)="getSubscription(data._id, data.type, data.amount, data.plan_name)"
-              >
+              <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+                  getSubscription(
+                    data._id,
+                    data.type,
+                    data.amount,
+                    data.plan_name
+                  )
+                ">
                 Subscribe
               </button>
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
-              <button
-                class="pd-1 fw-bold btn btn-primary w-100 cancel-selected"
-                (click)="getSubscription(0, data.type, data.amount, data.plan_name)"
-              >
+              <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name)
+                ">
                 Selected
               </button>
             </div>
@@ -355,44 +331,26 @@
   </div>
   </section> -->
   <div class="d-flex justify-content-center align-items-center pricingFooter">
-    <span class="fontsizeTC">
-      <input
-        type="checkbox"
-        name="check"
-        id=""
-        (change)="checking($event)"
-        class="form-check-input m-0 me-2 checkbox"
-        [(ngModel)]="checked"
-      />
-      <span>Yes, I agree to</span>&nbsp;<u
-        class="hand"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModalCenter"
-        >terms</u
-      >&nbsp;<span>&</span>&nbsp;<u
-        class="hand"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModalCenter"
-        >conditions</u
-      >&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span>
-    </span>
-    <div class="do-later-checkout-btn-container">
-      <button
-        class="btn pd-1 cancel-btn fw-bold fs-2 doitlater"
-        (click)="Logout()"
-      >
+    <div>
+      <span class="fontsizeTC">
+        <input type="checkbox" name="check" id="" (change)="checking($event)"
+          class="form-check-input m-0 me-2 checkbox lg-check" [(ngModel)]="checked" />
+        <span>Yes, I agree to</span>&nbsp;<u class="hand" data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter">Terms</u>&nbsp;<span>&</span>&nbsp;<u class="hand" data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter">Conditions</u>&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span>
+      </span><br><br><br><br>
+    </div>
+    <div class="do-later-checkout-btn-container float-right">
+      <button class="btn pd-1 cancel-btn fw-bold fs-2 doitlater" (click)="Logout()">
         Do later
       </button>
-      <button
-        class="btn pd-1 other-btn fw-bold paynow"
-        data-bs-toggle="modal"
-        data-bs-target="#myModal"
-        (click)="checked ? '' : handleClick()"
-      >
+      <button class="btn pd-1 other-btn fw-bold paynow" data-bs-toggle="modal" data-bs-target="#myModal"
+        (click)="checkoutBtn()">
         Checkout
       </button>
     </div>
   </div>
+
   <!-- <div class="container-fluid">
     <owl-carousel-o [options]="customOptions" class="">
         <ng-container *ngFor="let data of yearlyAllData; let i = index">
@@ -426,31 +384,18 @@
   <!-- </div> -->
 
   <!-- ! modal -->
-  <div
-    class="modal fade modal-lg"
-    id="exampleModalCenter"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
+  <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header justify-content-between align-items-center">
           <div></div>
-          <h2
-            class="modal-title fw-bold d-flex justify-content-center fw-semibold"
-            id="exampleModalLongTitle"
-          >
+          <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold" id="exampleModalLongTitle">
             Dark
             <div class="mountain-color">Mountain</div>
           </h2>
-          <i
-            id="launch_ad"
-            class="fa-solid fa-xmark fs-5"
-            data-bs-dismiss="modal"
-            style="cursor: pointer;"
-          ></i>
+          <i id="launch_ad" class="fa-solid fa-xmark fs-5 fontColor my" data-bs-dismiss="modal"
+            style="cursor:pointer;display: block !important;"></i>
         </div>
         <div class="modal-body">
           <h5>Terms & Conditions</h5>
@@ -461,9 +406,9 @@
             </li>
             <br />
             <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-              vel molestiae ratione nam ipsam neque porro ipsum quia accusamus
-              eaque molestias assumenda blanditiis obcaecati, dolore archit
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia vel
+              molestiae ratione nam ipsam neque porro ipsum quia accusamus eaque
+              molestias assumenda blanditiis obcaecati, dolore archit
             </li>
             <br />
             <li>
@@ -480,8 +425,8 @@
             <br />
             <li>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea
-              ipsa ipsum, reiciendis rem aspernatur, quisquam temporibus nam
-              odio quaerat, fuga voluptate
+              ipsa ipsum, reiciendis rem aspernatur, quisquam temporibus nam odio
+              quaerat, fuga voluptate
             </li>
             <br />
             <li>
@@ -490,9 +435,9 @@
             </li>
             <br />
             <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-              labore doloremque numquam quibusdam, voluptatum veniam architecto
-              ab autem laboriosam illo quos quam voluptas quasi!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit labore
+              doloremque numquam quibusdam, voluptatum veniam architecto ab autem
+              laboriosam illo quos quam voluptas quasi!
             </li>
             <br />
             <li>
@@ -501,8 +446,8 @@
             </li>
             <br />
             <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-              dolor commodi beatae odio.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor
+              commodi beatae odio.
             </li>
           </ol>
           <!-- <div class="d-flex justify-content-center align-items-center mb-3">
@@ -525,50 +470,198 @@
   </div>
 </div>
 
-<div
-  class="modal fade modal-md"
-  id="myModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered modal-md" role="document" >
+<!-- ! pricing modal -->
+<div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <!-- [hidden]="IsmodelShow" -->
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content modal-tall">
       <div class="modal-header justify-content-between align-items-center">
         <div></div>
-        <h2
-          class="modal-title fw-bold d-flex justify-content-center fw-semibold"
-        >
+        <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
           Dark
           <div class="mountain-color">Mountain</div>
         </h2>
-        <i
-          class="fa-solid fa-xmark fs-5"
-          data-bs-dismiss="modal"
-          style="cursor: pointer;"
-        ></i>
+        <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
       </div>
-      <div class="modal-body">
-        <div *ngIf="checked && subsId != 0">
-          <h4 class="text-center fw-semibold">Proceed to checkout</h4>
-          <ul class="proceed-details m-0 p-0">
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Plan name:</span>&nbsp;<span>{{subsTitle | titlecase}}</span>
-            </li>
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Plan type:</span>&nbsp;<span>{{subsType | titlecase}}</span>
-            </li>
-            <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-              <span>Price:</span>&nbsp;<span>₹{{subsPrice}}</span>
-            </li>
-          </ul>
+      <div class="modal-body px-5 py-4">
+        <div *ngIf="checked && subsId != 0" class="d-flex justify-content-evenly align-items-start body-content">
+          <div class="d-flex align-items-start flex-column sub-body-content">
+            <h5 class="text-center fw-semibold">Billing Details:</h5>
+            <form #register_form="ngForm" [formGroup]="registerForm">
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="First Name"
+                      formControlName="first_name" maxlength="25" />
+                    <!-- <i class="fa-solid fa-user icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Last Name"
+                      formControlName="last_name" maxlength="25" />
+                    <!-- <i class="fa-solid fa-user icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Email ID<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilEnvelopeClosed"></svg>
+                    </span>
+                    <input type="email" class="form-control rounded ps-5 w-100" placeholder="Email ID/Username"
+                      formControlName="email" maxlength="70" />
+                    <!-- <i class="fa-solid fa-envelope icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input type="tel" class="form-control rounded ps-5 w-100" placeholder="Contact Number"
+                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilHome"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
+                      formControlName="address1" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
+                      formControlName="city" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
+                      formControlName="state" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilMap"></svg>
+                    </span>
+                    <select class="form-select ps-5" aria-label="Default select example" name="country"
+                      placeholder="Country" formControlName="country">
+                      <option [defaultSelected]="true" [selected]="true" disabled="true">
+                        {{ countryList }}
+                      </option>
+                      <option>India</option>
+                      <option>America</option>
+                      <option>Japan</option>
+                      <option>China</option>
+                    </select>
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilNotes"></svg>
+                    </span>
+                    <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
+                      formControlName="pincode" (keypress)="onlyNumberKey($event)" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Age" formControlName="age"
+                      maxlength="2" (keypress)="onlyNumberKey($event)" />
+                    <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                  </div>
+                </c-input-group>
+              </div>
+            </form>
+          </div>
+          <div class="d-flex align-items-start flex-column sub-body-content">
+            <h5 class="text-center fw-semibold">Subscription Details:</h5>
+            <ul class="proceed-details m-0 p-0">
+              <!-- <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Name:</span>&nbsp;<span>{{
+                  this.fname | titlecase
+                }} {{
+                  this.lname | titlecase
+                }}</span>
+              </li>
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center text-wrap"
+              >
+                <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
+              </li> -->
+              <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Plan Name:</span>&nbsp;<span>{{
+                  subsTitle | titlecase
+                  }}</span>
+              </li>
+              <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Plan Type:</span>&nbsp;<span>{{
+                  subsType | titlecase
+                  }}</span>
+              </li>
+              <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Price:</span>&nbsp;<span>₹{{ subsPrice }}</span>
+              </li>
+              <li class="fs-6 fw-bold d-flex justify-content-between align-items-center border-top">
+                <span>Total:</span>&nbsp;<span>₹{{ subsPrice }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
         <div *ngIf="!checked && subsId != 0">
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
             <div class="swal2-icon-content justify-content-center">!</div>
           </div>
-          <div class="swal2-html-container">Please accept the terms and conditions.</div>
+          <div class="swal2-html-container">
+            Please accept the terms and conditions.
+          </div>
         </div>
         <div *ngIf="subsId == 0 && checked">
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
@@ -580,19 +673,22 @@
           <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
             <div class="swal2-icon-content justify-content-center">!</div>
           </div>
-          <div class="swal2-html-container">Please choose a plan and accept the terms and conditions.</div>
+          <div class="swal2-html-container">
+            Please choose a plan and accept the terms and conditions.
+          </div>
         </div>
       </div>
       <div class="modal-footer justify-content-between">
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
-        <a  class="btn btn-primary pd-1 fw-bold fs-6" >
+        <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()">
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
-          Pay
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Pay</ngx-paypal>
-        </a>
+          Confirm & Pay
+          <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </button>
         <!-- <ngx-paypal [config]="payPalConfig" *ngIf="checked && subsId != 0 && paypalView" class="w-100 paypal-btn"></ngx-paypal> -->
       </div>
     </div>

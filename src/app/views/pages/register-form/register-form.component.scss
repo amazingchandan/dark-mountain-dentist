@@ -89,9 +89,10 @@ color: #00d957;
 .inputContainer {
   display: flex;
   // flex-wrap: wrap;
-  input {
-    width: 50%;
-  }
+  flex-direction: column;
+  // input {
+  //   width: 50%;
+  // }
 }
 .inputContainer input {
   // min-width: 200px !important;

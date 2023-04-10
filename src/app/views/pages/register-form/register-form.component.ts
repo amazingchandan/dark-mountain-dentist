@@ -39,12 +39,12 @@ export class RegisterFormComponent {
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]),
-      contact_number: new FormControl(null, Validators.required),
-      address1: new FormControl(null, Validators.required),
-      pincode: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      state: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required),
+      // contact_number: new FormControl(null, Validators.required),
+      // address1: new FormControl(null, Validators.required),
+      // pincode: new FormControl(null, Validators.required),
+      // city: new FormControl(null, Validators.required),
+      // state: new FormControl(null, Validators.required),
+      // country: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       // age: new FormControl(null, Validators.required)
@@ -108,55 +108,55 @@ export class RegisterFormComponent {
       });
       return false;
     }
-    if(this.registerForm.value.contact_number == undefined ||
-      this.registerForm.value.contact_number == '') {
-        Swal.fire({
-          text: 'Please enter contact number',
-          icon: 'warning'
-        });
-        return false;
-    }
+    // if(this.registerForm.value.contact_number == undefined ||
+    //   this.registerForm.value.contact_number == '') {
+    //     Swal.fire({
+    //       text: 'Please enter contact number',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
 
-    if(this.registerForm.value.address1 == undefined ||
-      this.registerForm.value.address1.trim() == '') {
-        Swal.fire({
-          text: 'Please enter address',
-          icon: 'warning'
-        });
-        return false;
-    }
-    if(this.registerForm.value.pincode == undefined ||
-      this.registerForm.value.pincode == '') {
-        Swal.fire({
-          text: 'Please enter zip',
-          icon: 'warning'
-        });
-        return false;
-    }
-    if(this.registerForm.value.city == undefined ||
-      this.registerForm.value.city.trim() == '') {
-        Swal.fire({
-          text: 'Please enter city',
-          icon: 'warning'
-        });
-        return false;
-    }
-    if(this.registerForm.value.state == undefined ||
-      this.registerForm.value.state.trim() == '') {
-        Swal.fire({
-          text: 'Please enter state',
-          icon: 'warning'
-        });
-        return false;
-    }
-    if(this.registerForm.value.country == undefined ||
-      this.registerForm.value.country == '-Select-') {
-        Swal.fire({
-          text: 'Please select country',
-          icon: 'warning'
-        });
-        return false;
-    }
+    // if(this.registerForm.value.address1 == undefined ||
+    //   this.registerForm.value.address1.trim() == '') {
+    //     Swal.fire({
+    //       text: 'Please enter address',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
+    // if(this.registerForm.value.pincode == undefined ||
+    //   this.registerForm.value.pincode == '') {
+    //     Swal.fire({
+    //       text: 'Please enter zip',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
+    // if(this.registerForm.value.city == undefined ||
+    //   this.registerForm.value.city.trim() == '') {
+    //     Swal.fire({
+    //       text: 'Please enter city',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
+    // if(this.registerForm.value.state == undefined ||
+    //   this.registerForm.value.state.trim() == '') {
+    //     Swal.fire({
+    //       text: 'Please enter state',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
+    // if(this.registerForm.value.country == undefined ||
+    //   this.registerForm.value.country == '-Select-') {
+    //     Swal.fire({
+    //       text: 'Please select country',
+    //       icon: 'warning'
+    //     });
+    //     return false;
+    // }
     // if(this.registerForm.value.age == undefined || this.registerForm.value.age == ''){
     //   Swal.fire({
     //     text: 'Please enter age',
@@ -208,10 +208,10 @@ export class RegisterFormComponent {
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);
-        Swal.fire({
+     /*   Swal.fire({
           text: res.message,
           icon: 'success',
-        });
+        });*/
         let loginData = {
           email: this.registerForm.value.email.toLowerCase().trim(),
           password: this.registerForm.value.password.trim()

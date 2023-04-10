@@ -10,9 +10,9 @@
 >
   <c-container>
     <c-row class="justify-content-center">
-      <c-col md="12">
+      <c-col md="8">
         <c-card-group class="d-flex justify-content-center">
-          <c-card class="p-5 mx-5 login-card">
+          <c-card class="p-4 w-50 mx-5 login-card">
             <c-card-body>
               <form #register_form="ngForm" [formGroup]="registerForm">
                 <h2 class="d-flex justify-content-center mb-4 fw-semibold">
@@ -39,7 +39,7 @@
                       <!-- <i class="fa-solid fa-user icon-position"></i> -->
                     </div>
                   </c-input-group>
-                  <c-input-group class="mb-3 mt-2 ms-4">
+                  <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative">
                       <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
                       <span
@@ -58,7 +58,7 @@
                       <!-- <i class="fa-solid fa-user icon-position"></i> -->
                     </div>
                   </c-input-group>
-                  <c-input-group class="mb-3 mt-2 ms-4">
+                  <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative">
                       <!-- <label class="mb-2">Email ID<sup>*</sup></label> -->
                       <span
@@ -78,10 +78,10 @@
                     </div>
                   </c-input-group>
                 </div>
-                <div class="inputContainer">
+                <!-- <div class="inputContainer">
                   <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
@@ -95,12 +95,12 @@
                         formControlName="contact_number"
                         (keypress)="onlyNumberKey($event)"
                       />
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
@@ -113,12 +113,12 @@
                         placeholder="Address"
                         formControlName="address1"
                       />
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
@@ -132,14 +132,14 @@
                         formControlName="pincode"
                         (keypress)="onlyNumberKey($event)"
                       />
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
-                </div>
-                <div class="inputContainer">
+                </div> -->
+                <!-- <div class="inputContainer">
                   <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
@@ -152,12 +152,12 @@
                         placeholder="City"
                         formControlName="city"
                       />
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
@@ -170,24 +170,24 @@
                         placeholder="State"
                         formControlName="state"
                       />
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
                   <c-input-group class="mb-3 mt-2 ms-4">
                     <div class="w-100 d-flex position-relative">
-                      <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                      <label class="mb-2">Password<sup>*</sup></label>
                       <span
                         cInputGroupText
                         class="rounded-0 rounded-start icon-position"
                       >
                         <svg cIcon name="cilMap"></svg>
                       </span>
-                      <!-- <input
+                      <input
                         type="password"
                         class="form-control rounded ps-5 w-100"
                         placeholder="Country"
                         formControlName="country"
-                      /> -->
+                      />
                       <select
                         class="form-select ps-5"
                         aria-label="Default select example"
@@ -195,14 +195,6 @@
                         placeholder="Country"
                         formControlName="country"
                       >
-                        <!-- can use ngFor instead of hardcoded value -->
-                        <!-- <option
-                          *ngFor="let country of countryList"
-                          [ngValue]="country"
-                          [selected]="country"
-                        >
-                          {{ country }}
-                        </option> -->
                         <option
                           [defaultSelected]="true"
                           [selected]="true"
@@ -215,10 +207,10 @@
                         <option>Japan</option>
                         <option>China</option>
                       </select>
-                      <!-- <i class="fa-solid fa-lock icon-position"></i> -->
+                      <i class="fa-solid fa-lock icon-position"></i>
                     </div>
                   </c-input-group>
-                </div>
+                </div> -->
                 <div class="inputContainer">
                   <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative">
@@ -239,7 +231,7 @@
                     </div>
                     <small>* Password must contain atleast 7 characters, 1 letter and 1 number</small>
                   </c-input-group>
-                  <c-input-group class="mb-3 mt-2 ms-4">
+                  <c-input-group class="mb-3 mt-2">
                     <div class="w-100 d-flex position-relative cnf_password">
                       <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                       <span
@@ -257,7 +249,7 @@
                       <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                     </div>
                   </c-input-group>
-                  <c-input-group class="mb-3 mt-2 ms-4">
+                  <!-- <c-input-group class="mb-3 mt-2 ms-4"> -->
                     <!-- <div class="w-100 d-flex position-relative cnf_password">
                       <span
                         cInputGroupText
@@ -273,7 +265,7 @@
                         (keypress)="onlyNumberKey($event)"
                       />
                     </div> -->
-                  </c-input-group>
+                  <!-- </c-input-group> -->
                 </div>
                 <!-- <div class="row mb-3">
                   <c-input-group class="mb-3 mt-2">
@@ -386,7 +378,7 @@
                     Cancel
                   </button> -->
                   <button
-                    class="btn btn-primary register-btn mt-2 p-2 fw-bold col-4"
+                    class="btn btn-primary register-btn mt-2 p-2 fw-bold col-12"
                     title="Register"
                     (click)="register()"
                     (window:keypress)="onSomeAction($event)"

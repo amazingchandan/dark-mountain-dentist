@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AppService } from 'src/app/services/app.service';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dentist-profile',
@@ -12,6 +14,7 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./dentist-profile.component.scss']
 })
 export class DentistProfileComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public userID = localStorage.getItem('id') || "";
   addSuperForm: FormGroup;
@@ -28,9 +31,10 @@ export class DentistProfileComponent implements OnInit {
   role: any;
   age: any;
   all_subData: any={};
-
-
-  
+  private isDtInitialized: boolean = false;
+  dtTrigger: Subject<any> = new Subject<any>();
+  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+  showContent: boolean;
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,
@@ -58,20 +62,20 @@ export class DentistProfileComponent implements OnInit {
     // this.userInfo=userInfo;
     console.log(this.userID);
 
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 10,
-    //   language: {
-    //     search:"",
-    //     searchPlaceholder: 'Search ',
-    //   },
-    //   info:false,
-    //   ordering: false,
-    //   responsive:true,
-    //   search:true,
-    //   dom: 'Bfrtip',
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      // language: {
+      //   search:"",
+      //   searchPlaceholder: 'Search ',
+      // },
+      info: false,
+      ordering: false,
+      responsive: true,
+      searching: false,
+      // dom: 'Bfrtip',
 
-    // };
+    };
 
     this.addSuperForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
@@ -205,7 +209,16 @@ export class DentistProfileComponent implements OnInit {
      this.apiService.getUserAllSubById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.all_subData = res.getData;
-
+      this.showContent=true
+      if (this.isDtInitialized) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+         this.dtTrigger.next(undefined);
+        });
+      } else {
+        this.isDtInitialized = true;
+        this.dtTrigger.next(undefined);
+      }
       console.log(this.all_subData)
     })
 
@@ -213,7 +226,16 @@ export class DentistProfileComponent implements OnInit {
     this.apiService.getUserXrayById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.xrayData = res.getData;
-
+      this.showContent=true
+      if (this.isDtInitialized) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+         this.dtTrigger.next(undefined);
+        });
+      } else {
+        this.isDtInitialized = true;
+        this.dtTrigger.next(undefined);
+      }
       console.log(this.xrayData)
     })
 
@@ -381,6 +403,8 @@ export class DentistProfileComponent implements OnInit {
 
 
   }
-
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
 }
 
