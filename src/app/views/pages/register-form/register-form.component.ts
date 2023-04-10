@@ -208,10 +208,10 @@ export class RegisterFormComponent {
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
         //this.toastr.success(res.message);
-        Swal.fire({
+     /*   Swal.fire({
           text: res.message,
           icon: 'success',
-        });
+        });*/
         let loginData = {
           email: this.registerForm.value.email.toLowerCase().trim(),
           password: this.registerForm.value.password.trim()

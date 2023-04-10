@@ -443,11 +443,13 @@
               <div class="col-12">
                 <!--pe-0-->
                 <table
-                  class="table table-bordered row-border hover"
+                  datatable *ngIf="showContent"
+                  class=" row-border hover"
                   datatable="ng"
                   datatable
                   [dtOptions]="dtOptions"
-                >
+
+                > 
                   <thead>
                     <tr>
                       <th scope="col">X-ray Uploaded Date</th>

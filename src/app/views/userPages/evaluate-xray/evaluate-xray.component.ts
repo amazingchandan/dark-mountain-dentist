@@ -224,7 +224,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  </View>
  <View style="flex: 10%;float:right">
  <RectangleLabels name="label" toName="img" background="red">
- <Label value="Add Mark" background="red" />
+ <Label value="Add Mark" background="#8b0000" />
  </RectangleLabels>
  </View>
  </View>

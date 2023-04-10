@@ -18,6 +18,7 @@ export class MarkXrayComponent {
   userMark: any;
   labelStudio: any;
   AIMarkData: any=[];
+  markInfo: any=[];
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
@@ -89,6 +90,7 @@ export class MarkXrayComponent {
 
   createLabelStudio() {
     var userMark1 = this.userMark;
+    console.log(this.markInfo,"adminMark")
          const resultArrUser = this.userMark.map((element: any) => {
       let obj = {
         "from_name": "label",
@@ -156,7 +158,46 @@ export class MarkXrayComponent {
     return obj;
     // return element.original_width
   })
- const resultArr = resultArrUser.concat(resultArrAI)
+
+ //Admin Marking
+ const resultArrAdmin = this.markInfo.map((element: any) => {
+  let obj = {
+    "from_name": "label2",
+    "id": element.id,
+    "type": "rectanglelabels",
+    "source": "$image",
+    // "original_width":this.userMark[1]?.original_height,
+    "original_width": element.original_width,
+    "original_height": element.original_height,
+    "image_rotation": 0,
+    "to_name": "img",
+   
+    "fillColor": "#00ff00",
+    "background":"green",
+    "value":
+   { 
+    "x": element.value.x,
+    "y": element.value.y,
+    "width": element.value.width,
+    "height": element.value.height,
+    "rotation": 0,
+    "rectanglelabels": [
+        "Admin Mark"
+    ]
+}
+
+
+
+  }
+
+console.log(obj)
+  return obj;
+  // return element.original_width
+})
+
+
+ const resultArr1 = resultArrUser.concat(resultArrAI)
+ const resultArr = resultArrAdmin.concat(resultArr1)
     this.labelStudio = new LabelStudio('label-studio',
 
 
@@ -180,7 +221,11 @@ export class MarkXrayComponent {
  </RectangleLabels>
  <RectangleLabels name="label1" toName="img" >
  
- <Label value="AI Mark" background="red" />
+ <Label value="AI Mark" background="#8b0000" />
+ </RectangleLabels>
+ <RectangleLabels name="label2" toName="img" >
+ 
+ <Label value="Admin Mark" background="#00008B" />
  </RectangleLabels>
  </View>
  </View>
@@ -264,7 +309,7 @@ export class MarkXrayComponent {
  </View>
  <View style="flex: 10%;float:right">
  <RectangleLabels name="tag" toName="img">
- <Label value="Add Mark" background="blue"></Label>
+ <Label value="Add Mark" background="#00008B"></Label>
 <!--<Label value="Add Mark1" style=""></Label>-->
 
  </RectangleLabels>
@@ -364,12 +409,12 @@ export class MarkXrayComponent {
   }
   saveMarks() {
 
-    var markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
-    console.log(markInfo)
+    this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
+    console.log(this.markInfo)
     const xray_info = {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
-      marker: markInfo,
+      marker: this.markInfo,
       accuracy_per: this.valInput,
 
     }
@@ -380,6 +425,7 @@ export class MarkXrayComponent {
           text: res.message,
           icon: 'success',
         });
+       this.createLabelStudio()
         document.getElementById('close')?.click();
       } else {
         Swal.fire({

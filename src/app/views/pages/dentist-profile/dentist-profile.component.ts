@@ -34,7 +34,7 @@ export class DentistProfileComponent implements OnInit {
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
-
+  showContent: boolean;
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,
@@ -209,6 +209,7 @@ export class DentistProfileComponent implements OnInit {
      this.apiService.getUserAllSubById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.all_subData = res.getData;
+      this.showContent=true
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -225,6 +226,7 @@ export class DentistProfileComponent implements OnInit {
     this.apiService.getUserXrayById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.xrayData = res.getData;
+      this.showContent=true
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -401,6 +403,8 @@ export class DentistProfileComponent implements OnInit {
 
 
   }
-
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
 }
 

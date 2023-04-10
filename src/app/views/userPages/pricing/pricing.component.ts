@@ -310,6 +310,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                          this.IsmodelShow = false
                          console.log(this.IsmodelShow);
                          ($("#myModal")as any).modal("hide");
+                         this.handleClick();
                         // <HTMLElement>document.getElementById('myModal').modal("hide")
 
                          Swal.fire({

@@ -75,7 +75,8 @@ export class AppService {
         if (res.getData[0]?.role == 'dentist') {
           let status = res.getData[0]?.subscription_details.status;
           console.log(status)
-          if (status == true) {
+          if (status == true) 
+          {
             this.router.navigateByUrl('/dashboard');
           }
 
@@ -129,9 +130,11 @@ export class AppService {
 
         }
       })
+      console.log("iff")
       return (!!this.userData[0]?.subscription_details.status);
     }
     else {
+      console.log("else")
       return true;
     }
   }
