@@ -113,7 +113,7 @@ export class AppService {
     return (!!localStorage.getItem("token"));
   }
 
-  isSubscribed() {
+async isSubscribed() {
 
     let jwt = localStorage.getItem('token');
     let jwtData = jwt.split('.')[1]
@@ -122,17 +122,16 @@ export class AppService {
     this.role = decodedJwtData.role;
     console.log("role", this.role)
     if (this.role === 'dentist') {
+      console.log("inside if")
       const id = localStorage.getItem('id');
-      this.UserService.getUserRecordById(id).subscribe((res: any) => {
+     const d = await this.UserService.getUserRecordById(id).subscribe((res: any) => {
         console.log(res)
         if (res.success) {
           this.userData = res.getData;
-
+          console.log("iff",!!this.userData[0]?.subscription_details.status,this.userData[0]?.subscription_details.status)
+          return (!!this.userData[0]?.subscription_details.status);
         }
       })
-      console.log("iff",!!this.userData[0]?.subscription_details.status,this.userData[0]?.subscription_details.status)
-      return (!!this.userData[0]?.subscription_details.status);
-    
     }
     else {
       console.log("else")
