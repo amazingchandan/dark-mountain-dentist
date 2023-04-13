@@ -6,6 +6,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
 import {
   IPayPalConfig,
@@ -60,6 +61,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public payData: any;
   countryList = "-Select Country-";
   public IsmodelShow: any = false;
+
+  ipAddress = '';
   //route: any;
   public customOptions: OwlOptions = {
     center: true,
@@ -116,6 +119,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // http_post: this.userService
   };
   toastr: any;
+  country: any="";
 
 
 
@@ -125,7 +129,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     private appService: AppService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private http:HttpClient) {
       this.registerForm = this.formBuilder.group({})
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
@@ -133,7 +138,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     console.log(this.checked, this.subsId);
     // console.log(window.paypal);
-
+    this.getIPAddress();
     this.userService.getSubscriptionList().subscribe((res: any) => {
       console.log(res, "response")
       if (res.success) {
@@ -198,6 +203,16 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // this.registerForm.controls['email'].disable();
     // this.registerForm.controls['first_name'].disable();
     // this.registerForm.controls['last_name'].disable();
+  }
+
+  getIPAddress()
+  {
+    this.http.get("https://geolocation-db.com/json/").subscribe((res:any)=>{
+      const data = res;
+      this.ipAddress= data.IPv4
+      this.country =data.country_name;
+      console.log(this.country,"ipAddress")
+    });
   }
   ngAfterViewInit(): void {
     // if(this.checked && this.subsId != 0){
@@ -319,7 +334,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                          });
                         /*var modal= document.getElementById("launch_ad");
                          modal.style.display = "none";*/
-                         if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+                         if(this.userInfo.token!=null && this.userInfo.token!=undefined&& this.userInfo.token!='' )
                          {
                           console.log("iff")
 

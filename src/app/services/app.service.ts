@@ -130,8 +130,9 @@ export class AppService {
 
         }
       })
-      console.log("iff")
+      console.log("iff",!!this.userData[0]?.subscription_details.status,this.userData[0]?.subscription_details.status)
       return (!!this.userData[0]?.subscription_details.status);
+    
     }
     else {
       console.log("else")

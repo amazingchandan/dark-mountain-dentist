@@ -166,5 +166,16 @@ input[type='range']::-webkit-slider-thumb {
 }
 .mark-label{
     position: relative;
-    top: -87px;
+    top: -8px;
+}
+.mark-label1{
+    position: relative;
+    top: -8px;
+}
+.del-btn{
+    left: -2%;
+    font-size: 12px;
+    padding: 0px 7px !important;
+    border-radius: 2px;
+    top:-8px;
 }

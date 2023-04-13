@@ -186,7 +186,7 @@ export class UploadXrayComponent implements OnInit {
       this.display = true;
 
     }
-      var myHeaders = new Headers();
+     /* var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer my-secret-auth-token");
     myHeaders.append('Access-Control-Allow-Origin', "*");
     myHeaders.append('Access-Control-Allow-Headers', "*");
@@ -214,7 +214,7 @@ export class UploadXrayComponent implements OnInit {
         console.log(this.apiData)
       })
       .catch(error => console.log('error', error));
-    
+    */
 
   }
   handleSave() {

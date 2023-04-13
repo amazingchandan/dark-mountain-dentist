@@ -8,7 +8,7 @@
                   <!-- <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
                     <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>--> 
                     <div id="label-studio1"></div>
-                    <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
+                    <label class="text-center w-100 mt-3 fw-bold mark-label1">Original X-ray</label>
                 </div>
                 <div class="col-md-6 right-img">
                    <!--
@@ -20,7 +20,8 @@
             </div>-->
             <div id="label-studio"></div>
 
-             <label class="text-center w-100 mt-3 fw-bold mark-label">Original X-ray</label>
+             <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
+             <button type="button" class="btn fw-bold del-btn" (click)="delete()">Delete Mark</button>
                 </div>
             </div>
         </div>

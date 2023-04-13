@@ -177,9 +177,15 @@ input[type='range']::-webkit-slider-thumb {
 }
 .mark-label{
     position: relative;
-    top: -79px;
+    top: 0px;
 }
 .dentist-mark-label{
     position: relative;
-    top: -126px;
+    top: 0px;
+}
+.del-btn{
+    left: -2%;
+    font-size: 12px;
+    padding: 0px 7px !important;
+    border-radius: 2px;
 }
