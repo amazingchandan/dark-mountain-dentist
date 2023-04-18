@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container">
       <h5 class=" mb-3 fw-bold">X-ray Evaluation Result</h5>
-
+      <p>*Legal Disclaimer : This is a dummy tools modal by AI. This does not give you hundred percent accurate result.</p>
         <div class="row">
             <div class="col-12">
                 <div class="col-md-6 left-img ">
@@ -23,26 +23,30 @@
              <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
              <button type="button" class="btn fw-bold del-btn" (click)="delete()">Delete Mark</button>
                 </div>
+               
             </div>
         </div>
+        <div class="row fw-semibold" id="cavity">
+          <h5 class="fw-semibold">{{this.totalAI}} Cavities detected by AI Model</h5>
+        </div>
             <div class="row mt-5">
-                <div class="col mt-2 fw-semibold"><!--<span><i class="fa-solid fa-circle admin-i"></i> Admin Marking</span><br>
+                <div class="col mt-2 fw-semibold">
                     <span><i class="fa-solid fa-circle dentist-i"></i> Dentist Marking</span><br>
                     <span><i class="fa-solid fa-circle ai-i"></i> AI Marking</span><br>
-                --></div>
+               </div>
                 <div class="col-md-4 btn-div ">
 
 
-                        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn"   data-bs-toggle="modal" data-bs-target="#exampleModalCenter" (click)="save()">Save Result&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
+                        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn"   (click)="saveMarks()">Submit for Review&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
 
 
-                        <button type="button" class="btn btn-primary save-btn me-2 cancel-btn fw-bold other-btn pd-1">Reevaluate</button>
+                        <button type="button" class="btn btn-primary save-btn me-2 cancel-btn fw-bold other-btn pd-1" (click)="handleClick()">Close</button>
 
                 </div>
             </div>
         </div>
 </section>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -58,9 +62,9 @@
                       <div class="w-100 position-relative">
                         <input #myinput type="range" min="0" value="0" max="100" (input)="onRangeChange($event)"/>
                           <span class="inputValue fw-semibold p-1 fs-6 text-center"  [ngStyle]="{'left': leftPos}">
-                          {{valInput}}%
+                          {{valInput}}%-->
                           <!-- <span class="smallTrianlge"></span> -->
-                        </span>
+                       <!-- </span>
                       </div>
                     </div>
                 </div>
@@ -72,14 +76,12 @@
                     </div>
                 </div>
 
-              <!--  <span> Accuracy    &nbsp;<input type="range" min="0" max="100" value="50" style="width:50%;margin-left:0.5rem"></span>
-        <br><span class="mt-2">Tag  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" class="form-control" style="width:40%;margin-left:0.5rem"></span>
-              --> </div>
+             </div>
         <div class="modal-footer">
           <button type="button" id="close" class="btn btn-secondary cancel-btn other-btn pd-1 fw-bold me-2" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary other-btn pd-1 fw-bold " (click)="saveMarks()">Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk"></i></button>
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 

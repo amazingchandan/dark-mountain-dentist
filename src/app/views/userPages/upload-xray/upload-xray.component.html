@@ -82,10 +82,10 @@
                   <th class="text-nowrap">Uploaded Date</th>
                   <th class="text-nowrap">Evaluated Date</th>
                   <!-- <th>Subscription&nbsp;End Date</th> -->
-                  <th>Action</th>
+                  
                   <!-- <th>Upload</th> -->
                   <th>Evaluation</th>
-                  <!-- <th>Result</th> -->
+                 <th>Total Cavities Detected</th> 
                 </tr>
               </thead>
               <tbody *ngIf="allData?.length != 0">
@@ -95,27 +95,17 @@
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
                   <!-- <td>{{data.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                 
                   <td>
-                    <!-- <input class="custom-file-input2" type="file" [ngStyle]="fileStyle" (change)="uploadFile($event)" accept="image/*" multiple onclick="this.value = null"> -->
-                    <button
+                    <div *ngIf="data.evaluation_status==true">
+                      <button
                       type="button"
                       class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModalCenter"
-                      (click)="openModal()"
+                      (click)="view(data._id)"
                     >
                       View
-                    </button>
-                  </td>
-                  <td>
-                    <div *ngIf="data.evaluation_status==true">
-                    <button
-                      type="button"
-                      class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                     
-                      [disabled]="true"
-                    >
-                      Evaluate X-Ray
                     </button>
                   </div>
                   <div *ngIf="data.evaluation_status==false">
@@ -129,6 +119,7 @@
                     </button>
                   </div>
                   </td>
+                  <td>{{data.totalCavitiesDetectedByUser}}</td>
                   <!-- <td>
                   <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
                 </td> -->

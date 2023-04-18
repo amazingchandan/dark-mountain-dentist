@@ -7,14 +7,15 @@ import LabelStudio from 'label-studio';
 import { event } from 'jquery';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 
-
 @Component({
-  selector: 'app-evaluate-xray',
-  templateUrl: './evaluate-xray.component.html',
-  styleUrls: ['./evaluate-xray.component.scss']
+  selector: 'app-view-xray',
+  templateUrl: './view-xray.component.html',
+  styleUrls: ['./view-xray.component.scss']
 })
-export class EvaluateXrayComponent {
-  markData: any;
+export class ViewXrayComponent {
+  markData: any=[];
+  userMark: any=[];
+  AIMarkData: any;
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,
@@ -42,13 +43,10 @@ export class EvaluateXrayComponent {
 
   ngOnInit() {
 
-   this.cavity=document.getElementById("cavity")
-   this.cavity.style.display="none";
-
     this.id = this.route.snapshot.paramMap.get('xray_id');
-
+    this.spinner.show();
     this.getXray(this.id);
-
+    this.getMark(this.id);
     /* setTimeout(() => {
       
        this.createLabelStudio()
@@ -64,7 +62,7 @@ export class EvaluateXrayComponent {
       //  fetch(this.xRayData[0]?.xray_image.path)
        //   .then(result => console.log(result.url))
         //console.log(a)
-        this.defaultApi(this.xRayData[0]?.xray_image.path, this.xRayData[0]?.xray_image.mimetype)
+       
         this.createLabelStudio1()
 
       }
@@ -116,63 +114,22 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   .catch(error => console.log('error', error));
   }*/
 
-  async defaultApi(path, type) {
-    this.spinner.show();
-    this.userService.getEvalById(this.id).subscribe((res: any) => {
-      console.log(res)
-      if (!res.success) {
-        console.log("false")
-        const image_data = {
-          img_path: path,
-          img_type: type,
-          xray_id: this.id
-        }
-        this.userService.loadAIData(image_data).subscribe((res: any) => {
-          console.log("api", res, image_data)
-          if (res.success) {
-
-            console.log("API called succefully", res.getData)
-            setTimeout(() => {
-              this.getMarks()
-              this.spinner.hide();
-            }, 2000)
-          }
-          else {
-            this.spinner.hide();
-            console.log("not called", res)
-          }
-        })
-        
-      }
-      else {
-        if (res.success) {
-          this.markData = res.getData;
-          setTimeout(() => {
-            this.spinner.hide();
-          }, 2000)
-         // console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0].coordinates[1], "record found")
-          this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length;
-          this.cavity.style.display="block";
-
-          this.createLabelStudio()
-        }
-      }
-    })
-
-
-  }
-
-  getMarks() {
-    this.userService.getEvalById(this.id).subscribe((res: any) => {
-      console.log(res)
+ 
+  getMark(id) {
+    console.log(id)
+     this.userService.getEvalById(id).subscribe((res: any) => {
+      console.log("getMark")
       if (res.success) {
         this.markData = res.getData;
-        console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0].coordinates[2])
-        //this.userMark = this.markData.dentist_correction
-        //console.log(this.userMark, "***")
-        this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length
-        this.cavity.style.display="block";
+        console.log(this.markData)
+        this.userMark = this.markData.dentist_correction
+        this.AIMarkData = this.markData.ai_identified_cavities;
+        console.log(this.userMark, "***", this.AIMarkData)
         this.createLabelStudio()
+        this.createLabelStudio1()
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 1000);
       }
       else {
         console.log("error")
@@ -182,13 +139,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
   //label-studio
   createLabelStudio1() {
-
-
-    
-    this.labelStudio = new LabelStudio('label-studio1',
-
-
-      {
+     this.labelStudio = new LabelStudio('label-studio1',
+{
         config: `
         <View style="display:row; flex-direction: column;">
         <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
@@ -263,7 +215,43 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   }
 
   createLabelStudio() {
-    const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
+    const resultArrUser = this.userMark.map((element: any) => {
+      let obj = {
+        "from_name": "label",
+        "id": element.id,
+        "type": "rectanglelabels",
+        "source": "$image",
+        "readonly": false,
+        "canrotate": false,
+        // "original_width":this.userMark[1]?.original_height,
+        "original_width": element.original_width,
+        "original_height": element.original_height,
+        "image_rotation": 0,
+        "to_name": "img",
+
+        "fillColor": "#00ff00",
+        "background": "green",
+        "value":
+        {
+          "x": element.value.x,
+          "y": element.value.y,
+          "width": element.value.width,
+          "height": element.value.height,
+          "rotation": 0,
+          "rectanglelabels": [
+            "Add Mark"
+          ]
+        }
+
+
+
+      }
+
+      console.log(obj)
+      return obj;
+      // return element.original_width
+    })
+    const resultArrAI = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
       let obj = {
         "from_name": "label",
         "id":element._id,
@@ -295,44 +283,41 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       return obj;
       // return element.original_width
     })
+    const resultArr = resultArrUser.concat(resultArrAI)
     this.labelStudio = new LabelStudio('label-studio', {
       config: `
       <View style="display:row; flex-direction: column;">
       <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
-      <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; }</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}</Style>
-     <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;  
-     margin-top: -14px; width:566px">
+      <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
+     <View style="flex: 90%;
+     margin-top: -14px;">
      <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
-     <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px; height:354px !important;  }</Style>
+     <Image name="img" value="$image" width="100%" height="100%" ></Image>
+     <Style> canvas { width:594px; height:354px !important }</Style>
      </View>
- <View style="float:right;visibility:hidden">
+
+ <View style="flex: 10%;float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5">
  <Label value="Add Mark1" background="#8b0000" />
+ <Label value="Add Mark" background="green" />
  </RectangleLabels>
 
  </View>
- <View style="flex:10%;position: absolute;left: 157%;margin-top: 11px;"> 
- <RectangleLabels name="label1" toName="img" background="red">
- <Label value="Add Mark" background="green" />
- </RectangleLabels>
- </View>
+ 
  </View>
  `,
 
       interfaces: [
         // "panel",
-        "update",
-        "submit",
-        "controls",
-        "side-column",
+       // "update",
+        //"submit",
+       // "controls",
+       // "side-column",
        // "annotations:menu",
-        "annotations:add-new",
-        "annotations:delete",
+       // "annotations:add-new",
+       // "annotations:delete",
         //"predictions:menu",*/
       ],
 
@@ -343,10 +328,10 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
        },*/
 
       task: {
-        annotations: [{
+        annotations: [],
+        predictions: [{
           result: resultArr
         }],
-        predictions: [],
         // id: 1,
         data: {
           image: this.baseLink + this.xRayData[0]?.xray_image.path
@@ -430,7 +415,6 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
       marker: markInfo1,
-      total_cavities:markInfo.length
      
 
     }
@@ -478,33 +462,3 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     this.router.navigateByUrl('/upload-xray');
   }
 }
-
-/*
- "result":this.userMark.map((element:any) => { [
-          {
-              "from_name": "tag",
-              "id": "Dx_aB91ISN",
-
-              "source": "$image",
-              // "original_width":this.userMark[1]?.original_height,
-              "original_width":element?.original_width,
-               "original_height": element?.original_height,
-              "image_rotation": 0,
-              "to_name": "img",
-              "type": "ellipselabels",
-              "value": {
-
-                "height": 10.458911419423693,
-                "ellipselabels": [
-                  "Add Mark"
-                ],
-               "radiusX":element?.value.radiusX,
-               "radiusY":element?.value.radiusY,
-                "rotation": 0,
-
-                "x":element?.value.x,
-                "y":element?.value.y
-              }
-          }
-      ]}),
- */

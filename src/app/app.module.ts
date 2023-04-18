@@ -64,6 +64,7 @@ import { PricingComponent } from './views/userPages/pricing/pricing.component';
 import { DentistsComponent } from './views/dentists/dentists.component';
 import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
 import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
+import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -76,7 +77,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent, ViewXrayComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

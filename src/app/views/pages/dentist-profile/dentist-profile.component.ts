@@ -30,7 +30,9 @@ export class DentistProfileComponent implements OnInit {
   // userInfo:any;
   role: any;
   age: any;
-  all_subData: any={};
+  all_subData:any=[];
+  hiddenFlag:boolean=true;
+  hiddenunFlag:boolean=true;
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
@@ -55,7 +57,8 @@ export class DentistProfileComponent implements OnInit {
       state: new FormControl(),
       country: new FormControl(),
       zip: new FormControl(),
-      age: new FormControl()
+      age: new FormControl(),
+      license_no : new FormControl(),
 
       //user_role: new FormControl(),
     });
@@ -94,7 +97,7 @@ export class DentistProfileComponent implements OnInit {
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
       age: ['', [Validators.required]],
-
+      license_no : ['', [Validators.required]],
     });
 
 
@@ -120,8 +123,30 @@ export class DentistProfileComponent implements OnInit {
     let decodedJwtJsonData = window.atob(jwtData)
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     this.role = decodedJwtData.role;
+  setTimeout(()=>{
+    this.flagBtn();
+  },1000)
+   
 
+     
+  }
+  flagBtn(){
+    let flag = document.getElementById("flag");
+let unflag = document.getElementById("unflag");
+console.log("00",this.userData.flag)
+    
+    if(this.userData[0].flag===0){
+      this.hiddenFlag=false;
+      this.hiddenunFlag=true;
+      console.log("0",this.userData[0].flag)
 
+    }
+    else if(this.userData[0].flag===1){
+      this.hiddenFlag=true;
+      this.hiddenunFlag=false
+      console.log("1",this.userData.flag)
+
+    }
   }
   handleClick(){
     this.router.navigateByUrl('/registered-dentists');
@@ -199,17 +224,20 @@ export class DentistProfileComponent implements OnInit {
         });
         this.addSuperForm.patchValue({
           age: res.getData[0].age
+        });
+        this.addSuperForm.patchValue({
+         license_no: res.getData[0].license_no
         })
-
 
 
       }
     });
      //allSubscriptionDetail Api
+   
      this.apiService.getUserAllSubById(id).subscribe((res: any) => {
       console.log(res, "xray");
-      this.all_subData = res.getData;
-      this.showContent=true
+      this.all_subData=(res.getData.all_subscription_details);
+     this.showContent=true
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
@@ -242,9 +270,11 @@ export class DentistProfileComponent implements OnInit {
 
   }
   updateUser() {
+    console.log("user")
     if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
       this.apiService.updateUser(this.addSuperForm.value, this.dentistId)
         .subscribe((res: any) => {
+          console.log("user1")
           if (res.success) {
             //this.toastr.success(res.message);
             Swal.fire({
@@ -399,9 +429,46 @@ export class DentistProfileComponent implements OnInit {
     });
     this.addSuperForm.patchValue({
       age: '',
+    });
+    this.addSuperForm.patchValue({
+      license_no: '',
     })
+     
 
-
+  }
+  flagClick(){
+    const flagData={
+      id: this.userData[0]?._id,
+      flag: 1,
+    }
+    this.apiService.setFlag(flagData).subscribe((res:any)=>{
+      if (res.success){
+        console.log("flag set successfully")
+        this.hiddenFlag=true;
+        this.hiddenunFlag=false;
+      }
+      else{
+        console.log("flag not set successfully")
+      }
+    })
+   
+  }
+  unflagClick(){
+    const flagData={
+      id: this.userData[0]?._id,
+      flag: 0,
+    }
+    this.apiService.setFlag(flagData).subscribe((res:any)=>{
+      if (res.success){
+        console.log("flag set successfully")
+        this.hiddenFlag=false;
+        this.hiddenunFlag=true;
+      }
+      else{
+        console.log("flag not set successfully")
+      }
+    })
+   
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();

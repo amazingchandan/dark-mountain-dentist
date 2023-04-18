@@ -37,10 +37,21 @@ export class UploadedXraysComponent {
       ordering: false,
       responsive:true,
       dom: 'Bfrtip',
-
+      order : [7, 'asc'],
+      "columnDefs": [ {
+      "targets": [0,1,2,3,4,5,6,8,9],
+      "orderable": false
+      } ]
 
 
     };
+   this.dtOptions.Settings = {
+    order : [7, 'asc'],
+    "columnDefs": [ {
+    "targets": [0,1,2,3,4,5,6,8,9],
+    "orderable": false
+    } ]
+      };
     this.xrayList();
   }
 
@@ -50,9 +61,9 @@ export class UploadedXraysComponent {
       this.allData = res.getData;
       console.log(this.allData);
 
-      for(let x = 0; x < this.allData.length; x++){
+      /*for(let x = 0; x < this.allData.length; x++){
         console.log(this.allData[x].user_id._id);
-      }
+      }*/
       this.showContent=true;
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

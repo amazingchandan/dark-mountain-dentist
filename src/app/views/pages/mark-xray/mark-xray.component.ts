@@ -20,6 +20,11 @@ export class MarkXrayComponent {
   labelStudio: any;
   AIMarkData: any = [];
   markInfo: any = [];
+  totUserCavity: number=0;
+  markInfo2: any;
+  delCavity: number=0;
+  adminMark:number=0;
+  avgPer: any=0;
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
@@ -29,8 +34,8 @@ export class MarkXrayComponent {
 
 
   // is equal to default value of input range
-  valInput = '25';
-  leftPos = `25%`;
+  valInput: any; 
+  leftPos: any ;
   marker: any = [];
   baseLink: string = environment.API_HOST;
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
@@ -75,12 +80,16 @@ export class MarkXrayComponent {
         console.log(this.markData)
         this.userMark = this.markData.dentist_correction
         this.AIMarkData = this.markData.ai_identified_cavities;
+        this.totUserCavity=this.userMark.length + this.AIMarkData.rectangle_coordinates.length
         console.log(this.userMark, "***", this.AIMarkData)
+       setTimeout(()=>{
         this.createLabelStudio()
         this.createLabelStudio1()
+       },1000)
+        
         setTimeout(() => {
           this.spinner.hide();
-        }, 1000);
+        }, 2000);
       }
       else {
         console.log("error")
@@ -317,13 +326,13 @@ export class MarkXrayComponent {
 
   }
 
-  onLabelStudioEvent(event: any) {
+  /*onLabelStudioEvent(event: any) {
 
     if (event.type === 'onEntityCreate') {
       const selectedAnnotationId = this.labelStudio.ls.annotations[this.labelStudio.ls.annotations.length - 1].id;
       console.log('Selected annotation ID:', selectedAnnotationId);
     }
-  }
+  }*/
 
 
   //
@@ -425,41 +434,86 @@ export class MarkXrayComponent {
     // (<HTMLElement>document.getElementsByClassName('ls-submit-btn')[0]).click()
     console.log(this.labelStudio.onSubmitAnnotation, "***")
     console.log(this.marker)
-  }
-  addMarker(event: MouseEvent) {
-    const position = {
-      x: event.offsetX,
-      y: event.offsetY
-    };
-    this.marker.push(position);
-    console.log(this.marker, "---")
 
-
-  }
-  saveMarks() {
-    // const newArr = this.AIMarkData._id.concat(this.userMark.id)
-    //console.log(newArr,"new")
     this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
     console.log(this.markInfo)
     console.log(this.userMark)
+  
+    //for cavity label
+    const markInfo3 = this.markInfo.filter((elem) => {
+      return this.userMark.some((ele) => {
+        return elem.id === ele.id;
+      });
+    });
+    const markInfo4 = this.markInfo.filter((elem) => {
+      return this.AIMarkData.rectangle_coordinates.some((ele) => {
+        return elem.id === ele._id;
+      });
+    });
+   console.log(markInfo3.length ,markInfo4.length,"remain")
+   const delCavity1= markInfo3.length+markInfo4.length
+    //end for cavity label
+
     const markInfo1 = this.markInfo.filter((elem) => {
       return this.userMark.every((ele) => {
         return elem.id !== ele.id;
       });
     });
-    const markInfo2 = markInfo1.filter((elem) => {
+    this.markInfo2 = markInfo1.filter((elem) => {
       return this.AIMarkData.rectangle_coordinates.every((ele) => {
         return elem.id !== ele._id;
       });
     });
 
-    console.log(markInfo2, "new data")
+    this.delCavity=this.totUserCavity - delCavity1
+    this.adminMark=this.markInfo2.length;
+    console.log(this.markInfo2, "new data")
+    this.avgPer= ((this.markInfo.length-(this.delCavity+this.adminMark))*100/this.markInfo.length).toFixed(1);
+    console.log("avgPer",this.avgPer)
+    this.valInput= this.avgPer;
+  this.leftPos = this.avgPer;
+  }
+  
+  saveMarks() {
+    // const newArr = this.AIMarkData._id.concat(this.userMark.id)
+    //console.log(newArr,"new")
+  /*  this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
+    console.log(this.markInfo)
+    console.log(this.userMark)
+  
+    //for cavity label
+    const markInfo3 = this.markInfo.filter((elem) => {
+      return this.userMark.some((ele) => {
+        return elem.id === ele.id;
+      });
+    });
+    const markInfo4 = this.markInfo.filter((elem) => {
+      return this.AIMarkData.rectangle_coordinates.some((ele) => {
+        return elem.id === ele._id;
+      });
+    });
+   console.log(markInfo3.length ,markInfo4.length,"remain")
+    //end for cavity label
+
+    const markInfo1 = this.markInfo.filter((elem) => {
+      return this.userMark.every((ele) => {
+        return elem.id !== ele.id;
+      });
+    });
+    this.markInfo2 = markInfo1.filter((elem) => {
+      return this.AIMarkData.rectangle_coordinates.every((ele) => {
+        return elem.id !== ele._id;
+      });
+    });
+
+    console.log(this.markInfo2, "new data")*/
 
     const xray_info = {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
-      marker: markInfo2,
+      marker: this.markInfo2,
       accuracy_per: this.valInput,
+      accurate_val: (this.markInfo.length-(this.delCavity+this.adminMark))
 
     }
     console.log(xray_info)
@@ -489,6 +543,21 @@ export class MarkXrayComponent {
     }
   }
   handleClick() {
+    this.router.navigateByUrl('/uploaded-xray');
+  }
+  flag(){
+    const flagData={
+      id: this.xRayData[0]?.user_id,
+      flag: 1,
+    }
+    this.userService.setFlag(flagData).subscribe((res:any)=>{
+      if (res.success){
+        console.log("flag set successfully")
+      }
+      else{
+        console.log("flag not set successfully")
+      }
+    })
     this.router.navigateByUrl('/uploaded-xray');
   }
 }

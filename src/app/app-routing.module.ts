@@ -22,6 +22,8 @@ import {UserAuthGuard} from './guard/user-auth.guard';
 import {SubscribeAuthGuard} from './guard/subscribe-auth.guard'
 import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
 import { TestComponent } from './views/pages/test/test.component';
+import { FinancialComponent } from './views/pages/financial/financial.component';
+import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
 const routes: Routes = [
 
   // {
@@ -206,10 +208,10 @@ const routes: Routes = [
       },
 
       {
-        path: 'manage-subscription',
-        component: ManageSubscriptionComponent,
+        path: 'financial',
+        component: FinancialComponent,
         data: {
-          title: 'Manage Subscription'
+          title: 'Financial'
         }
       },
       {
@@ -256,6 +258,15 @@ const routes: Routes = [
         },
       //  canActivate :[UserAuthGuard]
       },
+      {
+        path: 'view-x-ray/:xray_id',
+        component: ViewXrayComponent,
+        data: {
+          title: 'View X-Ray'
+        },
+      //  canActivate :[UserAuthGuard]
+      },
+
 
     ],
 

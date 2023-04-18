@@ -30,7 +30,14 @@ export const navItems:
     name: 'Manage Subscription',
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
-  }
+  },
+  {
+    name: 'Financials',
+    url: 'financial',
+    icon: 'fa-solid fa-file-invoice-dollar'
+  },
+
+
 
 /*  {
     name: 'Charts',

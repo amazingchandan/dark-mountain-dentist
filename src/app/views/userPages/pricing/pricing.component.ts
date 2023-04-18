@@ -182,7 +182,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
       country: new FormControl(null, Validators.required),
       // password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       // repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
-      age: new FormControl(null, Validators.required)
+      age: new FormControl(null, Validators.required),
+      license_no : new FormControl(null, Validators.required),
     });
 
     this.registerForm = this.formBuilder.group({
@@ -197,6 +198,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
       age: ['', [Validators.required]],
+      license_no : ['', [Validators.required]],
     });
     console.log(this.userInfo);
     this.editUser(this.userInfo.id)
@@ -207,11 +209,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
   getIPAddress()
   {
-    this.http.get("https://geolocation-db.com/json/").subscribe((res:any)=>{
+    this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res:any)=>{
       const data = res;
       this.ipAddress= data.IPv4
-      this.country =data.country_name;
-      console.log(this.country,"ipAddress")
+      this.country =data.country;
+      console.log(this.country,"ipAddress",data)
     });
   }
   ngAfterViewInit(): void {
@@ -730,6 +732,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
         });
         this.registerForm.patchValue({
           age: res.getData[0].age
+        })
+        this.registerForm.patchValue({
+          license_no: res.getData[0].license_no
         })
       }
     })

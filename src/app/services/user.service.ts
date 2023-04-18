@@ -38,6 +38,8 @@ export class UserService {
   paypalReq: string;
   getUserAllSubsById: any;
   AIData:string;
+  newAIData:String;
+  flag:String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -69,6 +71,8 @@ export class UserService {
     this.getUserAllSubsById = this.apiHost + 'getUserAllSubListById'
     this.paypalReq = this.apiHost + 'create_payment';
     this.AIData = this.apiHost +'loadAIMarking';
+    this.newAIData = this. apiHost + 'updateAIMarking';
+    this.flag = this.apiHost + 'setFlag';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -157,5 +161,10 @@ export class UserService {
   loadAIData(requestParameters: any){
     return this.http.post(`${this.AIData}`, requestParameters, {});
   }
-
+  updateAIData(requestParameters: any){
+    return this.http.post(`${this.newAIData}`, requestParameters, {});
+  }
+  setFlag(requestParameters:any){
+    return this.http.post(`${this.flag}`, requestParameters, {});
+  }
 }

@@ -21,6 +21,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { TestComponent } from './test/test.component';
+import { FinancialComponent } from './financial/financial.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TestComponent } from './test/test.component';
     ForgetPasswordComponent,
     SetNewPasswordComponent,
     TestComponent,
+    FinancialComponent,
   ],
   imports: [
     CommonModule,

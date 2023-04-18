@@ -60,7 +60,26 @@ export class UploadXrayComponent implements OnInit {
     };
 
     this.getAllXrayOfUserById()
+    //this.evalBtn();
+
+     
   }
+/*  evalBtn(){
+    let evaluate = document.getElementById("eval");
+let view = document.getElementById("view");
+
+    let flagged=0;
+    if(flagged==0){
+      this.hiddenFlag=false;
+      this.hiddenunFlag=true;
+
+    }
+    else if(flagged==1){
+      this.hiddenFlag=true;
+      this.hiddenunFlag=false
+
+    }
+  }*/
   public open() {
     if (0) {
       // Dont open the modal
@@ -290,6 +309,9 @@ export class UploadXrayComponent implements OnInit {
     // let id = this.xRayData._id
     this.router.navigateByUrl('/evaluate-x-ray/' + id);
     this.hidden = true;
+  }
+  view(id){
+    this.router.navigateByUrl('/view-x-ray/' + id)
   }
   // evaluate(){
   //   // [routerLink]="'/evaluate-x-ray'"
