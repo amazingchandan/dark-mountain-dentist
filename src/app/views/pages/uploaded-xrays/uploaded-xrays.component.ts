@@ -34,24 +34,18 @@ export class UploadedXraysComponent {
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
-      ordering: false,
+     
       responsive:true,
       dom: 'Bfrtip',
-      order : [7, 'asc'],
-      "columnDefs": [ {
-      "targets": [0,1,2,3,4,5,6,8,9],
+      order :[ [7,'asc'],[8,'desc'],[2,'desc']],
+      "columnDefs": [{
+      "targets": [0,1,3,4,5,6,9],
       "orderable": false
-      } ]
+      }]
 
 
     };
-   this.dtOptions.Settings = {
-    order : [7, 'asc'],
-    "columnDefs": [ {
-    "targets": [0,1,2,3,4,5,6,8,9],
-    "orderable": false
-    } ]
-      };
+   
     this.xrayList();
   }
 
