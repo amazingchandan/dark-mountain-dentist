@@ -87,33 +87,26 @@
                 <option value="China">China</option>
               </select>
             </div>
-            <div class="col-md-4 form-group">
-              <label class="mb-2">Age<sup>*</sup></label>
-              <input type="number" placeholder="Age" formControlName="age" class="form-control" maxlength="20"
-                (keypress)="onlyNumberKey($event)" />
-            </div>
+           
             <div class="col-md-4 form-group">
               <label class="mb-2">License/Registration No.<sup>*</sup></label>
               <input type="text" placeholder="License/Registration No." formControlName="license_no"
                 class="form-control" />
             </div>
-
-          </div>
-
-          <div class="row mb-n4 mt-n2">
-            <div class="col-md-4 form-group"></div>
-            <div class="col-md-4 form-group"></div>
             <div class="col-md-4 btn-div">
-              <button type="button" class="btn btn-primary save-btn mt-4 cancel-btn pd-1 other-btn fw-bolder"
+              <button type="button" class="btn btn-primary save-btn mt-5 cancel-btn pd-1 other-btn fw-bolder"
                 (click)="resetUser()">
                 Reset&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
               </button>
-              <button type="button" class="btn btn-primary save-btn ms-2 mt-4 pd-1 other-btn fw-bolder"
+              <button type="button" class="btn btn-primary save-btn ms-2 mt-5 pd-1 other-btn fw-bolder"
                 (click)="updateUser()">
                 &nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i>
               </button>
             </div>
+
           </div>
+
+         
         </form>
 
         <div class="sub-container">
@@ -209,12 +202,11 @@
             <div class="container mt-3 xray-table-container border-top p-0" *ngIf="this.userID != this.dentistId">
               <!--p-0-->
               <div class="sub-coontainer mt-4 xray-row">
-                <h5>Subscription Detailsee</h5>
+                <h5>Subscription Details</h5>
                 <div class="row mt-3">
                   <div class="col-12 overflowForScroll">
                     <!--pe-0-->
-                    <table class="table table-bordered row-border hover" datatable="ng" datatable
-                      [dtOptions]="dtOptions">
+                    <table class="table table-bordered row-border hover" >
                       <thead>
                         <tr>
                           <th scope="col">Plan</th>
@@ -321,8 +313,7 @@
             <div class="row mt-3">
               <div class="col-12">
                 <!--pe-0-->
-                <table datatable *ngIf="showContent" class=" row-border hover" datatable="ng" datatable
-                  [dtOptions]="dtOptions">
+                <table class="table table-bordered row-border hover">
                   <thead>
                     <tr>
                       <th scope="col">X-ray Uploaded Date</th>

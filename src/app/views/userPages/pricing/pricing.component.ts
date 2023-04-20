@@ -61,6 +61,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public payData: any;
   countryList = "-Select Country-";
   public IsmodelShow: any = false;
+  public paypalBtn: any = false;
 
   ipAddress = '';
   //route: any;
@@ -197,7 +198,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
-      age: ['', [Validators.required]],
+     
       license_no : ['', [Validators.required]],
     });
     console.log(this.userInfo);
@@ -232,6 +233,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   private initConfig(): void {
     var modal= document.getElementById("launch_ad");
     modal.style.display = "none";
+  
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'sb',
@@ -242,21 +244,21 @@ export class PricingComponent implements OnInit, AfterViewInit {
             purchase_units: [{
               amount: {
                   currency_code: 'USD',
-                  value: '9.99',
+                  value: `${this.subsPrice}`,
                   breakdown: {
                       item_total: {
                           currency_code: 'USD',
-                          value: '9.99'
+                          value: `${this.subsPrice}`
                       }
                   }
               },
               items: [{
-                  name: 'Enterprise Subscription',
+                  name: 'Dark Mountain',
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                       currency_code: 'USD',
-                      value: '9.99',
+                      value: `${this.subsPrice}`,
                   },
               }]
             }]
@@ -327,7 +329,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                          this.IsmodelShow = false
                          console.log(this.IsmodelShow);
                          ($("#myModal")as any).modal("hide");
-                         this.handleClick();
+                        //  this.handleClick();
                         // <HTMLElement>document.getElementById('myModal').modal("hide")
 
                          Swal.fire({
@@ -727,12 +729,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
         this.registerForm.patchValue({
           country: res.getData[0].country,
         });
+        this.countryList = res.getData[0].country ? res.getData[0].country : "-Select Country-"
         this.registerForm.patchValue({
           pincode: res.getData[0].pincode,
         });
-        this.registerForm.patchValue({
-          age: res.getData[0].age
-        })
+        
         this.registerForm.patchValue({
           license_no: res.getData[0].license_no
         })
@@ -765,12 +766,15 @@ export class PricingComponent implements OnInit, AfterViewInit {
               text: res.message,
               icon: 'success',
             });
+            console.log("DO HERE!!!!!!")
+            this.paypalBtn = true;
             //  this.router.navigateByUrl('/registered-dentists');
           } else {
             Swal.fire({
               text: res.message,
               icon: 'error',
             });
+            
             //this.toastr.error(res.message);
           }
         });

@@ -13,21 +13,22 @@
               <thead>
                 <tr>
                   <th class="text-nowrap">Dentist Name</th>
-                  <th>Age</th>
+                  <th>License Number</th>
                   <th>City</th>
-                  <th class="text-nowrap">Contact Number</th>
+                 
                   <th class="text-nowrap">Subscription End Date</th>
                   <th>Action</th>
                   <th>Upload</th>
                   <th>Evaluations</th>
+                  <th>Marked</th>
                 </tr>
               </thead>
               <tbody  *ngIf="allData?.length != 0">
                 <tr *ngFor="let user of allData; let i = index">
                   <td>{{user.first_name | titlecase}} {{user.last_name | titlecase}}</td>
-                  <td>{{user.age}}</td>
+                <td>{{user.license_no}}</td>
                   <td>{{user.city | titlecase}}</td>
-                  <td>{{user.contact_number}}</td>
+                 
                   <td class="paddingForCenter">{{user.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td>
                   <td>
                     <!-- <div class="d-flex align-items-center"> -->
@@ -45,8 +46,9 @@
                       >Edit</button>
                     <!-- </div> -->
                   </td>
-                 <td>12</td>
-                  <td>5</td>
+                 <td>{{user.noOfXrayUploaded}}</td>
+                  <td>{{user.noOfXrayEvaluated}}</td>
+                  <td>{{user.noOfXrayMarkedByAdmin}}</td>
                 </tr>
                <!-- <tr>
 

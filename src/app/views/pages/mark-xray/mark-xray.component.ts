@@ -241,8 +241,8 @@ export class MarkXrayComponent {
  </RectangleLabels>
  </View>
 <View style="flex: 10%;position: absolute;left: 160%;margin-top: 11px;"> 
- <RectangleLabels name="label1" toName="img" background="green" editable="false" readOnly="true">
-<Label value="Add Mark" background="#00008B" />
+ <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.6" strokeWidth="6" strokeColor="#ff0000">
+<Label value="Add Mark" background="#ff0000" opacity="0.6" strokeColor="#ff0000"/>
 </RectangleLabels>
  </View>
  
@@ -524,7 +524,7 @@ export class MarkXrayComponent {
           icon: 'success',
         });
         this.createLabelStudio()
-        document.getElementById('close')?.click();
+        this.router.navigateByUrl('/uploaded-xray');
       } else {
         Swal.fire({
           text: res.message,
