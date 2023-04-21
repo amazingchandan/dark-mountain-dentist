@@ -19,7 +19,7 @@ import { DataTableDirective } from 'angular-datatables';
   styleUrls: ['./subscription-list.component.scss']
 })
 export class SubscriptionListComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   addPriceingForm: FormGroup;
   private pricingId: any;
   private status: any;
@@ -53,6 +53,10 @@ export class SubscriptionListComponent implements OnInit {
         search:"",
         searchPlaceholder: 'Search ',
       },
+      buttons:[{
+        sExtends: 'CSV',
+        text: 'Download CSV'
+      }],
       info:false,
       ordering: false,
       responsive:true,

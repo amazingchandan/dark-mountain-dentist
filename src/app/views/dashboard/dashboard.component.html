@@ -3,8 +3,13 @@
     <div class="col-12">
       <h5 class="mb-3 userName fw-bold">Hello  {{this.fName | titlecase}} {{this.lName | titlecase}}</h5>
 <!--<div class="mt-2 userName fw-bold">Hello, {{userInfo.first_name}} {{userInfo.last_name}}</div>-->
-
-      <app-widgets-dropdown></app-widgets-dropdown>
+  <div *ngIf="this.role=='admin'">
+    <app-widgets-dropdown></app-widgets-dropdown>
+  </div>
+  <div *ngIf="this.role=='dentist'">
+    <app-widgets-user-dropdown></app-widgets-user-dropdown>
+  </div>
+      
     </div>
   </div>
 </section>

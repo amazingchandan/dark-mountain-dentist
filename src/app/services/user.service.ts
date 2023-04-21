@@ -40,6 +40,12 @@ export class UserService {
   AIData:string;
   newAIData:String;
   flag:String;
+  subscriberCount:String;
+  xrayEvalCount: String;
+  planCount : String;
+  amtEarned : String;
+  xrayNotEval :String;
+  unsubscriberCount : String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -73,6 +79,12 @@ export class UserService {
     this.AIData = this.apiHost +'loadAIMarking';
     this.newAIData = this. apiHost + 'updateAIMarking';
     this.flag = this.apiHost + 'setFlag';
+    this.subscriberCount = this.apiHost +'noOfSubscriber';
+    this.xrayEvalCount = this.apiHost +'noOfXrayEval';
+    this.planCount = this.apiHost + 'noOfPlans';
+    this.amtEarned = this.apiHost + 'amtEarned';
+    this.xrayNotEval = this.apiHost + 'noOfXrayNotEval'
+    this.unsubscriberCount = this.apiHost + 'noOfUnsubscriber'
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -166,5 +178,23 @@ export class UserService {
   }
   setFlag(requestParameters:any){
     return this.http.post(`${this.flag}`, requestParameters, {});
+  }
+  noOfSubscriber() {
+    return this.http.get(`${this.subscriberCount}`);
+  }
+  noOfUnsubscriber() {
+    return this.http.get(`${this.unsubscriberCount}`);
+  }
+  noOfXrayEval() {
+    return this.http.get(`${this.xrayEvalCount}`);
+  }
+  noOfXrayNotEval() {
+    return this.http.get(`${this.xrayNotEval}`);
+  }
+  noOfPlans() {
+    return this.http.get(`${this.planCount}`);
+  }
+  totAmtEarned() {
+    return this.http.get(`${this.amtEarned}`);
   }
 }

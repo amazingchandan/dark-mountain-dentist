@@ -31,6 +31,10 @@ export class UploadedXraysComponent {
         search:"",
         searchPlaceholder: 'Search ',
       },
+      buttons:[{
+        sExtends: 'CSV',
+        text: 'Download CSV'
+      }],
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,

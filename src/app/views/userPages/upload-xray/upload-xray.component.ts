@@ -13,7 +13,8 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 })
 export class UploadXrayComponent implements OnInit {
   public allData: Array<any> = [];
-  dtOptions: DataTables.Settings = {};
+ // dtOptions: DataTables.Settings = {};
+ dtOptions: any = {};
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
@@ -51,6 +52,10 @@ export class UploadXrayComponent implements OnInit {
         search: "",
         searchPlaceholder: 'Search ',
       },
+      buttons:[{
+        sExtends: 'CSV',
+        text: 'Download CSV'
+      }],
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,

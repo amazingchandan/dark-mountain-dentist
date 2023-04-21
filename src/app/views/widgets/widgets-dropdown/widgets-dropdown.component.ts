@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { getStyle } from '@coreui/utils/src';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-widgets-dropdown',
@@ -18,12 +19,20 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
+
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private userService: UserService,
   ) {}
 
   data: any[] = [];
   options: any[] = [];
+  subCount:any=0;
+  unsubCount:any=0;
+  xrayCount: any=0;
+  xrayNotCount: any=0;
+  planCount: any=0;
+  amtEarned: any=0;
   labels = [
     'January',
     'February',
@@ -117,6 +126,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.setData();
+    this.subscriberCount();
   }
 
   ngAfterContentInit(): void {
@@ -167,6 +177,51 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         }
       }
     }
+  }
+  subscriberCount(){
+   this.userService.noOfSubscriber().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.subCount=res.getData;
+      console.log("subcount",this.subCount)
+     }
+   })
+   this.userService.noOfUnsubscriber().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.unsubCount=res.getData;
+      console.log("unsubcount",this.unsubCount)
+     }
+   })
+   this.userService.noOfXrayEval().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.xrayCount=res.getData;
+      console.log("xraycount",this.subCount)
+     }
+   })
+   this.userService.noOfXrayNotEval().subscribe((res:any)=>
+   {
+    console.log(res)
+     if(res.success){
+      this.xrayNotCount=res.getData;
+      console.log("xraynotcount",this.xrayNotCount)
+     }
+   })
+   this.userService.noOfPlans().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.planCount=res.getData;
+      console.log("plancount",this.planCount)
+     }
+   })
+   this.userService.totAmtEarned().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.amtEarned=res.getData;
+      console.log("amtEarned",this.amtEarned)
+     }
+   })
   }
 }
 

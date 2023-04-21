@@ -23,6 +23,7 @@ interface IUser {
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  role: any;
   constructor(private chartsData: DashboardChartsData,
     private userService : UserService) {
   }
@@ -118,6 +119,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initCharts();
     console.log(this.userInfo)
+    let jwt = this.userInfo.token
+
+    let jwtData = jwt.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData);
+    this.role=decodedJwtData.role;
+
     let id= this.userInfo.id;
     this.userService.getUserRecordById(id).subscribe((res: any) =>{
       console.log(res,"++++++")
