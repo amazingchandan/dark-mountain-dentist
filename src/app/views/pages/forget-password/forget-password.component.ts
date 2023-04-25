@@ -36,7 +36,8 @@ export class ForgetPasswordComponent implements OnInit {
   }
   // time = 5;
   handleReset(){
-    this.spinner.show()
+    this.spinner.show();
+    (<HTMLInputElement>document.getElementById('email')).disabled = true;
     const testBy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     // console.log(this.emailReset);
@@ -134,23 +135,46 @@ export class ForgetPasswordComponent implements OnInit {
   }
   setNew(){
     if(this.newPass !== "" && this.cnfPass !== "" && this.newPass == this.cnfPass){
-      this.apiService.setNewPassword({email: this.emailReset.toLowerCase().trim(), newPass: this.newPass, cnfPass: this.cnfPass}).subscribe((res:any) => {
+      if (this.newPass !== this.cnfPass) {
+        Swal.fire({
+          text: 'The password confirmation does not match, please again',
+          icon: 'error'
+        });
+        return false;
+      }
+      else if (!this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || !this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || this.cnfPass.length < 7 || this.newPass.length < 7) {
+        Swal.fire({
+          text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
+          icon: 'warning'
+        });
+        return false;
+       }
+        else { this.apiService.setNewPassword({email: this.emailReset.toLowerCase().trim(), newPass: this.newPass, cnfPass: this.cnfPass}).subscribe((res:any) => {
         console.log("Password changes");
         this.router.navigateByUrl("/login")
-      })
-    } else if (!this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || !this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || this.cnfPass.length < 7 || this.newPass.length < 7) {
+      })}
+    }
+    else{
       Swal.fire({
-        text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
-        icon: 'warning'
-      });
-      return false;
-    } else if (this.newPass !== this.cnfPass) {
-      Swal.fire({
-        text: 'The password confirmation does not match, please again',
+        text: 'Please enter the password',
         icon: 'error'
       });
       return false;
+      
     }
+    // } else if (!this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || !this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || this.cnfPass.length < 7 || this.newPass.length < 7) {
+    //   Swal.fire({
+    //     text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
+    //     icon: 'warning'
+    //   });
+    //   return false;
+    // } else if (this.newPass !== this.cnfPass) {
+    //   Swal.fire({
+    //     text: 'The password confirmation does not match, please again',
+    //     icon: 'error'
+    //   });
+    //   return false;
+    // }
   }
   public timer(minute: any) {
     // let minute = 1;

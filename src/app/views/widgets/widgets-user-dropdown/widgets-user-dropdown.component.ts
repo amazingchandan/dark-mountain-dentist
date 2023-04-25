@@ -88,7 +88,8 @@ export class WidgetsUserDropdownComponent {
 
 
     }
-    if(this.curPass !== "" && this.newPass !== "" && this.cnfPass !== "" ){
+    console.log(this.curPass,this.newPass,this.cnfPass)
+    if(this.curPass !== undefined && this.newPass !== undefined && this.cnfPass !==undefined ){
       if (!this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || !this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || this.cnfPass.length < 7 || this.newPass.length < 7) {
         Swal.fire({
           text: 'Password must be contain atleast 7 characters and atleast one letter and one number',
@@ -112,14 +113,23 @@ export class WidgetsUserDropdownComponent {
             text: 'Password changed successfully',
             icon: 'success'
           });
+          document.getElementById('close')?.click();
           return true;
         }
        // this.router.navigateByUrl("/login")
       })
     }
+    
    
     } 
-   
+    else{
+      Swal.fire({
+        text: 'Please enter the password',
+        icon: 'error'
+      });
+      return false;
+      
+    }
   }
 
 }

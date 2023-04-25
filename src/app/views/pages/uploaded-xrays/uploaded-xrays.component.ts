@@ -41,11 +41,11 @@ export class UploadedXraysComponent {
      
       responsive:true,
       dom: 'Bfrtip',
-     order :[ [3,"date","desc"]
+     order :[ [1,"date","desc"]
       
     ],
       "columnDefs": [{
-      "targets": [0,1,2,4,5,6],
+      "targets": [0,2,3],
      
       "orderable": false
       }]
