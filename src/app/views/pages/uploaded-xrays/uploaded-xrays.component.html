@@ -2,13 +2,80 @@
   <div class="row">
     <div class="col-12">
       <h5 class="mb-n5 fw-bold">Uploaded X-Rays</h5>
-        <div class="table-responsive resposive-table" style="position: relative;">
+      <div class="table-responsive resposive-table" style="position: relative;">
         <div class="card pt-0 table-card">
 
 
-              <div class="card-body pt-0" style="overflow-x: auto;">
-          <table datatable *ngIf="showContent" datatable="ng"  class="row-border hover" [dtOptions]="dtOptions">
-                <thead>
+          <div class="card-body pt-0" style="overflow-x:auto;">
+            <table datatable *ngIf="showContent" datatable="ng" class="row-border hover" [dtOptions]="dtOptions" dt-column-defs="dtColumnDefs">
+             
+
+              <thead>
+                <tr>
+
+                  <th>Dentist Name</th>
+                  <th>City</th>
+                  <th>Contact Number</th>
+                  <th>X-Ray Uploaded Date</th>
+                  <th>Uploaded X-ray</th>
+                  <th>Marked</th>
+                  <th>View Details</th>
+                </tr>
+              </thead>
+  
+
+              <tbody *ngIf="allData?.length != 0">
+                <tr *ngFor="let data of this.allData; let i = index">
+
+
+                  <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
+                  <td>{{data.user_id.city}}</td>
+                  <td>{{data.user_id.contact_number}}</td>
+                  <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
+                  <td>{{data.user_id.noOfXrayUploaded}}</td>
+
+
+                  <td>
+                    <div *ngIf="data.admin_marked_status==true"><input class="form-check-input checkbox1"
+                        type="checkbox" value="" id="checkbox-1" checked /></div>
+
+                    <div *ngIf="data.admin_marked_status==false"><input class="form-check-input checkbox1"
+                        type="checkbox" value="" id="checkbox-1" /></div>
+                  </td>
+
+
+                  <td>
+
+                    <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
+                      [routerLink]="'/mark-xray/'+data._id">Edit</button>
+                  </td>
+
+                </tr>
+
+
+              </tbody>
+              <tbody *ngIf="this.allData?.length == 0">
+                <tr>
+                  <td colspan="8" class="no-data-available text-center" >No data</td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                 
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- <thead>
                   <tr>
                     <th class="text-nowrap">X-Ray ID</th>
                     <th>Dentist Name</th>
@@ -21,8 +88,8 @@
                     <th>Percentage</th>
                     <th>Action</th>
                   </tr>
-                </thead>
-                <tbody  *ngIf="allData?.length != 0">
+                </thead> -->
+              <!-- <tbody  *ngIf="allData?.length != 0">
                   <tr *ngFor="let data of this.allData; let i = index">
                     <td>{{data._id}}</td>
                     
@@ -44,11 +111,7 @@
                     <td>{{data.accurateCavitiesPerByUser}}</td>
                    
                     <td>
-                      <!-- <button
-                      type="button"
-                      class="btn btn-danger edit"
-                      title="Edit"
-                    ><i class="fa-regular fa-pen-to-square mt-2"></i></button> -->
+                     
                    <button
                       title="View"
                       type="button"
@@ -73,13 +136,4 @@
                     <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
                   </tr>
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </section>
-
+                </tbody> -->

@@ -46,6 +46,10 @@ export class UserService {
   amtEarned : String;
   xrayNotEval :String;
   unsubscriberCount : String;
+ totXrayById : String;
+ totCavityByAI : String;
+ userPlanById :String;
+ rstPwd : String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -83,8 +87,12 @@ export class UserService {
     this.xrayEvalCount = this.apiHost +'noOfXrayEval';
     this.planCount = this.apiHost + 'noOfPlans';
     this.amtEarned = this.apiHost + 'amtEarned';
-    this.xrayNotEval = this.apiHost + 'noOfXrayNotEval'
-    this.unsubscriberCount = this.apiHost + 'noOfUnsubscriber'
+    this.xrayNotEval = this.apiHost + 'noOfXrayNotEval';
+    this.unsubscriberCount = this.apiHost + 'noOfUnsubscriber';
+    this.totXrayById = this.apiHost + 'noOfXrayById';
+    this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
+    this.userPlanById = this.apiHost + 'userPlanById';
+    this.rstPwd = this.apiHost + 'resetPassword';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -196,5 +204,17 @@ export class UserService {
   }
   totAmtEarned() {
     return this.http.get(`${this.amtEarned}`);
+  }
+  noOfXrayByID(id) {
+    return this.http.get(`${this.totXrayById}?dentist_id=${id}`);
+  }
+ noOfCavityByAI(id) {
+    return this.http.get(`${this.totCavityByAI}?dentist_id=${id}`);
+  }
+  getUserPlanById(id) {
+    return this.http.get(`${this.userPlanById}?dentist_id=${id}`);
+  }
+  resetPassword(requestParameters){
+    return this.http.post(`${this.rstPwd}`,requestParameters,{});
   }
 }

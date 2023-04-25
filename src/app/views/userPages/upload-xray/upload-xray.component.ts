@@ -59,9 +59,12 @@ export class UploadXrayComponent implements OnInit {
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
-      ordering: false,
+     // ordering: false,
       responsive: true,
       // dom: 'Bfrtip',
+      order :[ [0,"date","desc"]
+      
+    ],
     };
 
     this.getAllXrayOfUserById()

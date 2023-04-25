@@ -33,7 +33,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   xrayNotCount: any=0;
   planCount: any=0;
   amtEarned: any=0;
-  labels = [
+ /* labels = [
     'January',
     'February',
     'March',
@@ -122,10 +122,10 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         hoverRadius: 4
       }
     }
-  };
+  };*/
 
   ngOnInit(): void {
-    this.setData();
+    //this.setData();
     this.subscriberCount();
   }
 
@@ -134,7 +134,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   }
 
-  setData() {
+ /* setData() {
     for (let idx = 0; idx < 4; idx++) {
       this.data[idx] = {
         labels: idx < 3 ? this.labels.slice(0, 7) : this.labels,
@@ -177,7 +177,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         }
       }
     }
-  }
+  }*/
   subscriberCount(){
    this.userService.noOfSubscriber().subscribe((res:any)=>
    {

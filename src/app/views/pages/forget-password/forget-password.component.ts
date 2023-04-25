@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { of, catchError } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 
 @Component({
   selector: 'app-forget-password',
@@ -20,7 +21,7 @@ export class ForgetPasswordComponent implements OnInit {
   newPass = "";
   cnfPass = "";
   ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
-
+  constructor(private apiService: UserService, public router : Router,private spinner: NgxSpinnerService){}
   onEmailReset(event: any){
     this.emailReset = (<HTMLInputElement>event.target).value.trim();
   }
@@ -35,6 +36,7 @@ export class ForgetPasswordComponent implements OnInit {
   }
   // time = 5;
   handleReset(){
+    this.spinner.show()
     const testBy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     // console.log(this.emailReset);
@@ -44,8 +46,11 @@ export class ForgetPasswordComponent implements OnInit {
         //   },(this.time - i) * 1000);
         // }
     if(this.emailReset !== ''){
-
+      
       let isValid = testBy.test(this.emailReset.toLowerCase().trim());
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 2000);
       if (!isValid) {
         Swal.fire({
           text: 'Please enter valid email',
@@ -53,17 +58,22 @@ export class ForgetPasswordComponent implements OnInit {
         });
         return false;
       }
+    
       this.apiService.forgotPassword({email: this.emailReset.toLowerCase().trim()}).pipe(
         catchError(err => of([err]))
       ).subscribe((res: any) => {
+       
         console.log(res);
 
         if(res.data){
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 2000);
           console.log(`Email done! ${res.otp} is the OTP`);
           this.data = res.data;
           this.resetState = true;
           this.timePassed = false;
-          this.timer(2);
+          this.timer(10);
         } else {
           Swal.fire({
             text: `An account with email address ${this.emailReset} does not exists, please register.`,
@@ -81,7 +91,7 @@ export class ForgetPasswordComponent implements OnInit {
       });
       return false;
     }
-    console.log(this.resetState);
+    console.log(this.resetState,"***");
   }
   // countDown() {
   //   for(let i  = this.time; i >= 0; i--){
@@ -193,7 +203,7 @@ export class ForgetPasswordComponent implements OnInit {
       }
     }, 1000);
   }
-  constructor(private apiService: UserService, public router : Router){}
+ 
   ngOnInit(): void {
 
     // console.log(this.resetState);
