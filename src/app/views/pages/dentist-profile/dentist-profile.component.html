@@ -7,7 +7,7 @@
           *ngIf="this.role == 'admin' && this.dentistId != this.userID">
           Back
         </button>
-        <div class="flag-btn">
+        <!-- <div class="flag-btn">
           <button class="btn fw-bold rounded p-1 cancel-btn flag" (click)="flagClick()" id="flag"
             *ngIf="this.role == 'admin' && this.dentistId != this.userID" [hidden]="hiddenFlag">
             Flag
@@ -16,7 +16,7 @@
             [hidden]="hiddenunFlag" *ngIf="this.role == 'admin' && this.dentistId != this.userID">
             Unflag
           </button>
-        </div>
+        </div> -->
       </h5>
 
       <div class="row">
@@ -117,16 +117,15 @@
               <div class="container xray-table-container border-top p-0" *ngIf="this.role == 'dentist'">
                 <!--p-0-->
                 <div class="sub-coontainer mt-4 xray-row">
-                  <h5>Subscription Detailsss</h5>
+                  <h5>Subscription Details</h5>
                   <div class="row mt-3">
                     <div class="col-12 overflowForScroll">
                       <!--pe-0-->
-                      <table class="table table-bordered row-border hover" datatable="ng" datatable
-                      [dtOptions]="dtOptions">
+                      <table class="table table-bordered row-border hover" >
                         <thead>
                           <tr>
                             <th scope="col">Plan</th>
-                            <th scope="col">End Date</th>
+                            <th scope="col">Next Billing Date</th>
                             <th scope="col">Amount</th>
                             <th scope="col">View Details</th>
                           </tr>
@@ -141,7 +140,7 @@
                             <td>{{ data.subscription_id.amount }}</td>
                             <td>
                               <!-- removed href from <a></a> for now, please add later when using it -->
-                              <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
+                              <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="planDetails(data._id)">
                                   View Details
                                 </button></a>
                             </td>
@@ -210,7 +209,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Plan</th>
-                          <th scope="col">End Date</th>
+                          <th scope="col">Next Billing Date</th>
                           <th scope="col">Amount</th>
                           <th scope="col">View Details</th>
                         </tr>
@@ -225,9 +224,9 @@
                           <td>{{ data.subscription_id.amount }}</td>
                           <td>
                             <!-- removed href from <a></a> for now, please add later when using it -->
-                            <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View">
-                                View Details
-                              </button></a>
+                            <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="planDetails(data._id)">
+                              View Details
+                            </button></a>
                           </td>
                           <!-- <td>
                               <div class="custom-control custom-checkbox">
@@ -290,7 +289,7 @@
                 <!-- </div> -->
                 <!-- </div> -->
               </div>
-              <div class="row mt-3">
+              <!-- <div class="row mt-3">
                 <div class="custom-control custom-checkbox">
                   <input class="form-check-input me-1" type="checkbox" value="" id="checkbox-1" checked />
                   <span class="fw-semibold"><span>Yes, I agree to</span>&nbsp;<u class="hand" data-bs-toggle="modal"
@@ -298,7 +297,7 @@
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModalCenter">conditions</u>&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span></span>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -318,7 +317,7 @@
                     <tr>
                       <th scope="col">X-ray Uploaded Date</th>
                       <th scope="col">View X-ray</th>
-                      <th scope="col">Marked By Dentist</th>
+                      <th scope="col">Evaluated By Dentist</th>
                     </tr>
                   </thead>
                   <tbody *ngIf="this.xrayData?.length != 0">
@@ -440,6 +439,64 @@
         >
           Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
         </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--view plan modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Subscription Details:</h4>
+          
+        </div>
+        <div class="modal-body">
+            <div class="d-flex align-items-start flex-column sub-body-content">
+               
+                <ul class="proceed-details m-0 p-0 align-self-center  me-2 w-75 color">
+                <!-- <li
+                  class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+                >
+                  <span>Name:</span>&nbsp;<span>{{
+                    this.fname | titlecase
+                  }} {{
+                    this.lname | titlecase
+                  }}</span>
+                </li>
+                <li
+                  class="fs-6 fw-semibold d-flex justify-content-between align-items-center text-wrap"
+                >
+                  <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
+                </li> -->
+                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <span>Plan Name:</span>&nbsp;<span class="me-2">{{
+                    this.planDetail?.subscription_id?.plan_name
+
+                    | titlecase
+                    }}</span>
+                </li>
+                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <span>Plan Type:</span>&nbsp;<span class="me-2">{{
+                      this.planDetail?.subscription_id?.type | titlecase
+                    }}</span>
+                </li>
+                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.subscription_id?.amount }}</span>
+                </li>
+                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
+                  <span>Start Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+                </li>
+                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+                </li>
+              </ul>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
+       
       </div>
     </div>
   </div>

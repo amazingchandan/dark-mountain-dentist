@@ -27,7 +27,7 @@ img{
 }
 .btn-div{
     margin-right: -0.5rem !important;
-    margin-top: 1.3rem !important;
+    margin-top: 0  !important;
     margin-bottom: 0.5rem !important;
 }
 // .range-input{
@@ -179,4 +179,7 @@ input[type='range']::-webkit-slider-thumb {
     padding: 0px 7px !important;
     border-radius: 2px;
     top:-8px;
+}
+.discard{
+    height: 39.6px;
 }

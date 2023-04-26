@@ -219,6 +219,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
    {
      if(res.success){
       this.amtEarned=res.getData;
+      this.amtEarned = this.amtEarned.toFixed(2)
       console.log("amtEarned",this.amtEarned)
      }
    })

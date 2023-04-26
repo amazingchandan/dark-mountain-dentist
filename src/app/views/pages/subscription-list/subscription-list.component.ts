@@ -69,16 +69,16 @@ export class SubscriptionListComponent implements OnInit {
     this.addPriceingForm = new FormGroup({
       plan_name: new FormControl(),
       amount: new FormControl(),
-      maximum: new FormControl(),
-      minimum: new FormControl(),
+      // maximum: new FormControl(),
+      // minimum: new FormControl(),
       type: new FormControl(),
       country: new FormControl(),
     });
     this.addPriceingForm = this.formBuilder.group({
       plan_name: ['', [Validators.required]],
       amount: ['', [Validators.required]],
-      maximum: ['', [Validators.required]],
-      minimum: ['', [Validators.required]],
+      // maximum: ['', [Validators.required]],
+      // minimum: ['', [Validators.required]],
       type: ['', [Validators.required]],
       country: ['', [Validators.required]],
     });
@@ -135,30 +135,30 @@ export class SubscriptionListComponent implements OnInit {
       // this.toastr.error('Please enter priceing amount');
       // return false;
     }
-    if (
-      this.addPriceingForm.value.minimum == undefined ||
-      this.addPriceingForm.value.minimum == ''
-    ) {
-      Swal.fire({
-        text: 'Please enter minimum',
-        icon: 'warning'
-      });
-      return false;
-      // this.toastr.error('Please enter subscription days');
-      // return false;
-    }
-    if (
-      this.addPriceingForm.value.maximum == undefined ||
-      this.addPriceingForm.value.maximum == ''
-    ) {
-      Swal.fire({
-        text: 'Please enter maximum',
-        icon: 'warning'
-      });
-      return false;
-      // this.toastr.error('Please enter subscription days');
-      // return false;
-    }
+    // if (
+    //   this.addPriceingForm.value.minimum == undefined ||
+    //   this.addPriceingForm.value.minimum == ''
+    // ) {
+    //   Swal.fire({
+    //     text: 'Please enter minimum',
+    //     icon: 'warning'
+    //   });
+    //   return false;
+    //   // this.toastr.error('Please enter subscription days');
+    //   // return false;
+    // }
+    // if (
+    //   this.addPriceingForm.value.maximum == undefined ||
+    //   this.addPriceingForm.value.maximum == ''
+    // ) {
+    //   Swal.fire({
+    //     text: 'Please enter maximum',
+    //     icon: 'warning'
+    //   });
+    //   return false;
+    //   // this.toastr.error('Please enter subscription days');
+    //   // return false;
+    // }
     if (
       this.addPriceingForm.value.type == undefined ||
       this.addPriceingForm.value.type == ''
@@ -249,12 +249,12 @@ export class SubscriptionListComponent implements OnInit {
             plan_name: this.allData[i].plan_name.toLowerCase().trim(),
           });
 
-          this.addPriceingForm.patchValue({
-            minimum: this.allData[i].minimum,
-          });
-          this.addPriceingForm.patchValue({
-            maximum: this.allData[i].maximum,
-          });
+          // this.addPriceingForm.patchValue({
+          //   minimum: this.allData[i].minimum,
+          // });
+          // this.addPriceingForm.patchValue({
+          //   maximum: this.allData[i].maximum,
+          // });
           this.addPriceingForm.patchValue({
             type: this.allData[i].type,
           });
@@ -274,12 +274,12 @@ export class SubscriptionListComponent implements OnInit {
         plan_name: '',
       });
 
-      this.addPriceingForm.patchValue({
-        minimum: '',
-      });
-      this.addPriceingForm.patchValue({
-        maximum: '',
-      });
+      // this.addPriceingForm.patchValue({
+      //   minimum: '',
+      // });
+      // this.addPriceingForm.patchValue({
+      //   maximum: '',
+      // });
       this.addPriceingForm.patchValue({
         type: '',
       });

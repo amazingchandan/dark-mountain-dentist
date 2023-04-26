@@ -50,7 +50,7 @@ export class MarkXrayComponent {
     /*  setTimeout(() => {
         this.createLabelStudio()
       }, 1000);*/
-
+      this.avgPer= ((this.markInfo.length-(this.delCavity+this.adminMark))*100/this.markInfo.length).toFixed(1);
 
   }
   onRangeChange(event: any) {
@@ -116,8 +116,11 @@ export class MarkXrayComponent {
         "image_rotation": 0,
         "to_name": "img",
 
-        "fillColor": "#00ff00",
-        "background": "green",
+        //"fillColor": "#00ff00",
+        "strokewidth":6,
+        "strokecolor":"#ff0000",
+        "opacity":0.2,
+
         "value":
         {
           "x": element.value.x,
@@ -223,7 +226,8 @@ export class MarkXrayComponent {
   <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
   <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
   <Style> .Hint_main__1Svrz { display:none; }</Style>
-  <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; }</Style>
+  <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; position: relative;
+    top: -7px; padding: 10px 14px; border-radius:4px}</Style>
  <Style> .App_menu__X-A5N{visibility:hidden}</Style>
  <Style> .ls-common {height:354px !important}</Style>
   <View style="flex: 90%;  
@@ -233,16 +237,17 @@ export class MarkXrayComponent {
  <Style> canvas { width:566px; height:354px !important;  }</Style>
  </View>
  <View style="float:right;visibility:hidden">
- <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" canRotate="false">
- <Label value="Add Mark" background="green"/> 
- <Label value="AI Mark" background="#8b0000" editable="false"  readOnly="true"/>
+ <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
+ <Label value="Add Mark" background="green" strokeColor="#000000"/> 
+ <Label value="AI Mark" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
  </View>
-<View style="flex: 10%;position: absolute;left: 160%;margin-top: 11px;"> 
- <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.6" strokeWidth="6" strokeColor="#ff0000">
-<Label value="Add Mark" background="#ff0000" opacity="0.6" strokeColor="#ff0000"/>
+<View style="flex: 10%;position: absolute;left: 65%;
+margin-top: 94px;"> 
+ <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.5" strokeWidth="6" strokeColor="#ff0000">
+<Label value="Add Mark" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
 </RectangleLabels>
  </View>
  
@@ -523,8 +528,10 @@ export class MarkXrayComponent {
           text: res.message,
           icon: 'success',
         });
-        this.createLabelStudio()
+       // this.createLabelStudio()
+       document.getElementById('close')?.click();
         this.router.navigateByUrl('/uploaded-xray');
+        return true;
       } else {
         Swal.fire({
           text: res.message,
@@ -559,5 +566,10 @@ export class MarkXrayComponent {
       }
     })
     this.router.navigateByUrl('/uploaded-xray');
+  }
+  change(e){
+    this.avgPer= ((this.markInfo.length-(this.delCavity+this.adminMark))*100/this.markInfo.length).toFixed(1);
+    this.valInput= this.avgPer;
+    console.log("***",this.avgPer)
   }
 }

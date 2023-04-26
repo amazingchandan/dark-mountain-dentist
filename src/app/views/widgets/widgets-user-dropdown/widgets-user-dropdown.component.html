@@ -22,14 +22,14 @@
         <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
           
   
-          <h6 class="color fw-bold">
+          <h6 class="color fw-bold my" [routerLink]="'/upload-xray'">
             Number of Xray Uploaded
           </h6>
           <h3 class="text-danger rotate fw-bold">
             {{this.noOfXray}}
           </h3>
         </ng-template>
-        <img src="../../../../assets/images/upload--v2.png" class="image">
+        <img src="../../../../assets/images/upload--v2.png" class="image my" [routerLink]="'/upload-xray'">
         <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="64" height="64" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="hovered-paths"><g transform="matrix(1,-2.4492935982947064e-16,2.4492935982947064e-16,1,-1.1368683772161603e-13,1.1368683772161603e-13)"><path d="M464 160.003h-16v-48c0-8.864-7.168-16-16-16H48c-26.464 0-48 21.536-48 48v288c0 26.464 21.536 48 48 48h416c8.832 0 16-7.168 16-16v-288c0-8.864-7.168-16-16-16z" style="" fill="#ecb641" data-original="#2196f3" class="hovered-path"></path><path d="M48 128.003h368v32H48c-8.832 0-16-7.168-16-16s7.168-16 16-16z" style="" fill="#fafafa" data-original="#fafafa" class=""></path><path d="M496 352.003h-96c-26.496 0-48-21.504-48-48 0-26.528 21.504-48 48-48h96c8.832 0 16 7.168 16 16v64c0 8.832-7.168 16-16 16z" style="" fill="#fffcd3" data-original="#1976d2" class=""></path><path d="M409.888 160.003 350.304 40.835c-3.968-7.904-13.568-11.072-21.472-7.168L76.224 160.003h333.664z" style="" fill="#ecb641" data-original="#4caf50" class=""></path><path d="M32 160.003h313.888L286.304 40.835c-3.968-7.904-13.568-11.072-21.472-7.136L32 150.115v9.888z" style="" fill="#fffcd3" data-original="#81c784" class=""></path></g></svg> -->
         <!-- <ng-template cTemplateId="widgetActionTemplate"> -->
           <!-- <c-dropdown alignment="end" variant="btn-group">
@@ -55,7 +55,7 @@
         class="mb-4 p-2"
       >
         <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-          <h6 class="text-primary fw-bold">Number Of Cavities Identify By AI</h6>
+          <h6 class="text-primary fw-bold">Number Of Cavities Identified By AI</h6>
           <h3 class="text-danger rotate fw-bold">
            {{this.count}} 
           </h3>
@@ -204,16 +204,16 @@
   <!--My Plan Modal-->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fw-semibold" id="exampleModalLabel">My Plan</h5>
+          <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Subscription Details:</h4>
           
         </div>
         <div class="modal-body">
             <div class="d-flex align-items-start flex-column sub-body-content">
-                <h5 class="text-center fw-semibold">Subscription Details:</h5>
-                <ul class="proceed-details m-0 p-0 align-self-center">
+               
+                <ul class="proceed-details m-0 p-0 align-self-center  me-2 w-75 color">
                   <!-- <li
                     class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
                   >
@@ -228,32 +228,32 @@
                   >
                     <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
                   </li> -->
-                  <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-                    <span>Plan Name:</span>&nbsp;<span>{{
+                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                    <span>Plan Name:</span>&nbsp;<span class="me-2">{{
                       this.planDetail?.subscription_details?.subscription_id?.plan_name
 
                       | titlecase
                       }}</span>
                   </li>
-                  <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-                    <span>Plan Type:</span>&nbsp;<span>{{
+                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                    <span>Plan Type:</span>&nbsp;<span class="me-2">{{
                         this.planDetail?.subscription_details?.subscription_id?.type | titlecase
                       }}</span>
                   </li>
-                  <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-                    <span>Price:</span>&nbsp;<span>${{ this.planDetail?.subscription_details?.subscription_id?.amount }}</span>
+                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                    <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.subscription_details?.subscription_id?.amount }}</span>
                   </li>
-                  <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center ">
-                    <span>Start Date:</span>&nbsp;<span>&nbsp;{{ this.planDetail?.subscription_details?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
+                    <span>Start Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.subscription_details?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                   </li>
-                  <li class="fs-6 fw-semibold d-flex justify-content-between align-items-center">
-                    <span>End Date:</span>&nbsp;<span>&nbsp;{{ this.planDetail?.subscription_details?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                    <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.subscription_details?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                   </li>
                 </ul>
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button btn" class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">Close</button>
+          <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
          
         </div>
       </div>
@@ -263,37 +263,37 @@
   <!--Reset Password-------->
 
   <div class="modal fade" id="ResetPassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+          <h5 class="modal-title fw-semibold" id="exampleModalLabel">Reset Password</h5>
           
         </div>
         <div class="modal-body">
-            <div class="inputContainer">
+            <div class="inputContainer align-self-center ms-5">
                 <div class="mb-3 mt-2">
-                  <div class="w-100 d-flex position-relative">
+                  <div class="w-100 d-flex position-relative color">
                     <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
                    <label>Current Password</label>
-                    <input type="password" class="rounded ml-a w-50" placeholder="Current Password"  (input)="onCurPass($event)"
+                    <input type="password" class=" ml-a w-50 form-control" placeholder="Current Password"  (input)="onCurPass($event)"
                    />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
                 </div>
                 <div class="mb-3 mt-2 inputMargin">
-                  <div class="w-100 d-flex position-relative">
+                  <div class="w-100 d-flex position-relative color">
                     <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
                     <label>New Password</label>
-                    <input type="password" class="rounded ml-b w-50" placeholder="New Password"  (input)="onNewPass($event)"
+                    <input type="password" class="ml-b w-50 form-control" placeholder="New Password"  (input)="onNewPass($event)"
                      />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
                 </div>
                 <div class="mb-3 mt-2 inputMargin">
-                    <div class="w-100 d-flex position-relative">
+                    <div class="w-100 d-flex position-relative color">
                       <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
                       <label>Confirm New Password</label>
-                      <input type="password" class="rounded ml-c w-50" placeholder="Confirm New Password"  (input)="onCnfPass($event)"
+                      <input type="password" class="ml-c w-50 form-control" placeholder="Confirm New Password"  (input)="onCnfPass($event)"
                        />
                       <!-- <i class="fa-solid fa-user icon-position"></i> -->
                     </div>
@@ -302,8 +302,8 @@
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button btn" class="btn  fw-semibold" id="close" data-bs-dismiss="modal">Close</button>
-          <button type="button btn" class="btn  fw-semibold"  (click)="setNew()">Reset Password</button>
+          <button type="button btn" class="btn  fw-semibold pd-1" id="close" data-bs-dismiss="modal">Close</button>
+          <button type="button btn" class="btn  fw-semibold pd-1"  (click)="setNew()">Reset Password</button>
         </div>
       </div>
     </div>

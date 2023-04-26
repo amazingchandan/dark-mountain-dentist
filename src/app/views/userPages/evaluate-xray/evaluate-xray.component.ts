@@ -301,7 +301,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
-      <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; }</Style>
+      <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; position: relative;
+        top: 0px; padding: 10px 14px; border-radius:4px}</Style>
      <Style> .App_menu__X-A5N{visibility:hidden}</Style>
      <Style> .ls-common {height:354px !important}</Style>
       <View style="flex: 90%;  
@@ -311,13 +312,14 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
      <Style> canvas { width:566px; height:354px !important;  }</Style>
      </View>
  <View style="float:right;visibility:hidden">
- <RectangleLabels name="label" toName="img" background="red" opacity="0.5">
- <Label value="Add Mark1" background="#8b0000" />
+ <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
+ <Label value="Add Mark1" background="#FF3131" />
  </RectangleLabels>
 
  </View>
- <View style="flex:10%;position: absolute;left: 157%;margin-top: 11px;"> 
- <RectangleLabels name="label1" toName="img" background="red">
+ <View style="flex: 10%;position: absolute;left: -19%;
+ margin-top: 85px;">
+ <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
  <Label value="Add Mark" background="green" />
  </RectangleLabels>
  </View>
@@ -476,6 +478,9 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   }
   handleClick() {
     this.router.navigateByUrl('/upload-xray');
+  }
+  refresh(){
+    window.location.reload();
   }
 }
 

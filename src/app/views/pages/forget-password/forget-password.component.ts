@@ -134,10 +134,11 @@ export class ForgetPasswordComponent implements OnInit {
     }
   }
   setNew(){
-    if(this.newPass !== "" && this.cnfPass !== "" && this.newPass == this.cnfPass){
+    if(this.newPass !== "" && this.cnfPass !== "" )
+    { console.log("ifff")
       if (this.newPass !== this.cnfPass) {
         Swal.fire({
-          text: 'The password confirmation does not match, please again',
+          text: 'The password confirmation does not match, please try again',
           icon: 'error'
         });
         return false;

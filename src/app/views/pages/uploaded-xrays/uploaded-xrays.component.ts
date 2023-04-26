@@ -77,6 +77,12 @@ export class UploadedXraysComponent {
       }
     })
 
+
+
+  }
+
+  view(id){
+    
   }
   ngOnDestroy(): void {
   }

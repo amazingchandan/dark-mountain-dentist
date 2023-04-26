@@ -18,7 +18,7 @@
                   <th>Contact Number</th> -->
                   <th>X-Ray Uploaded Date</th>
                   <!-- <th>Uploaded X-ray</th> -->
-                  <th>Marked</th>
+                  <th>Submitted to AI</th>
                   <th>View Details</th>
                 </tr>
               </thead>
@@ -31,7 +31,7 @@
                   <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
                   <!-- <td>{{data.user_id.city}}</td>
                   <td>{{data.user_id.contact_number}}</td> -->
-                  <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
+                  <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <!-- <td>{{data.user_id.noOfXrayUploaded}}</td> -->
 
 
@@ -46,8 +46,30 @@
 
                   <td>
 
-                    <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
-                      [routerLink]="'/mark-xray/'+data._id">Edit</button>
+                    <!-- <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
+                      [routerLink]="'/mark-xray/'+data._id">Edit</button> -->
+
+                      <div *ngIf="data.admin_marked_status==true">
+                        <button
+                        type="button"
+                        class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalCenter"
+                        (click)="view(data._id)"
+                      >
+                        View
+                      </button>
+                    </div>
+                    <div *ngIf="data.admin_marked_status==false">
+                      <button
+                        type="button"
+                        class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                        [routerLink]="'/mark-xray/'+data._id"
+                        [disabled]="false"
+                      >
+                      Edit
+                      </button>
+                    </div>
                   </td>
 
                 </tr>

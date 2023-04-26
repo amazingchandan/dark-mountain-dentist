@@ -37,6 +37,7 @@ export class DentistProfileComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
   showContent: boolean;
+  planDetail: any;
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,
@@ -123,6 +124,7 @@ export class DentistProfileComponent implements OnInit {
     let decodedJwtJsonData = window.atob(jwtData)
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     this.role = decodedJwtData.role;
+    this.myPlanDetail()
   setTimeout(()=>{
     this.flagBtn();
   },1000)
@@ -293,6 +295,17 @@ console.log("00",this.userData.flag)
     }
 
   }
+ planDetails(id){
+   console.log(id,"idd")
+   for(let i=0;i< this.all_subData.length;i++){
+    if(this.all_subData[i]._id==id){
+      this.planDetail=this.all_subData[i]
+    }
+    console.log(this.planDetail,"detail")
+   }
+ }
+
+
 
   cancelSub(event) {
 
@@ -469,6 +482,15 @@ console.log("00",this.userData.flag)
       }
     })
    
+  }
+  myPlanDetail(){
+    this.apiService.getUserPlanById(this.userInfo.id).subscribe((res:any)=>
+    {
+      if(res.success){
+      // this.planDetail=res.getData;
+       console.log("planDetail",this.planDetail)
+      }
+    })
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();

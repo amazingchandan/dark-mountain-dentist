@@ -65,6 +65,11 @@ export class UploadXrayComponent implements OnInit {
       order :[ [0,"date","desc"]
       
     ],
+      "columnDefs": [{
+      "targets": [1,2,3],
+     
+      "orderable": false
+      }]
     };
 
     this.getAllXrayOfUserById()

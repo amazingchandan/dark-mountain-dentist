@@ -1,51 +1,55 @@
 <section class="content">
-    <div class="container">
-      <h5 class=" mb-3 fw-bold">X-ray Evaluation Result</h5>
-      <p>*Legal Disclaimer : There is a direct correlation of diagnosis and xray quality.
-        This software is just an aid for the Dentists to help them identifies cavities easily. It does not guarantee medical accuracy.</p>
-        <div class="row">
-            <div class="col-12">
-                <div class="col-md-6 left-img ">
-                  <!-- <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
-                    <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>--> 
-                    <div id="label-studio1"></div>
-                    <label class="text-center w-100 mt-3 fw-bold mark-label1">Original X-ray</label>
-                </div>
-                <div class="col-md-6 right-img">
-                   <!--
+  <div class="container">
+    <h5 class=" mb-3 fw-bold">X-ray Evaluation Result</h5>
+    <p>*Legal Disclaimer : There is a direct correlation of diagnosis and xray quality.
+      This software is just an aid for the Dentists to help them identifies cavities easily.<br> It does not guarantee
+      medical accuracy.</p>
+    <div class="row">
+      <div class="col-12">
+        <div class="col-md-6 left-img ">
+          <!-- <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
+                    <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>-->
+          <div id="label-studio1"></div>
+          <label class="text-center w-100 mt-3 fw-bold mark-label1">Original X-ray</label>
+        </div>
+        <div class="col-md-6 right-img">
+          <!--
                     <img  [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100 ms-2"
                     (click)="addMarker($event)" >
                     <div class="ms-2 markDiv">
                     <div *ngFor="let marker of marker" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">  
                 </div>
             </div>-->
-            <div id="label-studio"></div>
+          <div id="label-studio"></div>
 
-             <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
-             <button type="button" class="btn fw-bold del-btn" (click)="delete()">Delete Mark</button>
-                </div>
-               
-            </div>
+          <label class="text-center w-100 mt-3 fw-bold mark-label">Marked Cavities</label>
+
         </div>
-        <div class="row fw-semibold" id="cavity">
-          <h5 class="fw-semibold">{{this.totalAI}} Cavities detected by AI Model</h5>
-        </div>
-            <div class="row mt-5">
-                <div class="col mt-2 fw-semibold">
-                    <span><i class="fa-solid fa-circle dentist-i"></i> Dentist Marking</span><br>
-                    <span><i class="fa-solid fa-circle ai-i"></i> AI Marking</span><br>
-               </div>
-                <div class="col-md-4 btn-div ">
+
+      </div>
+    </div>
+    <div class="row fw-semibold" id="cavity">
+      <h5 class="fw-semibold">{{this.totalAI}} Cavities detected by AI Model</h5>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-4 mt-n1 fw-semibold">
+        <span><i class="fa-solid fa-circle dentist-i"></i> Dentist Marking</span><br>
+        <span><i class="fa-solid fa-circle ai-i"></i> AI Marking</span><br>
+      </div>
+      <div class="col-md-8 btn-div ">
 
 
-                        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn"   (click)="saveMarks()">Submit for Review&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
+        <button type="button" class="btn me-2 cancel-btn fw-bold other-btn pd-1 ms-2 discard" id="close"
+          (click)="handleClick()">Discard</button>
 
-
-                        <button type="button" class="btn btn-primary save-btn me-2 cancel-btn fw-bold other-btn pd-1" id="close" (click)="handleClick()">Close</button>
-
-                </div>
-            </div>
-        </div>
+        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Submit for
+          Review&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
+       
+        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="refresh()">Refresh AI Marking</button>
+        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="delete()">Delete Mark</button>
+      </div>
+    </div>
+  </div>
 </section>
 <!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -64,8 +68,8 @@
                         <input #myinput type="range" min="0" value="0" max="100" (input)="onRangeChange($event)"/>
                           <span class="inputValue fw-semibold p-1 fs-6 text-center"  [ngStyle]="{'left': leftPos}">
                           {{valInput}}%-->
-                          <!-- <span class="smallTrianlge"></span> -->
-                       <!-- </span>
+<!-- <span class="smallTrianlge"></span> -->
+<!-- </span>
                       </div>
                     </div>
                 </div>
@@ -85,4 +89,3 @@
       </div>
     </div>
   </div>-->
-

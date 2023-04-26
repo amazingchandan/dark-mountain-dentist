@@ -32,9 +32,11 @@
             <thead>
               <tr>
                 <th class="text-nowrap">Plan Name</th>
+                <th>Country</th>
                 <th>Type</th>
-                <th>Min</th>
-                <th>Max</th>
+               
+                <!-- <th>Min</th>
+                <th>Max</th> -->
                 <th>Amount</th>
                 <th class="text-nowrap"># of Subscribers</th>
                 <th>Action</th>
@@ -43,9 +45,10 @@
             <tbody *ngIf="allData?.length !=0">
               <tr *ngFor="let data of allData; let  i= index">
                 <td>{{data.plan_name | titlecase}}</td>
+                <td>{{data.country}}</td>
                 <td>{{data.type}}</td>
-                <td>{{data.minimum}}</td>
-                <td>{{data.maximum}}</td>
+                <!-- <td>{{data.minimum}}</td>
+                <td>{{data.maximum}}</td> -->
                 <td>{{data.amount}}</td>
                 <td class="paddingForCenter">3</td>
                 <td>
@@ -68,7 +71,7 @@
                     <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
-                    <td colspan="0" class="no-data-available p-0" ></td>
+                    <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
                   </tr>
                 </tbody>
           </table>
@@ -101,7 +104,7 @@
         <div class="row">
           <form  class="form-inline" role="form" [formGroup]="addPriceingForm">
             <div class="row mb-2">
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 <label class="mb-2">Plan Name<sup>*</sup></label>
                 <input
                   type="text"
@@ -111,7 +114,7 @@
                   [value]="plan_name"
                 />
               </div>
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 <label class="mb-2">Amount<sup>*</sup></label>
                 <input
                   type="number"
@@ -121,7 +124,7 @@
                   [value]="amount"
                 />
               </div>
-              <div class="col-md-4 form-group">
+              <!-- <div class="col-md-4 form-group">
                 <label class="mb-2">Minimum<sup>*</sup></label>
                 <input
                   type="text"
@@ -142,9 +145,11 @@
                   class="form-control"
                   [value]="maximum"
                 />
-              </div>
+              </div> -->
+            </div>
+            <div class="row mb-2">
 
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 <label class="mb-2" for="inputState">Type<sup>*</sup></label>
                 <select
                   class="form-select"
@@ -157,7 +162,7 @@
                   <option value="Yearly">Yearly</option>
                 </select>
               </div>
-              <div class="col-md-4 form-group country-col">
+              <div class="col-md-6 form-group country-col">
                 <label class="mb-2" for="inputState">Country<sup>*</sup></label>
                 <select
                   class="form-select"
