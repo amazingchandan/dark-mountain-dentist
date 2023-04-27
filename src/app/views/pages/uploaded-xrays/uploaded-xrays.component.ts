@@ -21,7 +21,7 @@ n:any=0;
    @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   showContent: boolean;
   admin_pending: any=[];
-  admin_eval: any;
+  admin_eval: any=[];
   constructor( private userService : UserService,
     public route :ActivatedRoute,
     public router :Router

@@ -458,6 +458,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
           icon: 'success',
         });
         document.getElementById('close')?.click();
+        this.router.navigateByUrl('/upload-xray/0');
       } else {
         Swal.fire({
           text: res.message,

@@ -493,7 +493,7 @@ console.log("00",this.userData.flag)
     })
   }
   view(id){
-    
+    this.router.navigateByUrl('/view-admin-x-ray/' + id)
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();

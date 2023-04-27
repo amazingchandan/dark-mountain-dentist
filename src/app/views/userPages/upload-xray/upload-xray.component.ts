@@ -47,9 +47,9 @@ export class UploadXrayComponent implements OnInit {
   xRayData: any = [];
 
   public ngOnInit() {
-    this.n=0;
-    this.n =this.route.snapshot.paramMap.get('n');
-    
+    // this.n=0;
+    // this.n =this.route.snapshot.paramMap.get('n');
+   
     this.dtOptions = {
       search: false,
       searching: false,
@@ -76,7 +76,12 @@ export class UploadXrayComponent implements OnInit {
       "orderable": false
       }]
     };
-
+    this.route.params.subscribe(
+      params => {
+         this.n= +params['n'];
+         console.log("nnnnn",this.n)
+        
+      });
     this.getAllXrayOfUserById()
     //this.evalBtn();
 

@@ -129,7 +129,7 @@ export class MarkXrayComponent {
           "height": element.value.height,
           "rotation": 0,
           "rectanglelabels": [
-            "Dentist Mark"
+            element.value.rectanglelabels[0]
           ]
         }
 
@@ -530,7 +530,7 @@ margin-top: 94px;">
         });
        // this.createLabelStudio()
        document.getElementById('close')?.click();
-        this.router.navigateByUrl('/uploaded-xray');
+        this.router.navigateByUrl('/uploaded-xray/0');
         return true;
       } else {
         Swal.fire({
