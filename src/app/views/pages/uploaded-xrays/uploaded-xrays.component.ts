@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
@@ -14,17 +15,24 @@ export class UploadedXraysComponent {
   public subsEndDate: any[] = [];
   public allData: any;
   public userData : any;
-
+n:any=0;
   private isDtInitialized: boolean = false;
    dtTrigger: Subject<any> = new Subject<any>();
    @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   showContent: boolean;
+  admin_pending: any=[];
+  admin_eval: any;
   constructor( private userService : UserService,
+    public route :ActivatedRoute,
+    public router :Router
 
   ) { }
 
   ngOnInit(): void {
     // setTimeout(()=>this.showContent=true, 450);
+    this.n=0;
+    this.n =this.route.snapshot.paramMap.get('n');
+    console.log(this.n,"nn")
     this.dtOptions = {
       search:true,
       language: {
@@ -61,7 +69,14 @@ export class UploadedXraysComponent {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
       console.log(this.allData);
-
+      this.admin_pending= this.allData.filter((elem) => {
+        return elem.admin_marked_status===false;
+        });
+        this.admin_eval= this.allData.filter((elem) => {
+          return elem.admin_marked_status===true;
+          });  
+     console.log(this.admin_pending,this.admin_eval)
+ 
       /*for(let x = 0; x < this.allData.length; x++){
         console.log(this.allData[x].user_id._id);
       }*/
@@ -82,7 +97,7 @@ export class UploadedXraysComponent {
   }
 
   view(id){
-    
+    this.router.navigateByUrl('/view-admin-x-ray/' + id)
   }
   ngOnDestroy(): void {
   }

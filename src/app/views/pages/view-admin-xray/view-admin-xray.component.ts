@@ -8,11 +8,13 @@ import { event } from 'jquery';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 
 @Component({
-  selector: 'app-view-xray',
-  templateUrl: './view-xray.component.html',
-  styleUrls: ['./view-xray.component.scss']
+  selector: 'app-view-admin-xray',
+  templateUrl: './view-admin-xray.component.html',
+  styleUrls: ['./view-admin-xray.component.scss']
 })
-export class ViewXrayComponent {
+export class ViewAdminXrayComponent {
+
+
   markData: any=[];
   userMark: any=[];
   AIMarkData: any;
@@ -122,9 +124,9 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       if (res.success) {
         this.markData = res.getData;
         console.log(this.markData)
-        this.userMark = this.markData.dentist_correction
-       // this.AIMarkData = this.markData.ai_identified_cavities;
-        console.log(this.userMark, "***", this.AIMarkData)
+        this.userMark = this.markData.admin_correction
+        //this.AIMarkData = this.markData.ai_identified_cavities;
+        console.log(this.userMark, "***")
         this.createLabelStudio()
         this.createLabelStudio1()
         setTimeout(() => {
@@ -251,39 +253,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       return obj;
       // return element.original_width
     })
-    // const resultArrAI = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
-    //   let obj = {
-    //     "from_name": "label",
-    //     "id":element._id,
-    //     "type": "rectanglelabels",
-    //     "source": "$image",
-       
-    //     // "original_width":this.userMark[1]?.original_height,
-    //     "original_width": "",
-    //     "original_height": "",
-    //     "image_rotation": 0,
-    //     "to_name": "img",
-
-    //     "fillColor": "#00ff00",
-    //     "background": "red",
-    //     "value":
-    //     {
-    //       "x": element.coordinates[0]*100.00/480,
-    //       "y": element.coordinates[1]*100.00/480,
-    //       "width": (element.coordinates[2]-element.coordinates[0])*100.0/480,
-    //       "height":(element.coordinates[3]-element.coordinates[1])*100.0/480,
-    //       "rotation": 0,
-    //       "rectanglelabels": [
-    //         "Add Mark1"
-    //       ]
-    //     }
-    //   }
-
-    //   console.log(obj)
-    //   return obj;
-    //   // return element.original_width
-    // })
-    // const resultArr = resultArrUser.concat(resultArrAI)
+   
+  //  const resultArr = resultArrUser.concat(resultArrAI)
     this.labelStudio = new LabelStudio('label-studio', {
       config: `
       <View style="display:row; flex-direction: column;">
@@ -302,6 +273,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
  <Label value="AI Mark" background="#FF3131" />
  <Label value="Dentist Mark" background="green" />
+ <Label value="Admin Mark" background="#FF7420" />
  </RectangleLabels>
 
  </View>
@@ -385,72 +357,72 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     console.log(this.marker)
 
   }*/
-  delete() {
-    console.log("delete function")
+//   delete() {
+//     console.log("delete function")
 
-    $('.Entity_button__3c64R .anticon-delete').trigger("click");
-  }
+//     $('.Entity_button__3c64R .anticon-delete').trigger("click");
+//   }
  
-  saveMarks() {
-    (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
-    console.log(this.labelStudio.onSubmitAnnotation, "***")
-    console.log(this.marker)
+//   saveMarks() {
+//     (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
+//     console.log(this.labelStudio.onSubmitAnnotation, "***")
+//     console.log(this.marker)
 
-    console.log(this.annotations)
+//     console.log(this.annotations)
 
-    var markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
-    console.log(markInfo)
-    const markInfo1 = markInfo.filter((elem) => {
-      return this.markData.ai_identified_cavities.rectangle_coordinates.every((ele) => {
-      return elem.id !== ele._id;
-        });
-      });
-      const AiMarks= this.markData.ai_identified_cavities.rectangle_coordinates.filter((elem) => {
-        return markInfo.some((ele) => {
-        return elem._id === ele.id;
-          });
-        });
- console.log(markInfo1,AiMarks)
-    const xray_info = {
-      xray_id: this.id,
-      user_id: this.xRayData[0]?.user_id,
-      marker: markInfo1,
+//     var markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
+//     console.log(markInfo)
+//     const markInfo1 = markInfo.filter((elem) => {
+//       return this.markData.ai_identified_cavities.rectangle_coordinates.every((ele) => {
+//       return elem.id !== ele._id;
+//         });
+//       });
+//       const AiMarks= this.markData.ai_identified_cavities.rectangle_coordinates.filter((elem) => {
+//         return markInfo.some((ele) => {
+//         return elem._id === ele.id;
+//           });
+//         });
+//  console.log(markInfo1,AiMarks)
+//     const xray_info = {
+//       xray_id: this.id,
+//       user_id: this.xRayData[0]?.user_id,
+//       marker: markInfo1,
      
 
-    }
-    const ai_info={
-      xray_id:this.id,
-      ai_cavities:AiMarks
-    }
-    this.userService.updateAIData(ai_info).subscribe((res: any)=>{
-      if(res.success)
-      {
-        console.log("Ai updated")
-      }
-      else{
-        console.log("Ai not updated")
-      }
-    })
+//     }
+//     const ai_info={
+//       xray_id:this.id,
+//       ai_cavities:AiMarks
+//     }
+//     this.userService.updateAIData(ai_info).subscribe((res: any)=>{
+//       if(res.success)
+//       {
+//         console.log("Ai updated")
+//       }
+//       else{
+//         console.log("Ai not updated")
+//       }
+//     })
 
-        console.log(xray_info)
-    this.userService.addEvalData(xray_info).subscribe((res: any) => {
-      if (res.success) {
-        Swal.fire({
-          text: res.message,
-          icon: 'success',
-        });
-        document.getElementById('close')?.click();
-      } else {
-        Swal.fire({
-          text: res.message,
-          icon: 'error',
-        });
+//         console.log(xray_info)
+//     this.userService.addEvalData(xray_info).subscribe((res: any) => {
+//       if (res.success) {
+//         Swal.fire({
+//           text: res.message,
+//           icon: 'success',
+//         });
+//         document.getElementById('close')?.click();
+//       } else {
+//         Swal.fire({
+//           text: res.message,
+//           icon: 'error',
+//         });
 
-      }
+//       }
 
-    })
-    localStorage.removeItem('markInfo')
-  }
+//     })
+//     localStorage.removeItem('markInfo')
+//   }
   renderImage(img: string) {
     if (img) {
       return this.baseLink + img;
@@ -459,6 +431,6 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     }
   }
   handleClick() {
-    this.router.navigateByUrl('/upload-xray/0');
+    this.router.navigateByUrl('/uploaded-xray/0');
   }
 }

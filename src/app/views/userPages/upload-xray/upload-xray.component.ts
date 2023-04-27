@@ -4,7 +4,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 @Component({
   selector: 'app-upload-xray',
@@ -26,10 +26,13 @@ export class UploadXrayComponent implements OnInit {
   myFormData: any;
   myFiles: any;
   apiData: any={};
+  user_eval: any[];
+  n: any=0;
 
   constructor(private userService: UserService,
     private spinner: NgxSpinnerService,
-    public router: Router) { }
+    public router: Router,
+    public route : ActivatedRoute) { }
 
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fileToUpload: File | null = null;
@@ -44,6 +47,8 @@ export class UploadXrayComponent implements OnInit {
   xRayData: any = [];
 
   public ngOnInit() {
+    this.n=0;
+    this.n =this.route.snapshot.paramMap.get('n');
     
     this.dtOptions = {
       search: false,
@@ -289,7 +294,10 @@ let view = document.getElementById("view");
       console.log(res, "!!!!!!!!!!!!!!!!!!!!!!");
       this.allData = res.getData
       this.showContent = true;
-  
+      this.user_eval= this.allData.filter((elem) => {
+        return elem.evaluation_status===true;
+        });  
+   console.log(this.user_eval)
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();

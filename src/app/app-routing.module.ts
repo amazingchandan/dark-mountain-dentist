@@ -24,6 +24,7 @@ import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-
 import { TestComponent } from './views/pages/test/test.component';
 import { FinancialComponent } from './views/pages/financial/financial.component';
 import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
+import { ViewAdminXrayComponent } from './views/pages/view-admin-xray/view-admin-xray.component';
 const routes: Routes = [
 
   // {
@@ -222,7 +223,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'uploaded-xray',
+        path: 'uploaded-xray/:n',
         component: UploadedXraysComponent,
         data: {
           title: 'Uploaded X-Rays'
@@ -236,7 +237,15 @@ const routes: Routes = [
         }
       },
       {
-        path: 'upload-xray',
+        path: 'view-admin-x-ray/:xray_id',
+        component: ViewAdminXrayComponent,
+        data: {
+          title: 'View X-Ray'
+        },
+      //  canActivate :[UserAuthGuard]
+      },
+      {
+        path: 'upload-xray/:n',
         component: UploadXrayComponent,
         data: {
           title: 'Upload X-Ray'

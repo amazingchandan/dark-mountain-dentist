@@ -23,7 +23,7 @@ export const navItems:
 
   {
     name: 'Uploaded X-Rays',
-    url: 'uploaded-xray',
+    url: '/uploaded-xray/0',
     icon: 'fa-solid fa-cloud-arrow-up'
   },
   {
@@ -31,11 +31,11 @@ export const navItems:
     url: 'subscription-list',
     icon: 'fa-solid fa-bookmark'
   },
-  {
-    name: 'Financials',
-    url: 'financial',
-    icon: 'fa-solid fa-file-invoice-dollar'
-  },
+  // {
+  //   name: 'Financials',
+  //   url: 'financial',
+  //   icon: 'fa-solid fa-file-invoice-dollar'
+  // },
 
 
 
@@ -95,7 +95,7 @@ export const navItemsUser:
     },
     {
       name: 'Upload X-ray',
-      url: 'upload-xray',
+      url: 'upload-xray/0',
       icon:'fa-solid fa-cloud-arrow-up'
 
     },

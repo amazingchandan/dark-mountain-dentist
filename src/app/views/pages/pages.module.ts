@@ -22,6 +22,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { SetNewPasswordComponent } from './set-new-password/set-new-password.component';
 import { TestComponent } from './test/test.component';
 import { FinancialComponent } from './financial/financial.component';
+import { ViewAdminXrayComponent } from './view-admin-xray/view-admin-xray.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FinancialComponent } from './financial/financial.component';
     SetNewPasswordComponent,
     TestComponent,
     FinancialComponent,
+    ViewAdminXrayComponent,
   ],
   imports: [
     CommonModule,

@@ -197,7 +197,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
    {
      if(res.success){
       this.xrayCount=res.getData;
-      console.log("xraycount",this.subCount)
+      console.log("xraycount",this.xrayCount)
      }
    })
    this.userService.noOfXrayNotEval().subscribe((res:any)=>

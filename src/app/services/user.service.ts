@@ -47,6 +47,7 @@ export class UserService {
   xrayNotEval :String;
   unsubscriberCount : String;
  totXrayById : String;
+ totXrayEvalById:String;
  totCavityByAI : String;
  userPlanById :String;
  rstPwd : String;
@@ -90,6 +91,7 @@ export class UserService {
     this.xrayNotEval = this.apiHost + 'noOfXrayNotEval';
     this.unsubscriberCount = this.apiHost + 'noOfUnsubscriber';
     this.totXrayById = this.apiHost + 'noOfXrayById';
+    this.totXrayEvalById = this.apiHost + 'noOfXrayEvalById';
     this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
     this.userPlanById = this.apiHost + 'userPlanById';
     this.rstPwd = this.apiHost + 'resetPassword';
@@ -207,6 +209,9 @@ export class UserService {
   }
   noOfXrayByID(id) {
     return this.http.get(`${this.totXrayById}?dentist_id=${id}`);
+  }
+  noOfXrayEvalByID(id) {
+    return this.http.get(`${this.totXrayEvalById}?dentist_id=${id}`);
   }
  noOfCavityByAI(id) {
     return this.http.get(`${this.totCavityByAI}?dentist_id=${id}`);

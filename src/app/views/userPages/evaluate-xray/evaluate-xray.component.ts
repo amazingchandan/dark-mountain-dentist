@@ -286,7 +286,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
           "height":(element.coordinates[3]-element.coordinates[1])*100.0/480,
           "rotation": 0,
           "rectanglelabels": [
-            "Add Mark1"
+            "AI Mark"
           ]
         }
       }
@@ -313,14 +313,14 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
      </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
- <Label value="Add Mark1" background="#FF3131" />
+ <Label value="AI Mark" background="#FF3131" />
  </RectangleLabels>
 
  </View>
- <View style="flex: 10%;position: absolute;left: -19%;
+ <View style="flex: 10%;position: absolute;left: -27%;
  margin-top: 85px;">
  <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
- <Label value="Add Mark" background="green" />
+ <Label value="Dentist Mark" background="green" />
  </RectangleLabels>
  </View>
  </View>
@@ -431,24 +431,24 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     const xray_info = {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
-      marker: markInfo1,
+      marker: markInfo,
       total_cavities:markInfo.length
      
 
     }
-    const ai_info={
-      xray_id:this.id,
-      ai_cavities:AiMarks
-    }
-    this.userService.updateAIData(ai_info).subscribe((res: any)=>{
-      if(res.success)
-      {
-        console.log("Ai updated")
-      }
-      else{
-        console.log("Ai not updated")
-      }
-    })
+    // const ai_info={
+    //   xray_id:this.id,
+    //   ai_cavities:AiMarks
+    // }
+    // this.userService.updateAIData(ai_info).subscribe((res: any)=>{
+    //   if(res.success)
+    //   {
+    //     console.log("Ai updated")
+    //   }
+    //   else{
+    //     console.log("Ai not updated")
+    //   }
+    // })
 
         console.log(xray_info)
     this.userService.addEvalData(xray_info).subscribe((res: any) => {
@@ -477,7 +477,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     }
   }
   handleClick() {
-    this.router.navigateByUrl('/upload-xray');
+    this.router.navigateByUrl('/upload-xray/0');
   }
   refresh(){
     window.location.reload();

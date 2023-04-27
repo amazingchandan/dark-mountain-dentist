@@ -23,10 +23,11 @@
                 </tr>
               </thead>
   
-
-              <tbody *ngIf="allData?.length != 0">
-                <tr *ngFor="let data of this.allData; let i = index">
-
+      
+              <tbody *ngIf="allData?.length != 0 && this.n==0">
+                
+               
+                  <tr *ngFor="let data of this.allData; let i = index">
 
                   <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
                   <!-- <td>{{data.user_id.city}}</td>
@@ -71,12 +72,141 @@
                       </button>
                     </div>
                   </td>
-
+                
                 </tr>
-
-
               </tbody>
+         
+              <tbody *ngIf="this.admin_pending?.length != 0 && this.n==1">
+                
+               
+                <tr *ngFor="let data of this.admin_pending; let i = index">
+
+                <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
+                <!-- <td>{{data.user_id.city}}</td>
+                <td>{{data.user_id.contact_number}}</td> -->
+                <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                <!-- <td>{{data.user_id.noOfXrayUploaded}}</td> -->
+
+
+                <td>
+                  <div *ngIf="data.admin_marked_status==true"><input class="form-check-input checkbox1"
+                      type="checkbox" value="" id="checkbox-1" checked /></div>
+
+                  <div *ngIf="data.admin_marked_status==false"><input class="form-check-input checkbox1"
+                      type="checkbox" value="" id="checkbox-1" /></div>
+                </td>
+
+
+                <td>
+
+                  <!-- <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
+                    [routerLink]="'/mark-xray/'+data._id">Edit</button> -->
+
+                    <div *ngIf="data.admin_marked_status==true">
+                      <button
+                      type="button"
+                      class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter"
+                      (click)="view(data._id)"
+                    >
+                      View
+                    </button>
+                  </div>
+                  <div *ngIf="data.admin_marked_status==false">
+                    <button
+                      type="button"
+                      class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                      [routerLink]="'/mark-xray/'+data._id"
+                      [disabled]="false"
+                    >
+                    Edit
+                    </button>
+                  </div>
+                </td>
+              
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="this.admin_eval?.length != 0 && this.n==2">
+                
+               
+              <tr *ngFor="let data of this.admin_eval; let i = index">
+
+              <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
+              <!-- <td>{{data.user_id.city}}</td>
+              <td>{{data.user_id.contact_number}}</td> -->
+              <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+              <!-- <td>{{data.user_id.noOfXrayUploaded}}</td> -->
+
+
+              <td>
+                <div *ngIf="data.admin_marked_status==true"><input class="form-check-input checkbox1"
+                    type="checkbox" value="" id="checkbox-1" checked /></div>
+
+                <div *ngIf="data.admin_marked_status==false"><input class="form-check-input checkbox1"
+                    type="checkbox" value="" id="checkbox-1" /></div>
+              </td>
+
+
+              <td>
+
+                <!-- <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
+                  [routerLink]="'/mark-xray/'+data._id">Edit</button> -->
+
+                  <div *ngIf="data.admin_marked_status==true">
+                    <button
+                    type="button"
+                    class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter"
+                    (click)="view(data._id)"
+                  >
+                    View
+                  </button>
+                </div>
+                <div *ngIf="data.admin_marked_status==false">
+                  <button
+                    type="button"
+                    class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                    [routerLink]="'/mark-xray/'+data._id"
+                    [disabled]="false"
+                  >
+                  Edit
+                  </button>
+                </div>
+              </td>
+            
+            </tr>
+          </tbody>
+
+
+              
               <tbody *ngIf="this.allData?.length == 0">
+                <tr>
+                  <td colspan="8" class="no-data-available text-center" >No data</td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <!-- <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td> -->
+                 
+                </tr>
+              </tbody>
+              <tbody *ngIf="this.admin_pending?.length == 0 && this.n==1">
+                <tr>
+                  <td colspan="8" class="no-data-available text-center" >No data</td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <!-- <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td>
+                  <td colspan="0" class="no-data-available p-0" ></td> -->
+                 
+                </tr>
+              </tbody>
+              <tbody *ngIf="this.admin_pending?.length == 0 && this.n==2">
                 <tr>
                   <td colspan="8" class="no-data-available text-center" >No data</td>
                   <td colspan="0" class="no-data-available p-0" ></td>

@@ -492,6 +492,9 @@ console.log("00",this.userData.flag)
       }
     })
   }
+  view(id){
+    
+  }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }

@@ -49,7 +49,7 @@
                 <td>{{data.type}}</td>
                 <!-- <td>{{data.minimum}}</td>
                 <td>{{data.maximum}}</td> -->
-                <td>{{data.amount}}</td>
+                <td>${{data.amount}}</td>
                 <td class="paddingForCenter">3</td>
                 <td>
                   <!-- <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
@@ -115,7 +115,7 @@
                 />
               </div>
               <div class="col-md-6 form-group">
-                <label class="mb-2">Amount<sup>*</sup></label>
+                <label class="mb-2">Amount($)<sup>*</sup></label>
                 <input
                   type="number"
                   placeholder="Amount"

@@ -88,7 +88,7 @@
                  <th>Total Cavities Detected</th> 
                 </tr>
               </thead>
-              <tbody *ngIf="allData?.length != 0">
+              <tbody *ngIf="allData?.length != 0 &&this.n==0">
                 <tr *ngFor="let data of allData; let i = index">
                   <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
@@ -129,7 +129,59 @@
 
               </tr>-->
               </tbody>
-              <tbody *ngIf="this.allData?.length == 0">
+              <tbody *ngIf="this.allData?.length == 0  &&this.n==0">
+                <tr>
+                  <td colspan="8" class="no-data-available text-center">
+                    No data
+                  </td>
+                  <td colspan="0" class="no-data-available p-0"></td>
+                  <td colspan="0" class="no-data-available p-0"></td>
+                  <td colspan="0" class="no-data-available p-0"></td>
+                  <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
+                </tr>
+              </tbody>
+              <tbody *ngIf="user_eval?.length != 0 && this.n==1">
+                <tr *ngFor="let data of this.user_eval; let i = index">
+                  <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <!-- <td>{{data.city | titlecase}}</td> -->
+                  <!-- <td>{{data.contact_number}}</td> -->
+                  <!-- <td>{{data.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                 
+                  <td>
+                    <div *ngIf="data.evaluation_status==true">
+                      <button
+                      type="button"
+                      class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter"
+                      (click)="view(data._id)"
+                    >
+                      View
+                    </button>
+                  </div>
+                  <div *ngIf="data.evaluation_status==false">
+                    <button
+                      type="button"
+                      class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
+                      (click)="evaluate(data._id)"
+                      [disabled]="false"
+                    >
+                      Evaluate X-Ray
+                    </button>
+                  </div>
+                  </td>
+                  <td>{{data.totalCavitiesDetectedByUser}}</td>
+                  <!-- <td>
+                  <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
+                </td> -->
+                  <!-- <td>85%</td> -->
+                </tr>
+                <!-- <tr>
+
+              </tr>-->
+              </tbody>
+              <tbody *ngIf="this.user_eval?.length == 0 && this.n==1">
                 <tr>
                   <td colspan="8" class="no-data-available text-center">
                     No data

@@ -129,7 +129,7 @@ export class MarkXrayComponent {
           "height": element.value.height,
           "rotation": 0,
           "rectanglelabels": [
-            "Add Mark"
+            "Dentist Mark"
           ]
         }
 
@@ -238,16 +238,16 @@ export class MarkXrayComponent {
  </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
- <Label value="Add Mark" background="green" strokeColor="#000000"/> 
+ <Label value="Dentist Mark" background="green" strokeColor="#000000"/> 
  <Label value="AI Mark" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
  </View>
-<View style="flex: 10%;position: absolute;left: 65%;
+<View style="flex: 10%;position: absolute;left: 58%;
 margin-top: 94px;"> 
  <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.5" strokeWidth="6" strokeColor="#ff0000">
-<Label value="Add Mark" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
+<Label value="Admin Mark" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
 </RectangleLabels>
  </View>
  
@@ -516,7 +516,7 @@ margin-top: 94px;">
     const xray_info = {
       xray_id: this.id,
       user_id: this.xRayData[0]?.user_id,
-      marker: this.markInfo2,
+      marker: this.markInfo,
       accuracy_per: this.valInput,
       accurate_val: (this.markInfo.length-(this.delCavity+this.adminMark))
 

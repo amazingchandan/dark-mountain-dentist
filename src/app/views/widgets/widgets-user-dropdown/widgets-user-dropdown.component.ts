@@ -19,6 +19,7 @@ export class WidgetsUserDropdownComponent {
   cnfPass: string;
   curPass: string;
   ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
+  noOfXrayEval: any=0;
   constructor(
    // private changeDetectorRef: ChangeDetectorRef,
     private userService: UserService,
@@ -35,6 +36,13 @@ export class WidgetsUserDropdownComponent {
       if(res.success){
        this.noOfXray=res.getData;
        console.log("noOfXray",this.noOfXray)
+      }
+    })
+    this.userService.noOfXrayEvalByID(this.userInfo.id).subscribe((res:any)=>
+    {
+      if(res.success){
+       this.noOfXrayEval=res.getData;
+       console.log("noOfXray",this.noOfXrayEval)
       }
     })
     this.userService.noOfCavityByAI(this.userInfo.id).subscribe((res:any)=>
@@ -99,7 +107,7 @@ export class WidgetsUserDropdownComponent {
       }
       else if (this.newPass !== this.cnfPass) {
         Swal.fire({
-          text: 'The password confirmation does not match, please again',
+          text: 'The password confirmation does not match, please try again',
           icon: 'error'
         });
         return false;
