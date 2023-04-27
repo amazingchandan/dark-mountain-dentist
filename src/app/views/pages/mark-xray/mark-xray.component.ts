@@ -80,8 +80,8 @@ export class MarkXrayComponent {
         console.log(this.markData)
         this.userMark = this.markData.dentist_correction
         this.AIMarkData = this.markData.ai_identified_cavities;
-        this.totUserCavity=this.userMark.length + this.AIMarkData.rectangle_coordinates.length
-        console.log(this.userMark, "***", this.AIMarkData)
+        this.totUserCavity=this.userMark.length 
+        console.log(this.userMark, "***", this.AIMarkData,)
        setTimeout(()=>{
         this.createLabelStudio()
         this.createLabelStudio1()
@@ -239,7 +239,8 @@ export class MarkXrayComponent {
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
  <Label value="Dentist Mark" background="green" strokeColor="#000000"/> 
- <Label value="AI Mark" background="#FF3131" editable="false"  readOnly="true"/>
+ <Label value="1" background="#FF3131" editable="false"  readOnly="true"/>
+ <Label value="2" background="#FFFF00" />
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
@@ -275,7 +276,7 @@ margin-top: 94px;">
 
         task: {
 
-          annotations: [{ result: resultArr }
+          annotations: [{ result: resultArrUser }
           ],
           predictions: [],
 
@@ -455,8 +456,9 @@ margin-top: 94px;">
         return elem.id === ele._id;
       });
     });
-   console.log(markInfo3.length ,markInfo4.length,"remain")
-   const delCavity1= markInfo3.length+markInfo4.length
+   console.log(markInfo3.length ,this.userMark.length,markInfo4.length,"remain")
+  // const delCavity1= markInfo3.length+markInfo4.length
+  const delCavity1 =this.userMark.length-markInfo3.length
     //end for cavity label
 
     const markInfo1 = this.markInfo.filter((elem) => {
@@ -470,7 +472,8 @@ margin-top: 94px;">
       });
     });
 
-    this.delCavity=this.totUserCavity - delCavity1
+    //this.delCavity=this.totUserCavity - delCavity1
+    this.delCavity=delCavity1
     this.adminMark=this.markInfo2.length;
     console.log(this.markInfo2, "new data")
     this.avgPer= ((this.markInfo.length-(this.delCavity+this.adminMark))*100/this.markInfo.length).toFixed(1);

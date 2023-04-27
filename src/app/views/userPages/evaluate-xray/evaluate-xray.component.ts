@@ -153,7 +153,12 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
          // console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0].coordinates[1], "record found")
           this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length;
           this.cavity.style.display="block";
-
+          var obj=this.markData.ai_identified_cavities
+          const entries = Object.entries(obj);
+          const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any,index: any) => {
+            console.log(this.markData.ai_identified_cavities.color_labels[index],"/**/")
+            })
+          console.log(entries,"new obj")
           this.createLabelStudio()
         }
       }
@@ -170,6 +175,15 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0].coordinates[2])
         //this.userMark = this.markData.dentist_correction
         //console.log(this.userMark, "***")
+        var obj=this.markData.ai_identified_cavities
+        const entries = Object.keys(obj).map((key) => [
+          key,
+          obj[key],
+        ]);
+        const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any,index: any) => {
+        console.log(this.markData.ai_identified_cavities.color_labels[index],"/**/")
+        })
+        console.log(entries,"new obj")
         this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length
         this.cavity.style.display="block";
         this.createLabelStudio()
@@ -263,7 +277,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   }
 
   createLabelStudio() {
-    const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any) => {
+    const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any,index:any) => {
       let obj = {
         "from_name": "label",
         "id":element._id,
@@ -286,7 +300,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
           "height":(element.coordinates[3]-element.coordinates[1])*100.0/480,
           "rotation": 0,
           "rectanglelabels": [
-            "AI Mark"
+            this.markData.ai_identified_cavities.color_labels[index].toString()
           ]
         }
       }
@@ -313,7 +327,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
      </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
- <Label value="AI Mark" background="#FF3131" />
+ <Label value="1" background="#FF3131" />
+ <Label value="2" background="#FFFF00" />
  </RectangleLabels>
 
  </View>
