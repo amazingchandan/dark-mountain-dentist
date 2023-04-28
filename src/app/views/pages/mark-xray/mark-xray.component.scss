@@ -196,3 +196,15 @@ input[type='range']::-webkit-slider-thumb {
 .input-w{
     width: 5%;
 }
+::ng-deep .ngxImageZoomContainer {
+    max-height: 354px !important;
+    max-width: 566px !important;
+    height: 354px !important;
+   width: 566px !important;
+  }
+  ::ng-deep .ngxImageZoomContainer >img{
+    max-height: 354px !important;
+    max-width: 566px !important;
+   height: 354px !important;
+   width: 566px !important;
+  }

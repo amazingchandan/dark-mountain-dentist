@@ -23,6 +23,7 @@ import { SetNewPasswordComponent } from './set-new-password/set-new-password.com
 import { TestComponent } from './test/test.component';
 import { FinancialComponent } from './financial/financial.component';
 import { ViewAdminXrayComponent } from './view-admin-xray/view-admin-xray.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ViewAdminXrayComponent } from './view-admin-xray/view-admin-xray.compon
     FormModule,
     DataTablesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxImageZoomModule
   ]
 })
 export class PagesModule {

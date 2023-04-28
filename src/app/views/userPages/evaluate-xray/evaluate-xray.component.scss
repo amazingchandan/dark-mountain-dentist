@@ -25,9 +25,12 @@ label , span{
 img{
     height: 22.125rem;
 }
+.icon-div{
+    margin-top: -1rem;
+}
 .btn-div{
     margin-right: -0.5rem !important;
-    margin-top: 0  !important;
+    margin-top: -7px  !important;
     margin-bottom: 0.5rem !important;
 }
 // .range-input{
@@ -183,3 +186,15 @@ input[type='range']::-webkit-slider-thumb {
 .discard{
     height: 39.6px;
 }
+::ng-deep .ngxImageZoomContainer {
+    max-height: 354px !important;
+    max-width: 566px !important;
+    height: 354px !important;
+   width: 566px !important;
+  }
+  ::ng-deep .ngxImageZoomContainer >img{
+    max-height: 354px !important;
+    max-width: 566px !important;
+   height: 354px !important;
+   width: 566px !important;
+  }

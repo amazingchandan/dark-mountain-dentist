@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import LabelStudio from 'label-studio';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class MarkXrayComponent {
   delCavity: number=0;
   adminMark:number=0;
   avgPer: any=0;
+  myThumbnail: string;
+  myFullresImage: string;
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
@@ -64,6 +67,8 @@ export class MarkXrayComponent {
       if (res.success) {
         this.xRayData = res.getData;
         console.log(this.xRayData[0]?.xray_image.path)
+        this.myThumbnail= this.baseLink + this.xRayData[0]?.xray_image.path;
+        this.myFullresImage= this.baseLink + this.xRayData[0]?.xray_image.path;
 
       }
       else {
@@ -226,9 +231,11 @@ export class MarkXrayComponent {
   <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
   <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
   <Style> .Hint_main__1Svrz { display:none; }</Style>
-  <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; position: relative;
+  <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
     top: -7px; padding: 10px 14px; border-radius:4px}</Style>
- <Style> .App_menu__X-A5N{visibility:hidden}</Style>
+ <Style> .App_menu__X-A5N{visibility:hidden}
+ .Entity_row__3Ii1C {display:none}
+ .ant-card-small>.ant-card-body{height:20px}</Style>
  <Style> .ls-common {height:354px !important}</Style>
   <View style="flex: 90%;  
  margin-top: -14px; width:566px">
@@ -349,12 +356,14 @@ margin-top: 94px;">
   <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
   <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
   <Style> .Hint_main__1Svrz { display:none; }</Style>
-  <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
+  <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}
+  .ImageView_block__3BAO- {margin-left:-49px}
+  </Style>
  <View style="flex: 90%;
  margin-top: -14px;">
  <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
  
- <Image name="img" value="$image" width="100%" height="100%" ></Image>
+ <Image name="img" value="$image" width="100%" height="100%" zoom="true" zoomControl="true" ></Image>
  <Style> canvas { width:594px; height:354px !important }</Style>
  </View>
  <View style="flex: 10%;float:right">

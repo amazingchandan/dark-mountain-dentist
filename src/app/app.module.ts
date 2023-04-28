@@ -65,6 +65,7 @@ import { DentistsComponent } from './views/dentists/dentists.component';
 import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
 import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
 import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +110,7 @@ const APP_CONTAINERS = [
     HttpClientModule,
     FormsModule,
     CarouselModule,
+    NgxImageZoomModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
     }),

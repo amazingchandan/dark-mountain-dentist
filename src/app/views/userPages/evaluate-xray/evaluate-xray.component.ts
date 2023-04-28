@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import LabelStudio from 'label-studio';
 import { event } from 'jquery';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 })
 export class EvaluateXrayComponent {
   markData: any;
+  myThumbnail: string;
+  myFullresImage: string;
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,
@@ -39,9 +42,10 @@ export class EvaluateXrayComponent {
     this.valInput = (<HTMLInputElement>event.target).value.trim();
     this.leftPos = `${+(<HTMLInputElement>event.target).value.trim() - 5}%`
   }
+  
 
   ngOnInit() {
-
+   
    this.cavity=document.getElementById("cavity")
    this.cavity.style.display="none";
 
@@ -64,6 +68,8 @@ export class EvaluateXrayComponent {
       //  fetch(this.xRayData[0]?.xray_image.path)
        //   .then(result => console.log(result.url))
         //console.log(a)
+        this.myThumbnail= this.baseLink + this.xRayData[0]?.xray_image.path;
+  this.myFullresImage= this.baseLink + this.xRayData[0]?.xray_image.path;
         this.defaultApi(this.xRayData[0]?.xray_image.path, this.xRayData[0]?.xray_image.mimetype)
         this.createLabelStudio1()
 
@@ -211,7 +217,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
        <View style="flex: 90%;
        margin-top: -14px;">
-       <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+       <Style> .ImageView_container__AOBmH img {  height:354px !important }
+       .ImageView_block__3BAO- {margin-left:-49px}</Style>
        <Image name="img" value="$image" width="100%" height="100%" ></Image>
        <Style> canvas { width:594px; height:354px !important }</Style>
        </View>
@@ -315,9 +322,11 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
-      <Style>#label-studio .ant-tag {color:white !important; font-weight:bold !important;border:none !important; position: relative;
+      <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
         top: 0px; padding: 10px 14px; border-radius:4px}</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}</Style>
+     <Style> .App_menu__X-A5N{visibility:hidden}
+     .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
+     .Entity_row__3Ii1C {display:none}</Style>
      <Style> .ls-common {height:354px !important}</Style>
       <View style="flex: 90%;  
      margin-top: -14px; width:566px">
@@ -333,7 +342,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
  </View>
  <View style="flex: 10%;position: absolute;left: -27%;
- margin-top: 85px;">
+ margin-top: 78px;">
  <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
  <Label value="Dentist Mark" background="green" />
  </RectangleLabels>
@@ -348,8 +357,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         "controls",
         "side-column",
        // "annotations:menu",
-        "annotations:add-new",
-        "annotations:delete",
+       // "annotations:add-new",
+       // "annotations:delete",
         //"predictions:menu",*/
       ],
 
@@ -407,8 +416,17 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
 
   //
+zoom(e){
+  console.log("zoom function")
 
+  $('.ImageView_block__3BAO- .anticon-zoom-in').trigger("click");
+  $('.ImageView_block__3BAO- .anticon-drag').trigger("click");
+}
+zoomOut(e){
+  console.log("zoom out function")
 
+  $('.ImageView_block__3BAO- .anticon-zoom-out').trigger("click");
+}
 
 /*  save() {
     

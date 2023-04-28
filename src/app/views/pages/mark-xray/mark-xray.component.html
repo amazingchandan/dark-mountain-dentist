@@ -20,7 +20,16 @@
         
           </div>
           <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100">--> 
-          <div id="label-studio1" ></div>
+          <!-- <div id="label-studio1" ></div> -->
+          <lib-ngx-image-zoom
+          [thumbImage]="myThumbnail"
+          [fullImage]="myFullresImage"
+          [magnification]="1"
+          [enableScrollZoom]="true"
+          [enableLens]="true"
+          [lensWidth]="200"
+          [lensHeight]="200">
+         </lib-ngx-image-zoom>
           <label class="text-center w-100 mt-2 fw-bold dentist-mark-label">Original X-ray</label>
         </div>
         <div class="col-md-6 right-img">
