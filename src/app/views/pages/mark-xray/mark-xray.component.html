@@ -88,17 +88,17 @@
             
               <div class="row">
                 <div class="col-10"><span class="label1 fw-semibold">Total Cavities detected by Dentist : </span></div>
-                <div class="col-2"> <input type="text" [(ngModel)]="this.totUserCavity" class="w-100 form-control" (input)="change($event)">
+                <div class="col-2"> <input type="text" [(ngModel)]="this.totUserCavity" class="w-100 form-control" (input)="change($event)" readonly>
                 </div>
                 </div>
                 <div class="row">
                   <div class="col-10"><span class="label1 fw-semibold">Total Cavities inaccurately marked by Dentist :</span></div>
-                  <div class="col-2">  <input type="text" [(ngModel)]="this.delCavity" class="w-100 form-control mt-2" (input)="change($event)">
+                  <div class="col-2">  <input type="text" [(ngModel)]="this.delCavity" class="w-100 form-control mt-2" (input)="change($event)" readonly>
                   </div>
                   </div>
                   <div class="row">
                     <div class="col-10"><span class="label1 fw-semibold">Total Cavities missed by Dentist :</span></div>
-                    <div class="col-2"> <input type="text"  [(ngModel)]="this.adminMark" class="w-100 form-control" (input)="change($event)">
+                    <div class="col-2"> <input type="text"  [(ngModel)]="this.adminMark" class="w-100 form-control" (input)="change($event)" readonly>
                     </div>
                     </div>
               

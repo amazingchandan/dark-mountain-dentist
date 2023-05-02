@@ -239,9 +239,9 @@ export class MarkXrayComponent {
  <Style> .ls-common {height:354px !important}</Style>
   <View style="flex: 90%;  
  margin-top: -14px; width:566px">
- <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px !important }</Style>
+ <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
  <Image name="img" value="$image" width="100%" height="100%"></Image>
- <Style> canvas { width:566px !important; height:354px !important;  }</Style>
+ <Style> canvas { width:566px ; height:354px !important;  }</Style>
  </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
