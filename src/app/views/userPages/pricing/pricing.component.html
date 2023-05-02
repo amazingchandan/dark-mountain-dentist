@@ -503,7 +503,7 @@
                       <svg cIcon name="cilUser"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="First Name"
-                      formControlName="first_name" maxlength="25" />
+                      formControlName="first_name" maxlength="25" [readOnly]="readOnly" />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -514,7 +514,7 @@
                       <svg cIcon name="cilUser"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Last Name"
-                      formControlName="last_name" maxlength="25" />
+                      formControlName="last_name" maxlength="25" [readOnly]="readOnly"/>
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -527,7 +527,7 @@
                       <svg cIcon name="cilEnvelopeClosed"></svg>
                     </span>
                     <input type="email" class="form-control rounded ps-5 w-100" placeholder="Email ID/Username"
-                      formControlName="email" maxlength="70" />
+                      formControlName="email" maxlength="70" readonly/>
                     <!-- <i class="fa-solid fa-envelope icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -538,7 +538,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="tel" class="form-control rounded ps-5 w-100" placeholder="Contact Number"
-                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" />
+                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" [readOnly]="readOnly" />
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -551,7 +551,7 @@
                       <svg cIcon name="cilHome"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
-                      formControlName="address1" />
+                      formControlName="address1" [readOnly]="readOnly" />
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -562,7 +562,7 @@
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
-                      formControlName="city" />
+                      formControlName="city" [readOnly]="readOnly"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -575,7 +575,7 @@
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
-                      formControlName="state" />
+                      formControlName="state" [readOnly]="readOnly"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -586,8 +586,8 @@
                       <svg cIcon name="cilMap"></svg>
                     </span>
                     <select class="form-select ps-5" aria-label="Default select example" name="country"
-                      placeholder="Country" formControlName="country">
-                      <option [defaultSelected]="true" [selected]="true" disabled="true">
+                      placeholder="Country" id="country"formControlName="country" [disabled]="readOnly">
+                      <option [defaultSelected]="true" [selected]="true" disabled="true" >
                         {{ countryList }}
                       </option>
                       <option>India</option>
@@ -607,7 +607,7 @@
                       <svg cIcon name="cilNotes"></svg>
                     </span>
                     <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
-                      formControlName="pincode" (keypress)="onlyNumberKey($event)" />
+                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -618,7 +618,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
-                    />
+                    [readOnly]="readOnly" />
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -697,7 +697,7 @@
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
         </button>
         <div *ngIf="paypalBtn">
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal>
+          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
         </div>
       </div>
     </div>

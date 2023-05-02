@@ -330,9 +330,9 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
      <Style> .ls-common {height:354px !important}</Style>
       <View style="flex: 90%;  
      margin-top: -14px; width:566px">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px !important }</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px; height:354px !important;  }</Style>
+     <Style> canvas { width:566px !important; height:354px !important;  }</Style>
      </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
@@ -341,7 +341,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  </RectangleLabels>
 
  </View>
- <View style="flex: 10%;position: absolute;left: -27%;
+ <View style="flex: 10%;position: absolute;left: -24%;
  margin-top: 78px;">
  <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
  <Label value="Dentist Mark" background="green" />

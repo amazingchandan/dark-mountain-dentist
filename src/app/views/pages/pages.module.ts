@@ -24,6 +24,7 @@ import { TestComponent } from './test/test.component';
 import { FinancialComponent } from './financial/financial.component';
 import { ViewAdminXrayComponent } from './view-admin-xray/view-admin-xray.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxImageZoomModule
+    NgxImageZoomModule,
+    NgxPayPalModule,
   ]
 })
 export class PagesModule {

@@ -51,6 +51,7 @@ export class UserService {
  totCavityByAI : String;
  userPlanById :String;
  rstPwd : String;
+ renewSub : String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -95,6 +96,7 @@ export class UserService {
     this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
     this.userPlanById = this.apiHost + 'userPlanById';
     this.rstPwd = this.apiHost + 'resetPassword';
+    this.renewSub = this.apiHost + 'getSubscriptionRenew'
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -141,6 +143,9 @@ export class UserService {
   }
   getSubscription(requestParameters , id) {
     return this.http.post(`${this.userSubscription}?id=${id}`,requestParameters,{})
+  }
+  getSubscriptionRenew(requestParameters , id) {
+    return this.http.post(`${this.renewSub}?id=${id}`,requestParameters,{})
   }
   addXray(requestParameters){
     return this.http.post(`${this.uploadXray}`,requestParameters,{});
@@ -222,4 +227,5 @@ export class UserService {
   resetPassword(requestParameters){
     return this.http.post(`${this.rstPwd}`,requestParameters,{});
   }
+
 }

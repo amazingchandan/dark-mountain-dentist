@@ -282,7 +282,7 @@
                     (click)="cancelSubfromUser()">
                     Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                   </button>
-                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder">
+                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal">
                     Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
                   </button>
                 </div>
@@ -521,6 +521,264 @@
       <div class="modal-footer">
         <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----Renew Subscription-------->
+<div class="modal fade" id="renewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Renew Subscription</h4>
+          
+        </div>
+        <div class="modal-body">
+            <div class="d-flex align-items-center flex-column sub-body-content">
+               
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button" class="btn fw-bold pd-1  renew-btn" data-bs-toggle="modal" data-bs-target="#myModal">Renew With Existing Plan</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn fw-bold pd-1 w-100" data-bs-toggle="modal" data-bs-target="#renewModal">Renew With New Plan</button>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------Pricing Modal-------------------->
+<div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <!-- [hidden]="IsmodelShow" -->
+  <div class="modal-dialog modal-dialog-centered modal-lg billing-modal" role="document">
+    <div class="modal-content modal-tall">
+      <div class="modal-header justify-content-between align-items-center">
+        <div></div>
+        <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
+          Dark
+          <div class="mountain-color">Mountain</div>
+        </h2>
+        <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
+      </div>
+      <div class="modal-body px-5 py-4">
+        <div  class="d-flex align-items-center flex-column sub-body-content">
+          <!-- <div class="d-flex align-items-start flex-column sub-body-content billing-div">
+            <h5 class="text-center fw-semibold">Billing Details:</h5>
+            <form #register_form="ngForm" [formGroup]="registerForm">
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative"> -->
+                    <!-- <label class="mb-2">First Name<sup>*</sup></label>
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="First Name"
+                      formControlName="first_name" maxlength="25" [readOnly]="readOnly" />
+                   
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                 
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Last Name"
+                      formControlName="last_name" maxlength="25" [readOnly]="readOnly"/>
+                
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                  
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilEnvelopeClosed"></svg>
+                    </span>
+                    <input type="email" class="form-control rounded ps-5 w-100" placeholder="Email ID/Username"
+                      formControlName="email" maxlength="70" readonly/>
+                  
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                    
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input type="tel" class="form-control rounded ps-5 w-100" placeholder="Contact Number"
+                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" [readOnly]="readOnly" />
+                   
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                 
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilHome"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
+                      formControlName="address1" [readOnly]="readOnly" />
+                   
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                  
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
+                      formControlName="city" [readOnly]="readOnly"/>
+                 
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilLocationPin"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
+                      formControlName="state" [readOnly]="readOnly"/>
+                
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+               
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilMap"></svg>
+                    </span>
+                    <select class="form-select ps-5" aria-label="Default select example" name="country"
+                      placeholder="Country" id="country"formControlName="country" [disabled]="readOnly">
+                      <option [defaultSelected]="true" [selected]="true" disabled="true" >
+                        {{ countryList }}
+                      </option>
+                      <option>India</option>
+                      <option>America</option>
+                      <option>Japan</option>
+                      <option>China</option>
+                    </select>
+        
+                  </div>
+                </c-input-group>
+              </div>
+              <div class="inputContainer">
+                <c-input-group class="mb-3 mt-2">
+                  <div class="w-100 d-flex position-relative">
+                   
+                    <span cInputGroupText class="rounded-0 rounded-start icon-position">
+                      <svg cIcon name="cilNotes"></svg>
+                    </span>
+                    <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
+                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly"/>
+                   
+                  </div>
+                </c-input-group>
+                <c-input-group class="mb-3 mt-2 inputMargin">
+                  <div class="w-100 d-flex position-relative">
+                  ion">
+                      <svg cIcon name="cilSpreadsheet"></svg>
+                    </span>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
+                    [readOnly]="readOnly" />
+                 
+                  </div>
+                </c-input-group>
+                </div>
+                    <span cInputGroupText class="rounded-0 rounded-start icon-posit
+                
+            </form>
+          </div> -->
+          <div class="d-flex align-items-center flex-column sub-body-content ">
+            <h5 class="text-center fw-semibold ">Subscription Details:</h5>
+            <ul class="proceed-details m-0 p-0 ">
+              <!-- <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
+              >
+                <span>Name:</span>&nbsp;<span>{{
+                  this.fname | titlecase
+                }} {{
+                  this.lname | titlecase
+                }}</span>
+              </li>
+              <li
+                class="fs-6 fw-semibold d-flex justify-content-between align-items-center text-wrap"
+              >
+                <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
+              </li> -->
+              <li class="fs-6  mt-2 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Plan Name:</span>&nbsp; &nbsp; &nbsp;<span>{{
+                 this.curPlanDetail?.subscription_details.subscription_id.plan_name | titlecase
+                  }}</span>
+              </li>
+              <li class="fs-6  mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Plan Type:</span>&nbsp;<span>{{
+                  this.curPlanDetail?.subscription_details.subscription_id.type| titlecase
+                  }}</span>
+              </li>
+              <li class="fs-6  mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                <span>Price:</span>&nbsp;<span>${{ this.curPlanDetail?.subscription_details.subscription_id.amount}}</span>
+              </li>
+              <li class="fs-6  mt-4 fw-bold d-flex justify-content-between align-items-center border-top">
+                <span>Total:</span>&nbsp;<span>${{  this.curPlanDetail?.subscription_details.subscription_id.amount }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div *ngIf="!checked && subsId != 0">
+          <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
+            <div class="swal2-icon-content justify-content-center">!</div>
+          </div>
+          <div class="swal2-html-container">
+            Please accept the terms and conditions.
+          </div>
+        </div>
+        <div *ngIf="subsId == 0 && checked">
+          <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
+            <div class="swal2-icon-content justify-content-center">!</div>
+          </div>
+          <div class="swal2-html-container">Please choose a plan.</div>
+        </div>
+        <div *ngIf="subsId == 0 && !checked">
+          <div class="swal2-icon swal2-warning swal2-icon-show mt-1">
+            <div class="swal2-icon-content justify-content-center">!</div>
+          </div>
+          <div class="swal2-html-container">
+            Please choose a plan and accept the terms and conditions.
+          </div>
+        </div> -->
+      </div>
+      <div  class="modal-footer justify-content-between">
+        <small>&#169; All rights reserved</small>
+        <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
+        <!-- (click)="payView()" -->
+        <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()"> -->
+          <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
+          </a> -->
+          <!-- Confirm & Pay -->
+          <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
+          <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
+        <!-- </button> -->
+        <div >
+          
+          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
+        </div>
       </div>
     </div>
   </div>

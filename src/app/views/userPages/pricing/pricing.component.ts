@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
 import {
   IPayPalConfig,
+  
   ICreateOrderRequest,
   IPayPalButtonStyle
 } from 'ngx-paypal';
@@ -121,6 +122,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   };
   toastr: any;
   country: any="";
+  readOnly: boolean=false;
 
 
 
@@ -135,6 +137,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
       this.registerForm = this.formBuilder.group({})
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
+
+  // private payPalButtonContainerElem?: ElementRef;
+  // @ViewChild("payPalButtonContainer", { static: false })
+  // set payPalButtonContainer(content: ElementRef) {
+  //   this.payPalButtonContainerElem = content;
+  // }
   // @ViewChild('paypalRef',{static: true}) public paypalRef: ElementRef;
   ngOnInit(): void {
     console.log(this.checked, this.subsId);
@@ -230,14 +238,17 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //   ).render(this.paypalRef.nativeElement)
     // }
   }
+  
   private initConfig(): void {
+    //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
     var modal= document.getElementById("launch_ad");
     modal.style.display = "none";
-  
+ 
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'sb',
         // ! for orders on client side
+  
         createOrderOnClient: (data) => < ICreateOrderRequest > {
 
             intent: 'CAPTURE',
@@ -275,8 +286,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
         onApprove: (data, actions) => {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then(details => {
-              console.log('onApprove - you can get full order details inside onApprove: ', details);
-
+              console.log('onApprove - you can get full order details inside onApprove: ', details),
+             
 
     //my code
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
@@ -318,8 +329,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
           }
              this.userPlanData = {
                        sub_id: this.subsId,
-                       end_date: end_date,
-                       start_date: Date.now(),
+                      // 
+                      type:this.subsType,
                      }
                      this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
                        console.log(res)
@@ -382,6 +393,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
             console.log('onClick', data, actions);
             this.resetStatus();
         }
+
     };
   }
   checkoutBtn(){
@@ -768,7 +780,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
             });
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
+            this.readOnly= true;
+            document.getElementById("country").style.pointerEvents= 'none';
+           
             //  this.router.navigateByUrl('/registered-dentists');
+
           } else {
             Swal.fire({
               text: res.message,

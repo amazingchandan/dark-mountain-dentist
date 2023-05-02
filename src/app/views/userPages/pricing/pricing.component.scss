@@ -334,3 +334,9 @@ input.lg-check {
 .billing-div{
   margin-right: 2rem;
 }
+.paypal-button > .paypal-button-label-container:before {
+  content: "Pay NOw:";
+} 
+.paypal-button > .paypal-button-label-container > .paypal-logo{
+  display: none;
+}
