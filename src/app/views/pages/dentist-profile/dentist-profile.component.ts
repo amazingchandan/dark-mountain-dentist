@@ -515,17 +515,26 @@ console.log("00",this.userData.flag)
   myPlanDetail(){
     this.apiService.getUserPlanById(this.userInfo.id).subscribe((res:any)=>
     {
+      console.log("myPlan")
       if(res.success){
+        console.log("myPlan1",res.getData)
        this.curPlanDetail=res.getData;
        this.subsType= this.curPlanDetail?.subscription_details.subscription_id.type
     this.subsPrice = this.curPlanDetail?.subscription_details.subscription_id.amount;
     this.subsId= this.curPlanDetail?.subscription_details.subscription_id._id;
     this.preStart_date=this.curPlanDetail?.subscription_details.start_date;
     this.preEnd_date=this.curPlanDetail?.subscription_details.end_date;
+     
+
+   console.log("***",this.preEnd_date)
        console.log("planDetail",res)
+      }
+      else{
+        console.log(res,"error")
       }
     })
   }
+ 
   view(id){
     this.router.navigateByUrl('/view-admin-x-ray/' + id)
   }
