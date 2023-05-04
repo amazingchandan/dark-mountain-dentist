@@ -302,11 +302,12 @@
                 <div class="mb-3 mt-2 inputMargin">
                   <div class="w-100 d-flex position-relative color">
                     <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
-                    <label>New Password</label>
+                    <label class="mt-1">New Password</label>
                     <input type="password" class="ml-b w-50 form-control" placeholder="New Password"  (input)="onNewPass($event)"
                      />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
+                  <small class="pass-small">* Password must contain atleast 7 characters, 1 letter and 1 number</small>
                 </div>
                 <div class="mb-3 mt-2 inputMargin">
                     <div class="w-100 d-flex position-relative color">

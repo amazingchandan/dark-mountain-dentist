@@ -1,9 +1,8 @@
 <section class="content">
   <div class="container">
     <h5 class=" mb-3 fw-bold">X-ray Evaluation Result</h5>
-    <p>*Legal Disclaimer : There is a direct correlation of diagnosis and xray quality.
-      This software is just an aid for the Dentists to help them identifies cavities easily.<br>&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;It does not guarantee medical accuracy.</p>
+    <p><span class="border-bottom border-dark">*Legal Disclaimer :</span> There is a direct correlation of diagnosis and xray quality.
+      This software is just an aid for the Dentists to help them identifies cavities easily.<br>It does not guarantee medical accuracy.</p>
     <div class="row">
       <div class="col-12">
         <div class="col-md-6 left-img ">
@@ -52,11 +51,10 @@
         <button type="button" class="btn me-2 cancel-btn fw-bold other-btn pd-1 ms-2 discard" id="close"
           (click)="handleClick()">Discard</button>
 
-        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Submit for
-          Review&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
+        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Save Result&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
        
-        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="refresh()">Refresh AI Marking</button>
-        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="delete()">Delete Mark</button>
+        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="refresh()">Reevaluate</button>
+        <button type="button" class="btn fw-bold other-btn pd-1 ms-2" (click)="delete()">Delete Correction</button>
       </div>
     </div>
   </div>

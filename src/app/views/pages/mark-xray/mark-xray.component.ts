@@ -245,17 +245,17 @@ export class MarkXrayComponent {
  </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
- <Label value="Dentist Mark" background="green" strokeColor="#000000"/> 
+ <Label value="Dentist Correction" background="green" strokeColor="#000000"/> 
  <Label value="1" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="2" background="#FFFF00" />
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
  </View>
-<View style="flex: 10%;position: absolute;left: 59.5%;
+<View style="flex: 10%;position: absolute;left: 30.5%;
 margin-top: 99px;"> 
  <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.5" strokeWidth="6" strokeColor="#ff0000">
-<Label value="Admin Mark" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
+<Label value="Admin Correction" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
 </RectangleLabels>
  </View>
  

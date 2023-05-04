@@ -5,7 +5,7 @@
       class="mb-4 p-2"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <h6 class="text-primary  my fw-bold" >Total Amount <br>Earned</h6>
+        <h6 class="text-primary  my fw-bold" >Total Revenue <br>Earned</h6>
         <h3 class="text-danger rotate fw-bold">
          ${{this.amtEarned}} 
         </h3>
@@ -23,7 +23,7 @@
         
 
         <h6 class="color fw-bold my "  [routerLink]="'/uploaded-xray/2'">
-          Number of Xray Evaluated
+          Number of X-Rays Evaluated
         </h6>
         <h3 class="text-danger rotate fw-bold">
           {{this.xrayCount}}

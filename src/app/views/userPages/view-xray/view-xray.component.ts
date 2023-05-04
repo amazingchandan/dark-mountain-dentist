@@ -302,7 +302,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
  <Label value="1" background="#FF3131" />
  <Label value="2" background="#FFFF00" />
- <Label value="Dentist Mark" background="green" />
+ <Label value="Dentist Correction" background="green" />
  </RectangleLabels>
 
  </View>

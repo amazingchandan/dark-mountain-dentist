@@ -344,7 +344,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  <View style="flex: 10%;position: absolute;left: -28%;
  margin-top: 78px;">
  <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
- <Label value="Dentist Mark" background="green" />
+ <Label value="Dentist Correction" background="green" />
  </RectangleLabels>
  </View>
  </View>
