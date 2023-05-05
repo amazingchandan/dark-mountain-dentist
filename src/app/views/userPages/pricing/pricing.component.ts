@@ -123,6 +123,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
   toastr: any;
   country: any="";
   readOnly: boolean=false;
+  userSubscription: any;
+  buyNow: boolean = false;
 
 
 
@@ -704,10 +706,15 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // })
 
   }
+  buyNowFunc(){
+    this.buyNow=true;
+  }
 
   editUser(id: any){
     this.userService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res);
+      this.userSubscription= res.getData[0].all_subscription_details;
+        console.log(this.userSubscription,"length")
       if (res.success) {
         this.registerForm.patchValue({
           first_name: res.getData[0].first_name,

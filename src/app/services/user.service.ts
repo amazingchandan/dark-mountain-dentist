@@ -52,6 +52,7 @@ export class UserService {
  userPlanById :String;
  rstPwd : String;
  renewSub : String;
+ sub_expire_time:String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
     this.login = this.apiHost + `login`;
@@ -96,7 +97,8 @@ export class UserService {
     this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
     this.userPlanById = this.apiHost + 'userPlanById';
     this.rstPwd = this.apiHost + 'resetPassword';
-    this.renewSub = this.apiHost + 'getSubscriptionRenew'
+    this.renewSub = this.apiHost + 'getSubscriptionRenew';
+    this.sub_expire_time=this.apiHost + 'sub-expiration-time'
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -226,6 +228,9 @@ export class UserService {
   }
   resetPassword(requestParameters){
     return this.http.post(`${this.rstPwd}`,requestParameters,{});
+  }
+  getUserSubExpireTime(id) {
+    return this.http.get(`${this.sub_expire_time}?dentist_id=${id}`);
   }
 
 }

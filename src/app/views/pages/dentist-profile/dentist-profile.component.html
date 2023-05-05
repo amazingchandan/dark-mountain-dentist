@@ -539,10 +539,10 @@
                
               <div class="row">
                 <div class="col-md-6">
-                  <button type="button" class="btn fw-bold pd-1  renew-btn" data-bs-toggle="modal" data-bs-target="#myModal">Renew With Existing Plan</button>
+                  <button type="button" class="btn fw-bold pd-1  renew-btn" data-bs-toggle="modal" data-bs-target="#myModal" >Renew With Existing Plan</button>
                 </div>
                 <div class="col-md-6">
-                  <button type="button" class="btn fw-bold pd-1 w-100" data-bs-toggle="modal" data-bs-target="#renewModal">Renew With New Plan</button>
+                  <button type="button" class="btn fw-bold pd-1 w-100" [routerLink]="'/renew-sub/'+this.userInfo.id" (click)="close()">Renew With New Plan</button>
                 </div>
               </div>
             </div>

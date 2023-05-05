@@ -19,16 +19,24 @@
 
       </h2>
     </div>
-
-    <h2 class="head m-0 text-center fw-bold mt-1">
+  
+    <h2  *ngIf="this.userSubscription?.length==0 || this.buyNow==true"class="head m-0 text-center fw-bold mt-1">
       Please Choose Your Subscription Plan
     </h2>
+    <div *ngIf="this.userSubscription?.length>0 && this.buyNow==false" class="mt-5">
+      <h2 class="head m-0 text-center fw-bold mt-1"> Your Subscription has expired! Please Buy a new plan</h2>
+      <div class="w-100 d-flex justify-content-center mt-3">
+        <button class="pd-1 btn fw-bold mt-1 me-1" (click)="buyNowFunc()"> Buy Now</button>
+        <button class="pd-1 btn fw-bold mt-1 ms-1"> Not Now</button>
+      </div>
+    </div>
     <div class="btn-position" title="Logout">
       <!-- <img src="./assets/img/avatars/no-logo-icon-1.png" alt="" style="width: 30px; border: 2px solid black; border-radius: 50%;">
       <i class="fa-solid fa-power-off"></i> -->
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </div>
   </div>
+  <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true">
   <div class="w-100 d-flex justify-content-center mb-4">
     <button (click)="monthly()" [class]="
         monthlyPlan
@@ -45,6 +53,8 @@
       Yearly Plans
     </button>
   </div>
+  </div>
+
   <ng-template #userDropdown>
     <c-dropdown alignment="end" variant="nav-item">
       <button cButton color="" [caret]="false" cDropdownToggle class="py-0 icon-btn dd-header">
@@ -171,7 +181,7 @@
       </ul>
     </c-dropdown>
   </ng-template>
-  <div class="sub-container">
+  <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true" class="sub-container">
     <div *ngIf="monthlyAllData?.length != 0"
       class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
       <div *ngFor="let data of monthlyAllData; let i = index" >
@@ -272,6 +282,7 @@
 
     </div>
   </div>
+ 
   <!-- <section class="onlyHeight">
     <div class="owlContainer">
     <owl-carousel-o [options]="customOptions" *ngIf="monthlyAllData.length !== 0" class="owlContainer">
@@ -336,7 +347,7 @@
     </owl-carousel-o>
   </div>
   </section> -->
-  <div class="d-flex justify-content-center align-items-center pricingFooter">
+  <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true" class="d-flex justify-content-center align-items-center pricingFooter">
     <div>
       <span class="fontsizeTC">
         <input type="checkbox" name="check" id="" (change)="checking($event)"

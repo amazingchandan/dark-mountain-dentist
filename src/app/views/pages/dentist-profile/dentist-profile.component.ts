@@ -697,7 +697,9 @@ console.log("00",this.userData.flag)
   }
 
 
-
+close(){
+  ($("#renewModal")as any).modal("hide");
+}
 
 
   ngOnDestroy(): void {

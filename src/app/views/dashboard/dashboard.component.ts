@@ -24,6 +24,9 @@ interface IUser {
 })
 export class DashboardComponent implements OnInit {
   role: any;
+  expTime: any;
+  diffDays: any;
+  diiTime: any;
   constructor(private chartsData: DashboardChartsData,
     private userService : UserService) {
   }
@@ -125,7 +128,7 @@ export class DashboardComponent implements OnInit {
     let decodedJwtJsonData = window.atob(jwtData)
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     this.role=decodedJwtData.role;
-
+  this.getSubExpireTime();
     let id= this.userInfo.id;
     this.userService.getUserRecordById(id).subscribe((res: any) =>{
       console.log(res,"++++++")
@@ -145,5 +148,17 @@ export class DashboardComponent implements OnInit {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
     this.chartsData.initMainChart(value);
     this.initCharts();
+  }
+  getSubExpireTime(){
+    this.userService.getUserSubExpireTime(this.userInfo.id).subscribe((res: any) =>{
+      console.log(res,"++++++")
+      if(res.success){
+        console.log(res)
+        this.expTime=res.getData
+        this.diffDays=res.diffDays;
+        this.diiTime=res.diffTime;
+        console.log(this.expTime,this.diffDays,this.diiTime)
+      }
+    })
   }
 }

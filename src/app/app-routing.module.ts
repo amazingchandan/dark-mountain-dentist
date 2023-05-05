@@ -25,6 +25,7 @@ import { TestComponent } from './views/pages/test/test.component';
 import { FinancialComponent } from './views/pages/financial/financial.component';
 import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
 import { ViewAdminXrayComponent } from './views/pages/view-admin-xray/view-admin-xray.component';
+import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.component';
 const routes: Routes = [
 
   // {
@@ -272,6 +273,14 @@ const routes: Routes = [
         component: ViewXrayComponent,
         data: {
           title: 'View X-Ray'
+        },
+      //  canActivate :[UserAuthGuard]
+      },
+      {
+        path: 'renew-sub/:dentist_id',
+        component: RenewSubComponent,
+        data: {
+          title: 'Renew Sub'
         },
       //  canActivate :[UserAuthGuard]
       },
