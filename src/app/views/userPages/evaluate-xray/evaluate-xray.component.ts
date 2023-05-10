@@ -38,14 +38,15 @@ export class EvaluateXrayComponent {
   annotations: any;
   totalAI:number=0;
   cavity:any;
+  public forTesting: boolean = true;
   onRangeChange(event: any) {
     this.valInput = (<HTMLInputElement>event.target).value.trim();
     this.leftPos = `${+(<HTMLInputElement>event.target).value.trim() - 5}%`
   }
-  
+
 
   ngOnInit() {
-   
+
    this.cavity=document.getElementById("cavity")
    this.cavity.style.display="none";
 
@@ -54,7 +55,7 @@ export class EvaluateXrayComponent {
     this.getXray(this.id);
 
     /* setTimeout(() => {
-      
+
        this.createLabelStudio()
      }, 1000);*/
     //this.createLabelStudio();
@@ -123,7 +124,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   }*/
 
   async defaultApi(path, type) {
-    this.spinner.show();
+    // * this.spinner.show();
     this.userService.getEvalById(this.id).subscribe((res: any) => {
       console.log(res)
       if (!res.success) {
@@ -140,21 +141,24 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
             console.log("API called succefully", res.getData)
             setTimeout(() => {
               this.getMarks()
-              this.spinner.hide();
+              // * this.spinner.hide();
+              this.forTesting = false
             }, 2000)
           }
           else {
-            this.spinner.hide();
+            // * this.spinner.hide();
+            this.forTesting = false
             console.log("not called", res)
           }
         })
-        
+
       }
       else {
         if (res.success) {
           this.markData = res.getData;
           setTimeout(() => {
-            this.spinner.hide();
+            // * this.spinner.hide();
+            this.forTesting = false
           }, 2000)
          // console.log(this.markData.ai_identified_cavities.rectangle_coordinates[0].coordinates[1], "record found")
           this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length;
@@ -166,6 +170,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
             })
           console.log(entries,"new obj")
           this.createLabelStudio()
+          this.forTesting = false
         }
       }
     })
@@ -193,6 +198,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         this.totalAI=this.markData.ai_identified_cavities.rectangle_coordinates.length
         this.cavity.style.display="block";
         this.createLabelStudio()
+        this.forTesting = false
       }
       else {
         console.log("error")
@@ -202,9 +208,10 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
   //label-studio
   createLabelStudio1() {
+    this.forTesting = true;
 
 
-    
+    console.log(true, "THIS IS FIRST TRUE");
     this.labelStudio = new LabelStudio('label-studio1',
 
 
@@ -278,19 +285,23 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
       });
 
+    console.log(true, "THIS IS SECOND TRUE");
+
 
     return this.labelStudio;
 
   }
 
   createLabelStudio() {
+    console.log(true, "THIS IS THIRD TRUE");
+    this.forTesting = true;
     const resultArr = this.markData.ai_identified_cavities.rectangle_coordinates.map((element: any,index:any) => {
       let obj = {
         "from_name": "label",
         "id":element._id,
         "type": "rectanglelabels",
         "source": "$image",
-       
+
         // "original_width":this.userMark[1]?.original_height,
         "original_width": "",
         "original_height": "",
@@ -328,7 +339,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
      <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;  
+      <View style="flex: 90%;
      margin-top: -14px; width:566px">
      <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
@@ -341,7 +352,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  </RectangleLabels>
 
  </View>
- <View style="flex: 10%;position: absolute;left: -28%;
+ <View style="flex: 10%;position: absolute;left: -35%;
  margin-top: 78px;">
  <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
  <Label value="Dentist Correction" background="green" />
@@ -429,7 +440,7 @@ zoomOut(e){
 }
 
 /*  save() {
-    
+
     (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
     console.log(this.labelStudio.onSubmitAnnotation, "***")
     console.log(this.marker)
@@ -440,7 +451,7 @@ zoomOut(e){
 
     $('.Entity_button__3c64R .anticon-delete').trigger("click");
   }
- 
+
   saveMarks() {
     (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
     console.log(this.labelStudio.onSubmitAnnotation, "***")
@@ -466,7 +477,7 @@ zoomOut(e){
       user_id: this.xRayData[0]?.user_id,
       marker: markInfo,
       total_cavities:markInfo.length
-     
+
 
     }
     // const ai_info={

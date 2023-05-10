@@ -62,32 +62,34 @@
               <input type="text" placeholder="City" formControlName="city" class="form-control me-4" maxlength="15" />
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">State<sup>*</sup></label>
-              <input type="text" placeholder="State" formControlName="state" class="form-control" maxlength="20" />
+              <label class="mb-2" for="inputState">Country<sup>*</sup></label>
+              <select class="form-select me-4" aria-label="Default select example" formControlName="country"
+                [value]="country" (change)="stateByCountry($event)">
+                <option value="" [selected]="true" [disabled]="true">
+                  Select Country
+                </option>
+                <option *ngFor="let country of allcountries; let i = index" value="{{country.countryName}}">{{country.countryName}}</option>
+              </select>
             </div>
             <div class="col-md-4 form-group">
-              <label class="mb-2">Zip<sup>*</sup></label>
-              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10"
-                (keypress)="onlyNumberKey($event)" />
+              <label class="mb-2">State<sup>*</sup></label>
+              <!-- <input type="text" placeholder="State" formControlName="state" class="form-control" maxlength="20" /> -->
+              <select class="form-select me-4" aria-label="Default select example" formControlName="state">
+                <option value="" [selected]="true" [disabled]="true">
+                  Select State
+                </option>
+                <option *ngFor="let state of allstates; let i = index" value="{{state.name}}">{{state.name}}</option>
+              </select>
             </div>
           </div>
 
           <div class="row mb-2"></div>
           <div class="row mb-2">
             <div class="col-md-4 form-group">
-              <label class="mb-2" for="inputState">Country<sup>*</sup></label>
-              <select class="form-select me-4" aria-label="Default select example" formControlName="country"
-                [value]="country">
-                <option value="" [selected]="true" [disabled]="true">
-                  Select option
-                </option>
-                <option value="India">India</option>
-                <option value="America">America</option>
-                <option value="Japan">Japan</option>
-                <option value="China">China</option>
-              </select>
+              <label class="mb-2">Zip<sup>*</sup></label>
+              <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10"
+                (keypress)="onlyNumberKey($event)" />
             </div>
-           
             <div class="col-md-4 form-group">
               <label class="mb-2">License/Registration No.<sup>*</sup></label>
               <input type="text" placeholder="License/Registration No." formControlName="license_no"
@@ -106,7 +108,7 @@
 
           </div>
 
-         
+
         </form>
 
         <div class="sub-container">
@@ -333,7 +335,7 @@
                         <button
                         type="button"
                         class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-                        
+
                         (click)="view(data._id)"
                       >
                         View
@@ -474,11 +476,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Subscription Details:</h4>
-          
+
         </div>
         <div class="modal-body">
             <div class="d-flex align-items-start flex-column sub-body-content">
-               
+
                 <ul class="proceed-details m-0 p-0 align-self-center  me-2 w-75 color">
                 <!-- <li
                   class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
@@ -520,7 +522,7 @@
       </div>
       <div class="modal-footer">
         <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
-       
+
       </div>
     </div>
   </div>
@@ -532,24 +534,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Renew Subscription</h4>
-          
+        <!-- <i class="fa-solid fa-xmark fs-5 close-modal" data-bs-dismiss="modal" style="cursor: pointer;"></i> -->
         </div>
         <div class="modal-body">
-            <div class="d-flex align-items-center flex-column sub-body-content">
-               
-              <div class="row">
-                <div class="col-md-6">
-                  <button type="button" class="btn fw-bold pd-1  renew-btn" data-bs-toggle="modal" data-bs-target="#myModal" >Renew With Existing Plan</button>
-                </div>
-                <div class="col-md-6">
-                  <button type="button" class="btn fw-bold pd-1 w-100" [routerLink]="'/renew-sub/'+this.userInfo.id" (click)="close()">Renew With New Plan</button>
-                </div>
-              </div>
+            <div class="d-flex align-items-center justify-content-center sub-body-content">
+              <button type="button" class="btn fw-bold pd-1 renew-btn me-2" data-bs-toggle="modal" data-bs-target="#myModal" >Renew Existing Plan</button>
+              <button type="button" class="btn fw-bold pd-1 ms-2 new-btn-color" [routerLink]="'/renew-sub/'+this.userInfo.id" (click)="close()">Upgrade To A New Plan</button>
             </div>
+            <p class="text-center mt-3 mb-0">* In case of upgrade, the new plan will be active only after the current plan expires.</p>
       </div>
       <div class="modal-footer">
-        <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
-       
+        <button type="button btn" class="btn btn-secondary fw-semibold pd-1 cancel-btn" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -583,84 +578,84 @@
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="First Name"
                       formControlName="first_name" maxlength="25" [readOnly]="readOnly" />
-                   
+
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <div class="w-100 d-flex position-relative">
-                 
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilUser"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Last Name"
                       formControlName="last_name" maxlength="25" [readOnly]="readOnly"/>
-                
+
                   </div>
                 </c-input-group>
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
                   <div class="w-100 d-flex position-relative">
-                  
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilEnvelopeClosed"></svg>
                     </span>
                     <input type="email" class="form-control rounded ps-5 w-100" placeholder="Email ID/Username"
                       formControlName="email" maxlength="70" readonly/>
-                  
+
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <div class="w-100 d-flex position-relative">
-                    
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="tel" class="form-control rounded ps-5 w-100" placeholder="Contact Number"
                       formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" [readOnly]="readOnly" />
-                   
+
                   </div>
                 </c-input-group>
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
                   <div class="w-100 d-flex position-relative">
-                 
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilHome"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
                       formControlName="address1" [readOnly]="readOnly" />
-                   
+
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <div class="w-100 d-flex position-relative">
-                  
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
                       formControlName="city" [readOnly]="readOnly"/>
-                 
+
                   </div>
                 </c-input-group>
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
                   <div class="w-100 d-flex position-relative">
-                
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
                       formControlName="state" [readOnly]="readOnly"/>
-                
+
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <div class="w-100 d-flex position-relative">
-               
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilMap"></svg>
                     </span>
@@ -674,20 +669,20 @@
                       <option>Japan</option>
                       <option>China</option>
                     </select>
-        
+
                   </div>
                 </c-input-group>
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
                   <div class="w-100 d-flex position-relative">
-                   
+
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilNotes"></svg>
                     </span>
                     <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
                       formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly"/>
-                   
+
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
@@ -697,12 +692,12 @@
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
                     [readOnly]="readOnly" />
-                 
+
                   </div>
                 </c-input-group>
                 </div>
                     <span cInputGroupText class="rounded-0 rounded-start icon-posit
-                
+
             </form>
           </div> -->
           <div class="d-flex align-items-center flex-column sub-body-content ">
@@ -776,7 +771,7 @@
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
         <!-- </button> -->
         <div >
-          
+
           <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
         </div>
       </div>

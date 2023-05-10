@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
 import {
   IPayPalConfig,
-  
+
   ICreateOrderRequest,
   IPayPalButtonStyle
 } from 'ngx-paypal';
@@ -60,10 +60,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public subsTitle: any;
   public paypalView: any = false;
   public payData: any;
-  countryList = "-Select Country-";
+  public countryList = "-Select Country-";
+  public stateList = "-Select State-";
   public IsmodelShow: any = false;
   public paypalBtn: any = false;
-
+  public allcountries: Array<any>;
+  public allstates: Array<any>;
   ipAddress = '';
   //route: any;
   public customOptions: OwlOptions = {
@@ -208,7 +210,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
-     
+
       license_no : ['', [Validators.required]],
     });
     console.log(this.userInfo);
@@ -216,15 +218,24 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // this.registerForm.controls['email'].disable();
     // this.registerForm.controls['first_name'].disable();
     // this.registerForm.controls['last_name'].disable();
+    this.allCountryList();
+    this.countryList = "-Select Country-"
   }
-
+  stateByCountry(e: any){
+    console.log(e.target.value)
+    this.userService.getStateByCountries({name: e.target.value}).subscribe((res: any) => {
+      console.log(res.getData[0].regions)
+      this.stateList = "-Select State-"
+      this.allstates = res.getData[0].regions
+    })
+  }
   getIPAddress()
   {
     this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res:any)=>{
       const data = res;
       this.ipAddress= data.IPv4
       this.country =data.country;
-      console.log(this.country,"ipAddress",data)
+      console.log(this.country,"ipAddress",data, this.yearlyAllData)
     });
   }
   ngAfterViewInit(): void {
@@ -240,17 +251,17 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //   ).render(this.paypalRef.nativeElement)
     // }
   }
-  
+
   private initConfig(): void {
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
     var modal= document.getElementById("launch_ad");
     modal.style.display = "none";
- 
+
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'sb',
         // ! for orders on client side
-  
+
         createOrderOnClient: (data) => < ICreateOrderRequest > {
 
             intent: 'CAPTURE',
@@ -289,7 +300,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then(details => {
               console.log('onApprove - you can get full order details inside onApprove: ', details),
-             
+
 
     //my code
     this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
@@ -331,7 +342,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
           }
              this.userPlanData = {
                        sub_id: this.subsId,
-                      // 
+                      //
                       type:this.subsType,
                      }
                      this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
@@ -398,6 +409,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
     };
   }
+  allCountryList(){
+    this.userService.getCountries().subscribe((res: any) => {
+      console.log(res.getData)
+      this.allcountries = res.getData
+    })
+  }
   checkoutBtn(){
     this.IsmodelShow = true;
     console.log(this.IsmodelShow);
@@ -459,6 +476,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
 
   }
+
+
 
   monthly(){
     this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly")
@@ -752,7 +771,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
         this.registerForm.patchValue({
           pincode: res.getData[0].pincode,
         });
-        
+
         this.registerForm.patchValue({
           license_no: res.getData[0].license_no
         })
@@ -789,7 +808,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
             this.paypalBtn = true;
             this.readOnly= true;
             document.getElementById("country").style.pointerEvents= 'none';
-           
+
             //  this.router.navigateByUrl('/registered-dentists');
 
           } else {
@@ -797,7 +816,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
               text: res.message,
               icon: 'error',
             });
-            
+
             //this.toastr.error(res.message);
           }
         });

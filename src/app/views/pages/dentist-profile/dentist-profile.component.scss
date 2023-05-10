@@ -120,7 +120,7 @@ i {
   background-color: #00d957 !important;
   border-color: #00d957 !important;
   padding: 10px !important;
- 
+
 }
 .unflag:hover{
   background-color: #02c24f !important;
@@ -144,6 +144,9 @@ i {
   border-bottom: none !important;
   color: #043049 !important;
 }
+.modal-footer{
+  border-top: none !important;
+}
 .color{
   color: #043049 !important;
 }
@@ -152,4 +155,11 @@ i {
 }
 .renew-btn{
   width: max-content;
+}
+.close-modal {
+  color: #043049 !important;
+}
+.new-btn-color {
+  background-color: #043049 !important;
+  border-color: #043049 !important;
 }

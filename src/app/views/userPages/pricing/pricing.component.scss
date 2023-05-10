@@ -100,7 +100,7 @@ body {
 }
 
 .sub-container {
-  min-height: calc(100vh - 269px);
+  min-height: calc(100vh - 330px);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -336,7 +336,7 @@ input.lg-check {
 }
 .paypal-button > .paypal-button-label-container:before {
   content: "Pay NOw:";
-} 
+}
 .paypal-button > .paypal-button-label-container > .paypal-logo{
   display: none;
 }

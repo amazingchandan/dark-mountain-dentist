@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute ,Router} from '@angular/router';
 
 import { navItems ,navItemsUser } from './_nav';
 
@@ -17,16 +18,19 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   public navItemsUser = navItemsUser;
   public role :string;
+  public URL: string;
 
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };
 
-  constructor( private appService:AppService) {}
+  constructor( private appService:AppService, private router: Router,) {
+    this.URL = this.router.url.split('/')[0]
+  }
   ngOnInit(){
     console.log(this.userDetail)
     let jwt = this.userDetail.token
-
+    console.log(this.router.url.split('/')[0])
 let jwtData = jwt.split('.')[1]
 let decodedJwtJsonData = window.atob(jwtData)
 let decodedJwtData = JSON.parse(decodedJwtJsonData);

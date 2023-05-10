@@ -19,7 +19,7 @@
 
       </h2>
     </div>
-  
+
     <h2  *ngIf="this.userSubscription?.length==0 || this.buyNow==true"class="head m-0 text-center fw-bold mt-1">
       Please Choose Your Subscription Plan
     </h2>
@@ -185,7 +185,7 @@
     <div *ngIf="monthlyAllData?.length != 0"
       class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
       <div *ngFor="let data of monthlyAllData; let i = index" >
-        <div  *ngIf="data.country===this.country"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+        <div  *ngIf="data.country===this.country;"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
           <div class="card-body text-start d-flex flex-column justify-content-between">
@@ -201,8 +201,8 @@
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <p class="m-0">Max: ${{ data.maximum }}</p>
-              <p class="m-0">Min: ${{ data.minimum }}</p>
+              <!-- <p class="m-0">Max: ${{ data.maximum }}</p> -->
+              <!-- <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
@@ -228,14 +228,50 @@
           </div>
         </div>
       </div>
+        <!-- <div  *ngIf="data.country=='Others'"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+          <div class="card h-100 p-2 hover-effect">
+            <div class="card-body text-start d-flex flex-column justify-content-between">
+              <h4>{{ data.plan_name | titlecase }}</h4>
+              <p class="m-0 gst-sizing">
+                <i> {{ data.type }} pack </i>
+              </p>
+              <p class="m-0">Country: {{ data.country | titlecase }}</p>
+              <p class="m-0">Status: {{ data.status | titlecase }}</p>
+              <p>{{ data.currency | titlecase }}</p>
+              <div class="d-flex justify-content-center align-items-start flex-column mt-3">
+                <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
+              </div>
+              <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
+                <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+                    getSubscription(
+                      data._id,
+                      data.type,
+                      data.amount,
+                      data.plan_name
+                    )
+                  ">
+                  Subscribe
+                </button>
+              </div>
+              <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
+                <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
+                    getSubscription(0, data.type, data.amount, data.plan_name)
+                  ">
+                  Selected
+                </button>
+              </div>
+              <div class="position-absolute bottom-0 start-0 end-0"></div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
 
     <div *ngIf="yearlyAllData?.length != 0"
       class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
       <div *ngFor="let data of yearlyAllData; let i = index" >
-      <div  *ngIf="data.country===this.country"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
-        
+      <div  *ngIf="data.country===this.country;"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
           <div class="card-body text-start d-flex flex-column justify-content-between">
@@ -251,8 +287,8 @@
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <p class="m-0">Max: ${{ data.maximum }}</p>
-              <p class="m-0">Min: ${{ data.minimum }}</p>
+              <!-- <p class="m-0">Max: ${{ data.maximum }}</p> -->
+              <!-- <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
@@ -278,11 +314,49 @@
           </div>
         </div>
       </div>
+      <!-- <ng-template #dothisyearly>
+        <div  *ngIf="data.country=='Others'"  class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+          <div class="card h-100 p-2 hover-effect">
+            <div class="card-body text-start d-flex flex-column justify-content-between">
+              <h4>{{ data.plan_name | titlecase }}</h4>
+              <p class="m-0 gst-sizing">
+                <i> {{ data.type }} pack </i>
+              </p>
+              <p class="m-0">Country: {{ data.country | titlecase }}</p>
+              <p class="m-0">Status: {{ data.status | titlecase }}</p>
+              <p>{{ data.currency | titlecase }}</p>
+              <div class="d-flex justify-content-center align-items-start flex-column mt-3">
+                <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
+              </div>
+              <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
+                <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+                    getSubscription(
+                      data._id,
+                      data.type,
+                      data.amount,
+                      data.plan_name
+                    )
+                  ">
+                  Subscribe
+                </button>
+              </div>
+              <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
+                <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
+                    getSubscription(0, data.type, data.amount, data.plan_name)
+                  ">
+                  Selected
+                </button>
+              </div>
+              <div class="position-absolute bottom-0 start-0 end-0"></div>
+            </div>
+          </div>
+        </div>
+      </ng-template> -->
       </div>
 
     </div>
   </div>
- 
+
   <!-- <section class="onlyHeight">
     <div class="owlContainer">
     <owl-carousel-o [options]="customOptions" *ngIf="monthlyAllData.length !== 0" class="owlContainer">
@@ -347,7 +421,7 @@
     </owl-carousel-o>
   </div>
   </section> -->
-  <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true" class="d-flex justify-content-center align-items-center pricingFooter">
+  <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true" class="d-flex justify-content-center align-items-center pricingFooter flex-column">
     <div>
       <span class="fontsizeTC">
         <input type="checkbox" name="check" id="" (change)="checking($event)"
@@ -355,9 +429,9 @@
         <span>Yes, I agree to</span>&nbsp;<u class="hand" data-bs-toggle="modal"
           data-bs-target="#exampleModalCenter">Terms</u>&nbsp;<span>&</span>&nbsp;<u class="hand" data-bs-toggle="modal"
           data-bs-target="#exampleModalCenter">Conditions</u>&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span>
-      </span><br><br><br><br>
+      </span>
     </div>
-    <div class="do-later-checkout-btn-container float-right">
+    <div class="do-later-checkout-btn-container float-right mt-3">
       <button class="btn pd-1 cancel-btn fw-bold fs-2 doitlater" (click)="Logout()">
         Do later
       </button>
@@ -579,14 +653,23 @@
                 </c-input-group>
               </div>
               <div class="inputContainer">
-                <c-input-group class="mb-3 mt-2">
+                <c-input-group class="mb-3 mt-2 ">
                   <div class="w-100 d-flex position-relative">
                     <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
-                      <svg cIcon name="cilLocationPin"></svg>
+                      <svg cIcon name="cilMap"></svg>
                     </span>
-                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
-                      formControlName="state" [readOnly]="readOnly"/>
+                    <select class="form-select ps-5" aria-label="Default select example" name="country"
+                      placeholder="Country" id="country"formControlName="country" (change)="stateByCountry($event)">
+                      <option [defaultSelected]="true" [selected]="true" disabled="true" >
+                        {{ countryList }}
+                      </option>
+                      <!-- <option>India</option>
+                      <option>America</option>
+                      <option>Japan</option>
+                      <option>China</option> -->
+                      <option *ngFor="let country of allcountries; let i = index" value="{{country.countryName}}">{{country.countryName}}</option>
+                    </select>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -594,17 +677,16 @@
                   <div class="w-100 d-flex position-relative">
                     <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
-                      <svg cIcon name="cilMap"></svg>
+                      <svg cIcon name="cilLocationPin"></svg>
                     </span>
-                    <select class="form-select ps-5" aria-label="Default select example" name="country"
-                      placeholder="Country" id="country"formControlName="country" [disabled]="readOnly">
+                    <!-- <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
+                      formControlName="state" [readOnly]="readOnly"/> -->
+                    <select class="form-select ps-5" aria-label="Default select example" name="state"
+                    placeholder="State" id="state" formControlName="state">
                       <option [defaultSelected]="true" [selected]="true" disabled="true" >
-                        {{ countryList }}
+                        {{ stateList }}
                       </option>
-                      <option>India</option>
-                      <option>America</option>
-                      <option>Japan</option>
-                      <option>China</option>
+                      <option *ngFor="let state of allstates; let i = index" value="{{state.name}}">{{state.name}}</option>
                     </select>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
@@ -634,7 +716,7 @@
                   </div>
                 </c-input-group>
                 </div>
-                
+
             </form>
           </div>
           <div class="d-flex align-items-start flex-column sub-body-content border-start">

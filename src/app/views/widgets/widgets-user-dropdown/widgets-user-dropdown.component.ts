@@ -29,8 +29,12 @@ export class WidgetsUserDropdownComponent {
   ngOnInit(): void {
     //this.setData();
     this.dashboard();
+    console.log(this.userInfo);
   }
   dashboard(){
+    // this.userService.getUserRecordById(this.userInfo.id).subscribe((res: any) => {
+    //   console.log(res)
+    // })
     this.userService.noOfXrayByID(this.userInfo.id).subscribe((res:any)=>
     {
       if(res.success){
@@ -56,10 +60,10 @@ export class WidgetsUserDropdownComponent {
         if(this.noOfAiCavity[i].evaluation?.length > 0){
              let n=this.noOfAiCavity[i].evaluation[0]?.ai_identified_cavities?.color_labels?.length
           if(n==undefined)
-       { 
+       {
            console.log(n
           ,"***")
-          
+
         }
         else{
           this.count= this.count+this.noOfAiCavity[i].evaluation[0]?.ai_identified_cavities?.color_labels.length
@@ -73,7 +77,7 @@ export class WidgetsUserDropdownComponent {
     {
       if(res.success){
        this.planDetail=res.getData;
-       console.log("planDetail",this.planDetail)
+       console.log("planDetail", this.planDetail, this.planDetail.subscription_details.subscription_id.plan_name)
       }
     })
   }
@@ -127,16 +131,16 @@ export class WidgetsUserDropdownComponent {
        // this.router.navigateByUrl("/login")
       })
     }
-    
-   
-    } 
+
+
+    }
     else{
       Swal.fire({
         text: 'Please enter the password',
         icon: 'error'
       });
       return false;
-      
+
     }
   }
 

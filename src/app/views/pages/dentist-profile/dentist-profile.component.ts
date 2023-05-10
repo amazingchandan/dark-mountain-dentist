@@ -9,7 +9,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import {
   IPayPalConfig,
-  
+
   ICreateOrderRequest,
   IPayPalButtonStyle
 } from 'ngx-paypal';
@@ -47,10 +47,13 @@ export class DentistProfileComponent implements OnInit {
   curPlanDetail: any;
 
   public payPalConfig ? : IPayPalConfig;
-  
+
   public paypalView: any = false;
   public payData: any;
- 
+
+  public allcountries: any;
+  public stateList: any;
+  public allstates: any;
   public IsmodelShow: any = false;
   public paypalBtn: any = false;
   showSuccess: any;
@@ -60,7 +63,7 @@ export class DentistProfileComponent implements OnInit {
   subsPrice: any;
   // userPlanData: {
   //   sub_id: any;
-  //   // 
+  //   //
   //   type: any;
   // };
   subsId: any;
@@ -157,15 +160,15 @@ export class DentistProfileComponent implements OnInit {
   setTimeout(()=>{
     this.flagBtn();
   },1000)
-   
+
   this.initConfig();
-     
+  this.allCountryList();
   }
   flagBtn(){
     let flag = document.getElementById("flag");
 let unflag = document.getElementById("unflag");
 console.log("00",this.userData.flag)
-    
+
     if(this.userData[0].flag===0){
       this.hiddenFlag=false;
       this.hiddenunFlag=true;
@@ -178,6 +181,20 @@ console.log("00",this.userData.flag)
       console.log("1",this.userData.flag)
 
     }
+  }
+  allCountryList(){
+    this.apiService.getCountries().subscribe((res: any) => {
+      console.log(res.getData)
+      this.allcountries = res.getData
+    })
+  }
+  stateByCountry(e: any){
+    console.log(e.target.value)
+    this.apiService.getStateByCountries({name: e.target.value}).subscribe((res: any) => {
+      console.log(res.getData[0].regions)
+      this.stateList = "-Select State-"
+      this.allstates = res.getData[0].regions
+    })
   }
   handleClick(){
     this.router.navigateByUrl('/registered-dentists');
@@ -264,7 +281,7 @@ console.log("00",this.userData.flag)
       }
     });
      //allSubscriptionDetail Api
-   
+
      this.apiService.getUserAllSubById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.all_subData=(res.getData.all_subscription_details);
@@ -475,7 +492,7 @@ console.log("00",this.userData.flag)
     this.addSuperForm.patchValue({
       license_no: '',
     })
-     
+
 
   }
   flagClick(){
@@ -493,7 +510,7 @@ console.log("00",this.userData.flag)
         console.log("flag not set successfully")
       }
     })
-   
+
   }
   unflagClick(){
     const flagData={
@@ -510,7 +527,7 @@ console.log("00",this.userData.flag)
         console.log("flag not set successfully")
       }
     })
-   
+
   }
   myPlanDetail(){
     this.apiService.getUserPlanById(this.userInfo.id).subscribe((res:any)=>
@@ -524,7 +541,7 @@ console.log("00",this.userData.flag)
     this.subsId= this.curPlanDetail?.subscription_details.subscription_id._id;
     this.preStart_date=this.curPlanDetail?.subscription_details.start_date;
     this.preEnd_date=this.curPlanDetail?.subscription_details.end_date;
-     
+
 
    console.log("***",this.preEnd_date)
        console.log("planDetail",res)
@@ -534,7 +551,7 @@ console.log("00",this.userData.flag)
       }
     })
   }
- 
+
   view(id){
     this.router.navigateByUrl('/view-admin-x-ray/' + id)
   }
@@ -543,12 +560,12 @@ console.log("00",this.userData.flag)
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
     var modal= document.getElementById("launch_ad");
     modal.style.display = "none";
-    
+
     this.payPalConfig = {
         currency: 'USD',
         clientId: 'sb',
         // ! for orders on client side
-  
+
         createOrderOnClient: (data) => < ICreateOrderRequest > {
 
             intent: 'CAPTURE',
@@ -587,7 +604,7 @@ console.log("00",this.userData.flag)
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then(details => {
               console.log('onApprove - you can get full order details inside onApprove: ', details),
-             
+
 
     //my code
     this.apiService.getUserRecordById(this.userID).subscribe((res: any) => {
@@ -596,7 +613,7 @@ console.log("00",this.userData.flag)
          console.log(this.userData, this.userInfo,this.userInfo.token)
 
          if (res.success) {
-          
+
 
              var end_date;
              var now = new Date();
@@ -616,7 +633,7 @@ console.log("00",this.userData.flag)
 
                console.log(end_date, "Date", new Date());
 
-             
+
            }
           }
              const userPlanData = {
@@ -625,7 +642,7 @@ console.log("00",this.userData.flag)
                        pre_start_date:this.preStart_date,
                        pre_end_date:this.preEnd_date
                      }
-            
+
                      this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((res: any) => {
                        console.log(res)
 

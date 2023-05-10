@@ -49,7 +49,7 @@ export class UploadXrayComponent implements OnInit {
   public ngOnInit() {
     // this.n=0;
     // this.n =this.route.snapshot.paramMap.get('n');
-   
+
     this.dtOptions = {
       search: false,
       searching: false,
@@ -68,11 +68,11 @@ export class UploadXrayComponent implements OnInit {
       responsive: true,
       // dom: 'Bfrtip',
       order :[ [0,"date","desc"]
-      
+
     ],
       "columnDefs": [{
       "targets": [1,2,3],
-     
+
       "orderable": false
       }]
     };
@@ -80,12 +80,12 @@ export class UploadXrayComponent implements OnInit {
       params => {
          this.n= +params['n'];
          console.log("nnnnn",this.n)
-        
+
       });
     this.getAllXrayOfUserById()
     //this.evalBtn();
 
-     
+
   }
 /*  evalBtn(){
     let evaluate = document.getElementById("eval");
@@ -209,10 +209,10 @@ let view = document.getElementById("view");
         return;
       }
   */
-     
-     
-    
-    
+
+
+
+
 
 
 
@@ -235,17 +235,17 @@ let view = document.getElementById("view");
     myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:4200');
     var formdata = new FormData();
     formdata.append("image",this.myFiles);
-    
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
     };
-    
+
     fetch("https://admin-scm.blahworks.tech/upload/image", {
       method: 'POST',
-    
+
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
@@ -301,7 +301,7 @@ let view = document.getElementById("view");
       this.showContent = true;
       this.user_eval= this.allData.filter((elem) => {
         return elem.evaluation_status===true;
-        });  
+        });
    console.log(this.user_eval)
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -356,7 +356,7 @@ let view = document.getElementById("view");
         if (res.success) {
           //this.toastr.success(res.message);
           this.xRayData = res.getData;
-          
+
           this.display = false;
           this.hidden = false;
           this.isDtInitialized= false;
