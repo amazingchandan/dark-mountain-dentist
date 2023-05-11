@@ -67,6 +67,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public allcountries: Array<any>;
   public allstates: Array<any>;
   ipAddress = '';
+  public countriesInHere: Array<any> = ['India', 'United States', 'Japan', 'China', 'Netherland']
   //route: any;
   public customOptions: OwlOptions = {
     center: true,
@@ -179,7 +180,19 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.yearlyPlan = false;
     if(this.monthlyPlan){
       setTimeout(() => {
-        this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly");
+        if(this.countriesInHere.includes(this.country)){
+          this.monthlyAllData = this.allData.filter(elem => {
+            if(elem.type === "Monthly" && elem.country == this.country){
+              return elem.type === "Monthly" && elem.country == this.country
+            }
+          })
+        } else {
+          this.monthlyAllData = this.allData.filter(elem => {
+            if(elem.type === "Monthly" && elem.country == 'Others'){
+              return elem.type === "Monthly" && elem.country == "Others"
+            }
+          })
+        }
       }, 1000)
     }
     this.initConfig();
@@ -480,15 +493,51 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
 
   monthly(){
-    this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly")
+    // this.monthlyAllData = this.allData.filter((elem) => {
+    //   if(elem.type === "Monthly" && elem.country == this.country){
+    //     return elem.type === "Monthly" && elem.country == this.country
+    //   } else if(elem.type === "Monthly" && elem.country != this.country) {
+    //     console.log(elem.country, this.country, "DO THIS")
+    //     return elem.type === "Monthly" && elem.country == "Others"
+    //   }
+    // })
+    console.log(this.countriesInHere.includes(this.country))
+    if(this.countriesInHere.includes(this.country)){
+        this.monthlyAllData = this.allData.filter(elem => {
+          if(elem.type === "Monthly" && elem.country == this.country){
+            return elem.type === "Monthly" && elem.country == this.country
+          }
+        })
+    } else {
+      this.monthlyAllData = this.allData.filter(elem => {
+        if(elem.type === "Monthly" && elem.country == 'Others'){
+          return elem.type === "Monthly" && elem.country == "Others"
+        }
+      })
+    }
     this.yearlyAllData = []
     this.monthlyPlan= true;
     this.yearlyPlan = false;
-    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId);
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country);
   }
 
   yearly(){
-    this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly")
+    // this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly" && elem.country == this.country)
+
+    console.log(this.countriesInHere.includes(this.country))
+    if(this.countriesInHere.includes(this.country)){
+      this.yearlyAllData = this.allData.filter(elem => {
+        if(elem.type === "Yearly" && elem.country == this.country){
+          return elem.type === "Yearly" && elem.country == this.country
+        }
+      })
+    } else {
+      this.yearlyAllData = this.allData.filter(elem => {
+        if(elem.type === "Yearly" && elem.country == 'Others'){
+          return elem.type === "Yearly" && elem.country == "Others"
+        }
+      })
+    }
     this.monthlyAllData = [];
     this.monthlyPlan= false;
     this.yearlyPlan = true;
