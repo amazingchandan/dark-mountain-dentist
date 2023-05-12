@@ -97,6 +97,10 @@
   padding: 15px 20px;
   min-height: 150px;
   min-width: 260px;
+  height: calc(100vh - 200px);
+}
+.img-height{
+  height: 100% !important;
 }
 .backdrop-footer {
   padding: 15px 20px;
