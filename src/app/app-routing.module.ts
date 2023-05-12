@@ -29,6 +29,7 @@ import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.compone
 import { UserRolesAuthGuard } from './guard/user-roles-auth.guard';
 import { SubsAuthGuard } from './guard/subs-auth.guard';
 import { UserRoleDentistGuard } from './guard/user-role-dentist.guard';
+import { DashboardProfileCheckGuard } from './guard/dashboard-profile-check.guard';
 const routes: Routes = [
 
   // {
@@ -169,7 +170,7 @@ const routes: Routes = [
     data: {
       title: ''
     },
-    canActivate: [UserAuthGuard, SubscribeAuthGuard, SubsAuthGuard],
+    canActivate: [UserAuthGuard, SubscribeAuthGuard],
     children: [
       {
         path: 'widgets',
@@ -192,6 +193,7 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
+        canActivate: [DashboardProfileCheckGuard],
         // canActivate: [SubsAuthGuard, SubscribeAuthGuard],
         children: [
           {
@@ -211,6 +213,7 @@ const routes: Routes = [
         data: {
           title: 'Dentist Profile'
         },
+        canActivate: [DashboardProfileCheckGuard],
         // canActivate: [UserRolesAuthGuard, UserRoleDentistGuard]
       },
 

@@ -121,10 +121,11 @@ export class DashboardComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    if(!JSON.parse(localStorage.getItem("userInfo")).subscribed){
-      this.router.navigateByUrl['login']
-      console.log("Subs not found!!!!!!!!!")
-    }
+    // console.log(JSON.parse(localStorage.getItem("userInfo")), "SUBS", JSON.parse(localStorage.getItem("userInfo")).subscribed)
+    // if(!JSON.parse(localStorage.getItem("userInfo")).subscribed){
+    //   this.router.navigateByUrl('login')
+    //   console.log("Subs not found!!!!!!!!!")
+    // }
     this.initCharts();
     console.log(this.userInfo)
     let jwt = this.userInfo.token

@@ -120,8 +120,20 @@ export class AppService {
     }
   }
 
+  // roleOfAdmin(){
+
+  // }
+
   roleDentist(){
     if(JSON.parse(localStorage.getItem("userInfo")).role == 'dentist'){
+      return true
+    } else {
+      return false
+    }
+  }
+
+  subsForDashboard(){
+    if(JSON.parse(localStorage.getItem("userInfo")).role == 'admin' && JSON.parse(localStorage.getItem("userInfo")).subscribed || JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed){
       return true
     } else {
       return false

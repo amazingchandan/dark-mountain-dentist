@@ -6,15 +6,15 @@ import { AppService } from '../services/app.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRoleDentistGuard implements CanActivate, CanActivateChild {
+export class DashboardProfileCheckGuard implements CanActivate, CanActivateChild {
 
   constructor(private app: AppService, private router: Router){}
 
   canActivate(){
-    if(this.app.roleDentist()){
+    if(this.app.subsForDashboard()){
       return true;
     }
-    console.log("not authenticated for dentist")
+    console.log("not authenticated for dashboard")
     this.router.navigate(['login']);
     return false;
   }
