@@ -50,8 +50,8 @@ export class AppService {
     this.role = decodedJwtData.role;
     //let isAdmin = decodedJwtData.admin
 
-  //  console.log('jwtData: ' + jwtData)
-   // console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
+    //  console.log('jwtData: ' + jwtData)
+    // console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
     //console.log('decodedJwtData: ' + this.role)
 
 
@@ -75,8 +75,7 @@ export class AppService {
         if (res.getData[0]?.role == 'dentist') {
           let status = res.getData[0]?.subscription_details.status;
           console.log(status)
-          if (status == true) 
-          {
+          if (status == true) {
             this.router.navigateByUrl('/dashboard');
           }
 
@@ -86,7 +85,7 @@ export class AppService {
             this.router.navigateByUrl('/pricing/' + getLoginDetail.userInfo.id);
           }
         }
-        else{
+        else {
           this.router.navigateByUrl('/dashboard');
         }
       })
@@ -113,7 +112,40 @@ export class AppService {
     return (!!localStorage.getItem("token"));
   }
 
-async isSubscribed() {
+  roleAdmin(){
+    if(JSON.parse(localStorage.getItem("userInfo")).role == 'admin'){
+      return true
+    } else {
+      return false
+    }
+  }
+
+  roleDentist(){
+    if(JSON.parse(localStorage.getItem("userInfo")).role == 'dentist'){
+      return true
+    } else {
+      return false
+    }
+  }
+
+  subsAlready(){
+    if(JSON.parse(localStorage.getItem("userInfo")).subscribed){
+      return true
+    } else {
+      return false
+    }
+    // let id = JSON.parse(localStorage.getItem("userInfo")).id
+    // await this.UserService.getUserRecordById(id).subscribe((res: any) => {
+    //   console.log(res)
+    //   if(res.getData[0]?.subscription_details.status){
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // })
+  }
+
+  async isSubscribed() {
 
     let jwt = localStorage.getItem('token');
     let jwtData = jwt.split('.')[1]
@@ -124,11 +156,11 @@ async isSubscribed() {
     if (this.role === 'dentist') {
       console.log("inside if")
       const id = localStorage.getItem('id');
-     const d = await this.UserService.getUserRecordById(id).subscribe((res: any) => {
+      const d = await this.UserService.getUserRecordById(id).subscribe((res: any) => {
         console.log(res)
         if (res.success) {
           this.userData = res.getData;
-          console.log("iff",!!this.userData[0]?.subscription_details.status,this.userData[0]?.subscription_details.status)
+          console.log("iff", !!this.userData[0]?.subscription_details.status, this.userData[0]?.subscription_details.status)
           return (!!this.userData[0]?.subscription_details.status);
         }
       })

@@ -15,12 +15,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public isAuthLoading = false;
+  public statusSubs: any;
   constructor(
     private renderer: Renderer2,
     private toastr: ToastrService,
     private appService: AppService,
     private apiService: UserService,
-    public router : Router,
+    public router: Router,
   ) { }
   regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   ngOnInit() {
@@ -30,19 +31,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: new FormControl(null, Validators.required),
     });
     // this.appService.currentApprovalStageMessage.subscribe(msg => this. = msg);
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
       this.router.navigateByUrl("/dashboard")
     }
-   
+
   }
 
-  onSomeAction(event: any){
-    if(event.key == "Enter"){
+  onSomeAction(event: any) {
+    if (event.key == "Enter") {
       this.login()
     }
   }
 
-   login() {
+  login() {
     console.log(this.loginForm.value.email)
     if (this.loginForm.valid) {
 
@@ -62,41 +63,41 @@ export class LoginComponent implements OnInit, OnDestroy {
         email: this.loginForm.get("email").value.toLowerCase(),
         password: this.loginForm.get("password").value
       };
-     // this.appService.updateApprovalMessage(loginData)
-       this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
+      // this.appService.updateApprovalMessage(loginData)
+      this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
         console.log(result);
-       // let id= result.userInfo.id;
+        // let id= result.userInfo.id;
         if (result.success) {
-          let id= result.userInfo.id;
+          let id = result.userInfo.id;
           this.apiService.getUserRecordById(id).subscribe((res: any) => {
-            console.log(res,"*****");
-             if(res.getData[0]?.role=='dentist'){
-            let status = res.getData[0]?.subscription_details.status;
-             console.log(status)
-               if(status==true){
+            console.log(res, "*****");
+            if (res.getData[0]?.role == 'dentist') {
+              let status = res.getData[0]?.subscription_details.status;
+              this.statusSubs = res.getData[0]?.subscription_details.status;
+              console.log(status)
+              if (status == true) {
                 this.appService.login(result);
-               }
-               else
-               {
+              }
+              else {
                 localStorage.setItem('userInfo', JSON.stringify(result['userInfo']));
                 localStorage.setItem('id', result.userInfo.id);
 
-                localStorage.setItem('token',result.userInfo.token);
+                localStorage.setItem('token', result.userInfo.token);
 
-                this.router.navigateByUrl("/pricing/"+result.userInfo.id);
+                this.router.navigateByUrl("/pricing/" + result.userInfo.id);
 
                 // [routerLink]="'/dentist-profile/'+user._id"
-               }
+              }
 
-          }
-          else{
-            this.appService.login(result);
-          }
+            }
+            else {
+              this.appService.login(result);
+            }
 
           })
 
           //this.toastr.success(result.message);
-        //
+          //
         }
 
         else {

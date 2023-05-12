@@ -3,6 +3,7 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { Router } from '@angular/router';
 
 interface IUser {
   name: string;
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   diffDays: any;
   diiTime: any;
   constructor(private chartsData: DashboardChartsData,
-    private userService : UserService) {
+    private userService : UserService, private router: Router) {
   }
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fName:string;
@@ -120,6 +121,10 @@ export class DashboardComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    if(!JSON.parse(localStorage.getItem("userInfo")).subscribed){
+      this.router.navigateByUrl['login']
+      console.log("Subs not found!!!!!!!!!")
+    }
     this.initCharts();
     console.log(this.userInfo)
     let jwt = this.userInfo.token

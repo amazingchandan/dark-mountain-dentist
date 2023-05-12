@@ -12,7 +12,7 @@ export class SubscribeAuthGuard implements CanActivate {
   constructor(private app : AppService,
     public router :Router){}
 
-  
+
 
 
   canActivate(){
@@ -24,7 +24,7 @@ export class SubscribeAuthGuard implements CanActivate {
 
     return false;
   }
-  
-    
-  
+
+
+
 }

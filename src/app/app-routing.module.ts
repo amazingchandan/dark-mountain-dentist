@@ -18,14 +18,17 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgetPasswordComponent } from './views/pages/forget-password/forget-password.component';
 import { SetNewPasswordComponent } from './views/pages/set-new-password/set-new-password.component';
 import { UploadXrayComponent } from './views/userpages/upload-xray/upload-xray.component';
-import {UserAuthGuard} from './guard/user-auth.guard';
-import {SubscribeAuthGuard} from './guard/subscribe-auth.guard'
+import { UserAuthGuard } from './guard/user-auth.guard';
+import { SubscribeAuthGuard } from './guard/subscribe-auth.guard'
 import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-xray.component';
 import { TestComponent } from './views/pages/test/test.component';
 import { FinancialComponent } from './views/pages/financial/financial.component';
 import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
 import { ViewAdminXrayComponent } from './views/pages/view-admin-xray/view-admin-xray.component';
 import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.component';
+import { UserRolesAuthGuard } from './guard/user-roles-auth.guard';
+import { SubsAuthGuard } from './guard/subs-auth.guard';
+import { UserRoleDentistGuard } from './guard/user-role-dentist.guard';
 const routes: Routes = [
 
   // {
@@ -137,13 +140,13 @@ const routes: Routes = [
       title: "Test"
     }
   },
- /* {
-    path: 'dashboard/login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },*/
+  /* {
+     path: 'dashboard/login',
+     component: LoginComponent,
+     data: {
+       title: 'Login Page'
+     }
+   },*/
 
 
   {
@@ -166,18 +169,18 @@ const routes: Routes = [
     data: {
       title: ''
     },
-      canActivate:[UserAuthGuard,SubscribeAuthGuard],
+    canActivate: [UserAuthGuard, SubscribeAuthGuard, SubsAuthGuard],
     children: [
       {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
       },
-    /*  {
-        path: '',
-        loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      },*/
+      /*  {
+          path: '',
+          loadChildren: () =>
+            import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+        },*/
       {
         path: 'pages',
         loadChildren: () =>
@@ -189,7 +192,8 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
-        children:[
+        // canActivate: [SubsAuthGuard, SubscribeAuthGuard],
+        children: [
           {
             path: '',
             loadChildren: () =>
@@ -206,7 +210,8 @@ const routes: Routes = [
         component: DentistProfileComponent,
         data: {
           title: 'Dentist Profile'
-        }
+        },
+        // canActivate: [UserRolesAuthGuard, UserRoleDentistGuard]
       },
 
       {
@@ -214,28 +219,32 @@ const routes: Routes = [
         component: FinancialComponent,
         data: {
           title: 'Financial'
-        }
+        },
+        canActivate: [UserRolesAuthGuard]
       },
       {
         path: 'subscription-list',
         component: SubscriptionListComponent,
         data: {
           title: 'Subscription Plans'
-        }
+        },
+        canActivate: [UserRolesAuthGuard]
       },
       {
         path: 'uploaded-xray/:n',
         component: UploadedXraysComponent,
         data: {
           title: 'Uploaded X-Rays'
-        }
+        },
+        canActivate: [UserRolesAuthGuard]
       },
       {
         path: 'mark-xray/:xray_id',
         component: MarkXrayComponent,
         data: {
           title: 'Mark X-Ray'
-        }
+        },
+        canActivate: [UserRolesAuthGuard]
       },
       {
         path: 'view-admin-x-ray/:xray_id',
@@ -243,14 +252,15 @@ const routes: Routes = [
         data: {
           title: 'View X-Ray'
         },
-      //  canActivate :[UserAuthGuard]
+        canActivate: [UserAuthGuard, UserRolesAuthGuard]
       },
       {
         path: 'upload-xray/:n',
         component: UploadXrayComponent,
         data: {
           title: 'Upload X-Ray'
-        }
+        },
+        canActivate: [UserRoleDentistGuard, SubsAuthGuard]
       },
       {
         path: 'registered-dentists',
@@ -258,7 +268,7 @@ const routes: Routes = [
         data: {
           title: 'Registered Dentists'
         },
-      //  canActivate :[UserAuthGuard]
+        canActivate: [UserAuthGuard, UserRolesAuthGuard]
       },
       {
         path: 'evaluate-x-ray/:xray_id',
@@ -266,7 +276,8 @@ const routes: Routes = [
         data: {
           title: 'Evaluate X-Ray'
         },
-      //  canActivate :[UserAuthGuard]
+        canActivate: [UserAuthGuard, UserRoleDentistGuard, SubsAuthGuard]
+        // canActivate: [UserRoleDentistGuard]
       },
       {
         path: 'view-x-ray/:xray_id',
@@ -274,7 +285,7 @@ const routes: Routes = [
         data: {
           title: 'View X-Ray'
         },
-      //  canActivate :[UserAuthGuard]
+        canActivate: [UserAuthGuard, UserRoleDentistGuard, SubsAuthGuard]
       },
       {
         path: 'renew-sub/:dentist_id',
@@ -282,7 +293,7 @@ const routes: Routes = [
         data: {
           title: 'Renew Sub'
         },
-      //  canActivate :[UserAuthGuard]
+        canActivate: [UserAuthGuard, UserRoleDentistGuard, SubsAuthGuard]
       },
 
 

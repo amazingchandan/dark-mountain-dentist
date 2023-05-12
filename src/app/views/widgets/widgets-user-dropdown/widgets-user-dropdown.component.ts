@@ -77,7 +77,7 @@ export class WidgetsUserDropdownComponent {
     {
       if(res.success){
        this.planDetail=res.getData;
-       console.log("planDetail", this.planDetail, this.planDetail.subscription_details.subscription_id.plan_name)
+       console.log("planDetail", this.planDetail, this.planDetail?.subscription_details?.subscription_id?.plan_name)
       }
     })
   }

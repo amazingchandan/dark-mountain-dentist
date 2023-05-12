@@ -53,7 +53,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   showSuccess: any;
   showCancel: any;
   showError: any;
-  public payPalConfig ? : IPayPalConfig;
+  public payPalConfig?: IPayPalConfig;
   public subsId: any = 0;
   public subsType: any;
   public subsPrice: any;
@@ -111,7 +111,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     name: 'Dark Mountain',
     description: 'Dark Mountain Subscription payment',
     order_id: 'ORDERID_FROM_BACKEND',
-   // image: 'https://digitalpehchan.in/assets/images/DP%20LOGO%20BW.png',
+    // image: 'https://digitalpehchan.in/assets/images/DP%20LOGO%20BW.png',
     handler: function (response) {
       console.log('this is the response ', response);
     },
@@ -124,8 +124,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // http_post: this.userService
   };
   toastr: any;
-  country: any="";
-  readOnly: boolean=false;
+  country: any = "";
+  readOnly: boolean = false;
   userSubscription: any;
   buyNow: boolean = false;
 
@@ -138,8 +138,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
-    private http:HttpClient) {
-      this.registerForm = this.formBuilder.group({})
+    private http: HttpClient) {
+    this.registerForm = this.formBuilder.group({})
     this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
 
@@ -176,22 +176,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
       this.lname = res.getData[0].last_name;
       this.mail = res.getData[0].email;
     })
-    this.monthlyPlan= true;
+    this.monthlyPlan = true;
     this.yearlyPlan = false;
-    if(this.monthlyPlan){
+    if (this.monthlyPlan) {
       setTimeout(() => {
-        if(this.countriesInHere.includes(this.country)){
-          this.monthlyAllData = this.allData.filter(elem => {
-            if(elem.type === "Monthly" && elem.country == this.country){
-              return elem.type === "Monthly" && elem.country == this.country
-            }
-          })
+        if (this.countriesInHere.includes(this.country)) {
+          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
         } else {
-          this.monthlyAllData = this.allData.filter(elem => {
-            if(elem.type === "Monthly" && elem.country == 'Others'){
-              return elem.type === "Monthly" && elem.country == "Others"
-            }
-          })
+          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
         }
       }, 1000)
     }
@@ -209,7 +201,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       // password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       // repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       age: new FormControl(null, Validators.required),
-      license_no : new FormControl(null, Validators.required),
+      license_no: new FormControl(null, Validators.required),
     });
 
     this.registerForm = this.formBuilder.group({
@@ -224,7 +216,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
 
-      license_no : ['', [Validators.required]],
+      license_no: ['', [Validators.required]],
     });
     console.log(this.userInfo);
     this.editUser(this.userInfo.id)
@@ -234,21 +226,20 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.allCountryList();
     this.countryList = "-Select Country-"
   }
-  stateByCountry(e: any){
+  stateByCountry(e: any) {
     console.log(e.target.value)
-    this.userService.getStateByCountries({name: e.target.value}).subscribe((res: any) => {
+    this.userService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
       console.log(res.getData[0].regions)
       this.stateList = "-Select State-"
       this.allstates = res.getData[0].regions
     })
   }
-  getIPAddress()
-  {
-    this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res:any)=>{
+  getIPAddress() {
+    this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res: any) => {
       const data = res;
-      this.ipAddress= data.IPv4
-      this.country =data.country;
-      console.log(this.country,"ipAddress",data, this.yearlyAllData)
+      this.ipAddress = data.IPv4
+      this.country = data.country;
+      console.log(this.country, "ipAddress", data, this.yearlyAllData)
     });
   }
   ngAfterViewInit(): void {
@@ -267,177 +258,176 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
   private initConfig(): void {
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
-    var modal= document.getElementById("launch_ad");
+    var modal = document.getElementById("launch_ad");
     modal.style.display = "none";
 
     this.payPalConfig = {
-        currency: 'USD',
-        clientId: 'sb',
-        // ! for orders on client side
+      currency: 'USD',
+      clientId: 'sb',
+      // ! for orders on client side
 
-        createOrderOnClient: (data) => < ICreateOrderRequest > {
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
 
-            intent: 'CAPTURE',
-            purchase_units: [{
-              amount: {
-                  currency_code: 'USD',
-                  value: `${this.subsPrice}`,
-                  breakdown: {
-                      item_total: {
-                          currency_code: 'USD',
-                          value: `${this.subsPrice}`
-                      }
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'USD',
+            value: `${this.subsPrice}`,
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: `${this.subsPrice}`
+              }
+            }
+          },
+          items: [{
+            name: 'Dark Mountain',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'USD',
+              value: `${this.subsPrice}`,
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true',
+      },
+      style: {
+        layout: 'horizontal',
+        tagline: false,
+        shape: 'pill',
+        color: 'white',
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details),
+
+
+            //my code
+            this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
+              console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+              this.userData = res.getData;
+              console.log(this.userData, this.userInfo, this.userInfo.token)
+
+              if (res.success) {
+                if (this.userData[0].subscription_details.status == true) {
+                  Swal.fire({
+                    text: "You have already subscribed",
+                    icon: 'error',
+                  });
+                  return false;
+                }
+
+                else {
+
+                  var end_date;
+                  var now = new Date();
+                  console.log(this.subsType)
+                  if (this.subsType == "Monthly") {
+
+
+                    end_date = new Date(now.setMonth(now.getMonth() + 1));
+                    end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+                    console.log(end_date, "Date", new Date());
+
                   }
-              },
-              items: [{
-                  name: 'Dark Mountain',
-                  quantity: '1',
-                  category: 'DIGITAL_GOODS',
-                  unit_amount: {
-                      currency_code: 'USD',
-                      value: `${this.subsPrice}`,
-                  },
-              }]
-            }]
-        },
-        advanced: {
-            commit: 'true',
-        },
-        style: {
-          layout: 'horizontal',
-          tagline: false,
-          shape: 'pill',
-          color: 'white',
-        },
-        onApprove: (data, actions) => {
-          console.log('onApprove - transaction was approved, but not authorized', data, actions);
-          actions.order.get().then(details => {
-              console.log('onApprove - you can get full order details inside onApprove: ', details),
+                  else if (this.subsType === "Yearly") {
 
 
-    //my code
-    this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
-         console.log(res, "resssssssssssssssssssssssssssssssssssssss")
-         this.userData = res.getData;
-         console.log(this.userData, this.userInfo,this.userInfo.token)
+                    end_date = new Date(now.setMonth(now.getMonth() + 12));
 
-         if (res.success) {
-           if (this.userData[0].subscription_details.status == true) {
-             Swal.fire({
-               text: "You have already subscribed",
-               icon: 'error',
-             });
-             return false;
-           }
+                    console.log(end_date, "Date", new Date());
 
-           else {
+                  }
+                }
+              }
+              this.userPlanData = {
+                sub_id: this.subsId,
+                //
+                type: this.subsType,
+              }
+              this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+                console.log(res)
 
-             var end_date;
-             var now = new Date();
-             console.log( this.subsType)
-             if (this.subsType == "Monthly") {
+                if (res.success) {
+                  //this.toastr.success(res.message);
+                  this.IsmodelShow = false
+                  console.log(this.IsmodelShow);
+                  ($("#myModal") as any).modal("hide");
+                  //  this.handleClick();
+                  // <HTMLElement>document.getElementById('myModal').modal("hide")
 
+                  Swal.fire({
+                    text: "You have successfully subscribed",
+                    icon: 'success',
+                  });
+                  /*var modal= document.getElementById("launch_ad");
+                   modal.style.display = "none";*/
+                  if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                    console.log("iff")
 
-               end_date = new Date(now.setMonth(now.getMonth() + 1));
-               end_date = new Date(now.setMinutes(now.getMinutes() + 5));
-               console.log(end_date, "Date", new Date());
+                    this.router.navigateByUrl("/dashboard")
+                  }
+                  else {
+                    console.log("elseee")
+                    this.router.navigateByUrl("/login")
+                  }
+                }
+              })
 
-             }
-             else if (this.subsType === "Yearly") {
+            })
+        });
+      },
+      // ! for orders on server side
+      // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
+      //         .then((res) => res.json())
+      //         .then((order) => order.orderID),
+      //     onApprove: (data, actions) => {
+      //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
+      //         actions.order.get().then(details => {
+      //             console.log('onApprove - you can get full order details inside onApprove: ', details);
+      //         });
 
-
-               end_date = new Date(now.setMonth(now.getMonth() + 12));
-
-               console.log(end_date, "Date", new Date());
-
-             }
-           }
-          }
-             this.userPlanData = {
-                       sub_id: this.subsId,
-                      //
-                      type:this.subsType,
-                     }
-                     this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
-                       console.log(res)
-
-                       if (res.success) {
-                         //this.toastr.success(res.message);
-                         this.IsmodelShow = false
-                         console.log(this.IsmodelShow);
-                         ($("#myModal")as any).modal("hide");
-                        //  this.handleClick();
-                        // <HTMLElement>document.getElementById('myModal').modal("hide")
-
-                         Swal.fire({
-                           text: "You have successfully subscribed",
-                           icon: 'success',
-                         });
-                        /*var modal= document.getElementById("launch_ad");
-                         modal.style.display = "none";*/
-                         if(this.userInfo.token!=null && this.userInfo.token!=undefined&& this.userInfo.token!='' )
-                         {
-                          console.log("iff")
-
-                           this.router.navigateByUrl("/dashboard")
-                       }
-                       else{
-                         console.log("elseee")
-                         this.router.navigateByUrl("/login")
-                       }
-                        }
-                        })
-
-                      })
-          });
-        },
-        // ! for orders on server side
-        // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
-        //         .then((res) => res.json())
-        //         .then((order) => order.orderID),
-        //     onApprove: (data, actions) => {
-        //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        //         actions.order.get().then(details => {
-        //             console.log('onApprove - you can get full order details inside onApprove: ', details);
-        //         });
-
-        // },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            this.showSuccess = true;
-        },
-        onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
-            // this.checked = false;
-            this.showCancel = true;
-        },
-        onError: err => {
-            console.log('OnError', err);
-            this.showError = true;
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-            this.resetStatus();
-        }
+      // },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        this.showSuccess = true;
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+        // this.checked = false;
+        this.showCancel = true;
+      },
+      onError: err => {
+        console.log('OnError', err);
+        this.showError = true;
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+        this.resetStatus();
+      }
 
     };
   }
-  allCountryList(){
+  allCountryList() {
     this.userService.getCountries().subscribe((res: any) => {
       console.log(res.getData)
       this.allcountries = res.getData
     })
   }
-  checkoutBtn(){
+  checkoutBtn() {
     this.IsmodelShow = true;
     console.log(this.IsmodelShow);
   }
-  resetStatus(){
+  resetStatus() {
     document.getElementById("launch_ad")?.click();
     console.log("THIS IS RESET FOR PAYPAL");
     console.log(this.subsPrice.toString(), this.subsTitle, this.subsType);
   }
-  handleClose(){
+  handleClose() {
     this.checked = false;
   }
   onlyNumberKey(evt: KeyboardEvent) {
@@ -445,7 +435,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
   }
-  checking(event){
+  checking(event) {
     this.checked = event.target.checked
     console.log(event.target.checked, this.checked);
   }
@@ -483,7 +473,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
         this.allData = res.getData
       }
       else {
-         console.log("plan not fetched successfully")
+        console.log("plan not fetched successfully")
 
       }
     })
@@ -492,7 +482,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
 
 
-  monthly(){
+  monthly() {
     // this.monthlyAllData = this.allData.filter((elem) => {
     //   if(elem.type === "Monthly" && elem.country == this.country){
     //     return elem.type === "Monthly" && elem.country == this.country
@@ -502,44 +492,28 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //   }
     // })
     console.log(this.countriesInHere.includes(this.country))
-    if(this.countriesInHere.includes(this.country)){
-        this.monthlyAllData = this.allData.filter(elem => {
-          if(elem.type === "Monthly" && elem.country == this.country){
-            return elem.type === "Monthly" && elem.country == this.country
-          }
-        })
+    if (this.countriesInHere.includes(this.country)) {
+      this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
     } else {
-      this.monthlyAllData = this.allData.filter(elem => {
-        if(elem.type === "Monthly" && elem.country == 'Others'){
-          return elem.type === "Monthly" && elem.country == "Others"
-        }
-      })
+      this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
     }
     this.yearlyAllData = []
-    this.monthlyPlan= true;
+    this.monthlyPlan = true;
     this.yearlyPlan = false;
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country);
   }
 
-  yearly(){
+  yearly() {
     // this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly" && elem.country == this.country)
 
     console.log(this.countriesInHere.includes(this.country))
-    if(this.countriesInHere.includes(this.country)){
-      this.yearlyAllData = this.allData.filter(elem => {
-        if(elem.type === "Yearly" && elem.country == this.country){
-          return elem.type === "Yearly" && elem.country == this.country
-        }
-      })
+    if (this.countriesInHere.includes(this.country)) {
+      this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly" && elem.country == this.country)
     } else {
-      this.yearlyAllData = this.allData.filter(elem => {
-        if(elem.type === "Yearly" && elem.country == 'Others'){
-          return elem.type === "Yearly" && elem.country == "Others"
-        }
-      })
+      this.yearlyAllData = this.allData.filter(elem => elem.type === "Yearly" && elem.country == "Others")
     }
     this.monthlyAllData = [];
-    this.monthlyPlan= false;
+    this.monthlyPlan = false;
     this.yearlyPlan = true;
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
@@ -550,7 +524,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  getSubscription(id, type,pricing_amount, title) {
+  getSubscription(id, type, pricing_amount, title) {
     console.log(id, type, pricing_amount);
     this.subsId = id;
     this.subsType = type;
@@ -774,15 +748,15 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // })
 
   }
-  buyNowFunc(){
-    this.buyNow=true;
+  buyNowFunc() {
+    this.buyNow = true;
   }
 
-  editUser(id: any){
+  editUser(id: any) {
     this.userService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res);
-      this.userSubscription= res.getData[0].all_subscription_details;
-        console.log(this.userSubscription,"length")
+      this.userSubscription = res.getData[0].all_subscription_details;
+      console.log(this.userSubscription, "length")
       if (res.success) {
         this.registerForm.patchValue({
           first_name: res.getData[0].first_name,
@@ -828,7 +802,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
   }
 
-  handleClick(){
+  handleClick() {
     // if(!this.checked){
     //   this.displayStyle = "none"
     //   return Swal.fire({
@@ -855,8 +829,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
             });
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
-            this.readOnly= true;
-            document.getElementById("country").style.pointerEvents= 'none';
+            this.readOnly = true;
+            document.getElementById("country").style.pointerEvents = 'none';
 
             //  this.router.navigateByUrl('/registered-dentists');
 
@@ -871,7 +845,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
         });
     }
   }
-  payView(){
+  payView() {
     this.payData = {
       price: this.subsPrice
     }
@@ -883,7 +857,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   }
 
 
-  payBtn(){
+  payBtn() {
     (<HTMLElement>document.getElementsByClassName('paypal-button paypal-button-number-0')[0]).click()
     console.log("paypal")
   }
