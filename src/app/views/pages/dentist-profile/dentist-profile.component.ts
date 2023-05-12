@@ -262,10 +262,11 @@ console.log("00",this.userData.flag)
           city: res.getData[0].city,
         });
         this.addSuperForm.patchValue({
-          state: res.getData[0].state,
-        });
-        this.addSuperForm.patchValue({
           country: res.getData[0].country,
+        });
+        // this.allstates = res.getData[0].state;
+        this.addSuperForm.patchValue({
+          state: res.getData[0].state,
         });
         this.addSuperForm.patchValue({
           pincode: res.getData[0].pincode,
@@ -279,6 +280,7 @@ console.log("00",this.userData.flag)
 
 
       }
+      console.log(this.addSuperForm.value)
     });
      //allSubscriptionDetail Api
 
@@ -287,7 +289,7 @@ console.log("00",this.userData.flag)
       this.all_subData=(res.getData.all_subscription_details);
      this.showContent=true
       if (this.isDtInitialized) {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement?.dtInstance?.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
          this.dtTrigger.next(undefined);
         });
@@ -304,7 +306,7 @@ console.log("00",this.userData.flag)
       this.xrayData = res.getData;
       this.showContent=true
       if (this.isDtInitialized) {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        this.dtElement?.dtInstance?.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
          this.dtTrigger.next(undefined);
         });

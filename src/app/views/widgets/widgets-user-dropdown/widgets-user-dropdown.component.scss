@@ -1,20 +1,24 @@
 .color {
     color: #00d957;
   }
-  
+
   .rotate svg {
     transform: rotate(45deg);
   }
-  
+
   .myclass div {
     display: flex !important;
-    background-color: aqua;
+    // background-color: aqua;
   }
   .mtop{
     margin-top:1.7rem
   }
   .image{
-    height: 66px !important;
+    height: 60px !important;
+    opacity: 0.4;
+    // position: absolute;
+    // right: 5%;
+    // top: 31%;
   }
   .my{
     cursor: pointer;
@@ -43,4 +47,19 @@
   }
   .pass-small{
     margin-left: 12rem;
+  }
+  .title-pos {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    background-color: rgba(0,0,0,.1);
+  }
+
+  .min-h {
+    height: 145px;
+    cursor: pointer;
+  }
+  .div-height {
+    height: 75px;
   }

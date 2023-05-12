@@ -91,8 +91,8 @@
               </thead>
               <tbody *ngIf="allData?.length != 0 &&n==0">
                 <tr *ngFor="let data of allData; let i = index">
-                  <td>File name here</td>
-                  <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data?.xray_image?.path.split('/')[1]}}</td>
+                  <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
@@ -139,11 +139,13 @@
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
+                  <td colspan="0" class="no-data-available p-0"></td>
                   <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
                 </tr>
               </tbody>
               <tbody *ngIf="user_eval?.length != 0 && n==1">
                 <tr *ngFor="let data of this.user_eval; let i = index">
+                  <td>{{data?.xray_image?.path.split('/')[1]}}</td>
                   <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
                   <!-- <td>{{data.city | titlecase}}</td> -->
@@ -188,6 +190,7 @@
                   <td colspan="8" class="no-data-available text-center">
                     No data
                   </td>
+                  <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
