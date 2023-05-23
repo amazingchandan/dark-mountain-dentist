@@ -68,6 +68,7 @@ export class EvaluateXrayComponent {
       console.log(img)
       this.file = img.file
       this.idUser = img.id
+      localStorage.setItem("file", img);
     })
 
     // this.getXray("646331c17e506d72d6a46de6");
@@ -113,15 +114,22 @@ export class EvaluateXrayComponent {
   displayImg() {
     console.log(this.file, this.idUser, this.file?.name, this.file?.type)
     if (this.file) {
+      // console.log(JSON.parse(localStorage.getItem('file')))
       var reader = new FileReader();
+      // console.log(JSON.parse(localStorage.getItem('file')));
       reader.readAsDataURL(this.file);
       reader.onload = (_event) => {
         this.msg = "";
         this.myThumbnail = reader.result;
         this.myFullresImage = reader.result;
+        localStorage.setItem('filepath', JSON.stringify(reader.result))
       }
-      var formdata = new FormData();
+      let formdata = new FormData();
       formdata.append('file', this.file)
+      // setTimeout(() => {
+      //   console.log(formdata)
+      //   localStorage.setItem('file', JSON.stringify(formdata));
+      // }, 1000)
       this.userService.generateAIData(formdata).subscribe((res: any) => {
         console.log(res, res.final_image_path.split('/')[2].slice(17))
         this.initAIResp = res;
@@ -129,23 +137,46 @@ export class EvaluateXrayComponent {
         this.forTesting = false
       })
     } else {
-      this.pageRefresh = false;
-      console.log(this.pageRefresh, "REFRESHED")
-      Swal.fire({
-        title: 'Page Refreshed',
-        text: "Your progress is lost, please try again.",
-        icon: 'warning',
-        showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        // cancelButtonColor: '#d33',
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigateByUrl('/dashboard');
-        } else {
-          this.router.navigateByUrl('/dashboard');
-        }
-      });
+      this.appService.updateGetUrl(true);
+      console.log(JSON.parse(localStorage.getItem('filepath')));
+      this.myThumbnail = JSON.parse(localStorage.getItem('filepath'));
+      this.myFullresImage = JSON.parse(localStorage.getItem('filepath'));
+      this.createLabelStudio3();
+      this.forTesting = false;
+      // console.log(localStorage.getItem('file'));
+      // this.file = localStorage.getItem('file');
+      // var reader = new FileReader();
+      // reader.readAsDataURL(this.file);
+      // reader.onload = (_event) => {
+      //   this.msg = "";
+      //   this.myThumbnail = reader.result;
+      //   this.myFullresImage = reader.result;
+      // }
+      // var formdata = new FormData();
+      // formdata.append('file', this.file)
+      // this.userService.generateAIData(formdata).subscribe((res: any) => {
+      //   console.log(res, res.final_image_path.split('/')[2].slice(17))
+      //   this.initAIResp = res;
+      //   this.createLabelStudio2()
+      //   this.forTesting = false
+      // })
+      // this.pageRefresh = false;
+      // console.log(this.pageRefresh, "REFRESHED")
+      // Swal.fire({
+      //   title: 'Page Refreshed',
+      //   text: "Your progress is lost, please try again.",
+      //   icon: 'warning',
+      //   showCancelButton: false,
+      //   confirmButtonColor: '#3085d6',
+      //   // cancelButtonColor: '#d33',
+      //   confirmButtonText: 'Ok',
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     this.router.navigateByUrl('/dashboard');
+      //   } else {
+      //     this.router.navigateByUrl('/dashboard');
+      //   }
+      // });
     }
     // setTimeout(() => {
     //   console.log(this.myThumbnail)
@@ -173,6 +204,7 @@ export class EvaluateXrayComponent {
   createLabelStudio2() {
     console.log(true, "THIS IS THIRD TRUE");
     console.log(this.initAIResp)
+    localStorage.setItem('labels', JSON.stringify(this.initAIResp))
     this.forTesting = true;
     let boxes = []
     for (let coords of this.initAIResp.boxes) {
@@ -238,7 +270,7 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 192px;
+      <View style="flex: 10%;position: absolute;right: 152px;
       margin-top: 56px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Dentist Correction" background="green" />
@@ -306,6 +338,147 @@ export class EvaluateXrayComponent {
 
     });
 
+    console.log(this.labelStudio)
+    return this.labelStudio;
+  }
+
+  createLabelStudio3() {
+    console.log(true, "THIS IS FOURTH TRUE");
+    this.initAIResp = JSON.parse(localStorage.getItem('labels'));
+    console.log(this.initAIResp)
+    // localStorage.setItem('labels', JSON.stringify(this.initAIResp))
+    this.forTesting = false;
+    let boxes = []
+    for (let coords of this.initAIResp.boxes) {
+      boxes.push({
+        coordinates: coords
+      })
+    }
+    this.initAIResp.boxes = boxes;
+    const resultArr = this.initAIResp.boxes.map((element: any, index: any) => {
+      let obj = {
+        "from_name": "label",
+        "id": index,
+        "type": "rectanglelabels",
+        "source": "$image",
+
+        // "original_width":this.userMark[1]?.original_height,
+        "original_width": "",
+        "original_height": "",
+        "image_rotation": 0,
+        "to_name": "img",
+
+        "fillColor": "#00ff00",
+        "background": "red",
+        "value":
+        {
+          "x": element.coordinates[0] * 100.00 / 480,
+          "y": element.coordinates[1] * 100.00 / 480,
+          "width": (element.coordinates[2] - element.coordinates[0]) * 100.0 / 480,
+          "height": (element.coordinates[3] - element.coordinates[1]) * 100.0 / 480,
+          "rotation": 0,
+          "rectanglelabels": [
+            this.initAIResp.labels[index].toString()
+          ]
+        }
+      }
+
+      console.log(obj)
+      return obj;
+      // return element.original_width
+    })
+    this.labelStudio = new LabelStudio('label-studio', {
+      config: `
+      <View style="display:row; flex-direction: column;">
+      <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
+      <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
+      <Style> .Hint_main__1Svrz { display:none; }</Style>
+      <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
+        top: 0px; padding: 10px 14px; border-radius:4px}</Style>
+     <Style> .App_menu__X-A5N{visibility:hidden}
+     .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
+     .Entity_row__3Ii1C {display:none}</Style>
+     <Style> .ls-common {height:354px !important}</Style>
+      <View style="flex: 90%;
+     margin-top: -14px; width:566px">
+     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+     <Image name="img" value="$image" width="100%" height="100%"></Image>
+     <Style> canvas { width:566px ; height:354px !important;  }</Style>
+     </View>
+      <View style="float:right;visibility:hidden">
+      <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
+      <Label value="1" background="#FF3131" />
+      <Label value="2" background="#FFFF00" />
+      </RectangleLabels>
+
+      </View>
+      <View style="flex: 10%;position: absolute;right: 152px;
+      margin-top: 56px;">
+      <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
+      <Label value="Dentist Correction" background="green" />
+      </RectangleLabels>
+      </View>
+      </View>
+      `,
+
+      interfaces: [
+        // "panel",
+        "update",
+        "submit",
+        "controls",
+        "side-column",
+        // "annotations:menu",
+        // "annotations:add-new",
+        // "annotations:delete",
+        //"predictions:menu",*/
+      ],
+
+      /* user: {
+         pk: 1,
+         firstName: "James",
+         lastName: "Dean"
+       },*/
+
+      task: {
+        annotations: [{
+          result: resultArr
+        }],
+        predictions: [],
+        // id: 1,
+        data: {
+          image: this.myThumbnail
+        }
+
+      },
+
+      onLabelStudioLoad: function (LS: { annotationStore: { addAnnotation: (arg0: { userGenerate: boolean; }) => any; selectAnnotation: (arg0: any) => void; }; }) {
+        var c = LS.annotationStore.addAnnotation({
+          userGenerate: true
+        });
+        LS.annotationStore.selectAnnotation(c.id);
+      },
+      onSubmitAnnotation: async function (LS, annotation) {
+        console.log(annotation.serializeAnnotation(), "original");
+
+        return annotation.serializeAnnotation();
+      },
+      onDeleteAnnotation: async function (LS, annotation) {
+        console.log("delete btn")
+        console.log(annotation.serializeAnnotation())
+      },
+
+      onUpdateAnnotation: async function (LS, annotation) {
+        this.marker = annotation.serializeAnnotation().map(({ id, original_height, original_width,
+          value }) => ({ id, original_height, original_width, value }))
+        console.log(this.marker[0].id)
+        // localStorage.setItem('markInfo', ['markInfo']);
+        localStorage.setItem('markInfo', JSON.stringify(this.marker))
+        console.log(annotation.serializeAnnotation());
+      }
+
+
+    });
+    this.forTesting = false;
     console.log(this.labelStudio)
     return this.labelStudio;
   }
@@ -847,7 +1020,10 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     });
   }
   refresh() {
-    window.location.reload();
+    this.forTesting = false;
+    // window.location.reload();
+    console.log(JSON.parse(localStorage.getItem('labels')))
+    this.createLabelStudio3()
   }
 }
 

@@ -956,10 +956,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
         .subscribe((res: any) => {
           if (res.success) {
             //this.toastr.success(res.message);
-            Swal.fire({
-              text: res.message,
-              icon: 'success',
-            });
+            // Swal.fire({
+            //   text: res.message,
+            //   icon: 'success',
+            // });
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
             this.readOnly = true;
