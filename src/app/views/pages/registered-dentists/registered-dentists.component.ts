@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registered-dentists',
@@ -12,7 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisteredDentistsComponent {
   //dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
- 
+  title = 'Dark Mountain - Dentist List';
+
  public allData: any;
  public userCount: Array<any> = [];
 
@@ -26,7 +28,10 @@ export class RegisteredDentistsComponent {
   constructor(
     private router: Router,
     private apiService: UserService,
-  ) { }
+    private titleService: Title,
+  ) {
+    titleService.setTitle(this.title);
+  }
 
   ngOnInit(): void {
     console.log($.fn['dataTable'].ext);
@@ -44,24 +49,29 @@ export class RegisteredDentistsComponent {
     // setTimeout(()=>this.showContent=true, 450);
     this.dtOptions = {
       // order: [[0, "asc"]],
-     
       search:true,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
-        
+
       },
-      buttons:[{
-        sExtends: 'CSV',
-        text: 'Download CSV'
-      }],
+
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
       ordering: false,
       responsive:true,
+      // dom: 'Bfrtip',
       dom: 'Bfrtip',
-      
+      buttons:[{
+        extend: 'csv',
+        text: 'Download CSV',
+      }],
+      // buttons: [
+        // 'copy',
+        // 'print',
+        // 'excel',
+      // ]
 
 
 
@@ -88,11 +98,11 @@ export class RegisteredDentistsComponent {
       // console.log(this.allData,"count",this.count)
       // for(let i=0;i<=this.allData.length;i++){
       //   for(let i=0;i<=this.count.length;i++){
-           
+
       //   }
       // }
       // console.log(this.allData, this.count)
-      
+
       this.showContent=true
          if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

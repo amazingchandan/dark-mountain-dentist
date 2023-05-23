@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  title = 'Dark Mountain - Login';
   public loginForm: FormGroup;
   public isAuthLoading = false;
   public statusSubs: any;
@@ -22,7 +23,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private apiService: UserService,
     public router: Router,
-  ) { }
+    private titleService: Title,
+  ) {
+    titleService.setTitle(this.title);
+  }
   regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   ngOnInit() {
     this.renderer.addClass(document.querySelector('app-root'), 'login-page');
@@ -75,7 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               let status = res.getData[0]?.subscription_details.status;
               this.statusSubs = res.getData[0]?.subscription_details.status;
               console.log(status)
-              if (status == true) {
+              if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
                 this.appService.login(result);
               }
               else {

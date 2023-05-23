@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-
+import { Title } from '@angular/platform-browser';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 import { Router } from '@angular/router';
 
@@ -24,12 +24,14 @@ interface IUser {
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  title = 'Dark Mountain - Dashboard';
   role: any;
   expTime: any;
   diffDays: any;
   diiTime: any;
   constructor(private chartsData: DashboardChartsData,
-    private userService : UserService, private router: Router) {
+    private userService : UserService, private router: Router, private titleService: Title,) {
+    titleService.setTitle(this.title);
   }
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   fName:string;

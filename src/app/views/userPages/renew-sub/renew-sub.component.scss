@@ -1,3 +1,6 @@
+* {
+  color: #043049;
+}
 .myCard {
     min-width: 220px !important;
     max-width: 260px !important;
@@ -5,7 +8,7 @@
     // height: 250px;
     margin: 10px auto;
   }
-  
+
   .sub-container {
     min-height: calc(100vh - 269px);
     display: flex;
@@ -15,48 +18,60 @@
     flex-direction: column;
     margin: 0 0 25px 0;
   }
-  
+
   .monthly-plans-btn {
     border-top-right-radius: 0% !important;
     border-bottom-right-radius: 0% !important;
     background-color: #fff !important;
     border: 1px solid #02d959 !important;
     color: #02d959 !important;
+    min-width: 150px;
   }
-  
+
   .yearly-plans-btn {
     border-bottom-left-radius: 0% !important;
     border-top-left-radius: 0% !important;
     background-color: #fff !important;
     border: 1px solid #02d959 !important;
     color: #02d959 !important;
+    min-width: 150px;
   }
-  
+
   .monthly-plans-btn:hover,
   .yearly-plans-btn:hover {
     background-color: #02d959 !important;
     color: #fff !important;
     border: 1px solid #02d959;
+    min-width: 150px;
   }
-  
+
   .monthly-plans-true {
     border-top-right-radius: 0% !important;
     border-bottom-right-radius: 0% !important;
     background-color: #02d959 !important;
     color: #fff !important;
     border: 1px solid #02d959;
+    min-width: 150px;
   }
-  
+
   .yearly-plans-true {
     border-bottom-left-radius: 0% !important;
     border-top-left-radius: 0% !important;
     background-color: #02d959 !important;
     color: #fff !important;
     border: 1px solid #02d959;
+    min-width: 150px;
   }
-  
+
   .monthly-plans-true:hover {
     background-color: #fff !important;
     border: 1px solid #02d959 !important;
     color: #02d959 !important;
+    min-width: 150px;
+  }
+  .cancel-selected {
+    background-color: var(--bs-gray) !important;
+    border: var(--bs-gray) !important;
+    font-size: 16px !important;
+    padding: 10px 14px !important;
   }

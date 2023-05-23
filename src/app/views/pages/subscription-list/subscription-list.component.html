@@ -31,15 +31,15 @@
           >
             <thead>
               <tr>
-                <th class="text-nowrap">Plan Name</th>
-                <th>Country</th>
-                <th>Type</th>
-
+                <th class="text-nowrap width-th">Plan Name</th>
+                <th class="width-th">Country</th>
+                <th class="width-th">Type</th>
+                <th style="max-width: 130px;" class="status-s">Status</th>
                 <!-- <th>Min</th>
                 <th>Max</th> -->
-                <th>Amount</th>
-                <th class="text-nowrap"># of Subscribers</th>
-                <th>Action</th>
+                <th class="amt-class status-s" style="max-width: 120px;">Amount</th>
+                <th class="text-nowrap amt-class"># of Subscribers</th>
+                <th class="text-center width-th">Action</th>
               </tr>
             </thead>
             <tbody *ngIf="allData?.length !=0">
@@ -47,11 +47,12 @@
                 <td>{{data.plan_name | titlecase}}</td>
                 <td>{{data.country}}</td>
                 <td>{{data.type}}</td>
+                <td>{{data.status | titlecase}}</td>
                 <!-- <td>{{data.minimum}}</td>
                 <td>{{data.maximum}}</td> -->
-                <td>${{data.amount}}</td>
-                <td class="paddingForCenter">3</td>
-                <td>
+                <td class="amt-class">${{data.amount}}</td>
+                <td class="amt-class">3</td>
+                <td class="text-center">
                   <!-- <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
                     class="fa-regular fa-pen-to-square mt-2" ></i></button> -->
                   <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder" (click)="openModal(data._id)"
@@ -66,6 +67,7 @@
                 <tbody *ngIf="this.allData?.length == 0">
                   <tr>
                     <td colspan="8" class="no-data-available text-center" >No data</td>
+                    <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
                     <td colspan="0" class="no-data-available p-0" ></td>
@@ -104,7 +106,7 @@
         <div class="row">
           <form  class="form-inline" role="form" [formGroup]="addPriceingForm">
             <div class="row mb-2">
-              <div class="col-md-6 form-group">
+              <div class="col-md-6 form-group my-2">
                 <label class="mb-2">Plan Name<sup>*</sup></label>
                 <input
                   type="text"
@@ -112,9 +114,10 @@
                   formControlName="plan_name"
                   class="form-control"
                   [value]="plan_name"
+                  maxlength="15"
                 />
               </div>
-              <div class="col-md-6 form-group">
+              <div class="col-md-6 form-group my-2">
                 <label class="mb-2">Amount($)<sup>*</sup></label>
                 <input
                   type="number"
@@ -122,6 +125,7 @@
                   formControlName="amount"
                   class="form-control"
                   [value]="amount"
+                  maxlength="10"
                 />
               </div>
               <!-- <div class="col-md-4 form-group">
@@ -149,7 +153,7 @@
             </div>
             <div class="row mb-2">
 
-              <div class="col-md-6 form-group">
+              <div class="col-md-6 form-group my-2">
                 <label class="mb-2" for="inputState">Type<sup>*</sup></label>
                 <select
                   class="form-select"
@@ -162,7 +166,7 @@
                   <option value="Yearly">Yearly</option>
                 </select>
               </div>
-              <div class="col-md-6 form-group country-col">
+              <div class="col-md-6 form-group country-col my-2">
                 <label class="mb-2" for="inputState">Country<sup>*</sup></label>
                 <select
                   class="form-select"
@@ -180,6 +184,21 @@
                 </select>
               </div>
             </div>
+            <div class="row mb-2">
+              <div class="col-md-6 form-group my-2">
+                <label class="mb-2" for="inputState">Status<sup>*</sup></label>
+                <select
+                  class="form-select"
+                  formControlName="status"
+                  aria-label="Default select example"
+                  [value]="status"
+                >
+                  <option value="" [selected]="true" [disabled]="true">Select option</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
             <!-- <div class="modal-footer">
              <button id="launch_ad" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close</button>
@@ -191,10 +210,14 @@
                       class="fa-sharp fa-regular fa-floppy-disk"></i></button>
 
             </div> -->
-            </form>
+          </form>
         </div>
       </div>
       <div class="modal-footer">
+        <!-- <button class="btn btn-save pd-1 fw-bold other-btn delete-btn" *ngIf="showDelete && planStatus == 'active'; else dootherplan" (click)="onClickInactive()">Inactivate</button>
+        <ng-template #dootherplan>
+          <button class="btn btn-save pd-1 fw-bold other-btn delete-btn" *ngIf="showDelete && planStatus == 'inactive'" (click)="onClickActive()">Activate</button>
+        </ng-template> -->
         <button  id="launch_ad" type="button" class="btn btn-secondary cancel-btn fw-bold pd-1 " data-bs-dismiss="modal">
           Close
         </button>

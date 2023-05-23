@@ -211,7 +211,8 @@
                     data._id,
                     data.type,
                     data.amount,
-                    data.plan_name
+                    data.plan_name,
+                    data.country
                   )
                 ">
                 Subscribe
@@ -219,7 +220,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
                 ">
                 Selected
               </button>
@@ -297,7 +298,8 @@
                     data._id,
                     data.type,
                     data.amount,
-                    data.plan_name
+                    data.plan_name,
+                    data.country
                   )
                 ">
                 Subscribe
@@ -305,7 +307,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
                 ">
                 Selected
               </button>
@@ -579,7 +581,7 @@
         <div *ngIf="checked && subsId != 0" class="d-flex  align-items-start body-content">
           <div class="d-flex align-items-start flex-column sub-body-content billing-div">
             <h5 class="text-center fw-semibold">Billing Details:</h5>
-            <form #register_form="ngForm" [formGroup]="registerForm">
+            <form #register_form="ngForm" [formGroup]="registerForm" (change)="formChange($event)">
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
                   <div class="w-100 d-flex position-relative">
@@ -623,7 +625,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="tel" class="form-control rounded ps-5 w-100" placeholder="Contact Number"
-                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" [readOnly]="readOnly" />
+                      formControlName="contact_number" (keypress)="onlyNumberKey($event)" maxlength="10" [readOnly]="readOnly" (keyup)="onchangeofthis($event)" [autofocus]="true" autofocus/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -636,7 +638,7 @@
                       <svg cIcon name="cilHome"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
-                      formControlName="address1" [readOnly]="readOnly" />
+                      formControlName="address1" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -647,7 +649,7 @@
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
-                      formControlName="city" [readOnly]="readOnly"/>
+                      formControlName="city" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -660,7 +662,7 @@
                       <svg cIcon name="cilMap"></svg>
                     </span>
                     <select class="form-select ps-5" aria-label="Default select example" name="country"
-                      placeholder="Country" id="country"formControlName="country" (change)="stateByCountry($event)">
+                      placeholder="Country" id="country"formControlName="country" (change)="stateByCountry($event)" >
                       <option [defaultSelected]="true" [selected]="true" disabled="true" >
                         {{ countryList }}
                       </option>
@@ -700,7 +702,7 @@
                       <svg cIcon name="cilNotes"></svg>
                     </span>
                     <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
-                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly"/>
+                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -711,7 +713,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
-                    [readOnly]="readOnly" />
+                    [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -782,16 +784,34 @@
         <small>&#169; All rights reserved</small>
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
-        <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()" *ngIf="!paypalBtn">
+        <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()" *ngIf="!paypalBtn"> -->
           <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
           </a> -->
-          Confirm & Pay
+          <!-- Confirm & Pay -->
           <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
-        </button>
-        <div *ngIf="paypalBtn">
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
+        <!-- </button> -->
+        <!-- *ngIf="paypalBtn" -->
+        <div *ngIf="!paypalBtn; else dofalsething">
+          <button class="btn pd-1 other-btn fw-bold paynow" (click)="handleClick()" *ngIf="!dots; else dothisdots">
+            Confirm & Pay
+          </button>
+          <ng-template #dothisdots>
+            <button class="btn pd-1 other-btn fw-bold paynow" [disabled]="dots">
+              <div class="span-container" >
+                <span class="span-dots1"></span>
+                <span class="span-dots2"></span>
+                <span class="span-dots3"></span>
+              </div>
+            </button>
+          </ng-template>
         </div>
+        <ng-template #dofalsething>
+          <div class="pay-container">
+            <h5 class="me-1">Proceed To:</h5>
+            <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

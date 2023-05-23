@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';;
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-widgets-user-dropdown',
@@ -20,16 +21,62 @@ export class WidgetsUserDropdownComponent {
   curPass: string;
   ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
   noOfXrayEval: any=0;
+  public URL: boolean;
   constructor(
    // private changeDetectorRef: ChangeDetectorRef,
     private userService: UserService,
     public router :Router,
+    private appService: AppService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     //this.setData();
     this.dashboard();
     console.log(this.userInfo);
+    this.appService.currentUrl.subscribe((url) => {
+      console.log(url)
+      this.URL = url
+    })
+  }
+  changeUrl(){
+    console.log(this.route.snapshot.url[0].path)
+    if(this.URL){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Your progress will be lost!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            title: 'Success!',
+            text: 'You Have Discarded The Image Successfully',
+            icon: 'success',
+          });
+              this.router.navigateByUrl('/dashboard');
+
+          // this.userService.deleteXrayByID(id, {name: name}).subscribe((res: any) => {
+          //   console.log(res)
+          //   if(res.success){
+          //     this.router.navigateByUrl('/upload-xray/0');
+          //   } else {
+          //     Swal.fire({
+          //       text: "Internal server error, image can't be deleted.",
+          //       icon: 'error',
+          //     });
+          //   }
+          // })
+        }
+      });
+    }
   }
   dashboard(){
     // this.userService.getUserRecordById(this.userInfo.id).subscribe((res: any) => {
@@ -118,7 +165,7 @@ export class WidgetsUserDropdownComponent {
       }
       else
       {
-        this.userService.resetPassword( data).subscribe((res:any) => {
+        this.userService.resetPassword(data).subscribe((res:any) => {
         console.log("Password changes",res);
         if(res.success){
           Swal.fire({
@@ -127,6 +174,11 @@ export class WidgetsUserDropdownComponent {
           });
           document.getElementById('close')?.click();
           return true;
+        } else {
+          Swal.fire({
+            text: res.message,
+            icon: 'error'
+          });
         }
        // this.router.navigateByUrl("/login")
       })

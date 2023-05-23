@@ -98,6 +98,8 @@
   min-height: 150px;
   min-width: 260px;
   height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
 }
 .img-height{
   height: 100% !important;
@@ -124,4 +126,16 @@
   .backdrop {
     padding: 10% 5%;
   }
+}
+
+.renew-subs {
+  color: #00d957;
+  cursor: pointer;
+}
+.text-right {
+  text-align: right;
+  // padding-right: 1.5rem;
+}
+.textCenter {
+  min-width: 210px;
 }

@@ -340,3 +340,68 @@ input.lg-check {
 .paypal-button > .paypal-button-label-container > .paypal-logo{
   display: none;
 }
+.paypal-btn {
+  width: 200px;
+}
+.pay-container {
+  min-width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.span-container {
+  position: relative;
+  min-width: 111px;
+  height: 19px;
+}
+.span-dots1, .span-dots2, .span-dots3 {
+  position: absolute;
+  bottom: 0%;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+.span-dots1{
+  left: 33%;
+  animation: thisismyanime1 1.25s ease-in-out infinite;
+}
+.span-dots2{
+  left: 47%;
+  animation: thisismyanime2 1.25s ease-in-out infinite;
+}
+.span-dots3{
+  left: 61%;
+  animation: thisismyanime1 1.25s ease-in-out infinite;
+}
+@keyframes thisismyanime1 {
+  100%{
+    bottom: 10px;
+  }
+  50%{
+    bottom: 0%;
+  }
+  0%{
+    bottom: 10px;
+  }
+}
+@keyframes thisismyanime2 {
+  100%{
+    bottom: 0%;
+  }
+  50%{
+    bottom: 10px;
+  }
+}
+// @keyframes thisismyanime3 {
+//   100%{
+//     bottom: 0%;
+//   }
+//   50%{
+//     bottom: 10px;
+//   }
+//   0%{
+//     bottom: 0%;
+//   }
+// }

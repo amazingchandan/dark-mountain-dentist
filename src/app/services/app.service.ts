@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { UserService } from './user.service';
 // import { FormGroup } from '@angular/forms';
@@ -17,17 +17,43 @@ export class AppService {
     image: 'assets/img/user2-160x160.jpg',
   };
 
-  private approvalStageMessage = new BehaviorSubject({});
+  private approvalStageMessage = new BehaviorSubject(false);
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
 
+  private forImage = new BehaviorSubject({})
+  currentApprovalStageImage = this.forImage.asObservable();
+
+
   constructor(private router: Router,
-    private UserService: UserService) { }
+    private UserService: UserService,
+    private route: ActivatedRoute) {}
+
+  private getUrl = new BehaviorSubject(false)
+  currentUrl = this.getUrl.asObservable();
+
+  updateGetUrl(url: boolean){
+    this.getUrl.next(url)
+    console.log(url)
+  }
+
   userData: any = {};
   role: string;
-  updateApprovalMessage(message: {}) {
+  updateApprovalMessage(message: boolean) {
     this.approvalStageMessage.next(message)
     console.log(message);
+  }
+  updateApprovalImage(message: any) {
+    this.forImage.next(message)
+    console.log(message);
+  }
 
+  urlChange(){
+    console.log(this.router.url)
+    if(this.router.url.split('/')[1] == 'evaluate-x-ray' && localStorage.getItem('url') == '1'){
+      return true
+    } else {
+      return false
+    }
   }
 
   login(getLoginDetail) {
@@ -75,7 +101,7 @@ export class AppService {
         if (res.getData[0]?.role == 'dentist') {
           let status = res.getData[0]?.subscription_details.status;
           console.log(status)
-          if (status == true) {
+          if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
             this.router.navigateByUrl('/dashboard');
           }
 
@@ -120,6 +146,18 @@ export class AppService {
     }
   }
 
+  pricingPage(){
+    if(JSON.parse(localStorage.getItem("userInfo"))?.role == 'dentist' && !JSON.parse(localStorage.getItem("userInfo"))?.subscribed){
+      return true;
+    } else {
+      this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
+        console.log(res)
+        // return true;
+        return false;
+      })
+    }
+  }
+
   // roleOfAdmin(){
 
   // }
@@ -132,20 +170,40 @@ export class AppService {
     }
   }
 
-  subsForDashboard(){
-    if(JSON.parse(localStorage.getItem("userInfo")).role == 'admin' && !JSON.parse(localStorage.getItem("userInfo")).subscribed || JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed){
-      return true
-    } else {
-      return false
-    }
+  async subsForDashboard(){
+    let subsNotEnded;
+    this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
+      // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()){
+      //   console.log(subsNotEnded, true)
+      //   subsNotEnded = true
+      // } else {
+      //   subsNotEnded = false
+      // }
+      if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin' && !JSON.parse(localStorage.getItem("userInfo")).subscribed)  || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()) || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
+        console.log(JSON.parse(localStorage.getItem("userInfo")).role, subsNotEnded)
+        return true
+      } else {
+        console.log(JSON.parse(localStorage.getItem("userInfo")).role, subsNotEnded)
+        return false
+      }
+    })
   }
 
-  subsAlready(){
-    if(JSON.parse(localStorage.getItem("userInfo")).subscribed){
-      return true
-    } else {
-      return false
-    }
+  async subsAlready(){
+    let subsNotEnded;
+    this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
+      // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > new Date('2023/06/14').getTime()){
+      //   console.log(subsNotEnded, true)
+      //   subsNotEnded = true
+      // } else {
+      //   subsNotEnded = false
+      // }
+      if(JSON.parse(localStorage.getItem("userInfo")).subscribed || new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()){
+        return true
+      } else {
+        return false
+      }
+    })
     // let id = JSON.parse(localStorage.getItem("userInfo")).id
     // await this.UserService.getUserRecordById(id).subscribe((res: any) => {
     //   console.log(res)

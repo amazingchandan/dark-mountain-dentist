@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Title } from '@angular/platform-browser';
 
 const ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
 const ALPHA_NUMERIC_VALIDATION_ERROR = { alphaNumericError: 'only alpha numeric values are allowed' }
@@ -17,18 +18,21 @@ const REGEX = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$
 })
 
 export class RegisterFormComponent {
+  title = 'Dark Mountain - Registration';
   public registerForm: FormGroup;
   newUser: any;
   isAuthLoading: boolean;
   countryList = "-Select-";
   constructor(
-
+    private titleService: Title,
     private toastr: ToastrService,
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
     private appService: AppService
-  ) { }
+  ) {
+    titleService.setTitle(this.title);
+  }
 
   ngOnInit() {
     function alphaNumericValidator(control: FormControl): ValidationErrors | null {

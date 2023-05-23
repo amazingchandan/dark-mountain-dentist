@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import LabelStudio from 'label-studio';
 import { event } from 'jquery';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-xray',
@@ -16,12 +17,14 @@ export class ViewXrayComponent {
   markData: any=[];
   userMark: any=[];
   AIMarkData: any;
+  title = 'Dark Mountain - View X-Ray';
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private spinner: NgxSpinnerService,
-    private router: Router,) {
-
+    private router: Router,
+    private titleService: Title,) {
+      titleService.setTitle(this.title);
   }
 
   valInput = '25';
@@ -56,6 +59,7 @@ export class ViewXrayComponent {
   getXray(id) {
 
     this.userService.getXray(id).subscribe((res: any) => {
+      console.log(res)
       if (res.success) {
         this.xRayData = res.getData;
         console.log(this.xRayData[0]?.xray_image)
@@ -119,6 +123,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
     console.log(id)
      this.userService.getEvalById(id).subscribe((res: any) => {
       console.log("getMark")
+      console.log(res)
       if (res.success) {
         this.markData = res.getData;
         console.log(this.markData)
@@ -153,13 +158,13 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
        <Image name="img" value="$image" width="100%" height="100%" ></Image>
        <Style> canvas { width:594px; height:354px !important }</Style>
        </View>
- <View style="flex: 10%;float:right">
- <RectangleLabels name="label" toName="img" background="red">
- <!--<Label value="Add Mark" background="#8b0000" />-->
- </RectangleLabels>
- </View>
- </View>
- `,
+        <View style="flex: 10%;float:right">
+        <RectangleLabels name="label" toName="img" background="red">
+        <!--<Label value="Add Mark" background="#8b0000" />-->
+        </RectangleLabels>
+        </View>
+        </View>
+        `,
 
         interfaces: [
           // "panel",
@@ -293,22 +298,22 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
      <View style="flex: 90%;
      margin-top: -14px;">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+     <Style> .ImageView_container__AOBmH img {  height:354px !important; }</Style>
      <Image name="img" value="$image" width="100%" height="100%" ></Image>
      <Style> canvas { width:594px; height:354px !important }</Style>
      </View>
 
- <View style="flex: 10%;float:right;visibility:hidden">
- <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
- <Label value="1" background="#FF3131" />
- <Label value="2" background="#FFFF00" />
- <Label value="Dentist Correction" background="green" />
- </RectangleLabels>
+      <View style="flex: 10%;float:right;visibility:hidden">
+      <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
+      <Label value="1" background="#FF3131" />
+      <Label value="2" background="#FFFF00" />
+      <Label value="Dentist Correction" background="green" />
+      </RectangleLabels>
 
- </View>
+      </View>
 
- </View>
- `,
+      </View>
+      `,
 
       interfaces: [
         // "panel",

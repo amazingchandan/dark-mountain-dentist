@@ -141,7 +141,7 @@
           My Plan
           </h6>
           <h6 class="text-white fw-bold my" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-            {{this.planDetail?.subscription_details?.subscription_id?.plan_name | titlecase}}
+            {{this.planDetail?.subscription_details?.name | titlecase}}
           </h6>
         </div>
           <!-- <span cInputGroupText>
@@ -251,7 +251,7 @@
   <!--My Plan Modal-->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Subscription Details:</h4>
@@ -260,7 +260,7 @@
         <div class="modal-body">
             <div class="d-flex align-items-start flex-column sub-body-content">
 
-                <ul class="proceed-details m-0 p-0 align-self-center  me-2 w-75 color">
+                <ul class="proceed-details m-0 p-0 align-self-center  mx-2 w-100 color">
                   <!-- <li
                     class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
                   >
@@ -275,32 +275,32 @@
                   >
                     <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
                   </li> -->
-                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                     <span>Plan Name:</span>&nbsp;<span class="me-2">{{
-                      this.planDetail?.subscription_details?.subscription_id?.plan_name
+                      this.planDetail?.subscription_details?.name
 
                       | titlecase
                       }}</span>
                   </li>
-                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                     <span>Plan Type:</span>&nbsp;<span class="me-2">{{
-                        this.planDetail?.subscription_details?.subscription_id?.type | titlecase
+                        this.planDetail?.subscription_details?.type | titlecase
                       }}</span>
                   </li>
-                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
-                    <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.subscription_details?.subscription_id?.amount }}</span>
+                  <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                    <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.subscription_details?.price }}</span>
                   </li>
-                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
+                  <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
                     <span>Start Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.subscription_details?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                   </li>
-                  <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                     <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.subscription_details?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                   </li>
                 </ul>
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button btn" class="btn btn-secondary fw-semibold pd-1" data-bs-dismiss="modal">Close</button>
+          <button type="button btn" class="btn btn-secondary fw-semibold pd-1 cancel-btn font-size" data-bs-dismiss="modal">Close</button>
 
         </div>
       </div>
@@ -313,35 +313,37 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fw-semibold" id="exampleModalLabel">Reset Password</h5>
+          <h4 class="modal-title fw-semibold font-color" id="exampleModalLabel">Reset Password</h4>
 
         </div>
         <div class="modal-body">
-            <div class="inputContainer align-self-center ms-5">
+            <div class="inputContainer align-self-center">
                 <div class="mb-3 mt-2">
-                  <div class="w-100 d-flex position-relative color">
+                  <div class="w-100 d-flex position-relative color align-items-center justify-content-evenly">
                     <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
                    <label>Current Password</label>
-                    <input type="password" class=" ml-a w-50 form-control" placeholder="Current Password"  (input)="onCurPass($event)"
+                    <input type="password" class=" ml-a my-w-50 form-control" placeholder="Current Password"  (input)="onCurPass($event)"
                    />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
                 </div>
                 <div class="mb-3 mt-2 inputMargin">
-                  <div class="w-100 d-flex position-relative color">
+                  <div class="w-100 d-flex position-relative color align-items-center justify-content-evenly">
                     <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
                     <label class="mt-1">New Password</label>
-                    <input type="password" class="ml-b w-50 form-control" placeholder="New Password"  (input)="onNewPass($event)"
+                    <input type="password" class="ml-b my-w-50 form-control" placeholder="New Password"  (input)="onNewPass($event)"
                      />
                     <!-- <i class="fa-solid fa-user icon-position"></i> -->
                   </div>
-                  <small class="pass-small">* Password must contain atleast 7 characters, 1 letter and 1 number</small>
+                  <div class="d-flex justify-content-end">
+                    <small class="pass-small">* Password must contain atleast 7 characters, 1 letter and 1 number</small>
+                  </div>
                 </div>
                 <div class="mb-3 mt-2 inputMargin">
-                    <div class="w-100 d-flex position-relative color">
+                    <div class="w-100 d-flex position-relative color align-items-center justify-content-evenly">
                       <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
                       <label>Confirm New Password</label>
-                      <input type="password" class="ml-c w-50 form-control" placeholder="Confirm New Password"  (input)="onCnfPass($event)"
+                      <input type="password" class="ml-c my-w-50 form-control" placeholder="Confirm New Password"  (input)="onCnfPass($event)"
                        />
                       <!-- <i class="fa-solid fa-user icon-position"></i> -->
                     </div>
@@ -350,7 +352,7 @@
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button btn" class="btn  fw-semibold pd-1" id="close" data-bs-dismiss="modal">Close</button>
+          <button type="button btn" class="btn  fw-semibold pd-1 cancel-btn font-size" id="close" data-bs-dismiss="modal">Close</button>
           <button type="button btn" class="btn  fw-semibold pd-1"  (click)="setNew()">Reset Password</button>
         </div>
       </div>

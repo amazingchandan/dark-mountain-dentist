@@ -179,7 +179,7 @@
         <!-- /.row -->
       </li>
       <!-- Menu Footer-->
-      <li class="user-footer text-center">
+      <li class="user-footer text-center" *ngIf="!this.changeUrl; else doThatValue">
         <!-- <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
           Profile
         </a> -->
@@ -191,6 +191,20 @@
           >Sign out</a
         > -->
       </li>
+      <ng-template #doThatValue>
+        <li class="user-footer text-center">
+          <!-- <a [routerLink]="['/profile']" class="btn btn-default btn-flat">
+            Profile
+          </a> -->
+          <button class="btn fw-bold other-btn pd-1" (click)="dashboardFn(true)" >
+              My Profile <i class="fa fa-user ms-1"></i>
+          </button>
+
+          <button class="btn fw-bold other-btn pd-1 ms-2" (click)="dashboardFn('logout')">Logout <i class="fa-solid fa-right-from-bracket ms-1"></i> </button><!-- <a (click)="Logout()" class="btn btn-default btn-flat "
+            >Sign out</a
+          > -->
+        </li>
+      </ng-template>
 
 
       <li></li>

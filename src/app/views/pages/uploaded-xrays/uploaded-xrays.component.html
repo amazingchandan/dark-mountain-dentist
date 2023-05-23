@@ -8,7 +8,7 @@
 
           <div class="card-body pt-0" style="overflow-x:auto;">
             <table datatable *ngIf="showContent" datatable="ng" class="row-border hover" [dtOptions]="dtOptions" dt-column-defs="dtColumnDefs">
-             
+
 
               <thead>
                 <tr>
@@ -18,15 +18,15 @@
                   <th>Contact Number</th> -->
                   <th>X-Ray Uploaded Date</th>
                   <!-- <th>Uploaded X-ray</th> -->
-                  <th>Submitted to AI</th>
-                  <th>View Details</th>
+                  <th class="text-center">Submitted to AI</th>
+                  <th class="text-center">View Details</th>
                 </tr>
               </thead>
-  
-      
+
+
               <tbody *ngIf="allData?.length != 0 && this.n==0">
-                
-               
+
+
                   <tr *ngFor="let data of this.allData; let i = index">
 
                   <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
@@ -36,7 +36,7 @@
                   <!-- <td>{{data.user_id.noOfXrayUploaded}}</td> -->
 
 
-                  <td>
+                  <td class="text-center">
                     <div *ngIf="data.admin_marked_status==true"><input class="form-check-input checkbox1"
                         type="checkbox" value="" id="checkbox-1" checked /></div>
 
@@ -45,7 +45,7 @@
                   </td>
 
 
-                  <td>
+                  <td class="text-center">
 
                     <!-- <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
                       [routerLink]="'/mark-xray/'+data._id">Edit</button> -->
@@ -54,7 +54,7 @@
                         <button
                         type="button"
                         class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-                       
+
                         (click)="view(data._id)"
                       >
                         View
@@ -71,13 +71,13 @@
                       </button>
                     </div>
                   </td>
-                
+
                 </tr>
               </tbody>
-         
+
               <tbody *ngIf="this.admin_pending?.length != 0 && this.n==1">
-                
-               
+
+
                 <tr *ngFor="let data of this.admin_pending; let i = index">
 
                 <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
@@ -105,7 +105,7 @@
                       <button
                       type="button"
                       class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-                    
+
                       (click)="view(data._id)"
                     >
                       View
@@ -122,13 +122,13 @@
                     </button>
                   </div>
                 </td>
-              
+
               </tr>
             </tbody>
 
             <tbody *ngIf="this.admin_eval?.length != 0 && this.n==2">
-                
-               
+
+
               <tr *ngFor="let data of this.admin_eval; let i = index">
 
               <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
@@ -156,7 +156,7 @@
                     <button
                     type="button"
                     class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-                   
+
                     (click)="view(data._id)"
                   >
                     View
@@ -173,12 +173,12 @@
                   </button>
                 </div>
               </td>
-            
+
             </tr>
           </tbody>
 
 
-              
+
               <tbody *ngIf="this.allData?.length == 0 ">
                 <tr>
                   <td colspan="8" class="no-data-available text-center" >No data</td>
@@ -188,7 +188,7 @@
                   <!-- <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td> -->
-                 
+
                 </tr>
               </tbody>
               <tbody *ngIf="this.admin_pending?.length == 0 && this.n==1">
@@ -200,7 +200,7 @@
                   <!-- <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td> -->
-                 
+
                 </tr>
               </tbody>
               <tbody *ngIf="this.admin_eval?.length == 0 && this.n==2">
@@ -212,7 +212,7 @@
                   <!-- <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td>
                   <td colspan="0" class="no-data-available p-0" ></td> -->
-                 
+
                 </tr>
               </tbody>
 
@@ -241,7 +241,7 @@
               <!-- <tbody  *ngIf="allData?.length != 0">
                   <tr *ngFor="let data of this.allData; let i = index">
                     <td>{{data._id}}</td>
-                    
+
                     <td>{{data.user_id.first_name | titlecase}} {{data.user_id.last_name | titlecase}}</td>
                     <td class="">{{data.created_at | date : 'dd/MM/yyyy'}}</td>
                     <td class="">{{data.updated_at | date : 'dd/MM/yyyy'}}</td>
@@ -258,16 +258,16 @@
                   </td>
                     <td>{{data.user_id.flag}}</td>
                     <td>{{data.accurateCavitiesPerByUser}}</td>
-                   
+
                     <td>
-                     
+
                    <button
                       title="View"
                       type="button"
                       class="btn btn-primary pd-1 view-btn fw-bolder"
                       [routerLink]="'/mark-xray/'+data._id"
                     >Edit</button></td>
-                    
+
                   </tr>
 
 

@@ -30,6 +30,8 @@ import { UserRolesAuthGuard } from './guard/user-roles-auth.guard';
 import { SubsAuthGuard } from './guard/subs-auth.guard';
 import { UserRoleDentistGuard } from './guard/user-role-dentist.guard';
 import { DashboardProfileCheckGuard } from './guard/dashboard-profile-check.guard';
+import { NonUserAuthGuard } from './guard/non-user-auth.guard';
+import { PricingGuardGuard } from './guard/pricing-guard.guard';
 const routes: Routes = [
 
   // {
@@ -274,7 +276,7 @@ const routes: Routes = [
         canActivate: [UserAuthGuard, UserRolesAuthGuard]
       },
       {
-        path: 'evaluate-x-ray/:xray_id',
+        path: 'evaluate-x-ray',
         component: EvaluateXrayComponent,
         data: {
           title: 'Evaluate X-Ray'
@@ -312,7 +314,8 @@ const routes: Routes = [
     component: PricingComponent,
     data: {
       title: 'Subscription Plans'
-    }
+    },
+    canActivate: [PricingGuardGuard]
   },
 
 

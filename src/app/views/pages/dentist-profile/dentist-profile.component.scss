@@ -141,11 +141,11 @@ i {
     }
 }
 .modal-header{
-  border-bottom: none !important;
+  // border-bottom: none !important;
   color: #043049 !important;
 }
 .modal-footer{
-  border-top: none !important;
+  // border-top: none !important;
 }
 .color{
   color: #043049 !important;
@@ -162,4 +162,10 @@ i {
 .new-btn-color {
   background-color: #043049 !important;
   border-color: #043049 !important;
+}
+.text-right {
+  text-align: right;
+}
+.x-mark {
+  color: #043049 !important;
 }

@@ -23,6 +23,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   fName: any;
   routerTo: any;
   public _router: any = "";
+  public changeUrl: boolean = false;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
@@ -33,9 +34,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
   }
   ngOnInit(): void {
     this.userfirst();
+    this.appService.currentUrl.subscribe((url: boolean) => {
+      this.changeUrl = url
+    })
     //this.admin()
   }
-
   userfirst() {
     this.userInfo;
     console.log(this.userInfo);
@@ -49,6 +52,53 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
     })
     console.log(this.fName)
+  }
+  dashboardFn(e: any){
+    // this.router.navigateByUrl("/dashboard")
+    console.log(this.router.url, this.changeUrl)
+    if(this.changeUrl){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Your progress will be lost!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            title: 'Success!',
+            text: 'You Have Discarded The Image Successfully',
+            icon: 'success',
+          });
+          if(e){
+            console.log(this.userInfo.id, 'dentist-profile')
+            this.appService.updateGetUrl(false)
+            this.router.navigateByUrl(`/dentist-profile/${this.userInfo.id}`);
+          } else if (e == 'logout') {
+            this.appService.updateGetUrl(false)
+            this.appService.logout()
+          }
+
+          // this.userService.deleteXrayByID(id, {name: name}).subscribe((res: any) => {
+          //   console.log(res)
+          //   if(res.success){
+          //     this.router.navigateByUrl('/upload-xray/0');
+          //   } else {
+          //     Swal.fire({
+          //       text: "Internal server error, image can't be deleted.",
+          //       icon: 'error',
+          //     });
+          //   }
+          // })
+        }
+      });
+    }
   }
   Logout(){
     Swal.fire({

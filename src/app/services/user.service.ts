@@ -15,6 +15,7 @@ export class UserService {
   getUsersRecordById: string;
   addPricingPlan: string;
   getPlanList: string;
+  getPlanListPricing: string;
   getPlanById: string;
   updateUserById: string;
   updatePlanById: String;
@@ -53,6 +54,10 @@ export class UserService {
  rstPwd : String;
  renewSub : String;
  sub_expire_time:String;
+ deleteXray: String;
+ setXrayData: String;
+ deleteSubs: String;
+ activeSubs: String;
 
  country: String;
  states: String;
@@ -65,6 +70,7 @@ export class UserService {
     this.getUsersRecordById = this.apiHost + 'getUserRecordById';
     this.addPricingPlan = this.apiHost + `setPricingPlan`;
     this.getPlanList = this.apiHost + 'getPlanList';
+    this.getPlanListPricing = this.apiHost + 'getPlanListForPricing';
     this.getPlanById = this.apiHost + 'getPlanById';
     this.updateUserById = this.apiHost + 'updateUserById';
     this.updatePlanById = this.apiHost + 'updatePlanById';
@@ -102,6 +108,10 @@ export class UserService {
     this.rstPwd = this.apiHost + 'resetPassword';
     this.renewSub = this.apiHost + 'getSubscriptionRenew';
     this.sub_expire_time=this.apiHost + 'sub-expiration-time'
+    this.deleteXray = this.apiHost + 'delete-xray';
+    this.setXrayData = this.apiHost + 'saveEvaluation';
+    this.deleteSubs = this.apiHost + 'deleteSubsById';
+    this.activeSubs = this.apiHost + 'activateSubsById';
 
     this.country = this.apiHost + 'countries';
     this.states = this.apiHost + 'countries-states';
@@ -130,6 +140,9 @@ export class UserService {
   }
   getSubscriptionList() {
     return this.http.get(`${this.getPlanList}`);
+  }
+  getSubscriptionListPricing() {
+    return this.http.get(`${this.getPlanListPricing}`);
   }
   getSubPlanById(id) {
     return this.http.get(`${this.getPlanById}?subscription_id=${id}`);
@@ -193,6 +206,19 @@ export class UserService {
   paypalOrderReq(requestParameter: any){
     return this.http.post(`${this.paypalReq}`, requestParameter, {})
   }
+  generateAIData(requestParameter: any){
+    var myHeaders = new HttpHeaders();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+    myHeaders.append("Access-Control-Allow-Headers", "*");
+    const requestOptions = {
+      headers: myHeaders,
+    };
+    return this.http.post(`https://c602-52-173-187-78.ngrok-free.app/predict`, requestParameter, requestOptions)
+  }
+  sendXrayData(data: any){
+    return this.http.post(`${this.setXrayData}`, data, {})
+  }
   loadAIData(requestParameters: any){
     return this.http.post(`${this.AIData}`, requestParameters, {});
   }
@@ -243,5 +269,14 @@ export class UserService {
   }
   getStateByCountries(requestParameters){
     return this.http.post(`${this.states}`, requestParameters, {});
+  }
+  deleteXrayByID(id: any, name: any){
+    return this.http.post(`${this.deleteXray}/${id}`, name, {});
+  }
+  deleteSubsById(id: any){
+    return this.http.post(`${this.deleteSubs}`, id, {})
+  }
+  activeSubsID(id: any){
+    return this.http.post(`${this.activeSubs}`, id, {})
   }
 }

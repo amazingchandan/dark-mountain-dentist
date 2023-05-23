@@ -1,4 +1,4 @@
-<h2 class="head m-0 text-center fw-bold mt-1">
+<h2 class="head m-0 text-center fw-bold mt-1 mb-3">
   Please Choose Your Subscription Plan
 </h2>
 
@@ -19,10 +19,9 @@
   </button>
 </div>
 <div class="sub-container">
-  <div *ngIf="monthlyAllData?.length != 0"
-    class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
+  <div *ngIf="monthlyAllData?.length != 0" class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
     <div *ngFor="let data of monthlyAllData; let i = index">
-      <div *ngIf="data.country===this.country" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+      <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
           <div class="card-body text-start d-flex flex-column justify-content-between">
@@ -38,8 +37,8 @@
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <p class="m-0">Max: ${{ data.maximum }}</p>
-              <p class="m-0">Min: ${{ data.minimum }}</p>
+              <!-- <p class="m-0">Max: ${{ data.maximum }}</p>
+              <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
@@ -71,7 +70,7 @@
   <div *ngIf="yearlyAllData?.length != 0"
     class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
     <div *ngFor="let data of yearlyAllData; let i = index">
-      <div *ngIf="data.country===this.country" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
+      <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
 
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
@@ -88,8 +87,8 @@
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <p class="m-0">Max: ${{ data.maximum }}</p>
-              <p class="m-0">Min: ${{ data.minimum }}</p>
+              <!-- <p class="m-0">Max: ${{ data.maximum }}</p>
+              <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
@@ -119,7 +118,7 @@
 
   </div>
 </div>
-<div class="d-flex justify-content-center align-items-center pricingFooter">
+<div class="d-flex justify-content-center align-items-center pricingFooter mb-3">
 
   <div class="do-later-checkout-btn-container float-right">
     <button class="btn pd-1 cancel-btn fw-bold fs-2 doitlater" (click)="logout()">
@@ -141,7 +140,7 @@
     <div class="modal-content modal-tall">
       <div *ngIf="this.selected==true">
         <div class="modal-header justify-content-between align-items-center">
-          <div></div>
+          <!-- <div></div> -->
           <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
             Subscription Details
 
@@ -223,14 +222,14 @@
           <!-- </button> -->
           <div>
 
-            <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
+            <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal>
           </div>
         </div>
       </div>
       <div *ngIf="this.selected==false">
         <div class="modal-header justify-content-between align-items-center">
           <div></div>
-        
+
           <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
         </div>
         <div class="swal2-icon swal2-warning swal2-icon-show mt-1">

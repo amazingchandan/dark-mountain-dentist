@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { of, catchError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forget-password',
@@ -11,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
+  title = 'Dark Mountain - Forgot Password';
   display: any = `00:00`;
   public resetState = false;
   setNewPass = false;
@@ -21,7 +23,9 @@ export class ForgetPasswordComponent implements OnInit {
   newPass = "";
   cnfPass = "";
   ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
-  constructor(private apiService: UserService, public router : Router,private spinner: NgxSpinnerService){}
+  constructor(private apiService: UserService, public router : Router,private spinner: NgxSpinnerService, private titleService: Title,){
+    titleService.setTitle(this.title);
+  }
   onEmailReset(event: any){
     this.emailReset = (<HTMLInputElement>event.target).value.trim();
   }
@@ -47,7 +51,7 @@ export class ForgetPasswordComponent implements OnInit {
         //   },(this.time - i) * 1000);
         // }
     if(this.emailReset !== ''){
-      
+
       let isValid = testBy.test(this.emailReset.toLowerCase().trim());
       setTimeout(() => {
         this.spinner.hide();
@@ -59,11 +63,11 @@ export class ForgetPasswordComponent implements OnInit {
         });
         return false;
       }
-    
+
       this.apiService.forgotPassword({email: this.emailReset.toLowerCase().trim()}).pipe(
         catchError(err => of([err]))
       ).subscribe((res: any) => {
-       
+
         console.log(res);
 
         if(res.data){
@@ -161,7 +165,7 @@ export class ForgetPasswordComponent implements OnInit {
         icon: 'error'
       });
       return false;
-      
+
     }
     // } else if (!this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || !this.ALPHA_NUMERIC_REGEX.test(this.cnfPass) || this.cnfPass.length < 7 || this.newPass.length < 7) {
     //   Swal.fire({
@@ -228,7 +232,7 @@ export class ForgetPasswordComponent implements OnInit {
       }
     }, 1000);
   }
- 
+
   ngOnInit(): void {
 
     // console.log(this.resetState);

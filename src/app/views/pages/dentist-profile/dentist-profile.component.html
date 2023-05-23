@@ -21,24 +21,24 @@
 
       <div class="row">
         <form [formGroup]="addSuperForm" class="form-inline" role="form">
-          <div class="row mb-2 mt-2">
+          <div class="row mb-3 mt-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">First Name<sup>*</sup></label>
               <input type="text" placeholder="First Name" formControlName="first_name" class="form-control"
-                maxlength="20" />
+                maxlength="25" />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Last Name<sup>*</sup></label>
               <input type="text" placeholder="Last Name" formControlName="last_name" class="form-control"
-                maxlength="20" />
+                maxlength="25" />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Email ID/Username<sup>*</sup></label>
-              <input type="text" placeholder="Email" formControlName="email" class="form-control" maxlength="100" />
+              <input type="text" placeholder="Email" formControlName="email" class="form-control" maxlength="60" />
             </div>
           </div>
           <div class="row mb-2"></div>
-          <div class="row mb-2">
+          <div class="row mb-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">Contact Number<sup>*</sup></label>
               <input type="tel" placeholder="Contact Number" formControlName="contact_number" class="form-control"
@@ -47,7 +47,7 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">Address 1<sup>*</sup></label>
               <input type="text" placeholder="Address 1" formControlName="address1" class="form-control me-4"
-                maxlength="70" />
+                maxlength="100" />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2">Address 2</label>
@@ -56,10 +56,10 @@
             </div>
           </div>
           <div class="row mb-2"></div>
-          <div class="row mb-2">
+          <div class="row mb-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">City<sup>*</sup></label>
-              <input type="text" placeholder="City" formControlName="city" class="form-control me-4" maxlength="15" />
+              <input type="text" placeholder="City" formControlName="city" class="form-control me-4" maxlength="25" />
             </div>
             <div class="col-md-4 form-group">
               <label class="mb-2" for="inputState">Country<sup>*</sup></label>
@@ -74,7 +74,7 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">State<sup>*</sup></label>
               <!-- <input type="text" placeholder="State" formControlName="state" class="form-control" maxlength="20" /> -->
-              <select class="form-select me-4" aria-label="Default select example" formControlName="state">
+              <select class="form-select me-4" aria-label="Default select example" formControlName="state" [value]="state">
                 <option value="" [selected]="true" [disabled]="true">
                   Select State
                 </option>
@@ -84,7 +84,7 @@
           </div>
 
           <div class="row mb-2"></div>
-          <div class="row mb-2">
+          <div class="row mb-3">
             <div class="col-md-4 form-group">
               <label class="mb-2">Zip<sup>*</sup></label>
               <input type="number" placeholder="Zip" formControlName="pincode" class="form-control me-5" maxlength="10"
@@ -93,14 +93,14 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">License/Registration No.<sup>*</sup></label>
               <input type="text" placeholder="License/Registration No." formControlName="license_no"
-                class="form-control" />
+                class="form-control" maxlength="15"/>
             </div>
             <div class="col-md-4 btn-div">
-              <button type="button" class="btn btn-primary save-btn mt-5 cancel-btn pd-1 other-btn fw-bolder"
+              <button type="button" class="btn btn-primary save-btn mt-2 cancel-btn pd-1 other-btn fw-bolder"
                 (click)="resetUser()">
                 Reset&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
               </button>
-              <button type="button" class="btn btn-primary save-btn ms-2 mt-5 pd-1 other-btn fw-bolder"
+              <button type="button" class="btn btn-primary save-btn ms-2 mt-2 pd-1 other-btn fw-bolder"
                 (click)="updateUser()">
                 &nbsp;Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i>
               </button>
@@ -114,7 +114,7 @@
         <div class="sub-container">
           <div class="sub-container mt-4">
             <!-- <h5 *ngIf="this.userID != this.dentistId">Subscription Details THIS</h5> -->
-            <div class="row mt-3" *ngIf="this.userData[0]?.subscription_details.status == true">
+            <div class="mt-3 w-100" *ngIf="this.userData[0]?.subscription_details.status == true || this.userData[0]?.subscription_details.status == false">
               <!--new code-->
               <div class="container xray-table-container border-top p-0" *ngIf="this.role == 'dentist'">
                 <!--p-0-->
@@ -128,19 +128,24 @@
                           <tr>
                             <th scope="col">Plan</th>
                             <th scope="col">Next Billing Date</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">View Details</th>
+                            <th scope="col" class="text-right">Amount</th>
+                            <th scope="col" class="text-center">View Details</th>
                           </tr>
                         </thead>
                         <tbody *ngIf="
-                            this.all_subData.length!= 0
+                            this.all_subData?.length!= 0
                           ">
                         <tr *ngFor="let data of this.all_subData;
                               let i = index">
-                            <td>{{ data.subscription_id.plan_name }}</td>
+                            <td>{{ data?.name | titlecase }}</td>
+                            <!-- <ng-template #dothatsub>
+                              <td>
+                                {{ data.subscription_id.plan_name | titlecase }}
+                              </td>
+                            </ng-template> -->
                             <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
-                            <td>${{ data.subscription_id.amount }}</td>
-                            <td>
+                            <td class="text-right">${{ data?.price }}</td>
+                            <td class="text-center">
                               <!-- removed href from <a></a> for now, please add later when using it -->
                               <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="planDetails(data._id)">
                                   View Details
@@ -154,12 +159,11 @@
                           </tr>
                         </tbody>
                         <tbody *ngIf="
-                            this.all_subData?.all_subscription_details
-                              ?.length == 0
+                            this.all_subData?.length == 0
                           ">
                           <tr>
                             <td colspan="3" class="no-data-available">
-                              No data!
+                              No data available!
                             </td>
                             <td colspan="0" class="no-data-available p-0"></td>
                             <td colspan="0" class="no-data-available p-0"></td>
@@ -203,7 +207,7 @@
             <div class="container mt-3 xray-table-container border-top p-0" *ngIf="this.userID != this.dentistId">
               <!--p-0-->
               <div class="sub-coontainer mt-4 xray-row">
-                <h5>Subscription Details</h5>
+                <h5>Subscription Detail</h5>
                 <div class="row mt-3">
                   <div class="col-12 overflowForScroll">
                     <!--pe-0-->
@@ -212,19 +216,19 @@
                         <tr>
                           <th scope="col">Plan</th>
                           <th scope="col">Next Billing Date</th>
-                          <th scope="col">Amount</th>
-                          <th scope="col">View Details</th>
+                          <th scope="col" class="text-right">Amount</th>
+                          <th scope="col" class="text-center">View Details</th>
                         </tr>
                       </thead>
                       <tbody *ngIf="
-                            this.all_subData.length!= 0
+                            this.all_subData?.length!= 0
                           ">
                         <tr *ngFor="let data of this.all_subData;
                               let i = index">
-                          <td>{{ data.subscription_id.plan_name }}</td>
+                          <td>{{ data?.name | titlecase }}</td>
                           <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
-                          <td>${{ data.subscription_id.amount }}</td>
-                          <td>
+                          <td class="text-right">${{ data?.price }}</td>
+                          <td class="text-center">
                             <!-- removed href from <a></a> for now, please add later when using it -->
                             <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="planDetails(data._id)">
                               View Details
@@ -238,12 +242,11 @@
                         </tr>
                       </tbody>
                       <tbody *ngIf="
-                            this.all_subData?.all_subscription_details
-                              ?.length == 0
+                            this.all_subData?.length == 0
                           ">
                         <tr>
                           <td colspan="3" class="no-data-available">
-                            No data!
+                            No data available!
                           </td>
                           <td colspan="0" class="no-data-available p-0"></td>
                           <td colspan="0" class="no-data-available p-0"></td>
@@ -280,7 +283,7 @@
                 <!-- <div class="col-sm-3 button-div"> -->
                 <!-- <div class="col btn-cancel ms-2 ps-3"> -->
                 <div class="d-flex justify-content-end">
-                  <button type="button" class="btn btn-danger ms-2 pd-1 other-btn fw-bolder"
+                  <button type="button" class="btn btn-danger ms-2 cancel-btn pd-1 other-btn fw-bolder"
                     (click)="cancelSubfromUser()">
                     Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                   </button>
@@ -318,14 +321,14 @@
                   <thead>
                     <tr>
                       <th scope="col">X-ray Uploaded Date</th>
-                      <th scope="col">View X-ray</th>
-                      <th scope="col">Evaluated By Dentist</th>
+                      <th scope="col" class="text-center">View X-ray</th>
+                      <th scope="col" class="text-center">Evaluated By Dentist</th>
                     </tr>
                   </thead>
                   <tbody *ngIf="this.xrayData?.length != 0">
                     <tr *ngFor="let data of this.xrayData; let i = index">
                       <td>{{ data.created_at | date : "dd/MM/yyyy" }}</td>
-                      <td>
+                      <td class="text-center">
                         <!-- removed href from <a></a> for now, please add later when using it -->
                         <!-- <a><button type="button" class="btn btn-primary pd-1 view-btn fw-bolder" title="View"
                             [routerLink]="'/mark-xray/'+data._id">
@@ -355,7 +358,7 @@
                       Not Submitted By Dentist
                     </div>
                     </td>
-                      <td>
+                      <td class="text-center">
                         <div class="custom-control custom-checkbox">
                           <div *ngIf="data.evaluation_status==true">
                             <input class="form-check-input checkbox1" type="checkbox" value="" id="checkbox-1" checked />
@@ -369,7 +372,7 @@
                   </tbody>
                   <tbody *ngIf="this.xrayData?.length == 0">
                     <tr>
-                      <td colspan="3" class="no-data-available">No data!</td>
+                      <td colspan="3" class="no-data-available">No data available!</td>
                       <td colspan="0" class="no-data-available p-0"></td>
                       <td colspan="0" class="no-data-available p-0"></td>
 
@@ -472,7 +475,7 @@
 
 <!--view plan modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title fw-semibold color" id="exampleModalLabel">Subscription Details:</h4>
@@ -481,7 +484,7 @@
         <div class="modal-body">
             <div class="d-flex align-items-start flex-column sub-body-content">
 
-                <ul class="proceed-details m-0 p-0 align-self-center  me-2 w-75 color">
+                <ul class="proceed-details m-0 p-0 align-self-center  mx-2 w-100 color">
                 <!-- <li
                   class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
                 >
@@ -496,25 +499,25 @@
                 >
                   <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
                 </li> -->
-                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                   <span>Plan Name:</span>&nbsp;<span class="me-2">{{
-                    this.planDetail?.subscription_id?.plan_name
+                    this.planDetail?.name
 
                     | titlecase
                     }}</span>
                 </li>
-                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                   <span>Plan Type:</span>&nbsp;<span class="me-2">{{
-                      this.planDetail?.subscription_id?.type | titlecase
+                      this.planDetail?.type | titlecase
                     }}</span>
                 </li>
-                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
-                  <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.subscription_id?.amount }}</span>
+                <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                  <span>Price:</span>&nbsp;<span class="me-2">${{ this.planDetail?.price }}</span>
                 </li>
-                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
+                <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center ">
                   <span>Start Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                 </li>
-                <li class=" fs-5  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+                <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
                   <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                 </li>
               </ul>
@@ -551,18 +554,16 @@
 </div>
 
 <!------Pricing Modal-------------------->
-<div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <!-- [hidden]="IsmodelShow" -->
-  <div class="modal-dialog modal-dialog-centered modal-lg billing-modal" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md billing-modal" role="document">
     <div class="modal-content modal-tall">
       <div class="modal-header justify-content-between align-items-center">
-        <div></div>
-        <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
-          Dark
-          <div class="mountain-color">Mountain</div>
-        </h2>
-        <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
+        <h4 class="modal-title d-flex justify-content-center fw-semibold text-start">
+          Subscription Details:
+        </h4>
+        <i class="fa-solid fa-xmark fs-5 x-mark" data-bs-dismiss="modal" style="cursor: pointer"></i>
       </div>
       <div class="modal-body px-5 py-4">
         <div  class="d-flex align-items-center flex-column sub-body-content">
@@ -700,9 +701,9 @@
 
             </form>
           </div> -->
-          <div class="d-flex align-items-center flex-column sub-body-content ">
-            <h5 class="text-center fw-semibold ">Subscription Details:</h5>
-            <ul class="proceed-details m-0 p-0 ">
+          <div class="d-flex align-items-center flex-column sub-body-content w-100">
+            <!-- <h5 class="text-center fw-semibold ">Subscription Details:</h5> -->
+            <ul class="proceed-details m-0 p-0 w-100">
               <!-- <li
                 class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
               >
@@ -719,19 +720,19 @@
               </li> -->
               <li class="fs-6  mt-2 fw-semibold d-flex justify-content-between align-items-center">
                 <span>Plan Name:</span>&nbsp; &nbsp; &nbsp;<span>{{
-                 this.curPlanDetail?.subscription_details.subscription_id.plan_name | titlecase
+                 this.curPlanDetail?.subscription_details?.name | titlecase
                   }}</span>
               </li>
               <li class="fs-6  mt-4 fw-semibold d-flex justify-content-between align-items-center">
                 <span>Plan Type:</span>&nbsp;<span>{{
-                  this.curPlanDetail?.subscription_details.subscription_id.type| titlecase
+                  this.curPlanDetail?.subscription_details?.type| titlecase
                   }}</span>
               </li>
               <li class="fs-6  mt-4 fw-semibold d-flex justify-content-between align-items-center">
-                <span>Price:</span>&nbsp;<span>${{ this.curPlanDetail?.subscription_details.subscription_id.amount}}</span>
+                <span>Price:</span>&nbsp;<span>${{ this.curPlanDetail?.subscription_details?.price}}</span>
               </li>
               <li class="fs-6  mt-4 fw-bold d-flex justify-content-between align-items-center border-top">
-                <span>Total:</span>&nbsp;<span>${{  this.curPlanDetail?.subscription_details.subscription_id.amount }}</span>
+                <span>Total:</span>&nbsp;<span>${{  this.curPlanDetail?.subscription_details?.price }}</span>
               </li>
             </ul>
           </div>

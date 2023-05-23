@@ -94,7 +94,7 @@ export const navItemsUser:
 
     },
     {
-      name: 'Upload X-ray',
+      name: 'Upload X-Ray',
       url: 'upload-xray/0',
       icon:'fa-solid fa-cloud-arrow-up'
 

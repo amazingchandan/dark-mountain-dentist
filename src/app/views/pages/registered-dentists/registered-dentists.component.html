@@ -15,12 +15,12 @@
                   <th class="text-nowrap">Dentist Name</th>
                   <th>License Number</th>
                   <th>City</th>
-                 
+
                   <th class="text-nowrap">Subscription End Date</th>
-                  <th>Action</th>
-                  <th>Upload</th>
-                  <th>Evaluations</th>
-                  <th>Corrected</th>
+                  <th class="text-right">Upload</th>
+                  <th class="text-right">Evaluations</th>
+                  <th class="text-right">Corrected</th>
+                  <th class="text-center textCenter">Action</th>
                 </tr>
               </thead>
               <tbody  *ngIf="allData?.length != 0">
@@ -28,9 +28,12 @@
                   <td>{{user.first_name | titlecase}} {{user.last_name | titlecase}}</td>
                 <td>{{user.license_no}}</td>
                   <td>{{user.city | titlecase}}</td>
-                 
-                  <td class="paddingForCenter">{{user.subscription_details.end_date | date : 'MM/dd/yyyy'}}</td>
-                  <td>
+
+                  <td class="">{{user.subscription_details.end_date | date : 'MM/dd/yyyy'}}</td>
+                  <td class="text-right">{{user.noOfXrayUploaded}}</td>
+                  <td class="text-right">{{user.noOfXrayEvaluated}}</td>
+                  <td class="text-right">{{user.noOfXrayMarkedByAdmin}}</td>
+                  <td class="text-center">
                     <!-- <div class="d-flex align-items-center"> -->
                       <!-- <button
                         type="button"
@@ -46,9 +49,6 @@
                       >Edit</button>
                     <!-- </div> -->
                   </td>
-                 <td>{{user.noOfXrayUploaded}}</td>
-                  <td>{{user.noOfXrayEvaluated}}</td>
-                  <td>{{user.noOfXrayMarkedByAdmin}}</td>
                 </tr>
                <!-- <tr>
 

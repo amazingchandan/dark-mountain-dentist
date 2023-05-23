@@ -67,6 +67,7 @@ import { EvaluateXrayComponent } from './views/userPages/evaluate-xray/evaluate-
 import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.component';
+import { DragDropDirective } from './drag-drop.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -79,7 +80,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent, ViewXrayComponent, RenewSubComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent, ViewXrayComponent, RenewSubComponent, DragDropDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

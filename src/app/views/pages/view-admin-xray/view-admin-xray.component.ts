@@ -50,7 +50,7 @@ export class ViewAdminXrayComponent {
     this.getXray(this.id);
     this.getMark(this.id);
     /* setTimeout(() => {
-      
+
        this.createLabelStudio()
      }, 1000);*/
     //this.createLabelStudio();
@@ -64,7 +64,7 @@ export class ViewAdminXrayComponent {
       //  fetch(this.xRayData[0]?.xray_image.path)
        //   .then(result => console.log(result.url))
         //console.log(a)
-       
+
         this.createLabelStudio1()
 
       }
@@ -116,7 +116,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
   .catch(error => console.log('error', error));
   }*/
 
- 
+
   getMark(id) {
     console.log(id)
      this.userService.getEvalById(id).subscribe((res: any) => {
@@ -253,7 +253,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       return obj;
       // return element.original_width
     })
-   
+
   //  const resultArr = resultArrUser.concat(resultArrAI)
     this.labelStudio = new LabelStudio('label-studio', {
       config: `
@@ -278,7 +278,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
  </RectangleLabels>
 
  </View>
- 
+
  </View>
  `,
 
@@ -352,7 +352,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
 
 /*  save() {
-    
+
     (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
     console.log(this.labelStudio.onSubmitAnnotation, "***")
     console.log(this.marker)
@@ -363,7 +363,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
 //     $('.Entity_button__3c64R .anticon-delete').trigger("click");
 //   }
- 
+
 //   saveMarks() {
 //     (<HTMLElement>document.getElementsByClassName('ls-update-btn')[0]).click()
 //     console.log(this.labelStudio.onSubmitAnnotation, "***")
@@ -388,7 +388,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 //       xray_id: this.id,
 //       user_id: this.xRayData[0]?.user_id,
 //       marker: markInfo1,
-     
+
 
 //     }
 //     const ai_info={

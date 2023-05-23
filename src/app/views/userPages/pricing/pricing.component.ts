@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, NgForm, ValidationErrors, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -14,6 +14,7 @@ import {
   ICreateOrderRequest,
   IPayPalButtonStyle
 } from 'ngx-paypal';
+import { Title } from '@angular/platform-browser';
 import * as bootstrap from "bootstrap";
 import * as $AB from "jquery";
 declare var Razorpay: any;
@@ -26,6 +27,8 @@ declare var Razorpay: any;
 
 const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
+
+
 @Component({
   selector: 'app-pricing',
   templateUrl: './pricing.component.html',
@@ -34,10 +37,15 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
 
 export class PricingComponent implements OnInit, AfterViewInit {
+  // @ViewChild("myinput") myInputField: ElementRef;
   // userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  @Directive({
+    selector: "[autofocus]"
+  })
   public registerForm: FormGroup;
   public isAuthLoading = false;
   public allData: any = [];
+  title = 'Dark Mountain - Pricing';
   userData: any;
   userPlanData: any;
   userInfo: any;
@@ -58,6 +66,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public subsType: any;
   public subsPrice: any;
   public subsTitle: any;
+  public subsCountry: any;
   public paypalView: any = false;
   public payData: any;
   public countryList = "-Select Country-";
@@ -67,7 +76,11 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public allcountries: Array<any>;
   public allstates: Array<any>;
   ipAddress = '';
+  public payDisabled: boolean = false;
+  public payDisabledMsg: any;
   public countriesInHere: Array<any> = ['India', 'United States', 'Japan', 'China', 'Netherland']
+  focus: any;
+  public dots: boolean = false;
   //route: any;
   public customOptions: OwlOptions = {
     center: true,
@@ -138,9 +151,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
-    private http: HttpClient) {
-    this.registerForm = this.formBuilder.group({})
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+    private http: HttpClient,
+    private el: ElementRef,
+    private titleService: Title,) {
+      titleService.setTitle(this.title);
+      this.registerForm = this.formBuilder.group({})
+      this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   }
 
   // private payPalButtonContainerElem?: ElementRef;
@@ -153,7 +169,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     console.log(this.checked, this.subsId);
     // console.log(window.paypal);
     this.getIPAddress();
-    this.userService.getSubscriptionList().subscribe((res: any) => {
+    this.userService.getSubscriptionListPricing().subscribe((res: any) => {
       console.log(res, "response")
       if (res.success) {
         console.log("plan fetched successfully")
@@ -242,6 +258,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
       console.log(this.country, "ipAddress", data, this.yearlyAllData)
     });
   }
+  @Input() set autofocus(condition: boolean)
+    {
+        this.focus = condition !== false;
+    }
   ngAfterViewInit(): void {
     // if(this.checked && this.subsId != 0){
     //   console.log(this.paypalRef.nativeElement);
@@ -254,18 +274,93 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //     }
     //   ).render(this.paypalRef.nativeElement)
     // }
+    this.el.nativeElement.focus()
+    console.log(this.registerForm)
   }
 
-  private initConfig(): void {
+  public initConfig(): void {
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
+
     var modal = document.getElementById("launch_ad");
     modal.style.display = "none";
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'sb',
+      clientId: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
       // ! for orders on client side
+      // onInit: (data, actions) => {
+      //   console.log("OnInit", data, actions)
+      //   console.log(this.registerForm.value);
+      //   // if (this.userInfo.id != "" && this.userInfo.id != undefined && this.userInfo.id != null) {
+      //   //   this.userService.updateUser(this.registerForm.value, this.userInfo.id)
+      //   //     .subscribe((res: any) => {
+      //   //       if (res.success) {
+      //   //         //this.toastr.success(res.message);
+      //   //         // Swal.fire({
+      //   //         //   text: res.message,
+      //   //         //   icon: 'success',
+      //   //         // });
+      //   //         console.log("DO HERE!!!!!!")
+      //   //         this.paypalBtn = true;
+      //   //         this.readOnly = true;
+      //   //         this.payDisabled = false;
+      //   //         document.getElementById("country").style.pointerEvents = 'none';
+      //   //         return actions.enable()
 
+      //   //         //  this.router.navigateByUrl('/registered-dentists');
+
+      //   //       } else {
+      //   //         Swal.fire({
+      //   //           text: "All the fields are necessary to fill before payment.",
+      //   //           icon: 'warning',
+      //   //         });
+      //   //         this.payDisabled = true;
+      //   //         // this.payDisabledMsg = res.message;
+      //   //         return actions.disable()
+
+      //   //         //this.toastr.error(res.message);
+      //   //       }
+      //   //     });
+      //   // }
+      // },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+        console.log(this.registerForm.valid)
+        console.log(this.registerForm.value)
+        // this.resetStatus();
+        return this.userService.updateUser(this.registerForm.value, this.userInfo.id)
+        .subscribe((res: any) => {
+          if (res.success) {
+            // Swal.fire({
+            //   text: res.message,
+            //   icon: 'success',
+            // });
+            this.paypalBtn = true;
+            this.readOnly = true;
+            this.payDisabled = false;
+            document.getElementById("country").style.pointerEvents = 'none';
+            // return actions.resolve();
+            return true;
+          } else {
+            Swal.fire({
+              text: res.message,
+              icon: 'warning',
+            });
+            this.payDisabled = true;
+            this.payDisabledMsg = res.message;
+            // return actions.reject();
+            return false;
+          }
+        });
+
+
+        if(this.registerForm.value){
+          // return actions.resolve();
+        } else {
+
+        }
+        // return actions.reject();
+      },
       createOrderOnClient: (data) => <ICreateOrderRequest>{
 
         intent: 'CAPTURE',
@@ -297,14 +392,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
       style: {
         layout: 'horizontal',
         tagline: false,
-        shape: 'pill',
-        color: 'white',
+        shape: 'rect',
+        color: 'gold',
       },
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then(details => {
           console.log('onApprove - you can get full order details inside onApprove: ', details),
-
 
             //my code
             this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
@@ -346,8 +440,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
               }
               this.userPlanData = {
                 sub_id: this.subsId,
-                //
                 type: this.subsType,
+                name: this.subsTitle,
+                price: this.subsPrice,
+                country: this.subsCountry,
               }
               this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
                 console.log(res)
@@ -405,11 +501,6 @@ export class PricingComponent implements OnInit, AfterViewInit {
         console.log('OnError', err);
         this.showError = true;
       },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-        this.resetStatus();
-      }
-
     };
   }
   allCountryList() {
@@ -417,6 +508,19 @@ export class PricingComponent implements OnInit, AfterViewInit {
       console.log(res.getData)
       this.allcountries = res.getData
     })
+  }
+  onchangeofthis(e: any){
+    console.log("THIS", e)
+    console.log(this.registerForm.value)
+    if(this.registerForm.value.first_name  && this.registerForm.value.last_name  && this.registerForm.value.email  && this.registerForm.value.contact_number  && this.registerForm.value.address1  && this.registerForm.value.city  && this.registerForm.value.country  && this.registerForm.value.state  && this.registerForm.value.pincode  && this.registerForm.value.license_no ){
+      this.paypalBtn = true;
+    } else {
+      this.paypalBtn = false;
+      this.dots = true
+      setTimeout(() => {
+        this.dots = false
+      }, 1500)
+    }
   }
   checkoutBtn() {
     this.IsmodelShow = true;
@@ -426,11 +530,39 @@ export class PricingComponent implements OnInit, AfterViewInit {
     document.getElementById("launch_ad")?.click();
     console.log("THIS IS RESET FOR PAYPAL");
     console.log(this.subsPrice.toString(), this.subsTitle, this.subsType);
+    if(!this.payDisabled){
+      this.userService.updateUser(this.registerForm.value, this.userInfo.id)
+            .subscribe((res: any) => {
+              if (res.success) {
+                // Swal.fire({
+                //   text: res.message,
+                //   icon: 'success',
+                // });
+                this.paypalBtn = true;
+                this.readOnly = true;
+                this.payDisabled = false;
+                document.getElementById("country").style.pointerEvents = 'none';
+                return true;
+              } else {
+                Swal.fire({
+                  text: res.message,
+                  icon: 'warning',
+                });
+                this.payDisabled = true;
+                this.payDisabledMsg = res.message;
+                return false;
+              }
+            });
+    }
   }
   handleClose() {
     this.checked = false;
   }
+  formChange(e: any){
+    console.log(e)
+  }
   onlyNumberKey(evt: KeyboardEvent) {
+    // console.log("THIS")
     // Only ASCII character in that range allowed
     let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
@@ -524,12 +656,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  getSubscription(id, type, pricing_amount, title) {
-    console.log(id, type, pricing_amount);
+  getSubscription(id, type, pricing_amount, title, country) {
+    console.log(id, type, pricing_amount, title, country);
     this.subsId = id;
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
+    this.subsCountry = country;
     // if(!this.checked){
     //   return Swal.fire({
     //     text: "Please accept the terms and conditions.",

@@ -5,17 +5,18 @@
       This software is just an aid for the Dentists to help them identifies cavities easily.<br>It does not guarantee medical accuracy.</p>
     <div class="row">
       <div class="col-12">
-        <div class="col-md-6 left-img position-relative">
-          <div class="for-loader" *ngIf="forTesting">
+        <div class="left-img position-relative">
+          <div class="for-loader" *ngIf="forTesting && pageRefresh">
             <div class="scan">
               <div class="retina"></div>
             </div>
           </div>
-          <div class="for-loader1" *ngIf="forTesting">
+          <!-- *ngIf="forTesting" -->
+          <!-- <div class="for-loader1" >
             <div class="scan1">
               <div class="retina1"></div>
             </div>
-          </div>
+          </div> -->
           <!-- <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
                     <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>-->
           <!-- <div id="label-studio1" (mousedown)="zoom($event)" (mouseleave)="zoomOut($event)"></div> -->
@@ -51,15 +52,15 @@
     </div>
     <div class="row mt-5">
       <div class="col-md-4 icon-div fw-semibold">
-        <span><i class="fa-solid fa-circle dentist-i"></i> Dentist Marking</span><br>
-        <span><i class="fa-solid fa-circle ai-i"></i> AI (Confirmed) Marking</span><br>
-        <span><i class="fa-solid fa-circle aiprob-i"></i> AI (Probable) Marking</span><br>
+        <span><i class="fa-solid fa-circle dentist-i me-1"></i> Dentist Marking</span><br>
+        <span><i class="fa-solid fa-circle ai-i me-1"></i> AI (Confirmed) Marking</span><br>
+        <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span><br>
       </div>
       <div class="col-md-8 btn-div " *ngIf="!forTesting">
 
 
         <button type="button" class="btn me-2 cancel-btn fw-bold other-btn pd-1 ms-2 discard" id="close"
-          (click)="handleClick()">Discard</button>
+          (click)="handleClick(this.xray, this.imgName)">Discard</button>
 
         <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Commit Correction&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
 

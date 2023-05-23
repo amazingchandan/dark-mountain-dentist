@@ -44,14 +44,16 @@
   </div>
 </section> -->
 
-<section class="content ps-2">
-  <div class="row">
+<section class="content ps-2" *ngIf="subsCancelled; else doSubsRenew">
+  <div class="row" >
     <div class="col-12">
       <h5 class="mb-n5 fw-bold position-relative">
         Uploaded X-Rays
         <label
           for="inputFiles"
           class="inputFile btn btn-primary other-btn pd-1 fw-bold"
+          appDragDrop
+          (files)="filesDropped($event)"
           >Upload X-Ray</label
         >
         <input
@@ -79,28 +81,29 @@
             >
               <thead>
                 <tr>
-                  <th class="text-nowrap">File Name</th>
-                  <th class="text-nowrap">Uploaded Date</th>
+                  <th class="text-nowrap" style="min-width: 150px;">File Name</th>
+                  <!-- <th class="text-nowrap">Uploaded Date</th> -->
                   <th class="text-nowrap">Evaluated Date</th>
                   <!-- <th>Subscription&nbsp;End Date</th> -->
 
                   <!-- <th>Upload</th> -->
-                  <th>Evaluation</th>
-                 <th>Total Cavities Detected</th>
+                  <th class="text-right">Total Cavities Detected</th>
+                  <th class="text-center textCenter">Evaluation</th>
                 </tr>
               </thead>
               <tbody *ngIf="allData?.length != 0 &&n==0">
                 <tr *ngFor="let data of allData; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
                   <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
-                  <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
                   <!-- <td>{{data.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
 
-                  <td>
-                    <div *ngIf="data.evaluation_status==true">
-                      <button
+                  <td class="text-right">{{data.totalCavitiesDetectedByUser}}</td>
+                  <td class="text-center">
+                    <!-- <div *ngIf="data.evaluation_status==true"> -->
+                    <button
                       type="button"
                       class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
                       data-bs-toggle="modal"
@@ -109,19 +112,18 @@
                     >
                       View
                     </button>
-                  </div>
-                  <div *ngIf="data.evaluation_status==false">
+                  <!-- </div> -->
+                  <!-- <div *ngIf="data.evaluation_status==false">
                     <button
                       type="button"
                       class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                      (click)="evaluate(data._id)"
+                      (click)="evaluate()"
                       [disabled]="false"
                     >
                       Resume Evaluation
                     </button>
-                  </div>
+                  </div> -->
                   </td>
-                  <td>{{data.totalCavitiesDetectedByUser}}</td>
                   <!-- <td>
                   <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
                 </td> -->
@@ -139,7 +141,7 @@
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
-                  <td colspan="0" class="no-data-available p-0"></td>
+                  <!-- <td colspan="0" class="no-data-available p-0"></td> -->
                   <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
                 </tr>
               </tbody>
@@ -168,7 +170,7 @@
                     <button
                       type="button"
                       class="btn btn-primary save-btn fw-bold other-btn pd-1 text-nowrap"
-                      (click)="evaluate(data._id)"
+                      (click)="evaluate()"
                       [disabled]="false"
                     >
                       Evaluate X-Ray
@@ -193,7 +195,7 @@
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
-                  <td colspan="0" class="no-data-available p-0"></td>
+                  <!-- <td colspan="0" class="no-data-available p-0"></td> -->
                   <!-- <td colspan="0" class="no-data-available p-0" ></td> -->
                 </tr>
               </tbody>
@@ -206,7 +208,8 @@
 
   <div class="backdrop" *ngIf="display">
     <div class="modal-dialog modal-dialog-centered modal-lg sub-backdrop-container" role="document">
-      <div class="modal-content">
+      <div class="modal-content rounded-3" appDragDrop
+      (files)="filesDropped($event)">
         <div class="modal-header backdrop-header">
           <h5 class="m-0 modal-title fw-bold">
             View Uploaded Image
@@ -266,6 +269,16 @@
     </div>
   </div> -->
 </section>
+
+<ng-template #doSubsRenew>
+  <section class="content ps-2">
+    <div class="row">
+      <div class="col-12">
+        <h3>Your subscription is expired.</h3><span [routerLink]="'/pricing/'+id" class="renew-subs">Click Here to renew your subscription.</span>
+      </div>
+    </div>
+  </section>
+</ng-template>
 
 <!-- <div class="backdrop" [ngStyle]="{ 'display': display }"></div>
   <div

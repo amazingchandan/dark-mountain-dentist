@@ -13,6 +13,7 @@ import {
   ICreateOrderRequest,
   IPayPalButtonStyle
 } from 'ngx-paypal';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dentist-profile',
@@ -20,6 +21,7 @@ import {
   styleUrls: ['./dentist-profile.component.scss']
 })
 export class DentistProfileComponent implements OnInit {
+  title = 'Dark Mountain - Profile';
   dtOptions: DataTables.Settings = {};
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public userID = localStorage.getItem('id') || "";
@@ -33,20 +35,21 @@ export class DentistProfileComponent implements OnInit {
   year: any;
   xrayData: any = {};
   country: any;
+  state: any;
   // userInfo:any;
   role: any;
   age: any;
-  all_subData:any=[];
-  hiddenFlag:boolean=true;
-  hiddenunFlag:boolean=true;
+  all_subData: any = [];
+  hiddenFlag: boolean = true;
+  hiddenunFlag: boolean = true;
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
-  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
   showContent: boolean;
   planDetail: any;
   curPlanDetail: any;
 
-  public payPalConfig ? : IPayPalConfig;
+  public payPalConfig?: IPayPalConfig;
 
   public paypalView: any = false;
   public payData: any;
@@ -68,14 +71,16 @@ export class DentistProfileComponent implements OnInit {
   // };
   subsId: any;
   preStart_date: Date;
-  preEnd_date:Date
+  preEnd_date: Date
 
   constructor(private formBuilder: FormBuilder,
     private apiService: UserService,
     private toastr: ToastrService,
     private router: Router,
+    private titleService: Title,
     private route: ActivatedRoute,
     private appService: AppService) {
+    titleService.setTitle(this.title);
     this.addSuperForm = this.formBuilder.group({})
   }
   ngOnInit(): void {
@@ -87,11 +92,11 @@ export class DentistProfileComponent implements OnInit {
       address1: new FormControl(),
       address2: new FormControl(),
       city: new FormControl(),
-      state: new FormControl(),
       country: new FormControl(),
+      state: new FormControl(),
       zip: new FormControl(),
       age: new FormControl(),
-      license_no : new FormControl(),
+      license_no: new FormControl(),
 
       //user_role: new FormControl(),
     });
@@ -130,7 +135,7 @@ export class DentistProfileComponent implements OnInit {
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
       age: ['', [Validators.required]],
-      license_no : ['', [Validators.required]],
+      license_no: ['', [Validators.required]],
     });
 
 
@@ -157,46 +162,47 @@ export class DentistProfileComponent implements OnInit {
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     this.role = decodedJwtData.role;
     this.myPlanDetail()
-  setTimeout(()=>{
-    this.flagBtn();
-  },1000)
+    setTimeout(() => {
+      this.flagBtn();
+    }, 1000)
 
-  this.initConfig();
-  this.allCountryList();
+    this.initConfig();
+    this.allCountryList();
   }
-  flagBtn(){
+  flagBtn() {
     let flag = document.getElementById("flag");
-let unflag = document.getElementById("unflag");
-console.log("00",this.userData.flag)
+    let unflag = document.getElementById("unflag");
+    console.log("00", this.userData.flag)
 
-    if(this.userData[0].flag===0){
-      this.hiddenFlag=false;
-      this.hiddenunFlag=true;
-      console.log("0",this.userData[0].flag)
+    if (this.userData[0]?.flag === 0) {
+      this.hiddenFlag = false;
+      this.hiddenunFlag = true;
+      console.log("0", this.userData[0].flag)
 
     }
-    else if(this.userData[0].flag===1){
-      this.hiddenFlag=true;
-      this.hiddenunFlag=false
-      console.log("1",this.userData.flag)
+    else if (this.userData[0]?.flag === 1) {
+      this.hiddenFlag = true;
+      this.hiddenunFlag = false
+      console.log("1", this.userData.flag)
 
     }
   }
-  allCountryList(){
+  allCountryList() {
     this.apiService.getCountries().subscribe((res: any) => {
       console.log(res.getData)
       this.allcountries = res.getData
     })
   }
-  stateByCountry(e: any){
+  stateByCountry(e: any) {
     console.log(e.target.value)
-    this.apiService.getStateByCountries({name: e.target.value}).subscribe((res: any) => {
+    this.apiService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
       console.log(res.getData[0].regions)
-      this.stateList = "-Select State-"
+      // this.stateList = "-Select State-"
       this.allstates = res.getData[0].regions
+      console.log(this.allstates)
     })
   }
-  handleClick(){
+  handleClick() {
     this.router.navigateByUrl('/registered-dentists');
     console.log(this.role);
   }
@@ -224,10 +230,10 @@ console.log("00",this.userData.flag)
       console.log(this.date, "/", this.month, "/", this.year);
 
       //Plan-details
-      this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((res: any) => {
-        console.log(res)
-        if (res.success) {
-          this.planData = res.getData;
+      this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((resp: any) => {
+        console.log(resp)
+        if (resp.success) {
+          this.planData = resp.getData;
           // console.log(this.planData[0].type)
         }
       })
@@ -275,23 +281,23 @@ console.log("00",this.userData.flag)
           age: res.getData[0].age
         });
         this.addSuperForm.patchValue({
-         license_no: res.getData[0].license_no
+          license_no: res.getData[0].license_no
         })
 
 
       }
-      console.log(this.addSuperForm.value)
+      console.log(this.addSuperForm.value, this.allstates)
     });
-     //allSubscriptionDetail Api
+    //allSubscriptionDetail Api
 
-     this.apiService.getUserAllSubById(id).subscribe((res: any) => {
+    this.apiService.getUserAllSubById(id).subscribe((res: any) => {
       console.log(res, "xray");
-      this.all_subData=(res.getData.all_subscription_details);
-     this.showContent=true
+      this.all_subData = (res.getData.all_subscription_details);
+      this.showContent = true
       if (this.isDtInitialized) {
         this.dtElement?.dtInstance?.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
-         this.dtTrigger.next(undefined);
+          this.dtTrigger.next(undefined);
         });
       } else {
         this.isDtInitialized = true;
@@ -304,11 +310,11 @@ console.log("00",this.userData.flag)
     this.apiService.getUserXrayById(id).subscribe((res: any) => {
       console.log(res, "xray");
       this.xrayData = res.getData;
-      this.showContent=true
+      this.showContent = true
       if (this.isDtInitialized) {
         this.dtElement?.dtInstance?.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
-         this.dtTrigger.next(undefined);
+          this.dtTrigger.next(undefined);
         });
       } else {
         this.isDtInitialized = true;
@@ -343,15 +349,15 @@ console.log("00",this.userData.flag)
     }
 
   }
- planDetails(id){
-   console.log(id,"idd")
-   for(let i=0;i< this.all_subData.length;i++){
-    if(this.all_subData[i]._id==id){
-      this.planDetail=this.all_subData[i]
+  planDetails(id) {
+    console.log(id, "idd")
+    for (let i = 0; i < this.all_subData.length; i++) {
+      if (this.all_subData[i]._id == id) {
+        this.planDetail = this.all_subData[i]
+      }
+      console.log(this.planDetail, "detail")
     }
-    console.log(this.planDetail,"detail")
-   }
- }
+  }
 
 
 
@@ -368,35 +374,37 @@ console.log("00",this.userData.flag)
     }).then((result) => {
       if (result.isConfirmed) {
         if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
-        this.apiService.cancelUserPlan(this.dentistId)
-          .subscribe((res: any) => {
-            if (res.success) {
-              //this.toastr.success(res.message);
-              Swal.fire({
-                text: res.message,
-                icon: 'success',
-              });
-              this.apiService.getUserRecordById(this.dentistId).subscribe((res: any) => {
-                console.log(res, "*****");
-                this.userData = res.getData;
-                if (this.userData[0]?.subscription_details.status == false) {
-                  this.planData = "";
-                  this.end_date = " ";
-                }
-                console.log(this.end_date, "date")
+          this.apiService.cancelUserPlan(this.dentistId)
+            .subscribe((res: any) => {
+              if (res.success) {
+                //this.toastr.success(res.message);
+                Swal.fire({
+                  text: res.message,
+                  icon: 'success',
+                });
+                this.apiService.getUserRecordById(this.dentistId).subscribe((res: any) => {
+                  console.log(res, "*****");
+                  this.userData = res.getData;
+                  if (this.userData[0]?.subscription_details.status == false) {
+                    this.planData = "";
+                    this.end_date = " ";
+                  }
+                  console.log(this.end_date, "date")
 
-              })
-              event.target.disable = true;
-              //  this.router.navigateByUrl('/registered-dentists');
-            } else {
-              Swal.fire({
-                text: res.message,
-                icon: 'error',
-              });
-              //this.toastr.error(res.message);
-            }
-          });
-      }}})
+                })
+                event.target.disable = true;
+                //  this.router.navigateByUrl('/registered-dentists');
+              } else {
+                Swal.fire({
+                  text: res.message,
+                  icon: 'error',
+                });
+                //this.toastr.error(res.message);
+              }
+            });
+        }
+      }
+    })
 
 
   }
@@ -416,16 +424,16 @@ console.log("00",this.userData.flag)
           this.apiService.cancelUserPlan(this.dentistId)
             .subscribe((res: any) => {
               if (res.success) {
-              /*  Swal.fire({
-                  toast: true,
-                  position: 'top-end',
+                Swal.fire({
+                  // toast: true,
+                  // position: 'top-end',
                   showConfirmButton: false,
                   timer: 3000,
                   title: 'Success!',
-                  text: "You have been log out",
+                  text: "Your subscription is cancelled successfully.",
                   icon: 'success',
-                });*/
-                this.appService.logout();
+                });
+                // this.appService.logout();
               }
               else {
                 Swal.fire({
@@ -497,228 +505,226 @@ console.log("00",this.userData.flag)
 
 
   }
-  flagClick(){
-    const flagData={
+  flagClick() {
+    const flagData = {
       id: this.userData[0]?._id,
       flag: 1,
     }
-    this.apiService.setFlag(flagData).subscribe((res:any)=>{
-      if (res.success){
+    this.apiService.setFlag(flagData).subscribe((res: any) => {
+      if (res.success) {
         console.log("flag set successfully")
-        this.hiddenFlag=true;
-        this.hiddenunFlag=false;
+        this.hiddenFlag = true;
+        this.hiddenunFlag = false;
       }
-      else{
+      else {
         console.log("flag not set successfully")
       }
     })
 
   }
-  unflagClick(){
-    const flagData={
+  unflagClick() {
+    const flagData = {
       id: this.userData[0]?._id,
       flag: 0,
     }
-    this.apiService.setFlag(flagData).subscribe((res:any)=>{
-      if (res.success){
+    this.apiService.setFlag(flagData).subscribe((res: any) => {
+      if (res.success) {
         console.log("flag set successfully")
-        this.hiddenFlag=false;
-        this.hiddenunFlag=true;
+        this.hiddenFlag = false;
+        this.hiddenunFlag = true;
       }
-      else{
+      else {
         console.log("flag not set successfully")
       }
     })
 
   }
-  myPlanDetail(){
-    this.apiService.getUserPlanById(this.userInfo.id).subscribe((res:any)=>
-    {
+  myPlanDetail() {
+    this.apiService.getUserPlanById(this.userInfo.id).subscribe((res: any) => {
       console.log("myPlan")
-      if(res.success){
-        console.log("myPlan1",res.getData)
-       this.curPlanDetail=res.getData;
-       this.subsType= this.curPlanDetail?.subscription_details.subscription_id.type
-    this.subsPrice = this.curPlanDetail?.subscription_details.subscription_id.amount;
-    this.subsId= this.curPlanDetail?.subscription_details.subscription_id._id;
-    this.preStart_date=this.curPlanDetail?.subscription_details.start_date;
-    this.preEnd_date=this.curPlanDetail?.subscription_details.end_date;
+      if (res.success) {
+        console.log("myPlan1", res.getData)
+        this.curPlanDetail = res.getData;
+        this.subsType = this.curPlanDetail?.subscription_details?.subscription_id?.type
+        this.subsPrice = this.curPlanDetail?.subscription_details?.subscription_id?.amount;
+        this.subsId = this.curPlanDetail?.subscription_details?.subscription_id?._id;
+        this.preStart_date = this.curPlanDetail?.subscription_details?.start_date;
+        this.preEnd_date = this.curPlanDetail?.subscription_details?.end_date;
 
 
-   console.log("***",this.preEnd_date)
-       console.log("planDetail",res)
+        console.log("***", this.preEnd_date)
+        console.log("planDetail", res)
       }
-      else{
-        console.log(res,"error")
+      else {
+        console.log(res, "error")
       }
     })
   }
 
-  view(id){
+  view(id) {
     this.router.navigateByUrl('/view-admin-x-ray/' + id)
   }
 
   private initConfig(): void {
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
-    var modal= document.getElementById("launch_ad");
+    var modal = document.getElementById("launch_ad");
     modal.style.display = "none";
 
     this.payPalConfig = {
-        currency: 'USD',
-        clientId: 'sb',
-        // ! for orders on client side
+      currency: 'USD',
+      clientId: 'sb',
+      // ! for orders on client side
 
-        createOrderOnClient: (data) => < ICreateOrderRequest > {
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
 
-            intent: 'CAPTURE',
-            purchase_units: [{
-              amount: {
-                  currency_code: 'USD',
-                  value: `${this.subsPrice}`,
-                  breakdown: {
-                      item_total: {
-                          currency_code: 'USD',
-                          value: `${this.subsPrice}`
-                      }
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'USD',
+            value: `${this.subsPrice}`,
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: `${this.subsPrice}`
+              }
+            }
+          },
+          items: [{
+            name: 'Dark Mountain',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'USD',
+              value: `${this.subsPrice}`,
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true',
+      },
+      style: {
+        layout: 'horizontal',
+        tagline: false,
+        shape: 'pill',
+        color: 'white',
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details),
+
+
+            //my code
+            this.apiService.getUserRecordById(this.userID).subscribe((res: any) => {
+              console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+              this.userData = res.getData;
+              console.log(this.userData, this.userInfo, this.userInfo.token)
+
+              if (res.success) {
+
+
+                var end_date;
+                var now = new Date();
+                console.log(this.subsType)
+                if (this.subsType == "Monthly") {
+
+
+                  end_date = new Date(now.setMonth(now.getMonth() + 1));
+                  end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+                  console.log(end_date, "Date", new Date());
+
+                }
+                else if (this.subsType === "Yearly") {
+
+
+                  end_date = new Date(now.setMonth(now.getMonth() + 12));
+
+                  console.log(end_date, "Date", new Date());
+
+
+                }
+              }
+              const userPlanData = {
+                sub_id: this.subsId,
+                type: this.subsType,
+                pre_start_date: this.preStart_date,
+                pre_end_date: this.preEnd_date
+              }
+
+              this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((res: any) => {
+                console.log(res)
+
+                if (res.success) {
+                  //this.toastr.success(res.message);
+                  this.IsmodelShow = false
+                  console.log(this.IsmodelShow);
+                  ($("#myModal") as any).modal("hide");
+                  //  this.handleClick();
+                  // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+                  Swal.fire({
+                    text: "You have successfully subscribed",
+                    icon: 'success',
+                  });
+                  /*var modal= document.getElementById("launch_ad");
+                   modal.style.display = "none";*/
+                  if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                    console.log("iff")
+
+                    this.router.navigateByUrl("/dashboard")
                   }
-              },
-              items: [{
-                  name: 'Dark Mountain',
-                  quantity: '1',
-                  category: 'DIGITAL_GOODS',
-                  unit_amount: {
-                      currency_code: 'USD',
-                      value: `${this.subsPrice}`,
-                  },
-              }]
-            }]
-        },
-        advanced: {
-            commit: 'true',
-        },
-        style: {
-          layout: 'horizontal',
-          tagline: false,
-          shape: 'pill',
-          color: 'white',
-        },
-        onApprove: (data, actions) => {
-          console.log('onApprove - transaction was approved, but not authorized', data, actions);
-          actions.order.get().then(details => {
-              console.log('onApprove - you can get full order details inside onApprove: ', details),
+                  else {
+                    console.log("elseee")
+                    this.router.navigateByUrl("/login")
+                  }
+                }
+              })
 
+            })
+        });
+      },
+      // ! for orders on server side
+      // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
+      //         .then((res) => res.json())
+      //         .then((order) => order.orderID),
+      //     onApprove: (data, actions) => {
+      //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
+      //         actions.order.get().then(details => {
+      //             console.log('onApprove - you can get full order details inside onApprove: ', details);
+      //         });
 
-    //my code
-    this.apiService.getUserRecordById(this.userID).subscribe((res: any) => {
-         console.log(res, "resssssssssssssssssssssssssssssssssssssss")
-         this.userData = res.getData;
-         console.log(this.userData, this.userInfo,this.userInfo.token)
-
-         if (res.success) {
-
-
-             var end_date;
-             var now = new Date();
-             console.log( this.subsType)
-             if (this.subsType == "Monthly") {
-
-
-               end_date = new Date(now.setMonth(now.getMonth() + 1));
-               end_date = new Date(now.setMinutes(now.getMinutes() + 5));
-               console.log(end_date, "Date", new Date());
-
-             }
-             else if (this.subsType === "Yearly") {
-
-
-               end_date = new Date(now.setMonth(now.getMonth() + 12));
-
-               console.log(end_date, "Date", new Date());
-
-
-           }
-          }
-             const userPlanData = {
-                       sub_id: this.subsId,
-                       type:this.subsType,
-                       pre_start_date:this.preStart_date,
-                       pre_end_date:this.preEnd_date
-                     }
-
-                     this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((res: any) => {
-                       console.log(res)
-
-                       if (res.success) {
-                         //this.toastr.success(res.message);
-                         this.IsmodelShow = false
-                         console.log(this.IsmodelShow);
-                         ($("#myModal")as any).modal("hide");
-                        //  this.handleClick();
-                        // <HTMLElement>document.getElementById('myModal').modal("hide")
-
-                         Swal.fire({
-                           text: "You have successfully subscribed",
-                           icon: 'success',
-                         });
-                        /*var modal= document.getElementById("launch_ad");
-                         modal.style.display = "none";*/
-                         if(this.userInfo.token!=null && this.userInfo.token!=undefined&& this.userInfo.token!='' )
-                         {
-                          console.log("iff")
-
-                           this.router.navigateByUrl("/dashboard")
-                       }
-                       else{
-                         console.log("elseee")
-                         this.router.navigateByUrl("/login")
-                       }
-                        }
-                        })
-
-                      })
-          });
-        },
-        // ! for orders on server side
-        // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
-        //         .then((res) => res.json())
-        //         .then((order) => order.orderID),
-        //     onApprove: (data, actions) => {
-        //         console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        //         actions.order.get().then(details => {
-        //             console.log('onApprove - you can get full order details inside onApprove: ', details);
-        //         });
-
-        // },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            this.showSuccess = true;
-        },
-        onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
-            // this.checked = false;
-            this.showCancel = true;
-        },
-        onError: err => {
-            console.log('OnError', err);
-            this.showError = true;
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-            this.resetStatus();
-        }
+      // },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        this.showSuccess = true;
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+        // this.checked = false;
+        this.showCancel = true;
+      },
+      onError: err => {
+        console.log('OnError', err);
+        this.showError = true;
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+        this.resetStatus();
+      }
 
     };
   }
-  resetStatus(){
+  resetStatus() {
     document.getElementById("launch_ad")?.click();
     console.log("THIS IS RESET FOR PAYPAL");
     console.log(this.subsPrice.toString(), this.subsType);
   }
 
 
-close(){
-  ($("#renewModal")as any).modal("hide");
-}
+  close() {
+    ($("#renewModal") as any).modal("hide");
+  }
 
 
   ngOnDestroy(): void {

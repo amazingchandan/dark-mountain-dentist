@@ -17,13 +17,38 @@
   </li>
 </c-sidebar-nav>
 
-<c-sidebar-nav  *ngIf='this.role === "dentist"' [navItems]="navItemsUser" dropdownMode="close">
+<c-sidebar-nav  *ngIf='this.role === "dentist" && !this.changeUrl; else dootherone' [navItems]="navItemsUser" dropdownMode="close">
+  <!-- <c-sidebar-nav-link class="nav-item">
+    <a routerlinkactive="active" ng-reflect-router-link-active="active" ng-reflect-ng-class="[object Object]" ng-reflect-c-html-attr="[object Object]" ng-reflect-preserve-fragment="false" ng-reflect-skip-location-change="false" ng-reflect-replace-url="false" ng-reflect-state="[object Object]" ng-reflect-router-link="upload-xray/0" ng-reflect-router-link-active-options="[object Object]" class="nav-link active" href="/upload-xray/0"><i ng-reflect-ng-class="[object Object]" class="nav-icon fa-solid fa-cloud-arrow-up"></i><c-sidebar-nav-link-content>Upload X-ray</c-sidebar-nav-link-content></a></c-sidebar-nav-link> -->
+    <!-- <c-sidebar-nav-link></c-sidebar-nav-link> -->
   <li class="nav-item" style="cursor:pointer">
     <a class=" nav-link-success nav-link" (click)="logout()">
       <i class="fa-solid fa-right-from-bracket nav-icon"></i> Logout
     </a>
   </li>
 </c-sidebar-nav>
+<ng-template #dootherone>
+  <c-sidebar-nav dropdownMode="close" *ngIf='this.role === "dentist" && this.changeUrl'>
+    <!-- <c-sidebar-nav-link class="nav-item">
+      <a routerlinkactive="active" ng-reflect-router-link-active="active" ng-reflect-ng-class="[object Object]" ng-reflect-c-html-attr="[object Object]" ng-reflect-preserve-fragment="false" ng-reflect-skip-location-change="false" ng-reflect-replace-url="false" ng-reflect-state="[object Object]" ng-reflect-router-link="upload-xray/0" ng-reflect-router-link-active-options="[object Object]" class="nav-link active" href="/upload-xray/0"><i ng-reflect-ng-class="[object Object]" class="nav-icon fa-solid fa-cloud-arrow-up"></i><c-sidebar-nav-link-content>Upload X-ray</c-sidebar-nav-link-content></a></c-sidebar-nav-link> -->
+      <!-- <c-sidebar-nav-link></c-sidebar-nav-link> -->
+    <li class="nav-item" style="cursor:pointer">
+      <a class=" nav-link-success nav-link" (click)="dashboardFn('dashboard')">
+        <i class="fa-solid fa-house-chimney nav-icon"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item" style="cursor:pointer">
+      <a class=" nav-link-success nav-link" (click)="dashboardFn('upload-xray/0')">
+        <i class="fa-solid fa-cloud-arrow-up nav-icon"></i> Upload X-Ray
+      </a>
+    </li>
+    <li class="nav-item" style="cursor:pointer">
+      <a class=" nav-link-success nav-link" (click)="dashboardFn('logout')">
+        <i class="fa-solid fa-right-from-bracket nav-icon"></i> Logout
+      </a>
+    </li>
+  </c-sidebar-nav>
+</ng-template>
 
 </c-sidebar>
 

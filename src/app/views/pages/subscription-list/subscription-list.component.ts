@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 import { type } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-subscription-list',
@@ -19,20 +20,27 @@ import { DataTableDirective } from 'angular-datatables';
   styleUrls: ['./subscription-list.component.scss']
 })
 export class SubscriptionListComponent implements OnInit {
+  title = 'Dark Mountain - Subscription List';
   dtOptions: any = {};
   addPriceingForm: FormGroup;
   private pricingId: any;
-  private status: any;
+  status: any;
   plan_name: string;
   minimum:string;
   maximum:string;
   amount:number;
   type:string;
+  // status: any;
+  public showDelete: boolean = false;
+  public deleteSubsId: any;
+  public planStatus: any;
 
   allData: any;
   private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
-  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+
+  // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
   @ViewChild('close') close: ElementRef;
 
   showContent: boolean;
@@ -41,26 +49,30 @@ export class SubscriptionListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private titleService: Title,
+  ) {
+    titleService.setTitle(this.title);
+  }
 
   ngOnInit(): void {
     // setTimeout(() => this.showContent = true, 350);
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
       language: {
         search:"",
         searchPlaceholder: 'Search ',
       },
       buttons:[{
-        sExtends: 'CSV',
+        extend: 'csv',
         text: 'Download CSV'
       }],
-      info:false,
+      info:true,
       ordering: false,
       responsive:true,
       search:true,
+      paging: true,
+      pagingType: 'full_numbers',
+      pageLength: 10,
       dom: 'Bfrtip',
 
     };
@@ -73,6 +85,7 @@ export class SubscriptionListComponent implements OnInit {
       // minimum: new FormControl(),
       type: new FormControl(),
       country: new FormControl(),
+      status: new FormControl(),
     });
     this.addPriceingForm = this.formBuilder.group({
       plan_name: ['', [Validators.required]],
@@ -81,6 +94,7 @@ export class SubscriptionListComponent implements OnInit {
       // minimum: ['', [Validators.required]],
       type: ['', [Validators.required]],
       country: ['', [Validators.required]],
+      status: ['', [Validators.required]],
     });
     this.pricingId = this.route.snapshot.paramMap.get('pricing_id');
     if (
@@ -172,6 +186,18 @@ export class SubscriptionListComponent implements OnInit {
       // return false;
     }
     if (
+      this.addPriceingForm.value.status == undefined ||
+      this.addPriceingForm.value.status == ''
+    ) {
+      Swal.fire({
+        text: 'Please select status',
+        icon: 'warning'
+      });
+      return false;
+      // this.toastr.error('Please enter subscription days');
+      // return false;
+    }
+    if (
       this.addPriceingForm.value.country == undefined ||
       this.addPriceingForm.value.country == ''
     ) {
@@ -228,11 +254,11 @@ export class SubscriptionListComponent implements OnInit {
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
           dtInstance.destroy();
-         this.dtTrigger.next(undefined);
+        //  this.dtTrigger.next(undefined);
         });
       } else {
         this.isDtInitialized = true;
-        this.dtTrigger.next(undefined);
+        // this.dtTrigger.next(undefined);
       }
     })
 
@@ -241,12 +267,15 @@ export class SubscriptionListComponent implements OnInit {
   openModal(id) {
     console.log(id, "plan id")
     if(id!=null && id != undefined && id != ''){
+      this.showDelete = true;
+      this.deleteSubsId = id;
       for (let i = 0; i < this.allData.length; i++) {
         if (this.allData[i]._id === id) {
           console.log(this.allData[i])
+          this.planStatus = this.allData[i].status
           this.pricingId=id;
           this.addPriceingForm.patchValue({
-            plan_name: this.allData[i].plan_name.toLowerCase().trim(),
+            plan_name: this.allData[i].plan_name.trim(),
           });
 
           // this.addPriceingForm.patchValue({
@@ -264,11 +293,15 @@ export class SubscriptionListComponent implements OnInit {
           this.addPriceingForm.patchValue({
             country: this.allData[i].country,
           });
-
+          this.addPriceingForm.patchValue({
+            status: this.allData[i].status,
+          });
+          console.log(this.planStatus)
         }
       }
     }
     else{
+      this.showDelete = false;
       console.log("no id")
       this.addPriceingForm.patchValue({
         plan_name: '',
@@ -289,8 +322,50 @@ export class SubscriptionListComponent implements OnInit {
       this.addPriceingForm.patchValue({
         country: '',
       });
+      this.addPriceingForm.patchValue({
+        status: '',
+      });
 
     }
+  }
+  onClickInactive(){
+    console.log(this.deleteSubsId)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to deactivate the plan?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Confirm',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteSubsById({id: this.deleteSubsId}).subscribe((res: any) => {
+          console.log(res)
+          // this.router.navigateByUrl('/subscription-list');
+          window.location.reload();
+        })
+      }
+    });
+
+  }
+  onClickActive(){
+    console.log(this.deleteSubsId)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to activate the plan?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Confirm',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.activeSubsID({id: this.deleteSubsId}).subscribe((res: any) => {
+          console.log(res)
+          // this.router.navigateByUrl('/subscription-list');
+          window.location.reload();
+        })
+      }
+    });
   }
   updatePlan(id) {
 
@@ -324,7 +399,7 @@ export class SubscriptionListComponent implements OnInit {
  }
 
   ngOnDestroy(): void {
-    this.planList();
+    // this.planList();
     this.dtTrigger.unsubscribe();
   }
 }

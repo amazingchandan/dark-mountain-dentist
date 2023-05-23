@@ -51,7 +51,7 @@ select.fade {
     margin-bottom: -2rem;
 }
 .paddingForCenter {
-  padding-left: 7.25%;
+  padding-right: 7rem;
 }
 
 @media (max-width: 645px){
@@ -73,4 +73,21 @@ select.fade {
     right: auto !important;
     position: absolute;
   }
+}
+.width-th {
+  min-width: 170px;
+}
+.amt-class {
+  text-align: right !important;
+}
+.delete-btn {
+  background-color: red !important;
+  border: 1px solid red !important;
+  // border-color: red !important;
+}
+.delete-btn:hover {
+  background-color: rgba(194, 0, 0, 0.75) !important;
+}
+.status-s {
+  width: 80px;
 }

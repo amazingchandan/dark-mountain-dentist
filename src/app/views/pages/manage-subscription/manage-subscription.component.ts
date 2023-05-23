@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./manage-subscription.component.scss']
 })
 export class ManageSubscriptionComponent {
-  
+
 }

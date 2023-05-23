@@ -37,7 +37,7 @@ export class MarkXrayComponent {
 
 
   // is equal to default value of input range
-  valInput: any; 
+  valInput: any;
   leftPos: any ;
   marker: any = [];
   baseLink: string = environment.API_HOST;
@@ -85,13 +85,13 @@ export class MarkXrayComponent {
         console.log(this.markData)
         this.userMark = this.markData.dentist_correction
         this.AIMarkData = this.markData.ai_identified_cavities;
-        this.totUserCavity=this.userMark.length 
+        this.totUserCavity=this.userMark.length
         console.log(this.userMark, "***", this.AIMarkData,)
        setTimeout(()=>{
         this.createLabelStudio()
         this.createLabelStudio1()
        },1000)
-        
+
         setTimeout(() => {
           this.spinner.hide();
         }, 2000);
@@ -195,11 +195,11 @@ export class MarkXrayComponent {
         "original_height": element.original_height,
         "image_rotation": 0,
         "to_name": "img",
-       
+
         "fillColor": "#00ff00",
         "background":"green",
         "value":
-       { 
+       {
         "x": element.value.x,
         "y": element.value.y,
         "width": element.value.width,
@@ -209,11 +209,11 @@ export class MarkXrayComponent {
             "Admin Mark1"
         ]
     }
-    
-    
-    
+
+
+
       }
-    
+
     console.log(obj)
       return obj;
       // return element.original_width
@@ -237,7 +237,7 @@ export class MarkXrayComponent {
  .Entity_row__3Ii1C {display:none}
  .ant-card-small>.ant-card-body{height:20px}</Style>
  <Style> .ls-common {height:354px !important}</Style>
-  <View style="flex: 90%;  
+  <View style="flex: 90%;
  margin-top: -14px; width:566px">
  <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
  <Image name="img" value="$image" width="100%" height="100%"></Image>
@@ -245,20 +245,20 @@ export class MarkXrayComponent {
  </View>
  <View style="float:right;visibility:hidden">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
- <Label value="Dentist Correction" background="green" strokeColor="#000000"/> 
+ <Label value="Dentist Correction" background="green" strokeColor="#000000"/>
  <Label value="1" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="2" background="#FFFF00" />
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
  </View>
-<View style="flex: 10%;position: absolute;left: 30.5%;
-margin-top: 99px;"> 
+<View style="flex: 10%;position: absolute;left: 111px;
+margin-top: 99px;">
  <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.5" strokeWidth="6" strokeColor="#ff0000">
 <Label value="Admin Correction" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
 </RectangleLabels>
  </View>
- 
+
  </View>
  `,
 
@@ -362,7 +362,7 @@ margin-top: 99px;">
  <View style="flex: 90%;
  margin-top: -14px;">
  <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
- 
+
  <Image name="img" value="$image" width="100%" height="100%" zoom="true" zoomControl="true" ></Image>
  <Style> canvas { width:594px; height:354px !important }</Style>
  </View>
@@ -453,7 +453,7 @@ margin-top: 99px;">
     this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
     console.log(this.markInfo)
     console.log(this.userMark)
-  
+
     //for cavity label
     const markInfo3 = this.markInfo.filter((elem) => {
       return this.userMark.some((ele) => {
@@ -490,14 +490,14 @@ margin-top: 99px;">
     this.valInput= this.avgPer;
   this.leftPos = this.avgPer;
   }
-  
+
   saveMarks() {
     // const newArr = this.AIMarkData._id.concat(this.userMark.id)
     //console.log(newArr,"new")
   /*  this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
     console.log(this.markInfo)
     console.log(this.userMark)
-  
+
     //for cavity label
     const markInfo3 = this.markInfo.filter((elem) => {
       return this.userMark.some((ele) => {

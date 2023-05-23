@@ -36,7 +36,7 @@
     min-height: 127px;
   }
   .modal-header{
-    border-bottom: none !important;
+    // border-bottom: none !important;
     color: #043049 !important;
   }
   .color{
@@ -46,7 +46,8 @@
     color: #00d957;
   }
   .pass-small{
-    margin-left: 12rem;
+    // margin-left: 12rem;
+    margin-right: 2.7rem;
   }
   .title-pos {
     position: absolute;
@@ -63,3 +64,12 @@
   .div-height {
     height: 75px;
   }
+.font-size {
+  font-size: 15px !important;
+}
+.font-color {
+  color: #043049 !important;
+}
+.my-w-50 {
+  width: 45% !important;
+}
