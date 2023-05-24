@@ -41,7 +41,6 @@ export class ForgetPasswordComponent implements OnInit {
   // time = 5;
   handleReset(){
     this.spinner.show();
-    (<HTMLInputElement>document.getElementById('email')).disabled = true;
     const testBy = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     // console.log(this.emailReset);
@@ -63,6 +62,8 @@ export class ForgetPasswordComponent implements OnInit {
         });
         return false;
       }
+
+      (<HTMLInputElement>document.getElementById('email')).disabled = true;
 
       this.apiService.forgotPassword({email: this.emailReset.toLowerCase().trim()}).pipe(
         catchError(err => of([err]))

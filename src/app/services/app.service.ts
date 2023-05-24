@@ -171,7 +171,7 @@ export class AppService {
   }
 
   async subsForDashboard(){
-    let subsNotEnded;
+    // let subsNotEnded;
     this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
       // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()){
       //   console.log(subsNotEnded, true)
@@ -179,18 +179,20 @@ export class AppService {
       // } else {
       //   subsNotEnded = false
       // }
-      if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin' && !JSON.parse(localStorage.getItem("userInfo")).subscribed)  || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()) || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
-        console.log(JSON.parse(localStorage.getItem("userInfo")).role, subsNotEnded)
-        return true
+      // console.log(res)
+      // && res.getData[0].all_subscription_details.length != 0
+      if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin') || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()) || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
+        console.log(JSON.parse(localStorage.getItem("userInfo")).role, true)
+        return true;
       } else {
-        console.log(JSON.parse(localStorage.getItem("userInfo")).role, subsNotEnded)
-        return false
+        console.log(JSON.parse(localStorage.getItem("userInfo")).role, false)
+        return false;
       }
     })
   }
 
   async subsAlready(){
-    let subsNotEnded;
+    // let subsNotEnded;
     this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
       // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > new Date('2023/06/14').getTime()){
       //   console.log(subsNotEnded, true)

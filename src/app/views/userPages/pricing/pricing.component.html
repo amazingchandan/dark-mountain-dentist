@@ -638,7 +638,7 @@
                       <svg cIcon name="cilHome"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Address"
-                      formControlName="address1" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
+                      formControlName="address1" [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="100"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -649,7 +649,7 @@
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="City"
-                      formControlName="city" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
+                      formControlName="city" [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="50"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -701,8 +701,8 @@
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilNotes"></svg>
                     </span>
-                    <input type="number" class="form-control rounded ps-5 w-100" placeholder="Zip"
-                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
+                    <input type="text" class="form-control rounded ps-5 w-100" placeholder="Zip"
+                      formControlName="pincode" (keypress)="onlyNumberKey($event)" [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="10"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>
@@ -713,7 +713,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
-                    [readOnly]="readOnly" (keyup)="onchangeofthis($event)"/>
+                    [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="15"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>

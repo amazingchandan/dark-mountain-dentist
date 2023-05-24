@@ -293,11 +293,17 @@ export class UploadXrayComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
 
+      // reader.onload = function(base64) {
+      //   localStorage["file"] = base64;
+      // }
+
       reader.onload = (_event) => {
         this.msg = "";
+        localStorage["file"] = _event;
         this.url = reader.result;
-        console.log(this.url)
+        console.log(this.url, _event)
       }
+
       this.hidden = false;
       this.display = true;
 

@@ -68,7 +68,9 @@ export class EvaluateXrayComponent {
       console.log(img)
       this.file = img.file
       this.idUser = img.id
-      localStorage.setItem("file", img);
+      setTimeout(() => {
+        // localStorage.setItem("file", JSON.stringify(img.file));
+      }, 1000)
     })
 
     // this.getXray("646331c17e506d72d6a46de6");
@@ -77,12 +79,22 @@ export class EvaluateXrayComponent {
     this.cavity.style.display = "none";
 
     this.displayImg()
+    this.getPhoto()
     // setTimeout(() => {
     // console.log(this.myThumbnail)
     //  this.createLabelStudio()
     //  }, 3000);
     //this.createLabelStudio();
   }
+  getPhoto() {
+    var base64 = localStorage["file"];
+    var base64Parts = base64.split(",");
+    var fileFormat = base64Parts[0].split(";")[1];
+    var fileContent = base64Parts[1];
+    var file = new File([fileContent], "file name here", {type: fileFormat});
+    console.log(file)
+    return file;
+ }
   getXray(id) {
 
     this.userService.getXray(id).subscribe((res: any) => {

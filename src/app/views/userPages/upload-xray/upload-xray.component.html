@@ -149,12 +149,13 @@
                 <tr *ngFor="let data of this.user_eval; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
                   <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
-                  <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
                   <!-- <td>{{data.subscription_details.end_date | date : 'dd/MM/yyyy'}}</td> -->
+                  <td class="text-right">{{data.totalCavitiesDetectedByUser}}</td>
 
-                  <td>
+                  <td class="text-center">
                     <div *ngIf="data.evaluation_status==true">
                       <button
                       type="button"
@@ -177,7 +178,6 @@
                     </button>
                   </div>
                   </td>
-                  <td>{{data.totalCavitiesDetectedByUser}}</td>
                   <!-- <td>
                   <button type="button" class="btn btn-primary save-btn fw-bold other-btn pd-1" (click)="evaluate()" [disabled]="hidden">Evaluate X-Ray</button>
                 </td> -->

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Title } from '@angular/platform-browser';
 
@@ -17,23 +17,28 @@ export class RegisteredDentistsComponent {
 
  public allData: any;
  public userCount: Array<any> = [];
-
+  public n: any = 0;
  private isDtInitialized: boolean = false;
   dtTrigger: Subject<any> = new Subject<any>();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
   showContent: boolean;
   xrayData: any;
   count: any;
+  public pendingUser: any;
+  public completeUser: any;
 
   constructor(
     private router: Router,
     private apiService: UserService,
     private titleService: Title,
+    public route :ActivatedRoute,
   ) {
     titleService.setTitle(this.title);
   }
 
   ngOnInit(): void {
+    this.n = this.router.url.split('/')[2];
+    console.log(this.router.url.split('/')[2])
     console.log($.fn['dataTable'].ext);
 
     // $.fn['dataTable'].ext.search.push((settings, data, dataIndex) => {
@@ -94,6 +99,19 @@ export class RegisteredDentistsComponent {
     this.apiService.getUserList().subscribe((res:any) => {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")
       this.allData = res.getData;
+      this.pendingUser = res.getData.filter((elem: any) => {
+        if(elem.subscription_details.status == false && elem.subscription_details.end_date == undefined){
+          return elem;
+        }
+      })
+      let date = new Date();
+      this.completeUser = res.getData.filter((elem: any) => {
+        if(elem.subscription_details.status == true || (elem.subscription_details.status == false && new Date(date).getTime() < new Date(elem.subscription_details.end_date).getTime()) ){
+          return elem;
+        }
+      })
+      console.log(this.pendingUser)
+      console.log(this.completeUser)
       // this.count= res.xrayCount
       // console.log(this.allData,"count",this.count)
       // for(let i=0;i<=this.allData.length;i++){

@@ -195,7 +195,7 @@ const routes: Routes = [
         data: {
           title: 'Dashboard'
         },
-        canActivate: [DashboardProfileCheckGuard],
+        canActivate: [ DashboardProfileCheckGuard ],
         // canActivate: [SubsAuthGuard, SubscribeAuthGuard],
         children: [
           {
@@ -215,7 +215,7 @@ const routes: Routes = [
         data: {
           title: 'Dentist Profile'
         },
-        canActivate: [DashboardProfileCheckGuard],
+        canActivate: [ DashboardProfileCheckGuard ],
         // canActivate: [UserRolesAuthGuard, UserRoleDentistGuard]
       },
 
@@ -273,7 +273,27 @@ const routes: Routes = [
         data: {
           title: 'Registered Dentists'
         },
-        canActivate: [UserAuthGuard, UserRolesAuthGuard]
+        canActivate: [UserAuthGuard, UserRolesAuthGuard],
+        children: [
+          {
+            path: 'pending',
+            component: RegisteredDentistsComponent,
+            data: {
+              title: 'Registered Dentists - Pending'
+            },
+            canActivate: [UserAuthGuard, UserRolesAuthGuard],
+
+          },
+          {
+            path: 'complete',
+            component: RegisteredDentistsComponent,
+            data: {
+              title: 'Registered Dentists - Complete'
+            },
+            canActivate: [UserAuthGuard, UserRolesAuthGuard],
+
+          },
+        ]
       },
       {
         path: 'evaluate-x-ray',

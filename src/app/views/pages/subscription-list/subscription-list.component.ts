@@ -34,6 +34,8 @@ export class SubscriptionListComponent implements OnInit {
   public showDelete: boolean = false;
   public deleteSubsId: any;
   public planStatus: any;
+  public allUser: any;
+  public subscribers: Array<any>;
 
   allData: any;
   private isDtInitialized: boolean = false;
@@ -246,10 +248,10 @@ export class SubscriptionListComponent implements OnInit {
     }
   }
   planList() {
-
     this.userService.getSubscriptionList().subscribe((res: any) => {
       console.log(res, "response")
       this.allData = res.getData;
+      // console.log(this.allData)
       this.showContent = true;
       if (this.isDtInitialized) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

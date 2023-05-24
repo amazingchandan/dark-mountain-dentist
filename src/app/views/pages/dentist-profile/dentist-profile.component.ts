@@ -95,7 +95,7 @@ export class DentistProfileComponent implements OnInit {
       country: new FormControl(),
       state: new FormControl(),
       zip: new FormControl(),
-      age: new FormControl(),
+      // age: new FormControl(),
       license_no: new FormControl(),
 
       //user_role: new FormControl(),
@@ -134,7 +134,7 @@ export class DentistProfileComponent implements OnInit {
       state: ['', [Validators.required]],
       country: ['', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
-      age: ['', [Validators.required]],
+      // age: ['', [Validators.required]],
       license_no: ['', [Validators.required]],
     });
 
@@ -277,13 +277,13 @@ export class DentistProfileComponent implements OnInit {
         this.addSuperForm.patchValue({
           pincode: res.getData[0].pincode,
         });
+        // this.addSuperForm.patchValue({
+        //   age: res.getData[0].age,
+        // });
         this.addSuperForm.patchValue({
-          age: res.getData[0].age
-        });
-        this.addSuperForm.patchValue({
-          license_no: res.getData[0].license_no
+          license_no: res.getData[0].license_no,
         })
-
+        this.addSuperForm.setValue({first_name: res.getData[0].first_name, last_name: res.getData[0].last_name, contact_number: res.getData[0].contact_number, email: res.getData[0].email, address1: res.getData[0].address1, address2: res.getData[0].address2, city: res.getData[0].city, country: res.getData[0].country, state: res.getData[0].state, pincode: res.getData[0].pincode, license_no: res.getData[0].license_no,})
 
       }
       console.log(this.addSuperForm.value, this.allstates)
