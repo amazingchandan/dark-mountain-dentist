@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(result);
         // let id= result.userInfo.id;
         if (result.success) {
+          console.log(result.userInfo.subscribed)
           let id = result.userInfo.id;
           this.apiService.getUserRecordById(id).subscribe((res: any) => {
             console.log(res, "*****");

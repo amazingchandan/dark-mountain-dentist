@@ -27,7 +27,7 @@
       <h2 class="head m-0 text-center fw-bold mt-1"> Your Subscription has expired! Please Buy a new plan</h2>
       <div class="w-100 d-flex justify-content-center mt-3">
         <button class="pd-1 btn fw-bold mt-1 me-1" (click)="buyNowFunc()"> Buy Now</button>
-        <button class="pd-1 btn fw-bold mt-1 ms-1"> Not Now</button>
+        <button class="pd-1 btn fw-bold mt-1 ms-1" (click)="Logout()"> Not Now</button>
       </div>
     </div>
     <div class="btn-position" title="Logout">
@@ -662,8 +662,8 @@
                       <svg cIcon name="cilMap"></svg>
                     </span>
                     <select class="form-select ps-5" aria-label="Default select example" name="country"
-                      placeholder="Country" id="country"formControlName="country" (change)="stateByCountry($event)" >
-                      <option [defaultSelected]="true" [selected]="true" disabled="true" >
+                      placeholder="Country" id="country"formControlName="country" (change)="stateByCountry($event)" [(ngModel)]="countryList">
+                      <option [defaultSelected]="true" [disabled]="true" [selected]="true" [value]="countryList">
                         {{ countryList }}
                       </option>
                       <!-- <option>India</option>
@@ -684,8 +684,8 @@
                     <!-- <input type="text" class="form-control rounded ps-5 w-100" placeholder="State"
                       formControlName="state" [readOnly]="readOnly"/> -->
                     <select class="form-select ps-5" aria-label="Default select example" name="state"
-                    placeholder="State" id="state" formControlName="state">
-                      <option [defaultSelected]="true" [selected]="true" disabled="true" >
+                    placeholder="State" id="state" formControlName="state" [value]="stateList">
+                      <option [defaultSelected]="true" [selected]="true" [disabled]="true" >
                         {{ stateList }}
                       </option>
                       <option *ngFor="let state of allstates; let i = index" value="{{state.name}}">{{state.name}}</option>
@@ -713,7 +713,7 @@
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
                     <input type="text" class="form-control rounded ps-5 w-100" placeholder="Registration/License Number" formControlName="license_no"
-                    [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="15"/>
+                    [readOnly]="readOnly" (keyup)="onchangeofthis($event)" maxlength="25"/>
                     <!-- <i class="fa-solid fa-lock icon-position"></i> -->
                   </div>
                 </c-input-group>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -236,7 +236,7 @@ export class SubscriptionListComponent implements OnInit {
             document.getElementById('launch_ad')?.click();
            this.isDtInitialized= false;
             this.planList();
-
+            // window.location.reload();
           } else {
             Swal.fire({
               text: res.message,
@@ -327,7 +327,7 @@ export class SubscriptionListComponent implements OnInit {
       this.addPriceingForm.patchValue({
         status: '',
       });
-
+      this.pricingId=null;
     }
   }
   onClickInactive(){
@@ -399,6 +399,15 @@ export class SubscriptionListComponent implements OnInit {
  openModal1(){
   console.log("helo")
  }
+
+//  ngAfterViewChecked(): void {
+//   // this.setPrice();
+//  }
+onlyNumberKey(evt: KeyboardEvent) {
+  // Only ASCII character in that range allowed
+  let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+  return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
+}
 
   ngOnDestroy(): void {
     // this.planList();

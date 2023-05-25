@@ -127,7 +127,8 @@ const routes: Routes = [
     component: RegisterFormComponent,
     data: {
       title: 'Register'
-    }
+    },
+    canActivate: []
   },
   {
     path: 'login',
@@ -201,7 +202,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+            import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
           }
         ]
 

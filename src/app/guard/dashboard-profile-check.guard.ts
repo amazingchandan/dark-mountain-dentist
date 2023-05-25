@@ -10,7 +10,7 @@ export class DashboardProfileCheckGuard implements CanActivate, CanActivateChild
 
   constructor(private app: AppService, private router: Router){}
 
-  canActivate(){
+  canActivate(): boolean {
     if(this.app.subsForDashboard()){
       return true;
     }

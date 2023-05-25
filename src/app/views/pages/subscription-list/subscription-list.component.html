@@ -120,12 +120,13 @@
               <div class="col-md-6 form-group my-2">
                 <label class="mb-2">Amount($)<sup>*</sup></label>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Amount"
                   formControlName="amount"
                   class="form-control"
                   [value]="amount"
                   maxlength="10"
+                  (keypress)="onlyNumberKey($event)"
                 />
               </div>
               <!-- <div class="col-md-4 form-group">

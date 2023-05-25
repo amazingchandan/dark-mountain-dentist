@@ -53,9 +53,9 @@ export class RegisterFormComponent {
       repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       // age: new FormControl(null, Validators.required)
     });
-    if (localStorage.getItem('token')) {
-      this.router.navigateByUrl("/dashboard")
-    }
+    // if (localStorage.getItem('token')) {
+    //   this.router.navigateByUrl("/dashboard")
+    // }
   }
   onSomeAction(event: any) {
     if (event.key == "Enter") {

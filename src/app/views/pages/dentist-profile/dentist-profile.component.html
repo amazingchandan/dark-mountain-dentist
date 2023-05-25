@@ -65,8 +65,8 @@
               <label class="mb-2" for="inputState">Country<sup>*</sup></label>
               <select class="form-select me-4" aria-label="Default select example" formControlName="country"
                 [value]="country" (change)="stateByCountry($event)">
-                <option value="" [selected]="true" [disabled]="true">
-                  Select Country
+                <option [selected]="true" [disabled]="true" [defaultSelected]="true">
+                  -Select Country-
                 </option>
                 <option *ngFor="let country of allcountries; let i = index" value="{{country.countryName}}">{{country.countryName}}</option>
               </select>
@@ -74,9 +74,14 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">State<sup>*</sup></label>
               <!-- <input type="text" placeholder="State" formControlName="state" class="form-control" maxlength="20" /> -->
-              <select class="form-select me-4" aria-label="Default select example" formControlName="state" [value]="state">
-                <option value="" [selected]="true" [disabled]="true">
-                  Select State
+              <!-- <select class="form-select me-4" aria-label="Default select example" formControlName="state" [(ngModel)]="stateList" name="state" placeholder="State" id="state">
+                <option [selected]="true" [disabled]="true" [defaultSelected]="true">
+                  {{stateList}}
+                </option>
+              </select> -->
+              <select aria-label="Default select example" class="form-select me-4" formControlName="state" [value]="stateList">
+                <option [disabled]="true" [defaultSelected]="true" [selected]="true" [value]="stateList">
+                  {{stateList}}
                 </option>
                 <option *ngFor="let state of allstates; let i = index" value="{{state.name}}">{{state.name}}</option>
               </select>
@@ -93,7 +98,7 @@
             <div class="col-md-4 form-group">
               <label class="mb-2">License/Registration No.<sup>*</sup></label>
               <input type="text" placeholder="License/Registration No." formControlName="license_no"
-                class="form-control" maxlength="15"/>
+                class="form-control" maxlength="25"/>
             </div>
             <div class="col-md-4 btn-div">
               <button type="button" class="btn btn-primary save-btn mt-2 cancel-btn pd-1 other-btn fw-bolder"

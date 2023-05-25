@@ -22,6 +22,7 @@ export class ForgetPasswordComponent implements OnInit {
   otp = '';
   newPass = "";
   cnfPass = "";
+  public resetPass: boolean = false;
   ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
   constructor(private apiService: UserService, public router : Router,private spinner: NgxSpinnerService, private titleService: Title,){
     titleService.setTitle(this.title);
@@ -37,6 +38,11 @@ export class ForgetPasswordComponent implements OnInit {
   }
   onCnfPass(event: any){
     this.cnfPass = (<HTMLInputElement>event.target).value.trim();
+  }
+  onlyNumberKey(evt: KeyboardEvent) {
+    // Only ASCII character in that range allowed
+    let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+    return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
   }
   // time = 5;
   handleReset(){
@@ -62,13 +68,13 @@ export class ForgetPasswordComponent implements OnInit {
         });
         return false;
       }
-
+      this.resetPass = true;
       (<HTMLInputElement>document.getElementById('email')).disabled = true;
 
       this.apiService.forgotPassword({email: this.emailReset.toLowerCase().trim()}).pipe(
         catchError(err => of([err]))
       ).subscribe((res: any) => {
-
+        this.resetPass = false;
         console.log(res);
 
         if(res.data){

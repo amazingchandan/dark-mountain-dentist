@@ -17,6 +17,14 @@ export class AppService {
     image: 'assets/img/user2-160x160.jpg',
   };
 
+  private windowScreen = new BehaviorSubject(window.innerWidth);
+  currentWindowScreen = this.windowScreen.asObservable();
+
+  updateWindowScreen(msg: any){
+    this.windowScreen.next(msg)
+    console.log(msg)
+  }
+
   private approvalStageMessage = new BehaviorSubject(false);
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
 
@@ -170,30 +178,27 @@ export class AppService {
     }
   }
 
-  async subsForDashboard(){
-    // let subsNotEnded;
-    this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
-      // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()){
-      //   console.log(subsNotEnded, true)
-      //   subsNotEnded = true
-      // } else {
-      //   subsNotEnded = false
-      // }
-      // console.log(res)
-      // && res.getData[0].all_subscription_details.length != 0
-      if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin') || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now()) || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
-        console.log(JSON.parse(localStorage.getItem("userInfo")).role, true)
-        return true;
-      } else {
-        console.log(JSON.parse(localStorage.getItem("userInfo")).role, false)
-        return false;
-      }
-    })
+  subsForDashboard(){
+    // this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
+    //   if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin') || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed) || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now())){
+    //     return true;
+    //   } else {
+    //     return false
+    //   }
+    // })
+    if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin') || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
+      console.log(JSON.parse(localStorage.getItem("userInfo")).role, true)
+      return true;
+    } else {
+      console.log(JSON.parse(localStorage.getItem("userInfo")).role, false)
+      return false;
+    }
+    // || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now())
   }
 
   async subsAlready(){
     // let subsNotEnded;
-    this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
+    await this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
       // if(new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > new Date('2023/06/14').getTime()){
       //   console.log(subsNotEnded, true)
       //   subsNotEnded = true

@@ -69,7 +69,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public subsCountry: any;
   public paypalView: any = false;
   public payData: any;
-  public countryList = "-Select Country-";
+  public countryList: any = "-Select Country-";
   public stateList = "-Select State-";
   public IsmodelShow: any = false;
   public paypalBtn: any = false;
@@ -166,8 +166,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
   // }
   // @ViewChild('paypalRef',{static: true}) public paypalRef: ElementRef;
   ngOnInit(): void {
-    console.log(this.checked, this.subsId);
-    // console.log(window.paypal);
+    console.log(this.checked, this.subsId, this.userInfo);
+    this.userInfo.subscribed = true;
+    console.log('window.paypal', this.userInfo);
     this.getIPAddress();
     this.userService.getSubscriptionListPricing().subscribe((res: any) => {
       console.log(res, "response")
@@ -179,7 +180,6 @@ export class PricingComponent implements OnInit, AfterViewInit {
         console.log("plan not fetched successfully")
       }
     })
-
     // console.log(this.appService.currentApprovalStageMessage.source['_value'], "------------");
     // this.planList();
     setTimeout(() => {
@@ -212,8 +212,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
       address1: new FormControl(null, Validators.required),
       pincode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
-      state: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required),
+      state: new FormControl('-Select State-', Validators.required),
+      country: new FormControl('-Select Country-', Validators.required),
       // password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       // repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       age: new FormControl(null, Validators.required),
@@ -229,7 +229,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       // address2: ['', [Validators.required]],
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      country: ['-Select Country-', [Validators.required]],
       pincode: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
 
       license_no: ['', [Validators.required]],
@@ -241,11 +241,18 @@ export class PricingComponent implements OnInit, AfterViewInit {
     // this.registerForm.controls['last_name'].disable();
     this.allCountryList();
     this.countryList = "-Select Country-"
+
+    // this.registerForm.setValue({
+    //   country: '-Select-'
+    // })
+    this.registerForm.controls['country'].setValue('-Select Country-')
   }
   stateByCountry(e: any) {
+    this.countryList = "-Select Country-"
     console.log(e.target.value)
     this.userService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
       console.log(res.getData[0].regions)
+      this.registerForm.controls['state'].setValue('-Select State-')
       this.stateList = "-Select State-"
       this.allstates = res.getData[0].regions
     })
@@ -449,6 +456,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
                 console.log(res)
 
                 if (res.success) {
+                  this.userInfo.subscribed = true;
+                  localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
                   //this.toastr.success(res.message);
                   this.IsmodelShow = false
                   console.log(this.IsmodelShow);
@@ -508,10 +517,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
       console.log(res.getData)
       this.allcountries = res.getData
     })
+    this.registerForm.controls['country'].setValue('-Select Country-')
+    this.countryList = "-Select Country-"
   }
   onchangeofthis(e: any){
-    console.log("THIS", e)
-    console.log(this.registerForm.value)
+    // console.log("THIS", e)
+    // console.log(this.registerForm.value)
     if(this.registerForm.value.first_name  && this.registerForm.value.last_name  && this.registerForm.value.email  && this.registerForm.value.contact_number  && this.registerForm.value.address1  && this.registerForm.value.city  && this.registerForm.value.country  && this.registerForm.value.state  && this.registerForm.value.pincode  && this.registerForm.value.license_no ){
       this.paypalBtn = true;
     } else {
@@ -559,7 +570,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.checked = false;
   }
   formChange(e: any){
-    console.log(e)
+    // console.log(e)
   }
   onlyNumberKey(evt: KeyboardEvent) {
     // console.log("THIS")

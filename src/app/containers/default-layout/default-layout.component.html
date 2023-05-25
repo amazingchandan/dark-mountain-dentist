@@ -53,7 +53,7 @@
 </c-sidebar>
 
 <!--main-->
-<div class="wrapper d-flex flex-column min-vh-100 dark:bg-transparent color-bg">
+<div class="wrapper d-flex flex-column min-vh-100 dark:bg-transparent color-bg" *ngIf="!windowWidth; else dootherscreen">
   <!--app-header-->
   <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar" (toggleMenuSidebar)="receiveMessage($event)"></app-default-header>
   <!--app-body-->
@@ -69,3 +69,14 @@
   <!--app footer-->
   <app-default-footer></app-default-footer>
 </div>
+<ng-template #dootherscreen>
+  <div class="less-width">
+    <div class="less-wdith-container">
+      <h2 class="d-flex justify-content-center mb-4 fw-semibold">Dark<div class="mountain-color">Mountain</div>
+      </h2>
+      <div>
+        This web app is only supported in screen larger than 768px.
+      </div>
+    </div>
+  </div>
+</ng-template>

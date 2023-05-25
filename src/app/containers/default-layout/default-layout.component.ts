@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute ,Router} from '@angular/router';
@@ -20,6 +20,8 @@ export class DefaultLayoutComponent {
   public role :string;
   public URL: string;
   public changeUrl: boolean = false;
+  public windowWidth: boolean = false;
+  public windowInnerWidth: any;
 
   public perfectScrollbarConfig = {
     suppressScrollX: true,
@@ -29,17 +31,41 @@ export class DefaultLayoutComponent {
     this.URL = this.router.url.split('/')[0]
   }
   ngOnInit(){
+    console.log(window.innerWidth);
+    this.appService.currentWindowScreen.subscribe((res: any) => {
+      console.log(res)
+      this.windowInnerWidth = res;
+    })
+    if(window.innerWidth < 768){
+      this.windowWidth = true;
+    } else {
+      this.windowWidth = false;
+    }
+
     this.appService.currentUrl.subscribe((url: boolean) => {
       this.changeUrl = url
     })
     console.log(this.userDetail, this.changeUrl, "URL")
     let jwt = this.userDetail.token
     console.log(this.router.url.split('/')[0])
-let jwtData = jwt.split('.')[1]
-let decodedJwtJsonData = window.atob(jwtData)
-let decodedJwtData = JSON.parse(decodedJwtJsonData);
+    let jwtData = jwt.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData);
 
-this.role=decodedJwtData.role;
+    this.role=decodedJwtData.role;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    // this.getScreenWidth = window.innerWidth;
+    // this.getScreenHeight = window.innerHeight;
+    // console.log(window.innerWidth)
+    this.appService.updateWindowScreen(window.innerWidth);
+    if(this.windowInnerWidth < 768 || window.innerWidth < 768){
+      this.windowWidth = true;
+    } else {
+      this.windowWidth = false;
+    }
   }
 
  receiveMessage(event: boolean) {
