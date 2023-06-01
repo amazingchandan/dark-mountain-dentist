@@ -12,7 +12,8 @@ import {
   IPayPalConfig,
 
   ICreateOrderRequest,
-  IPayPalButtonStyle
+  IPayPalButtonStyle,
+  ICreateSubscriptionRequest
 } from 'ngx-paypal';
 import { Title } from '@angular/platform-browser';
 import * as bootstrap from "bootstrap";
@@ -58,6 +59,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
   public yearlyPlan: any = false;
+  public noPlans: boolean = false;
   showSuccess: any;
   showCancel: any;
   showError: any;
@@ -170,18 +172,18 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.userInfo.subscribed = true;
     console.log('window.paypal', this.userInfo);
     this.getIPAddress();
-    this.userService.getSubscriptionListPricing().subscribe((res: any) => {
-      console.log(res, "response")
-      if (res.success) {
-        console.log("plan fetched successfully")
-        this.allData = res.getData
-      }
-      else {
-        console.log("plan not fetched successfully")
-      }
-    })
+    // this.userService.getSubscriptionListPricing().subscribe((res: any) => {
+    //   console.log(res, "response")
+    //   if (res.success) {
+    //     console.log("plan fetched successfully")
+    //     this.allData = res.getData
+    //   }
+    //   else {
+    //     console.log("plan not fetched successfully")
+    //   }
+    // })
     // console.log(this.appService.currentApprovalStageMessage.source['_value'], "------------");
-    // this.planList();
+
     setTimeout(() => {
       console.log(this.allData)
     }, 1000)
@@ -194,15 +196,15 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
     this.monthlyPlan = true;
     this.yearlyPlan = false;
-    if (this.monthlyPlan) {
-      setTimeout(() => {
-        if (this.countriesInHere.includes(this.country)) {
-          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
-        } else {
-          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
-        }
-      }, 1000)
-    }
+    // if (this.monthlyPlan) {
+    //   setTimeout(() => {
+    //     if (this.countriesInHere.includes(this.country)) {
+    //       this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
+    //     } else {
+    //       this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
+    //     }
+    //   }, 1000)
+    // }
     this.initConfig();
     this.registerForm = new FormGroup({
       first_name: new FormControl(this.fname, Validators.required),
@@ -246,12 +248,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //   country: '-Select-'
     // })
     this.registerForm.controls['country'].setValue('-Select Country-')
+    // this.monthly()
   }
   stateByCountry(e: any) {
     this.countryList = "-Select Country-"
-    console.log(e.target.value)
+    // console.log(e.target.value)
     this.userService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
-      console.log(res.getData[0].regions)
+      // console.log(res.getData[0].regions)
       this.registerForm.controls['state'].setValue('-Select State-')
       this.stateList = "-Select State-"
       this.allstates = res.getData[0].regions
@@ -262,7 +265,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
       const data = res;
       this.ipAddress = data.IPv4
       this.country = data.country;
-      console.log(this.country, "ipAddress", data, this.yearlyAllData)
+      console.log(this.country, "ipAddress", data, this.yearlyAllData, )
+      this.planList();
     });
   }
   @Input() set autofocus(condition: boolean)
@@ -293,7 +297,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
+      clientId: 'sb',
+      // clientId: 'AYCBFqGe2Tco1l33ZXvZXbdPKfPJVyqa2-NjAta0ytO1zR406yq2O66FkBI2_IdvKiRaUOcMPbTM-Ys_',
+      // sercet_Key: 'EB7iibKAc300PD34UVfZC_ESm6XWeJsCRK9GZq0ccemEGL4pmb4Py_PYyLuozAeJdkUVNQ1N-CmTroM6',
       // ! for orders on client side
       // onInit: (data, actions) => {
       //   console.log("OnInit", data, actions)
@@ -368,6 +374,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
         }
         // return actions.reject();
       },
+      createSubscription: (data) => <ICreateSubscriptionRequest>{
+        // plan_id: '123456789'
+      },
       createOrderOnClient: (data) => <ICreateOrderRequest>{
 
         intent: 'CAPTURE',
@@ -380,7 +389,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                 currency_code: 'USD',
                 value: `${this.subsPrice}`
               }
-            }
+            },
           },
           items: [{
             name: 'Dark Mountain',
@@ -402,6 +411,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
         shape: 'rect',
         color: 'gold',
       },
+      // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
+      //         .then((res) => res.json())
+      //         .then((order) => order.orderID),
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then(details => {
@@ -614,6 +626,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
       if (res.success) {
         console.log("plan fetched successfully")
         this.allData = res.getData
+        setTimeout(() => {
+          this.monthly()
+        }, 1000)
       }
       else {
         console.log("plan not fetched successfully")
@@ -643,7 +658,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.yearlyAllData = []
     this.monthlyPlan = true;
     this.yearlyPlan = false;
-    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country);
+    setTimeout(() => {
+      if(this.monthlyAllData.length == 0){
+        this.yearly()
+      }
+    }, 1000);
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country, this.allData, this.monthlyAllData.length);
   }
 
   yearly() {
@@ -658,6 +678,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.monthlyAllData = [];
     this.monthlyPlan = false;
     this.yearlyPlan = true;
+    setTimeout(() => {
+      if(this.yearlyAllData.length == 0 && this.monthlyAllData.length == 0){
+        console.log("NOTHING FOUND")
+        this.noPlans = true;
+      } else {
+        this.noPlans = false;
+      }
+    }, 1500)
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
 

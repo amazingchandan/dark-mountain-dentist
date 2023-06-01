@@ -220,37 +220,83 @@ export class SubscriptionListComponent implements OnInit {
       this.updatePlan(this.pricingId);
     }
      else {
-      this.userService
-        .addPrice(this.addPriceingForm.value)
-        .subscribe((res: any) => {
-          console.log(res);
-          if (res.success) {
-            //this.toastr.success(res.message);
-            // Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Success!', text: 'Subscripition Of this user ', icon: 'success', });
+      // let p_data = {
+      //   token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
+      //   prod_id: 'PROD-2SV05090KF783042A'
+      // }
+      // localStorage.setItem('p-data', JSON.stringify(p_data))
+      console.log(this.addPriceingForm.value);
+      let data = {
+        "product_id": JSON.parse(localStorage.getItem('p-data')).prod_id,
+        "name": this.addPriceingForm.value.plan_name,
+        "billing_cycles": [
+            {
+                "tenure_type": "REGULAR",
+                "sequence": 1,
+                "frequency": {
+                    "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'YEAR'
+                },
+                "pricing_scheme": {
+                    "fixed_price": {
+                        "value": `${this.addPriceingForm.value.amount}`,
+                        "currency_code": "USD"
+                    }
+                }
+            }
+        ],
+        "payment_preferences": {
+            "auto_bill_outstanding": true,
+            "setup_fee_failure_action": "CONTINUE",
+            "setup_fee": {
+                "currency_code": "USD",
+                "value": +this.addPriceingForm.value.amount
+            }
+        },
+        "taxes": {
+            "percentage": "1.5",
+            "inclusive": false
+        }
+      }
+      // console.log(data)
+      // return;
+      let token = JSON.parse(localStorage.getItem('p-data')).token;
+      this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
+        console.log(res)
+        if(res.id){
+          let planData = {...this.addPriceingForm.value, paypalID: res.id}
+          console.log(planData)
+          // return;
+          this.userService.addPrice(planData).subscribe((res: any) => {
+              console.log(res);
+              if (res.success) {
+                //this.toastr.success(res.message);
+                // Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Success!', text: 'Subscripition Of this user ', icon: 'success', });
 
-            Swal.fire({
-              text: res.message,
-              icon: 'success',
+                Swal.fire({
+                  text: res.message,
+                  icon: 'success',
+                });
+                //this.router.navigateByUrl('/subscription-list');
+                document.getElementById('launch_ad')?.click();
+               this.isDtInitialized= false;
+                this.planList();
+                // window.location.reload();
+              } else {
+                Swal.fire({
+                  text: res.message,
+                  icon: 'error',
+                });
+                //this.toastr.error(res.message);
+              }
             });
-            //this.router.navigateByUrl('/subscription-list');
-            document.getElementById('launch_ad')?.click();
-           this.isDtInitialized= false;
-            this.planList();
-            // window.location.reload();
-          } else {
-            Swal.fire({
-              text: res.message,
-              icon: 'error',
-            });
-            //this.toastr.error(res.message);
-          }
-        });
+        }
+      });
     }
   }
   planList() {
     this.userService.getSubscriptionList().subscribe((res: any) => {
       console.log(res, "response")
-      this.allData = res.getData;
+      this.allData = res.getData1;
       // console.log(this.allData)
       this.showContent = true;
       if (this.isDtInitialized) {

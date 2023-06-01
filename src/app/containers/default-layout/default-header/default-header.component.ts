@@ -76,7 +76,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
             text: 'You Have Discarded The Image Successfully',
             icon: 'success',
           });
-          if(e){
+          if(e == true){
             console.log(this.userInfo.id, 'dentist-profile')
             this.appService.updateGetUrl(false)
             this.router.navigateByUrl(`/dentist-profile/${this.userInfo.id}`);

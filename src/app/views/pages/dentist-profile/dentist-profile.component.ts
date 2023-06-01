@@ -53,7 +53,8 @@ export class DentistProfileComponent implements OnInit {
 
   public paypalView: any = false;
   public payData: any;
-
+  public renewBtn: boolean = false;
+  public cancelBtn: boolean = false;
   public allcountries: any;
   public stateList: any = '-Select State-';
   public allstates: any;
@@ -64,6 +65,8 @@ export class DentistProfileComponent implements OnInit {
   showError: any;
   subsType: any;
   subsPrice: any;
+  subsCountry: any;
+  subsName: any;
   // userPlanData: {
   //   sub_id: any;
   //   //
@@ -190,7 +193,7 @@ export class DentistProfileComponent implements OnInit {
   }
   allCountryList() {
     this.apiService.getCountries().subscribe((res: any) => {
-      console.log(res.getData)
+      // console.log(res.getData)
       this.allcountries = res.getData
     })
   }
@@ -229,8 +232,24 @@ export class DentistProfileComponent implements OnInit {
       }
       this.year =  null;
       }*/
-      console.log(this.date, "/", this.month, "/", this.year);
-
+      // console.log(this.date, "/", this.month, "/", this.year);
+      if(!res.getData[0].subscription_details.status){
+        this.cancelBtn = true
+      } else {
+        this.cancelBtn = false
+      }
+      let d = new Date()
+      // console.log(res.getData[0].subscription_details.end_date, new Date(res.getData[0].subscription_details.end_date).getTime(), new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10), new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime(), res.getData[0].all_subscription_details[res.getData[0].all_subscription_details.length - 1].end_date, new Date(res.getData[0].all_subscription_details[res.getData[0].all_subscription_details.length - 1].end_date).getTime())
+      if(new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res.getData[0].subscription_details.end_date).getTime() && new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res?.getData[0]?.all_subscription_details[res?.getData[0]?.all_subscription_details?.length - 1]?.end_date).getTime()){
+        console.log("subs 10, renew 10")
+        this.renewBtn = true;
+      } else if (new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res?.getData[0]?.subscription_details?.end_date).getTime() && res?.getData[0]?.all_subscription_details[res?.getData[0]?.all_subscription_details?.length - 1]?.end_date == undefined) {
+        console.log("subs 10, renew not 10")
+        this.renewBtn = true;
+      } else {
+        console.log("subs 10, renew not 10, FaLSE")
+        this.renewBtn = false;
+      }
       //Plan-details
       this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((resp: any) => {
         console.log(resp)
@@ -554,6 +573,8 @@ export class DentistProfileComponent implements OnInit {
         this.subsId = this.curPlanDetail?.subscription_details?.subscription_id?._id;
         this.preStart_date = this.curPlanDetail?.subscription_details?.start_date;
         this.preEnd_date = this.curPlanDetail?.subscription_details?.end_date;
+        this.subsCountry = this.curPlanDetail?.subscription_details?.country;
+        this.subsName = this.curPlanDetail?.subscription_details?.name;
 
 
         console.log("***", this.preEnd_date)
@@ -576,7 +597,7 @@ export class DentistProfileComponent implements OnInit {
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'sb',
+      clientId: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
       // ! for orders on client side
 
       createOrderOnClient: (data) => <ICreateOrderRequest>{
@@ -653,7 +674,10 @@ export class DentistProfileComponent implements OnInit {
                 sub_id: this.subsId,
                 type: this.subsType,
                 pre_start_date: this.preStart_date,
-                pre_end_date: this.preEnd_date
+                pre_end_date: this.preEnd_date,
+                pre_plan_name: this.subsName,
+                pre_plan_country: this.subsCountry,
+                pre_plan_price: this.subsPrice,
               }
 
               this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((res: any) => {

@@ -26,8 +26,9 @@
           [magnification]="2"
           [enableScrollZoom]="true"
           [enableLens]="true"
-          [lensWidth]="200"
-          [lensHeight]="200">
+          [lensWidth]="250"
+          [lensHeight]="250"
+          [circularLens]="true">
          </lib-ngx-image-zoom>
           <label class="text-center w-100 mt-3 fw-bold mark-label1">Original X-Ray</label>
         </div>
@@ -60,7 +61,7 @@
 
 
         <button type="button" class="btn me-2 cancel-btn fw-bold other-btn pd-1 ms-2 discard" id="close"
-          (click)="handleClick(this.xray, this.imgName)">Discard</button>
+          (click)="handleClick('/upload-xray/0')">Discard</button>
 
         <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Commit Correction&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-1"></i></button>
 

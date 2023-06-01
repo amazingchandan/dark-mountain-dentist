@@ -269,6 +269,13 @@
                     </div> -->
                   <!-- </c-input-group> -->
                 </div>
+                <div class="col-12 btn-div">
+                  <re-captcha
+                    (resolved)="resolved($event)"
+                    siteKey="6Ld7TU0mAAAAAFjH7axIGjhz4hCyTVTkAzGOtUfs"
+                    formControlName="recaptcha"
+                  ></re-captcha>
+                </div>
                 <!-- <div class="row mb-3">
                   <c-input-group class="mb-3 mt-2">
                     <label class="mb-2">Contact Number<sup>*</sup></label>
@@ -379,11 +386,13 @@
                   <!-- <button class="btn btn-primary register-btn ms-2 mt-4 cancel-btn p-1" title="Cancel">
                     Cancel
                   </button> -->
+                  <!--  -->
                   <button
                     class="btn btn-primary register-btn mt-2 p-2 fw-bold col-12"
                     title="Register"
                     (click)="register()"
-                    (window:keypress)="onSomeAction($event)"
+                    (keyup)="onSomeAction($event)"
+                    [disabled]="registerForm.invalid"
                   >
                     Register
                     <i class="fa-solid fa-address-card ms-1"></i>

@@ -27,6 +27,8 @@ export class RenewSubComponent implements OnInit {
   subsType: any = "";
   subsTitle: any = "";
   subsPrice: any = "";
+  subsName: any;
+  subsCountry: any;
   ipAddress: any;
   country: any;
   IsmodelShow: boolean = false;
@@ -88,8 +90,10 @@ export class RenewSubComponent implements OnInit {
       if (res.success) {
         console.log("myPlan1", res.getData)
         this.curPlanDetail = res.getData;
-        //    this.subsType= this.curPlanDetail?.subscription_details.subscription_id.type
-        // this.subsPrice = this.curPlanDetail?.subscription_details.subscription_id.amount;
+        this.subsType= this.curPlanDetail?.subscription_details?.subscription_id?.type;
+        this.subsPrice = this.curPlanDetail?.subscription_details?.subscription_id?.amount;
+        this.subsCountry = this.curPlanDetail?.subscription_details?.subscription_id?.country;
+        this.subsName = this.curPlanDetail?.subscription_details?.subscription_id?.name;
         // this.subsId= this.curPlanDetail?.subscription_details.subscription_id._id;
         this.preStart_date = this.curPlanDetail?.subscription_details.start_date;
         this.preEnd_date = this.curPlanDetail?.subscription_details.end_date;
@@ -187,8 +191,8 @@ export class RenewSubComponent implements OnInit {
       style: {
         layout: 'horizontal',
         tagline: false,
-        shape: 'pill',
-        color: 'white',
+        shape: 'rect',
+        color: 'gold',
       },
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
@@ -230,7 +234,10 @@ export class RenewSubComponent implements OnInit {
                 sub_id: this.subsId,
                 type: this.subsType,
                 pre_start_date: this.preStart_date,
-                pre_end_date: this.preEnd_date
+                pre_end_date: this.preEnd_date,
+                pre_plan_name: this.subsName,
+                pre_plan_country: this.subsCountry,
+                pre_plan_price: this.subsPrice,
               }
 
               this.userService.getSubscriptionRenew(userPlanData, this.userId).subscribe((res: any) => {

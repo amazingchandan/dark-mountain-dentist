@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   apiHost: string;
+  payApi: String;
   login: string;
   addAdmin: string;
   logout: string;
@@ -59,10 +60,17 @@ export class UserService {
  deleteSubs: String;
  activeSubs: String;
 
+ // ! paypal subscription
+ paypalToken: String;
+ paypalProdID: String;
+ paypalPlans: String;
+
+ // * country api
  country: String;
  states: String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
+    this.payApi = environment.PAY_API;
     this.login = this.apiHost + `login`;
     this.logout = this.apiHost + `admin/logout`;
     this.addAdmin = this.apiHost + 'adminRegister';
@@ -115,6 +123,11 @@ export class UserService {
 
     this.country = this.apiHost + 'countries';
     this.states = this.apiHost + 'countries-states';
+
+    // ! paypal subscription
+    this.paypalToken = this.payApi + 'oauth2/token';
+    this.paypalProdID = this.payApi + 'catalogs/products';
+    this.paypalPlans = this.payApi + 'billing/plans';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -278,5 +291,44 @@ export class UserService {
   }
   activeSubsID(id: any){
     return this.http.post(`${this.activeSubs}`, id, {})
+  }
+
+  // ! paypal subscription
+  payPalTokenGen(requestParameters: any){
+    const body = new URLSearchParams();
+    body.set("grant_type", "client_credentials")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
+      })
+    };
+    return this.http.post(`${this.paypalToken}`, body, httpOptions)
+  }
+  paypalGenProdID(requestParameter: any, token: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalProdID}`, requestParameter, httpOptions)
+  }
+  paypalDataByProdID(id: any, token: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(`${this.paypalProdID}/${id}`, httpOptions)
+  }
+  paypalCreatePlan(requestParameter: any, token: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalPlans}`, requestParameter, httpOptions)
   }
 }

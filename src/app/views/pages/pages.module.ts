@@ -25,6 +25,8 @@ import { FinancialComponent } from './financial/financial.component';
 import { ViewAdminXrayComponent } from './view-admin-xray/view-admin-xray.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { RecaptchaModule, RecaptchaFormsModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,13 +55,22 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ButtonModule,
     GridModule,
     IconModule,
+    // RecaptchaV3Module,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     FormModule,
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
     NgxImageZoomModule,
     NgxPayPalModule,
-  ]
+  ],
+  // providers: [
+  //   {
+  //     provide: RECAPTCHA_V3_SITE_KEY,
+  //     useValue: environment.recaptcha.siteKey
+  //   }
+  // ]
 })
 export class PagesModule {
 }

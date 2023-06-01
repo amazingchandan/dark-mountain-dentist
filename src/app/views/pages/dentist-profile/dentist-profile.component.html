@@ -289,10 +289,10 @@
                 <!-- <div class="col btn-cancel ms-2 ps-3"> -->
                 <div class="d-flex justify-content-end">
                   <button type="button" class="btn btn-danger ms-2 cancel-btn pd-1 other-btn fw-bolder"
-                    (click)="cancelSubfromUser()">
+                    (click)="cancelSubfromUser()" *ngIf="!cancelBtn">
                     Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                   </button>
-                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal">
+                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal" *ngIf="renewBtn">
                     Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
                   </button>
                 </div>
@@ -523,7 +523,7 @@
                   <span>Start Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.start_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                 </li>
                 <li class=" fs-6  ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
-                  <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+                  <span>Next Billing Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
                 </li>
               </ul>
             </div>
@@ -765,8 +765,8 @@
           </div>
         </div> -->
       </div>
-      <div  class="modal-footer justify-content-between">
-        <small>&#169; All rights reserved</small>
+      <div  class="modal-footer justify-content-end">
+        <!-- <small>&#169; All rights reserved</small> -->
         <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
         <!-- (click)="payView()" -->
         <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()"> -->
@@ -776,9 +776,9 @@
           <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
         <!-- </button> -->
-        <div >
-
-          <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn">Order Now</ngx-paypal>
+        <h3 class="fs-5">Proceed To:</h3>
+        <div class="paypal-btn">
+          <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal>
         </div>
       </div>
     </div>

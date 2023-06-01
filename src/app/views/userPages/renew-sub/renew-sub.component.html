@@ -121,10 +121,10 @@
 <div class="d-flex justify-content-center align-items-center pricingFooter mb-3">
 
   <div class="do-later-checkout-btn-container float-right">
-    <button class="btn pd-1 cancel-btn fw-bold fs-2 doitlater" (click)="logout()">
+    <!-- <button class="btn pd-1 cancel-btn fw-bold doitlater fs-6" (click)="logout()">
       Do later
-    </button>
-    <button class="btn pd-1 other-btn fw-bold paynow ms-2" data-bs-toggle="modal" data-bs-target="#myModal"
+    </button> -->
+    <button class="btn pd-1 fw-bold paynow ms-2 fs-6" data-bs-toggle="modal" data-bs-target="#myModal"
       (click)="checkoutBtn()">
       Checkout
     </button>
@@ -133,26 +133,25 @@
 
 <!----Pricing Modal-->
 
-<div class="modal fade modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <!-- [hidden]="IsmodelShow" -->
-  <div class="modal-dialog modal-dialog-centered modal-lg billing-modal" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md billing-modal" role="document">
     <div class="modal-content modal-tall">
       <div *ngIf="this.selected==true">
         <div class="modal-header justify-content-between align-items-center">
           <!-- <div></div> -->
-          <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
+          <h3 class="modal-title d-flex justify-content-center fw-semibold">
             Subscription Details
-
-          </h2>
+          </h3>
           <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
         </div>
         <div class="modal-body px-5 py-4">
           <div class="d-flex align-items-center flex-column sub-body-content">
 
-            <div class="d-flex align-items-center flex-column sub-body-content ">
+            <div class="d-flex align-items-center flex-column sub-body-content w-100">
 
-              <ul class="proceed-details m-0 p-0 ">
+              <ul class="proceed-details m-0 p-0 w-100">
                 <!-- <li
                 class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
               >
@@ -209,8 +208,8 @@
           </div>
         </div> -->
         </div>
-        <div class="modal-footer justify-content-between">
-          <small>&#169; All rights reserved</small>
+        <div class="modal-footer justify-content-end">
+          <!-- <small>&#169; All rights reserved</small> -->
           <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
           <!-- (click)="payView()" -->
           <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()"> -->
@@ -220,9 +219,9 @@
           <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
           <!-- </button> -->
-          <div>
-
-            <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal>
+        <h3 class="fs-5">Proceed To:</h3>
+          <div class="paypal-btn">
+            <ngx-paypal [config]="payPalConfig" class="paypal-btn"></ngx-paypal>
           </div>
         </div>
       </div>

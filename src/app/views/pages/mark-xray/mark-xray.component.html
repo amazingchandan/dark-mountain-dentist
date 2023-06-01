@@ -27,8 +27,9 @@
           [magnification]="1"
           [enableScrollZoom]="true"
           [enableLens]="true"
-          [lensWidth]="200"
-          [lensHeight]="200">
+          [lensWidth]="250"
+          [lensHeight]="250"
+          [circularLens]="true">
          </lib-ngx-image-zoom>
           <label class="text-center w-100 mt-2 fw-bold dentist-mark-label">Original X-ray</label>
         </div>
@@ -52,7 +53,8 @@
       </div>
     </div>
     <div class="row mt-4 d-flex align-items-end">
-      <div class="col mt-2 fw-semibold"><span><i class="fa-solid fa-circle admin-i me-1"></i> Admin Marking</span><br>
+      <div class="col mt-2 fw-semibold">
+        <span><i class="fa-solid fa-circle admin-i me-1"></i> Admin Marking</span><br>
         <span><i class="fa-solid fa-circle dentist-i me-1"></i> Dentist Marking</span><br>
         <span><i class="fa-solid fa-circle ai-i me-1"></i> AI (Confirmed) Marking</span><br>
         <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span><br>

@@ -4,10 +4,16 @@
 
 export const environment = {
   production: false,
- API_HOST: 'http://localhost:3100/'
+  PAY_API: 'https://api-m.sandbox.paypal.com/v1/',
+ API_HOST: 'http://localhost:3100/',
 //API_HOST : https://apidarkmountain.blahworks.tech/,
-//  API_HOST: 'https://apidarkmountain.blahworks.tech/'
+//  API_HOST: 'https://apidarkmountain.blahworks.tech/',
+  recaptcha: {
+    siteKey: '6Ld7TU0mAAAAAFjH7axIGjhz4hCyTVTkAzGOtUfs'
+  },
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

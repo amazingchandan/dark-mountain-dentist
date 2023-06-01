@@ -996,8 +996,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       return '../assets/images/no-image.jpg';
     }
   }
-  handleClick(id: any, name: any) {
-    console.log(id, name)
+  handleClick(e: any) {
+    // console.log(id, name)
     Swal.fire({
       title: 'Are you sure?',
       text: "Your progress will be lost!",
@@ -1017,17 +1017,27 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
           text: 'You Have Discarded The Image Successfully',
           icon: 'success',
         });
-        this.userService.deleteXrayByID(id, { name: name }).subscribe((res: any) => {
-          console.log(res)
-          if (res.success) {
-            this.router.navigateByUrl('/upload-xray/0');
-          } else {
-            Swal.fire({
-              text: "Internal server error, image can't be deleted.",
-              icon: 'error',
-            });
-          }
-        })
+        if(e == 'dashboard'){
+          this.appService.updateGetUrl(false)
+          this.router.navigateByUrl('/dashboard');
+        } else if (e == '/upload-xray/0') {
+          this.appService.updateGetUrl(false)
+          this.router.navigateByUrl('/upload-xray/0');
+        } else if (e == 'logout') {
+          this.appService.updateGetUrl(false)
+          this.appService.logout()
+        }
+        // this.userService.deleteXrayByID(id, { name: name }).subscribe((res: any) => {
+        //   console.log(res)
+        //   if (res.success) {
+        //     this.router.navigateByUrl('/upload-xray/0');
+        //   } else {
+        //     Swal.fire({
+        //       text: "Internal server error, image can't be deleted.",
+        //       icon: 'error',
+        //     });
+        //   }
+        // })
       }
     });
   }
