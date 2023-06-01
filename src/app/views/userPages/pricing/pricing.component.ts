@@ -69,6 +69,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public subsPrice: any;
   public subsTitle: any;
   public subsCountry: any;
+  public subsPaypalID: any;
+  public filterLink: any;
   public paypalView: any = false;
   public payData: any;
   public countryList: any = "-Select Country-";
@@ -695,13 +697,106 @@ export class PricingComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  getSubscription(id, type, pricing_amount, title, country) {
+  getSubscription(id, type, pricing_amount, title, country, paypalID) {
     console.log(id, type, pricing_amount, title, country);
     this.subsId = id;
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
     this.subsCountry = country;
+    this.subsPaypalID = paypalID
+    console.log(this.subsPaypalID)
+    let token = JSON.parse(localStorage.getItem('p-data')).token;
+    console.log(this.subsPaypalID)
+    let data = {
+      "plan_id": this.subsPaypalID,
+      // "start_time": "2018-11-01T00:00:00Z",
+      // "quantity": "20",
+      "shipping_amount": {
+          "currency_code": "USD",
+          "value": `${this.subsPrice}`
+      },
+      "subscriber": {
+          "name": {
+              "given_name": "John",
+              "surname": "Doe"
+          },
+          "email_address": "sb-zhqmo25396320@personal.example.com",
+          "shipping_address": {
+              "name": {
+                  "full_name": "John Doe"
+              },
+              "address": {
+                  "address_line_1": "2211 N First Street",
+                  "address_line_2": "Building 17",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131",
+                  "country_code": "US"
+              }
+          }
+      },
+      "application_context": {
+          "brand_name": "ARTI",
+          "locale": "en-US",
+          "shipping_preference": "SET_PROVIDED_ADDRESS",
+          "user_action": "SUBSCRIBE_NOW",
+          "payment_method": {
+              "payer_selected": "PAYPAL",
+              "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+          },
+          "return_url": "http://localhost:4200/dashboard",
+          "cancel_url": "http://localhost:4200/login"
+      }
+    }
+    this.userService.paypalPayment(data, token).subscribe((res: any) => {
+      console.log(res)
+      this.filterLink = res.links.filter(elem => elem.rel == "approve")
+      // this.router.navigateByUrl(this.filterLink[0].href)
+      this.userPlanData = {
+        sub_id: this.subsId,
+        type: this.subsType,
+        name: this.subsTitle,
+        price: this.subsPrice,
+        country: this.subsCountry,
+        paypal_ID: res.id
+      }
+      console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+      // return;
+      this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+        console.log(res)
+
+        if (res.success) {
+          // this.userInfo.subscribed = true;
+          localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+          //this.toastr.success(res.message);
+          // this.IsmodelShow = false
+          // console.log(this.IsmodelShow);
+          // ($("#myModal") as any).modal("hide");
+          //  this.handleClick();
+          // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+          // Swal.fire({
+          //   text: "You have successfully subscribed",
+          //   icon: 'success',
+          // });
+          /*var modal= document.getElementById("launch_ad");
+            modal.style.display = "none";*/
+          if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+            console.log("iff")
+
+            // this.router.navigateByUrl("/dashboard")
+          }
+          else {
+            console.log("elseee")
+            // this.router.navigateByUrl("/login")
+          }
+        }
+      })
+    })
+
+
+
     // if(!this.checked){
     //   return Swal.fire({
     //     text: "Please accept the terms and conditions.",
@@ -973,7 +1068,58 @@ export class PricingComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
+  handleClickPayment(){
+    // let token = JSON.parse(localStorage.getItem('p-data')).token;
+    // console.log(this.subsPaypalID)
+    // let data = {
+    //   "plan_id": this.subsPaypalID,
+    //   // "start_time": "2018-11-01T00:00:00Z",
+    //   // "quantity": "20",
+    //   "shipping_amount": {
+    //       "currency_code": "USD",
+    //       "value": `${this.subsPrice}`
+    //   },
+    //   "subscriber": {
+    //       "name": {
+    //           "given_name": "John",
+    //           "surname": "Doe"
+    //       },
+    //       "email_address": "sb-zhqmo25396320@personal.example.com",
+    //       "shipping_address": {
+    //           "name": {
+    //               "full_name": "John Doe"
+    //           },
+    //           "address": {
+    //               "address_line_1": "2211 N First Street",
+    //               "address_line_2": "Building 17",
+    //               "admin_area_2": "San Jose",
+    //               "admin_area_1": "CA",
+    //               "postal_code": "95131",
+    //               "country_code": "US"
+    //           }
+    //       }
+    //   },
+    //   "application_context": {
+    //       "brand_name": "ARTI",
+    //       "locale": "en-US",
+    //       "shipping_preference": "SET_PROVIDED_ADDRESS",
+    //       "user_action": "SUBSCRIBE_NOW",
+    //       "payment_method": {
+    //           "payer_selected": "PAYPAL",
+    //           "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+    //       },
+    //       "return_url": "http://localhost:4200/dashboard",
+    //       "cancel_url": "http://localhost:4200/login"
+    //   }
+    // }
+    // this.userService.paypalPayment(data, token).subscribe((res: any) => {
+    //   console.log(res)
+    //   this.filterLink = res.links.filter(elem => elem.rel == "approve")
+    //   // this.router.navigateByUrl(this.filterLink[0].href)
+    //   console.log(this.filterLink[0].href)
+    //   return;
+    // })
+  }
   handleClick() {
     // if(!this.checked){
     //   this.displayStyle = "none"

@@ -64,6 +64,7 @@ export class UserService {
  paypalToken: String;
  paypalProdID: String;
  paypalPlans: String;
+ paypalUserSubs: String;
 
  // * country api
  country: String;
@@ -128,6 +129,7 @@ export class UserService {
     this.paypalToken = this.payApi + 'oauth2/token';
     this.paypalProdID = this.payApi + 'catalogs/products';
     this.paypalPlans = this.payApi + 'billing/plans';
+    this.paypalUserSubs = this.payApi + 'billing/subscriptions';
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -330,5 +332,14 @@ export class UserService {
       })
     };
     return this.http.post(`${this.paypalPlans}`, requestParameter, httpOptions)
+  }
+  paypalPayment(requestParameter: any, token: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalUserSubs}`, requestParameter, httpOptions)
   }
 }

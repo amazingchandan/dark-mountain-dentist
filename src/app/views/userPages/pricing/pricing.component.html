@@ -212,7 +212,8 @@
                     data.type,
                     data.amount,
                     data.plan_name,
-                    data.country
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe
@@ -220,7 +221,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
                 ">
                 Selected
               </button>
@@ -248,7 +249,8 @@
                       data._id,
                       data.type,
                       data.amount,
-                      data.plan_name
+                      data.plan_name,
+                      data.paypalID
                     )
                   ">
                   Subscribe
@@ -256,7 +258,7 @@
               </div>
               <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
                 <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                    getSubscription(0, data.type, data.amount, data.plan_name)
+                    getSubscription(0, data.type, data.amount, data.plan_name, data.paypalID)
                   ">
                   Selected
                 </button>
@@ -299,7 +301,8 @@
                     data.type,
                     data.amount,
                     data.plan_name,
-                    data.country
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe
@@ -307,7 +310,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
                 ">
                 Selected
               </button>
@@ -816,7 +819,10 @@
         <ng-template #dofalsething>
           <div class="pay-container">
             <h5 class="me-1">Proceed To:</h5>
-            <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal>
+            <!-- <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal> -->
+            <a class="btn pd-1 other-btn fw-bold paynow" [href]="this.filterLink[0]?.href">
+              Pay
+            </a>
           </div>
         </ng-template>
       </div>

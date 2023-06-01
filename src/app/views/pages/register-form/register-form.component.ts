@@ -39,6 +39,11 @@ export class RegisterFormComponent {
   }
 
   ngOnInit() {
+    let p_data = {
+      token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
+      prod_id: 'PROD-2SV05090KF783042A'
+    }
+    localStorage.setItem('p-data', JSON.stringify(p_data))
     function alphaNumericValidator(control: FormControl): ValidationErrors | null {
       return ALPHA_NUMERIC_REGEX.test(control.value) ? null : ALPHA_NUMERIC_VALIDATION_ERROR;
     }
@@ -224,11 +229,11 @@ export class RegisterFormComponent {
 
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
-        this.userService.payPalTokenGen(null).subscribe((res: any) => {
-          if(res.access_token){
-            localStorage.setItem('p-token', res.access_token)
-          }
-        })
+        // this.userService.payPalTokenGen(null).subscribe((res: any) => {
+        //   if(res.access_token){
+        //     localStorage.setItem('p-token', res.access_token)
+        //   }
+        // })
         //this.toastr.success(res.message);
      /*   Swal.fire({
           text: res.message,
