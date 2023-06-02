@@ -233,6 +233,7 @@ export class SubscriptionListComponent implements OnInit {
             {
                 "tenure_type": "REGULAR",
                 "sequence": 1,
+                "total_cycles": 999,
                 "frequency": {
                     "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'YEAR'
                 },

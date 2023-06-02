@@ -442,11 +442,20 @@ export class DentistProfileComponent implements OnInit {
       confirmButtonText: 'Yes, cancel subscription!',
     }).then((result) => {
       if (result.isConfirmed) {
-
+        console.log('first');
         if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
+          console.log('second');
           this.apiService.cancelUserPlan(this.dentistId)
             .subscribe((res: any) => {
+              console.log(res.userData, res.userData.paypal_ID)
               if (res.success) {
+                let data = {
+                  reason: "Not satisfied with the service"
+                }
+                let token = "A21AAJO4flEg2MEs201bjXb8Ca_sCo-D3v-xBALryI6nvKvBaMX6edwe9AoiucwH-8z6ONrhZB4HnVtgCj1pJM1ItqT3J-mhA";
+                this.apiService.paypalSuspend(data, token, res.userData.paypal_ID).subscribe((res: any) => {
+                  console.log(res)
+                })
                 Swal.fire({
                   // toast: true,
                   // position: 'top-end',

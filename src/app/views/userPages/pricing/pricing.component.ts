@@ -712,6 +712,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       "plan_id": this.subsPaypalID,
       // "start_time": "2018-11-01T00:00:00Z",
       // "quantity": "20",
+      "auto_renewal": true,
       "shipping_amount": {
           "currency_code": "USD",
           "value": `${this.subsPrice}`

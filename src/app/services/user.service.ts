@@ -301,7 +301,7 @@ export class UserService {
     body.set("grant_type", "client_credentials")
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalToken}`, body, httpOptions)
@@ -328,7 +328,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalPlans}`, requestParameter, httpOptions)
@@ -341,5 +342,32 @@ export class UserService {
       })
     };
     return this.http.post(`${this.paypalUserSubs}`, requestParameter, httpOptions)
+  }
+  paypalSuspend(requestParameter: any, token: any, id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalUserSubs}/${id}/suspend`, requestParameter, httpOptions)
+  }
+  paypalActivate(requestParameter: any, token: any, id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalUserSubs}/${id}/activate`, requestParameter, httpOptions)
+  }
+  paypalCancel(requestParameter: any, token: any, id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalUserSubs}/${id}/cancel`, requestParameter, httpOptions)
   }
 }
