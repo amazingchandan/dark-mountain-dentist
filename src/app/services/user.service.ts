@@ -310,7 +310,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalProdID}`, requestParameter, httpOptions)
@@ -319,7 +320,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.get(`${this.paypalProdID}/${id}`, httpOptions)
@@ -328,7 +330,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
         // 'Authorization': 'Bearer ' + token
       })
     };
@@ -338,7 +341,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalUserSubs}`, requestParameter, httpOptions)
@@ -347,7 +351,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/suspend`, requestParameter, httpOptions)
@@ -356,7 +361,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/activate`, requestParameter, httpOptions)
@@ -365,7 +371,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/cancel`, requestParameter, httpOptions)
