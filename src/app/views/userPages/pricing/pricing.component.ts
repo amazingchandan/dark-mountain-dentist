@@ -750,7 +750,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
           "cancel_url": "http://localhost:4200/login"
       }
     }
-    this.userService.paypalPayment(data, token).subscribe((res: any) => {
+    this.userService.paypalPayment(data).subscribe((res: any) => {
       console.log(res)
       this.filterLink = res.links.filter(elem => elem.rel == "approve")
       // this.router.navigateByUrl(this.filterLink[0].href)

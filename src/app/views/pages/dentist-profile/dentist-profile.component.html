@@ -292,7 +292,7 @@
                     (click)="cancelSubfromUser()" *ngIf="!cancelBtn">
                     Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                   </button>
-                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal" *ngIf="renewBtn">
+                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal" *ngIf="!renewBtn">
                     Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
                   </button>
                 </div>
@@ -776,9 +776,14 @@
           <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
         <!-- </button> -->
-        <h3 class="fs-5">Proceed To:</h3>
+        <!-- <h3 class="fs-5">Proceed To:</h3>
         <div class="paypal-btn">
           <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal>
+        </div> -->
+        <div>
+          <button class="btn pd-1 other-btn fw-bold paynow" (click)="handleCOnfirmPay()">
+            Confirm & Pay
+          </button>
         </div>
       </div>
     </div>

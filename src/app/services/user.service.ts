@@ -58,6 +58,7 @@ export class UserService {
  deleteXray: String;
  setXrayData: String;
  deleteSubs: String;
+ planDeleteErr: String;
  activeSubs: String;
 
  // ! paypal subscription
@@ -120,6 +121,7 @@ export class UserService {
     this.deleteXray = this.apiHost + 'delete-xray';
     this.setXrayData = this.apiHost + 'saveEvaluation';
     this.deleteSubs = this.apiHost + 'deleteSubsById';
+    this.planDeleteErr = this.apiHost + 'deletePlanIfErrByID';
     this.activeSubs = this.apiHost + 'activateSubsById';
 
     this.country = this.apiHost + 'countries';
@@ -291,6 +293,9 @@ export class UserService {
   deleteSubsById(id: any){
     return this.http.post(`${this.deleteSubs}`, id, {})
   }
+  planDeleteDueToErr(id: any){
+    return this.http.post(`${this.planDeleteErr}`, id)
+  }
   activeSubsID(id: any){
     return this.http.post(`${this.activeSubs}`, id, {})
   }
@@ -337,7 +342,7 @@ export class UserService {
     };
     return this.http.post(`${this.paypalPlans}`, requestParameter, httpOptions)
   }
-  paypalPayment(requestParameter: any, token: any){
+  paypalPayment(requestParameter: any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -347,7 +352,7 @@ export class UserService {
     };
     return this.http.post(`${this.paypalUserSubs}`, requestParameter, httpOptions)
   }
-  paypalSuspend(requestParameter: any, token: any, id: any){
+  paypalSuspend(requestParameter: any, id: any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -357,7 +362,7 @@ export class UserService {
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/suspend`, requestParameter, httpOptions)
   }
-  paypalActivate(requestParameter: any, token: any, id: any){
+  paypalActivate(requestParameter: any, id: any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -367,7 +372,7 @@ export class UserService {
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/activate`, requestParameter, httpOptions)
   }
-  paypalCancel(requestParameter: any, token: any, id: any){
+  paypalCancel(requestParameter: any, id: any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
