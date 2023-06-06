@@ -55,6 +55,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   lname: any;
   mail: any;
   checked: any;
+  public paypal_ID: any;
   public monthlyAllData: any = [];
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
@@ -536,7 +537,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   }
   onchangeofthis(e: any){
     // console.log("THIS", e)
-    // console.log(this.registerForm.value)
+    console.log(this.registerForm.value)
     if(this.registerForm.value.first_name  && this.registerForm.value.last_name  && this.registerForm.value.email  && this.registerForm.value.contact_number  && this.registerForm.value.address1  && this.registerForm.value.city  && this.registerForm.value.country  && this.registerForm.value.state  && this.registerForm.value.pincode  && this.registerForm.value.license_no ){
       this.paypalBtn = true;
     } else {
@@ -746,54 +747,55 @@ export class PricingComponent implements OnInit, AfterViewInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "http://localhost:4200/dashboard",
-          "cancel_url": "http://localhost:4200/login"
+          "return_url": "https://darkmountain.blahworks.tech/dashboard",
+          "cancel_url": "https://darkmountain.blahworks.tech/login"
       }
     }
     this.userService.paypalPayment(data).subscribe((res: any) => {
       console.log(res)
+      this.paypal_ID = res.id;
       this.filterLink = res.links.filter(elem => elem.rel == "approve")
       // this.router.navigateByUrl(this.filterLink[0].href)
       this.userPlanData = {
-        sub_id: this.subsId,
-        type: this.subsType,
-        name: this.subsTitle,
-        price: this.subsPrice,
-        country: this.subsCountry,
+        sub_id: '',
+        type: '',
+        name: '',
+        price: '',
+        country: '',
         paypal_ID: res.id
       }
       console.log(this.filterLink[0].href, this.userId, this.userPlanData)
       // return;
-      this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
-        console.log(res)
+      // this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+      //   console.log(res)
 
-        if (res.success) {
-          // this.userInfo.subscribed = true;
-          localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
-          //this.toastr.success(res.message);
-          // this.IsmodelShow = false
-          // console.log(this.IsmodelShow);
-          // ($("#myModal") as any).modal("hide");
-          //  this.handleClick();
-          // <HTMLElement>document.getElementById('myModal').modal("hide")
+      //   if (res.success) {
+      //     // this.userInfo.subscribed = true;
+      //     localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+      //     //this.toastr.success(res.message);
+      //     // this.IsmodelShow = false
+      //     // console.log(this.IsmodelShow);
+      //     // ($("#myModal") as any).modal("hide");
+      //     //  this.handleClick();
+      //     // <HTMLElement>document.getElementById('myModal').modal("hide")
 
-          // Swal.fire({
-          //   text: "You have successfully subscribed",
-          //   icon: 'success',
-          // });
-          /*var modal= document.getElementById("launch_ad");
-            modal.style.display = "none";*/
-          if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
-            console.log("iff")
+      //     // Swal.fire({
+      //     //   text: "You have successfully subscribed",
+      //     //   icon: 'success',
+      //     // });
+      //     /*var modal= document.getElementById("launch_ad");
+      //       modal.style.display = "none";*/
+      //     if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+      //       console.log("iff")
 
-            // this.router.navigateByUrl("/dashboard")
-          }
-          else {
-            console.log("elseee")
-            // this.router.navigateByUrl("/login")
-          }
-        }
-      })
+      //       // this.router.navigateByUrl("/dashboard")
+      //     }
+      //     else {
+      //       console.log("elseee")
+      //       // this.router.navigateByUrl("/login")
+      //     }
+      //   }
+      // })
     })
 
 
@@ -1146,12 +1148,55 @@ export class PricingComponent implements OnInit, AfterViewInit {
             //   text: res.message,
             //   icon: 'success',
             // });
+            this.userInfo.subscribed = true;
+            localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
             this.readOnly = true;
             document.getElementById("country").style.pointerEvents = 'none';
 
             //  this.router.navigateByUrl('/registered-dentists');
+
+            this.userPlanData = {
+              sub_id: this.subsId,
+              type: this.subsType,
+              name: this.subsTitle,
+              price: this.subsPrice,
+              country: this.subsCountry,
+              paypal_ID: this.paypal_ID
+            }
+            console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+            // return;
+            this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+              console.log(res)
+
+              if (res.success) {
+                // this.userInfo.subscribed = true;
+                localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                //this.toastr.success(res.message);
+                // this.IsmodelShow = false
+                // console.log(this.IsmodelShow);
+                // ($("#myModal") as any).modal("hide");
+                //  this.handleClick();
+                // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+                // Swal.fire({
+                //   text: "You have successfully subscribed",
+                //   icon: 'success',
+                // });
+                /*var modal= document.getElementById("launch_ad");
+                  modal.style.display = "none";*/
+                if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                  console.log("iff")
+
+                  // this.router.navigateByUrl("/dashboard")
+                }
+                else {
+                  console.log("elseee")
+                  // this.router.navigateByUrl("/login")
+                }
+              }
+            })
 
           } else {
             Swal.fire({

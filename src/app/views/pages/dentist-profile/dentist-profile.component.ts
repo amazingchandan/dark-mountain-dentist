@@ -505,7 +505,7 @@ export class DentistProfileComponent implements OnInit {
           console.log('second');
           this.apiService.cancelUserPlan(this.dentistId)
             .subscribe((res: any) => {
-              console.log(res.userData, res.userData.paypal_ID)
+              console.log(res.userData, res.userData?.paypal_ID)
               if (res.success) {
                 let data = {
                   reason: "Not satisfied with the service"

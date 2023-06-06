@@ -818,10 +818,10 @@
         </div>
         <ng-template #dofalsething>
           <div class="pay-container">
-            <h5 class="me-1">Proceed To:</h5>
+            <!-- <h5 class="me-1">Proceed To:</h5> -->
             <!-- <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal> -->
-            <a class="btn pd-1 other-btn fw-bold paynow" [href]="this.filterLink[0]?.href">
-              Pay
+            <a class="btn pd-1 other-btn fw-bold paynow" [href]="this.filterLink[0]?.href" (click)="handleClick()">
+              Confirm & Pay
             </a>
           </div>
         </ng-template>

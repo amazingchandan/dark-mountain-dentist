@@ -47,7 +47,9 @@
                     data._id,
                     data.type,
                     data.amount,
-                    data.plan_name
+                    data.plan_name,
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe
@@ -55,7 +57,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypal_ID)
                 ">
                 Selected
               </button>
@@ -97,7 +99,9 @@
                     data._id,
                     data.type,
                     data.amount,
-                    data.plan_name
+                    data.plan_name,
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe
@@ -105,7 +109,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypal_ID)
                 ">
                 Selected
               </button>
@@ -219,9 +223,12 @@
           <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
           <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
           <!-- </button> -->
-        <h3 class="fs-5">Proceed To:</h3>
+        <!-- <h3 class="fs-5">Proceed To:</h3> -->
           <div class="paypal-btn">
-            <ngx-paypal [config]="payPalConfig" class="paypal-btn"></ngx-paypal>
+            <!-- <ngx-paypal [config]="payPalConfig" class="paypal-btn"></ngx-paypal> -->
+            <a class="btn pd-1 other-btn fw-bold paynow" [href]="this.filterLink[0]?.href" (click)="handleClick()">
+              Confirm & Pay
+            </a>
           </div>
         </div>
       </div>

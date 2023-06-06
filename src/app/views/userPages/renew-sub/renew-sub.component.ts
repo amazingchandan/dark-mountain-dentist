@@ -42,7 +42,14 @@ export class RenewSubComponent implements OnInit {
   showCancel: any;
   showError: any;
   selected: boolean = false;
+  public filterLink: any;
   public countriesInHere: Array<any> = ['India', 'United States', 'Japan', 'China', 'Netherland']
+  subsPaypalID: any;
+  paypal_ID: any;
+  userPlanData: { sub_id: string; type: string; name: string; price: string; country: string; paypal_ID: any; };
+  readOnly: boolean;
+  paypalBtn: boolean;
+  userInfo: any;
 
 
   constructor(private router: Router,
@@ -86,7 +93,7 @@ export class RenewSubComponent implements OnInit {
   }
   myPlanDetail() {
     this.userService.getUserPlanById(this.userId).subscribe((res: any) => {
-      console.log("myPlan")
+      console.log("myPlan", res)
       if (res.success) {
         console.log("myPlan1", res.getData)
         this.curPlanDetail = res.getData;
@@ -106,6 +113,92 @@ export class RenewSubComponent implements OnInit {
         console.log(res, "error")
       }
     })
+  }
+  handleClick() {
+    // if(!this.checked){
+    //   this.displayStyle = "none"
+    //   return Swal.fire({
+    //     text: "Please accept the terms and conditions.",
+    //     icon: 'warning',
+    //   });
+    // }
+    // else if(!this.subsId || this.subsId == 0){
+    //   this.displayStyle = "none"
+    //   return Swal.fire({
+    //     text: "Please choose a plan.",
+    //     icon: 'warning',
+    //   });
+    // }
+    // console.log(this.registerForm.value);
+    if (this.userId != "" && this.userId != undefined && this.userId != null) {
+      this.userService.updateUser(this.curPlanDetail, this.userId)
+        .subscribe((res: any) => {
+          if (res.success) {
+            //this.toastr.success(res.message);
+            // Swal.fire({
+            //   text: res.message,
+            //   icon: 'success',
+            // });
+            this.userInfo.subscribed = true;
+            localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+            console.log("DO HERE!!!!!!")
+            this.paypalBtn = true;
+            this.readOnly = true;
+            document.getElementById("country").style.pointerEvents = 'none';
+
+            //  this.router.navigateByUrl('/registered-dentists');
+
+            this.userPlanData = {
+              sub_id: this.subsId,
+              type: this.subsType,
+              name: this.subsTitle,
+              price: this.subsPrice,
+              country: this.subsCountry,
+              paypal_ID: this.paypal_ID
+            }
+            console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+            // return;
+            this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+              console.log(res)
+
+              if (res.success) {
+                // this.userInfo.subscribed = true;
+                localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                //this.toastr.success(res.message);
+                // this.IsmodelShow = false
+                // console.log(this.IsmodelShow);
+                // ($("#myModal") as any).modal("hide");
+                //  this.handleClick();
+                // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+                // Swal.fire({
+                //   text: "You have successfully subscribed",
+                //   icon: 'success',
+                // });
+                /*var modal= document.getElementById("launch_ad");
+                  modal.style.display = "none";*/
+                if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                  console.log("iff")
+
+                  // this.router.navigateByUrl("/dashboard")
+                }
+                else {
+                  console.log("elseee")
+                  // this.router.navigateByUrl("/login")
+                }
+              }
+            })
+
+          } else {
+            Swal.fire({
+              text: res.message,
+              icon: 'error',
+            });
+
+            //this.toastr.error(res.message);
+          }
+        });
+    }
   }
   getIPAddress() {
     this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res: any) => {
@@ -142,13 +235,331 @@ export class RenewSubComponent implements OnInit {
     this.yearlyPlan = true;
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
-  getSubscription(id, type, pricing_amount, title) {
-    console.log(id, type, pricing_amount);
+  getSubscription(id, type, pricing_amount, title, country, paypalID) {
+    console.log(id, type, pricing_amount, title, country);
+    if(id != 0){
+      this.selected = true;
+    } else {
+      this.selected = false;
+    }
     this.subsId = id;
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
-    this.selected = true
+    this.subsCountry = country;
+    this.subsPaypalID = paypalID
+    console.log(this.subsPaypalID)
+    let token = JSON.parse(localStorage.getItem('p-data')).token;
+    console.log(this.subsPaypalID)
+    let data = {
+      "plan_id": this.subsPaypalID,
+      // "start_time": "2018-11-01T00:00:00Z",
+      // "quantity": "20",
+      "auto_renewal": true,
+      "shipping_amount": {
+          "currency_code": "USD",
+          "value": `${this.subsPrice}`
+      },
+      "subscriber": {
+          "name": {
+              "given_name": "John",
+              "surname": "Doe"
+          },
+          "email_address": "sb-zhqmo25396320@personal.example.com",
+          "shipping_address": {
+              "name": {
+                  "full_name": "John Doe"
+              },
+              "address": {
+                  "address_line_1": "2211 N First Street",
+                  "address_line_2": "Building 17",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131",
+                  "country_code": "US"
+              }
+          }
+      },
+      "application_context": {
+          "brand_name": "ARTI",
+          "locale": "en-US",
+          "shipping_preference": "SET_PROVIDED_ADDRESS",
+          "user_action": "SUBSCRIBE_NOW",
+          "payment_method": {
+              "payer_selected": "PAYPAL",
+              "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+          },
+          "return_url": "https://darkmountain.blahworks.tech/dashboard",
+          "cancel_url": "https://darkmountain.blahworks.tech/login"
+      }
+    }
+    this.userService.paypalPayment(data).subscribe((res: any) => {
+      console.log(res)
+      this.paypal_ID = res.id;
+      // this.selected = true;
+      this.filterLink = res.links.filter(elem => elem.rel == "approve")
+      // this.router.navigateByUrl(this.filterLink[0].href)
+      this.userPlanData = {
+        sub_id: '',
+        type: '',
+        name: '',
+        price: '',
+        country: '',
+        paypal_ID: res.id
+      }
+      console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+      // return;
+      // this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+      //   console.log(res)
+
+      //   if (res.success) {
+      //     // this.userInfo.subscribed = true;
+      //     localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+      //     //this.toastr.success(res.message);
+      //     // this.IsmodelShow = false
+      //     // console.log(this.IsmodelShow);
+      //     // ($("#myModal") as any).modal("hide");
+      //     //  this.handleClick();
+      //     // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+      //     // Swal.fire({
+      //     //   text: "You have successfully subscribed",
+      //     //   icon: 'success',
+      //     // });
+      //     /*var modal= document.getElementById("launch_ad");
+      //       modal.style.display = "none";*/
+      //     if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+      //       console.log("iff")
+
+      //       // this.router.navigateByUrl("/dashboard")
+      //     }
+      //     else {
+      //       console.log("elseee")
+      //       // this.router.navigateByUrl("/login")
+      //     }
+      //   }
+      // })
+    })
+
+
+
+    // if(!this.checked){
+    //   return Swal.fire({
+    //     text: "Please accept the terms and conditions.",
+    //     icon: 'error',
+    //   });
+    // }
+    // this.userService.getUserRecordById(this.userId).subscribe((res: any) => {
+    //   //console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+    //   this.userData = res.getData;
+    //   console.log(this.userData, this.userInfo,this.userInfo.token)
+
+    //   if (res.success) {
+    //     if (this.userData[0].subscription_details.status == true) {
+    //       Swal.fire({
+    //         text: "You have already subscribed",
+    //         icon: 'error',
+    //       });
+    //       return false;
+    //     }
+
+    //     else {
+
+    //       var end_date;
+    //       var now = new Date();
+    //       console.log(id, type)
+    //       if (type == "Monthly") {
+
+
+    //         end_date = new Date(now.setMonth(now.getMonth() + 1));
+    //         //end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+    //         console.log(end_date, "Date", new Date());
+
+    //       }
+    //       else if (type === "Yearly") {
+
+
+    //         end_date = new Date(now.setMonth(now.getMonth() + 12));
+
+    //         console.log(end_date, "Date", new Date());
+
+    //       }
+
+    //      //razorpay code
+
+    //      const subscriptiondetails = {
+    //       amount: pricing_amount * 100,
+    //       user_id: this.userId,
+    //       receipt: 'Receipt #' + (Math.floor(Math.random() * 10000000) + 1),
+    //     };
+    //     console.log(subscriptiondetails);
+    //     this.spinner.show();
+    //     this.userService.order(subscriptiondetails).subscribe(
+    //       (response: any) => {
+    //         this.spinner.hide();
+    //         if(response.success){
+
+    //         }else{
+    //           Swal.fire({
+    //             title: 'Error!',
+    //             width: 400,
+    //             text: response.message,
+    //             icon: 'error',
+    //             confirmButtonText: 'Ok',
+    //           });
+    //           return false;
+    //         }
+    //         //console.log(response, 'iiiiiiii');
+    //         console.error('response for purchase ', response);
+    //         let order = response?.order;
+    //         this.razorPayOptions.order_id = order?.id;
+    //         this.razorPayOptions.amount = order?.amount_due;
+    //         const that = this;
+    //         this.razorPayOptions.handler = (response: any, error: any) => {
+    //           console.error(response);
+    //           // console.error(error);
+    //           if (!error) {
+    //             const allVarificationData = {
+    //               sub_id: id,
+    //               end_date: end_date,
+    //               start_date: Date.now(),
+    //               user_id: this.userId,
+    //               pricing_plan_id:id,
+    //               razorpay_order_id: response.razorpay_order_id,
+    //               razorpay_payment_id: response.razorpay_payment_id,
+    //               razorpay_signature: response.razorpay_signature,
+    //             };
+    //             console.log(allVarificationData, 'hiiiiiii');
+    //             //return;
+    //             let startDate= new DatePipe('en-US').transform(Date.now(), 'dd-MM-yyyy hh:mm a');
+    //             let endDate = new DatePipe('en-US').transform(end_date, 'dd-MM-yyyy hh:mm a')
+    //             this.spinner.show();
+    //             that.userService
+    //               .ordercomplete(allVarificationData)
+    //               .subscribe((res: any) => {
+    //                 if (res.success) {
+    //                   this.spinner.hide();
+    //                   Swal.fire({
+    //                     title: 'Thank You for subscribe',
+    //                     width: 400,
+    //                     text: 'Thank You for subscription',
+    //                     html:'<strong>Your subscription details are :</strong><br><br>'
+    //                     +"<strong>Start Date : </strong>"+startDate+ '<br>'
+    //                     +'<strong>End Date : </strong>'+endDate+'<br>'
+    //                     +'<strong>Order Id : </strong>'+response.razorpay_order_id+'<br>'
+    //                     +'<strong>Transaction Id : </strong>'+response.razorpay_payment_id+'<br>',
+    //                     icon: 'success',
+    //                     confirmButtonText: 'Ok',
+    //                   });
+    //                   if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+    //                   {console.log("iff")
+    //                     this.router.navigateByUrl("/dashboard")
+    //                 }
+    //                 else{
+    //                   console.log("elseee")
+    //                   this.router.navigateByUrl("/login")
+    //                 }
+    //              }
+    //              else
+    //               {
+    //                   this.spinner.hide();
+    //                   Swal.fire({
+    //                     title: 'Error!',
+    //                     width: 400,
+    //                     text: 'Payment unsuccessful, please try again',
+    //                     icon: 'error',
+    //                     confirmButtonText: 'Ok',
+    //                   });
+    //                   console.error(res.message);
+    //                   // this.router.navigate(['/profile']);
+    //                 }
+    //               });
+    //           }
+    //         };
+    //         console.error('op', this.razorPayOptions);
+
+    //         let rzp1 = new Razorpay(this.razorPayOptions);
+    //         rzp1.open();
+    //         console.error('opened');
+    //       },
+    //       (error) => {
+    //         console.error('error', error);
+    //       }
+    //     );
+    //       //razorpay code ends
+
+    //   /*  this.userPlanData = {
+    //         sub_id: id,
+    //         end_date: end_date,
+    //         start_date: Date.now(),
+    //       }
+    //       this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+    //         console.log(res)
+    //         if (res.success) {
+    //           //this.toastr.success(res.message);
+    //           Swal.fire({
+    //             text: "You have successfully subscribed",
+    //             icon: 'success',
+    //           });
+    //           //! changed here
+    //          /* this.userService.onLogin(this.appService.currentApprovalStageMessage.source['_value']).subscribe((result: any) => {
+    //             console.log(result.userInfo.id);
+    //             let id= result.userInfo.id;
+    //             if (result.success) {
+    //               this.userService.getUserRecordById(id).subscribe((res: any) => {
+    //                 console.log(res,"*****");
+    //                  if(res.getData[0]?.role=='dentist'){
+    //                 let status = res.getData[0]?.subscription_details.status;
+    //                  console.log(status)
+    //                    if(status==true){
+    //                     this.appService.login(result);
+    //                    }
+    //                    else
+    //                    {
+    //                     this.router.navigateByUrl("/pricing/"+result.userInfo.id);
+    //                    // [routerLink]="'/dentist-profile/'+user._id"
+    //                    }
+
+    //               }
+    //               else{
+    //                 this.appService.login(result);
+    //               }
+
+    //               })
+
+    //               //this.toastr.success(result.message);
+    //             //
+    //             }
+
+    //             else {
+    //               this.isAuthLoading = false;
+    //               //this.toastr.error(result.message);
+    //               Swal.fire({
+    //                 text: result.message,
+    //                 icon: 'error',
+    //               });
+    //             }
+    //           });*/
+    //        /* if(this.userInfo.token!=null&& this.userInfo.token!=undefined&& this.userInfo.token!='' )
+    //           {this.router.navigateByUrl("/dashboard")
+    //         }
+    //         else{
+    //           this.router.navigateByUrl("/login")
+    //         }
+    //       }
+    //         else {
+    //           Swal.fire({
+    //             text: res.message,
+    //             icon: 'error',
+    //           });
+    //           //this.toastr.error(res.message);
+    //         }
+    //       });*/
+
+    //     }
+    //   }
+    // })
+
   }
   private initConfig(): void {
     //(<HTMLImageElement>document.querySelector(".paypal-logo")).src="";
