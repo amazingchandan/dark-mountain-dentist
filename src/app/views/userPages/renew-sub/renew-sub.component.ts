@@ -148,17 +148,27 @@ export class RenewSubComponent implements OnInit {
 
             //  this.router.navigateByUrl('/registered-dentists');
 
-            this.userPlanData = {
+            // this.userPlanData = {
+            //   sub_id: this.subsId,
+            //   type: this.subsType,
+            //   name: this.subsTitle,
+            //   price: this.subsPrice,
+            //   country: this.subsCountry,
+            //   paypal_ID: this.paypal_ID
+            // }
+            const userPlanData = {
               sub_id: this.subsId,
               type: this.subsType,
-              name: this.subsTitle,
-              price: this.subsPrice,
-              country: this.subsCountry,
+              pre_start_date: this.preStart_date,
+              pre_end_date: this.preEnd_date,
+              pre_plan_name: this.subsName,
+              pre_plan_country: this.subsCountry,
+              pre_plan_price: this.subsPrice,
               paypal_ID: this.paypal_ID
             }
             console.log(this.filterLink[0].href, this.userId, this.userPlanData)
             // return;
-            this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+            this.userService.getSubscriptionRenew(userPlanData, this.userId).subscribe((res: any) => {
               console.log(res)
 
               if (res.success) {

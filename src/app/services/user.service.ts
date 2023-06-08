@@ -382,4 +382,14 @@ export class UserService {
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/cancel`, requestParameter, httpOptions)
   }
+  paypalTransactions(id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(`${this.paypalUserSubs}/${id}/transactions?start_time=2018-01-21T07:50:20.940Z&end_time=2023-08-21T07:50:20.940Z`,  httpOptions)
+  }
 }

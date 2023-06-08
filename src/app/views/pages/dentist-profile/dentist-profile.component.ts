@@ -643,6 +643,9 @@ export class DentistProfileComponent implements OnInit {
         this.subsCountry = this.curPlanDetail?.subscription_details?.country;
         this.subsName = this.curPlanDetail?.subscription_details?.name;
 
+        this.apiService.paypalTransactions(res.getData.paypal_ID).subscribe((resp: any) => {
+          console.log(resp)
+        })
 
         console.log("***", this.preEnd_date)
         console.log("planDetail", res)

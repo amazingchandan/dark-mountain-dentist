@@ -12,7 +12,9 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 import { type } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
+import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-subscription-list',
@@ -30,6 +32,7 @@ export class SubscriptionListComponent implements OnInit {
   maximum:string;
   amount:number;
   type:string;
+  public prod_id: any = environment.PROD_ID;
   // status: any;
   public showDelete: boolean = false;
   public deleteSubsId: any;
@@ -79,7 +82,7 @@ export class SubscriptionListComponent implements OnInit {
 
     };
     this.planList();
-
+    console.log(this.prod_id)
     this.addPriceingForm = new FormGroup({
       plan_name: new FormControl(),
       amount: new FormControl(),
@@ -227,7 +230,7 @@ export class SubscriptionListComponent implements OnInit {
       // localStorage.setItem('p-data', JSON.stringify(p_data))
       console.log(this.addPriceingForm.value);
       let data = {
-        "product_id": JSON.parse(localStorage.getItem('p-data')).prod_id,
+        "product_id": `${this.prod_id}`,
         "name": this.addPriceingForm.value.plan_name,
         "billing_cycles": [
             {
@@ -235,7 +238,7 @@ export class SubscriptionListComponent implements OnInit {
                 "sequence": 1,
                 "total_cycles": 999,
                 "frequency": {
-                    "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'YEAR'
+                    "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'DAY' // DAY, WEEK, MONTH, YEAR
                 },
                 "pricing_scheme": {
                     "fixed_price": {
@@ -250,12 +253,12 @@ export class SubscriptionListComponent implements OnInit {
             "setup_fee_failure_action": "CONTINUE",
             "setup_fee": {
                 "currency_code": "USD",
-                "value": +this.addPriceingForm.value.amount
+                "value": 0
             }
         },
         "taxes": {
             "percentage": "1.5",
-            "inclusive": false
+            "inclusive": true
         }
       }
       // console.log(data)

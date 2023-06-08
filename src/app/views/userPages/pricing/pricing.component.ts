@@ -716,7 +716,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       "auto_renewal": true,
       "shipping_amount": {
           "currency_code": "USD",
-          "value": `${this.subsPrice}`
+          "value": "0"
       },
       "subscriber": {
           "name": {
