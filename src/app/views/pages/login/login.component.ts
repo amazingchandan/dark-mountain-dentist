@@ -109,6 +109,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               else {
                 localStorage.setItem('userInfo', JSON.stringify(result['userInfo']));
                 localStorage.setItem('id', result.userInfo.id);
+                localStorage.setItem('i', result.userInfo.id);
 
                 localStorage.setItem('token', result.userInfo.token);
 

@@ -551,6 +551,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   checkoutBtn() {
     this.IsmodelShow = true;
     console.log(this.IsmodelShow);
+    localStorage.setItem('i', this.userId)
   }
   resetStatus() {
     document.getElementById("launch_ad")?.click();
@@ -799,7 +800,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       //   }
       // })
     })
-
+    localStorage.setItem('i', this.userId)
 
 
     // if(!this.checked){
