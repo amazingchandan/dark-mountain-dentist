@@ -27,6 +27,10 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { RecaptchaModule, RecaptchaFormsModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { PaySuccessComponent } from './pay-success/pay-success.component';
+import { PayFailureComponent } from './pay-failure/pay-failure.component';
+import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+
 
 @NgModule({
   declarations: [
@@ -47,6 +51,8 @@ import { environment } from 'src/environments/environment';
     TestComponent,
     FinancialComponent,
     ViewAdminXrayComponent,
+    PaySuccessComponent,
+    PayFailureComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +70,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     NgxImageZoomModule,
     NgxPayPalModule,
+    NgxSpinnerModule,
   ],
   // providers: [
   //   {

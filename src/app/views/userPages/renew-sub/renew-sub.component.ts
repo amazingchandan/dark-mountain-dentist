@@ -42,7 +42,7 @@ export class RenewSubComponent implements OnInit {
   showCancel: any;
   showError: any;
   selected: boolean = false;
-  public filterLink: any;
+  public filterLink: Array<any> = [];
   public countriesInHere: Array<any> = ['India', 'United States', 'Japan', 'China', 'Netherland']
   subsPaypalID: any;
   paypal_ID: any;
@@ -139,12 +139,12 @@ export class RenewSubComponent implements OnInit {
             //   text: res.message,
             //   icon: 'success',
             // });
-            this.userInfo.subscribed = true;
-            localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+            // this.userInfo.subscribed = true;
+            // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
             this.readOnly = true;
-            document.getElementById("country").style.pointerEvents = 'none';
+            // document.getElementById("country").style.pointerEvents = 'none';
 
             //  this.router.navigateByUrl('/registered-dentists');
 
@@ -173,7 +173,7 @@ export class RenewSubComponent implements OnInit {
 
               if (res.success) {
                 // this.userInfo.subscribed = true;
-                localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
                 //this.toastr.success(res.message);
                 // this.IsmodelShow = false
                 // console.log(this.IsmodelShow);
@@ -187,15 +187,15 @@ export class RenewSubComponent implements OnInit {
                 // });
                 /*var modal= document.getElementById("launch_ad");
                   modal.style.display = "none";*/
-                if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
-                  console.log("iff")
+                // if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                  // console.log("iff")
 
                   // this.router.navigateByUrl("/dashboard")
-                }
-                else {
-                  console.log("elseee")
+                // }
+                // else {
+                  // console.log("elseee")
                   // this.router.navigateByUrl("/login")
-                }
+                // }
               }
             })
 
@@ -256,6 +256,7 @@ export class RenewSubComponent implements OnInit {
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
+    this.subsName = title;
     this.subsCountry = country;
     this.subsPaypalID = paypalID
     console.log(this.subsPaypalID)
@@ -268,7 +269,7 @@ export class RenewSubComponent implements OnInit {
       "auto_renewal": true,
       "shipping_amount": {
           "currency_code": "USD",
-          "value": `${this.subsPrice}`
+          "value": "0"
       },
       "subscriber": {
           "name": {
@@ -299,8 +300,10 @@ export class RenewSubComponent implements OnInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "https://darkmountain.blahworks.tech/dashboard",
-          "cancel_url": "https://darkmountain.blahworks.tech/login"
+          "return_url": "http://localhost:4200/success",
+          "cancel_url": "http://localhost:4200/failure"
+          // "return_url": "https://darkmountain.blahworks.tech/dashboard",
+          // "cancel_url": "https://darkmountain.blahworks.tech/login"
       }
     }
     this.userService.paypalPayment(data).subscribe((res: any) => {
@@ -656,7 +659,7 @@ export class RenewSubComponent implements OnInit {
                 type: this.subsType,
                 pre_start_date: this.preStart_date,
                 pre_end_date: this.preEnd_date,
-                pre_plan_name: this.subsName,
+                pre_plan_name: this.subsTitle,
                 pre_plan_country: this.subsCountry,
                 pre_plan_price: this.subsPrice,
               }

@@ -32,6 +32,8 @@ import { UserRoleDentistGuard } from './guard/user-role-dentist.guard';
 import { DashboardProfileCheckGuard } from './guard/dashboard-profile-check.guard';
 import { NonUserAuthGuard } from './guard/non-user-auth.guard';
 import { PricingGuardGuard } from './guard/pricing-guard.guard';
+import { PaySuccessComponent } from './views/pages/pay-success/pay-success.component';
+import { PayFailureComponent } from './views/pages/pay-failure/pay-failure.component';
 const routes: Routes = [
 
   // {
@@ -153,6 +155,20 @@ const routes: Routes = [
    },*/
 
 
+  {
+    path: 'failure',
+    component: PayFailureComponent,
+    data: {
+      title: 'Pay Failure'
+    }
+  },
+  {
+    path: 'success',
+    component: PaySuccessComponent,
+    data: {
+      title: 'Pay Success'
+    }
+  },
   {
     path: 'forgot-password',
     component: ForgetPasswordComponent,

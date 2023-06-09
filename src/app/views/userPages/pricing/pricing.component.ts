@@ -747,8 +747,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "https://darkmountain.blahworks.tech/dashboard",
-          "cancel_url": "https://darkmountain.blahworks.tech/login"
+          // "return_url": "https://darkmountain.blahworks.tech/dashboard",
+          // "cancel_url": "https://darkmountain.blahworks.tech/login"
+          "return_url": "http://localhost:4200/success",
+          "cancel_url": "http://localhost:4200/failure"
       }
     }
     this.userService.paypalPayment(data).subscribe((res: any) => {
@@ -1149,7 +1151,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
             //   icon: 'success',
             // });
             this.userInfo.subscribed = true;
-            localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+            // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
             this.readOnly = true;
@@ -1172,7 +1174,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
               if (res.success) {
                 // this.userInfo.subscribed = true;
-                localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                localStorage.removeItem('userInfo')
+                localStorage.setItem('i', this.userId)
                 //this.toastr.success(res.message);
                 // this.IsmodelShow = false
                 // console.log(this.IsmodelShow);
