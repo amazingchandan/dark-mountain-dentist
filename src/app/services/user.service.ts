@@ -372,6 +372,16 @@ export class UserService {
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/activate`, requestParameter, httpOptions)
   }
+  paypalRevise(requestParameter: any, id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        // 'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.post(`${this.paypalUserSubs}/${id}/revise`, requestParameter, httpOptions)
+  }
   paypalCancel(requestParameter: any, id: any){
     const httpOptions = {
       headers: new HttpHeaders({

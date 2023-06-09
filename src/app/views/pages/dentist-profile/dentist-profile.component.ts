@@ -35,6 +35,7 @@ export class DentistProfileComponent implements OnInit {
   year: any;
   xrayData: any = {};
   country: any;
+  paypal_ID: any;
   // state: any;
   // userInfo:any;
   role: any;
@@ -460,15 +461,17 @@ export class DentistProfileComponent implements OnInit {
         pre_plan_name: this.subsName,
         pre_plan_country: this.subsCountry,
         pre_plan_price: this.subsPrice,
+        paypal_ID: this.paypal_ID
       }
+      // return
       this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((resp: any) => {
         console.log(resp)
         if (resp.success) {
           let dataToSend = {
             reason: "Subscription renewed."
           }
-          this.apiService.paypalActivate(dataToSend, this.userData.paypal_ID).subscribe((res: any) => {
-            console.log(res, "paypal")
+          this.apiService.paypalActivate(dataToSend, this.userData[0].paypal_ID).subscribe((result: any) => {
+            console.log(result, "paypal")
           })
           this.IsmodelShow = false
           console.log(this.IsmodelShow);
@@ -510,19 +513,23 @@ export class DentistProfileComponent implements OnInit {
                 let data = {
                   reason: "Not satisfied with the service"
                 }
-                let token = "A21AAJO4flEg2MEs201bjXb8Ca_sCo-D3v-xBALryI6nvKvBaMX6edwe9AoiucwH-8z6ONrhZB4HnVtgCj1pJM1ItqT3J-mhA";
-                this.apiService.paypalSuspend(data, res.userData.paypal_ID).subscribe((res: any) => {
+                // let token = "A21AAJO4flEg2MEs201bjXb8Ca_sCo-D3v-xBALryI6nvKvBaMX6edwe9AoiucwH-8z6ONrhZB4HnVtgCj1pJM1ItqT3J-mhA";
+                this.apiService.paypalSuspend(data, res.userData?.paypal_ID).subscribe((res: any) => {
                   console.log(res)
                 })
                 Swal.fire({
                   // toast: true,
                   // position: 'top-end',
-                  showConfirmButton: false,
+                  showConfirmButton: true,
                   timer: 3000,
                   title: 'Success!',
                   text: "Your subscription is cancelled successfully.",
                   icon: 'success',
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'Okay',
                 });
+                this.cancelBtn = true;
+                this.renewBtn = false;
                 // this.appService.logout();
               }
               else {
@@ -642,7 +649,7 @@ export class DentistProfileComponent implements OnInit {
         this.preEnd_date = this.curPlanDetail?.subscription_details?.end_date;
         this.subsCountry = this.curPlanDetail?.subscription_details?.country;
         this.subsName = this.curPlanDetail?.subscription_details?.name;
-
+        this.paypal_ID = this.curPlanDetail?.paypal_ID;
         this.apiService.paypalTransactions(res.getData.paypal_ID).subscribe((resp: any) => {
           console.log(resp)
         })

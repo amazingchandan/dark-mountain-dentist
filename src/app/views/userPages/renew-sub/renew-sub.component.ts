@@ -22,6 +22,7 @@ export class RenewSubComponent implements OnInit {
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
   public yearlyPlan: any = false;
+  public planStartDate: any;
   allData = []
   subsId: any = 0;
   subsType: any = "";
@@ -104,9 +105,13 @@ export class RenewSubComponent implements OnInit {
         // this.subsId= this.curPlanDetail?.subscription_details.subscription_id._id;
         this.preStart_date = this.curPlanDetail?.subscription_details.start_date;
         this.preEnd_date = this.curPlanDetail?.subscription_details.end_date;
+        if(new Date(this.preEnd_date).getTime() > new Date().getTime()){
+          this.planStartDate = this.preEnd_date;
+        } else {
+          this.planStartDate = new Date().toISOString()
+        }
 
-
-        console.log("***", this.preEnd_date)
+        console.log("***", this.preEnd_date, new Date(this.preEnd_date).getTime(), Date.now(), new Date().getTime(), new Date().toISOString(), new Date().toLocaleString())
         console.log("planDetail", res)
       }
       else {
@@ -246,6 +251,7 @@ export class RenewSubComponent implements OnInit {
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
   getSubscription(id, type, pricing_amount, title, country, paypalID) {
+    localStorage.setItem('i', this.userId)
     console.log(id, type, pricing_amount, title, country);
     if(id != 0){
       this.selected = true;
@@ -259,12 +265,12 @@ export class RenewSubComponent implements OnInit {
     this.subsName = title;
     this.subsCountry = country;
     this.subsPaypalID = paypalID
-    console.log(this.subsPaypalID)
-    let token = JSON.parse(localStorage.getItem('p-data')).token;
-    console.log(this.subsPaypalID)
+    // console.log(this.subsPaypalID)
+    // let token = JSON.parse(localStorage.getItem('p-data')).token;
+    console.log(this.subsPaypalID, this.planStartDate, this.curPlanDetail?.paypal_ID)
     let data = {
-      "plan_id": this.subsPaypalID,
-      // "start_time": "2018-11-01T00:00:00Z",
+      "plan_id": `${this.subsPaypalID}`,
+      "start_time": `${this.planStartDate}`,
       // "quantity": "20",
       "auto_renewal": true,
       "shipping_amount": {
@@ -300,12 +306,18 @@ export class RenewSubComponent implements OnInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          // "return_url": "http://localhost:4200/success",
-          // "cancel_url": "http://localhost:4200/failure"
-          "return_url": "https://darkmountain.blahworks.tech/success",
-          "cancel_url": "https://darkmountain.blahworks.tech/failure"
+          "return_url": "http://localhost:4200/success",
+          "cancel_url": "http://localhost:4200/failure"
+          // "return_url": "https://darkmountain.blahworks.tech/success",
+          // "cancel_url": "https://darkmountain.blahworks.tech/failure"
       }
     }
+    // let dataToSend = {
+    //   reason: "Subscription renewed."
+    // }
+    // this.userService.paypalActivate(dataToSend, this.curPlanDetail?.paypal_ID).subscribe((resp: any) => {
+    //   console.log(resp, "Activate")
+    // })
     this.userService.paypalPayment(data).subscribe((res: any) => {
       console.log(res)
       this.paypal_ID = res.id;
