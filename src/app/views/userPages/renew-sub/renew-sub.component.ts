@@ -300,10 +300,10 @@ export class RenewSubComponent implements OnInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "http://localhost:4200/success",
-          "cancel_url": "http://localhost:4200/failure"
-          // "return_url": "https://darkmountain.blahworks.tech/dashboard",
-          // "cancel_url": "https://darkmountain.blahworks.tech/login"
+          // "return_url": "http://localhost:4200/success",
+          // "cancel_url": "http://localhost:4200/failure"
+          "return_url": "https://darkmountain.blahworks.tech/success",
+          "cancel_url": "https://darkmountain.blahworks.tech/failure"
       }
     }
     this.userService.paypalPayment(data).subscribe((res: any) => {
