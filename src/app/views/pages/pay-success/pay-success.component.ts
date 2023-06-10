@@ -119,11 +119,11 @@ export class PaySuccessComponent implements OnInit {
         if (res.getData[0]?.role == 'dentist') {
           let status = res.getData[0]?.subscription_details.status;
           this.statusSubs = res.getData[0]?.subscription_details.status;
-          console.log(status)
+          console.log(status, res.getData[0]?.subscription_details.status)
           let userInfo = {
             id: this.id,
             role: res.getData[0]?.role,
-            subscribed: res.getData[0]?.subscription_details.status,
+            subscribed: true,
             token: this.token
           }
           localStorage.setItem('userInfo', JSON.stringify(userInfo))
@@ -132,19 +132,16 @@ export class PaySuccessComponent implements OnInit {
             this.spinner.hide();
             this.router.navigateByUrl('/dashboard');
           }, 4000)
-          if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
+          // if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
             // this.appService.login(result);
-          }
-          else {
+          // }
+          // else {
             // localStorage.setItem('userInfo', JSON.stringify(result['userInfo']));
             // localStorage.setItem('id', result.userInfo.id);
-
             // localStorage.setItem('token', result.userInfo.token);
-
             // this.router.navigateByUrl("/pricing/" + result.userInfo.id);
-
             // [routerLink]="'/dentist-profile/'+user._id"
-          }
+          // }
 
         }
         else {

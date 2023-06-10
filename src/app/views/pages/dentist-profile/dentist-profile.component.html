@@ -132,6 +132,7 @@
                         <thead>
                           <tr>
                             <th scope="col">Plan</th>
+                            <th scope="col">Transaction Time</th>
                             <th scope="col">Next Billing Date</th>
                             <th scope="col" class="text-right">Amount</th>
                             <th scope="col" class="text-center">View Details</th>
@@ -142,12 +143,17 @@
                           ">
                         <tr *ngFor="let data of this.all_subData;
                               let i = index">
-                            <td>{{ data?.name | titlecase }}</td>
+                              <td *ngIf="data?.start_date
+                              == this.preStart_date; else dotheOthersubs">{{ data?.name | titlecase }} (Active)</td>
+                              <ng-template #dotheOthersubs>
+                                <td>{{ data?.name | titlecase }}</td>
+                              </ng-template>
                             <!-- <ng-template #dothatsub>
                               <td>
                                 {{ data.subscription_id.plan_name | titlecase }}
                               </td>
                             </ng-template> -->
+                            <td>{{ data.start_date | date : "dd/MM/yyyy, hh:mm a" }}</td>
                             <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
                             <td class="text-right">${{ data?.price }}</td>
                             <td class="text-center">
@@ -170,6 +176,7 @@
                             <td colspan="3" class="no-data-available">
                               No data available!
                             </td>
+                            <td colspan="0" class="no-data-available p-0"></td>
                             <td colspan="0" class="no-data-available p-0"></td>
                             <td colspan="0" class="no-data-available p-0"></td>
                             <td colspan="0" class="no-data-available p-0"></td>
@@ -220,6 +227,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Plan</th>
+                          <th scope="col">Transaction Time</th>
                           <th scope="col">Next Billing Date</th>
                           <th scope="col" class="text-right">Amount</th>
                           <th scope="col" class="text-center">View Details</th>
@@ -231,6 +239,7 @@
                         <tr *ngFor="let data of this.all_subData;
                               let i = index">
                           <td>{{ data?.name | titlecase }}</td>
+                          <td>{{ data.start_date | date : "dd/MM/yyyy, hh:mm a" }}</td>
                           <td>{{ data.end_date | date : "dd/MM/yyyy" }}</td>
                           <td class="text-right">${{ data?.price }}</td>
                           <td class="text-center">
@@ -253,6 +262,7 @@
                           <td colspan="3" class="no-data-available">
                             No data available!
                           </td>
+                          <td colspan="0" class="no-data-available p-0"></td>
                           <td colspan="0" class="no-data-available p-0"></td>
                           <td colspan="0" class="no-data-available p-0"></td>
                           <td colspan="0" class="no-data-available p-0"></td>

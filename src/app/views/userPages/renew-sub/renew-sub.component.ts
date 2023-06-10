@@ -275,7 +275,7 @@ export class RenewSubComponent implements OnInit {
     console.log(`${this.localHost}pricing/${this.userId}/success`)
     let data = {
       "plan_id": `${this.subsPaypalID}`,
-      "start_time": `${this.planStartDate}`,
+      // "start_time": `${this.planStartDate}`,
       // "quantity": "20",
       "auto_renewal": true,
       "shipping_amount": {

@@ -659,7 +659,7 @@ export class DentistProfileComponent implements OnInit {
           console.log(resp)
         })
 
-        console.log("***", this.preEnd_date)
+        console.log("***", this.preEnd_date, this.subsId)
         console.log("planDetail", res)
       }
       else {
