@@ -10,6 +10,7 @@ import {
 } from 'ngx-paypal';
 import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-renew-sub',
@@ -51,6 +52,7 @@ export class RenewSubComponent implements OnInit {
   readOnly: boolean;
   paypalBtn: boolean;
   userInfo: any;
+  localHost: string;
 
 
   constructor(private router: Router,
@@ -59,6 +61,7 @@ export class RenewSubComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title,) {
       titleService.setTitle(this.title);
+      this.localHost = environment.LOCAL_HOST
     }
 
   ngOnInit(): void {
@@ -136,9 +139,9 @@ export class RenewSubComponent implements OnInit {
     // }
     // console.log(this.registerForm.value);
     if (this.userId != "" && this.userId != undefined && this.userId != null) {
-      this.userService.updateUser(this.curPlanDetail, this.userId)
-        .subscribe((res: any) => {
-          if (res.success) {
+      // this.userService.updateUser(this.curPlanDetail, this.userId)
+      //   .subscribe((res: any) => {
+      //     if (res.success) {
             //this.toastr.success(res.message);
             // Swal.fire({
             //   text: res.message,
@@ -146,9 +149,9 @@ export class RenewSubComponent implements OnInit {
             // });
             // this.userInfo.subscribed = true;
             // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
-            console.log("DO HERE!!!!!!")
-            this.paypalBtn = true;
-            this.readOnly = true;
+            // console.log("DO HERE!!!!!!")
+            // this.paypalBtn = true;
+            // this.readOnly = true;
             // document.getElementById("country").style.pointerEvents = 'none';
 
             //  this.router.navigateByUrl('/registered-dentists');
@@ -171,12 +174,13 @@ export class RenewSubComponent implements OnInit {
               pre_plan_price: this.subsPrice,
               paypal_ID: this.paypal_ID
             }
+            localStorage.setItem('renew_sub', JSON.stringify(userPlanData))
             console.log(this.filterLink[0].href, this.userId, this.userPlanData)
             // return;
-            this.userService.getSubscriptionRenew(userPlanData, this.userId).subscribe((res: any) => {
-              console.log(res)
+            // this.userService.getSubscriptionRenew(userPlanData, this.userId).subscribe((res: any) => {
+            //   console.log(res)
 
-              if (res.success) {
+            //   if (res.success) {
                 // this.userInfo.subscribed = true;
                 // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
                 //this.toastr.success(res.message);
@@ -201,18 +205,18 @@ export class RenewSubComponent implements OnInit {
                   // console.log("elseee")
                   // this.router.navigateByUrl("/login")
                 // }
-              }
-            })
+            //   }
+            // })
 
-          } else {
-            Swal.fire({
-              text: res.message,
-              icon: 'error',
-            });
+        //   } else {
+        //     Swal.fire({
+        //       text: res.message,
+        //       icon: 'error',
+        //     });
 
-            //this.toastr.error(res.message);
-          }
-        });
+        //     //this.toastr.error(res.message);
+        //   }
+        // });
     }
   }
   getIPAddress() {
@@ -268,6 +272,7 @@ export class RenewSubComponent implements OnInit {
     // console.log(this.subsPaypalID)
     // let token = JSON.parse(localStorage.getItem('p-data')).token;
     console.log(this.subsPaypalID, this.planStartDate, this.curPlanDetail?.paypal_ID)
+    console.log(`${this.localHost}pricing/${this.userId}/success`)
     let data = {
       "plan_id": `${this.subsPaypalID}`,
       "start_time": `${this.planStartDate}`,
@@ -306,8 +311,8 @@ export class RenewSubComponent implements OnInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "http://localhost:4200/success",
-          "cancel_url": "http://localhost:4200/failure"
+          "return_url": `${this.localHost}pricing/${this.userId}/success`,
+          "cancel_url": `${this.localHost}pricing/${this.userId}/failure`
           // "return_url": "https://darkmountain.blahworks.tech/success",
           // "cancel_url": "https://darkmountain.blahworks.tech/failure"
       }

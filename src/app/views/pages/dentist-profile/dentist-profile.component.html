@@ -292,7 +292,8 @@
                     (click)="cancelSubfromUser()" *ngIf="!cancelBtn">
                     Cancel Subscription&nbsp;<i class="fa-solid fa-ban ms-1"></i>
                   </button>
-                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" data-bs-toggle="modal" data-bs-target="#renewModal" *ngIf="!renewBtn">
+                  <!-- data-bs-toggle="modal" data-bs-target="#renewModal" -->
+                  <button type="button" class="btn ms-2 pd-1 other-btn fw-bolder" *ngIf="!renewBtn" (click)="handleRenew()">
                     Renew Subscription&nbsp;<i class="fa-solid fa-arrows-rotate ms-1"></i>
                   </button>
                 </div>

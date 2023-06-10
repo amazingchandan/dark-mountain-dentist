@@ -434,6 +434,11 @@ export class DentistProfileComponent implements OnInit {
       }
     })
   }
+  handleRenew(){
+    if(this.userID){
+      this.router.navigateByUrl("/renew-sub/"+this.userID)
+    }
+  }
   handleCOnfirmPay(){
     this.apiService.getUserRecordById(this.userID).subscribe((res: any) => {
       console.log(res, "resssssssssssssssssssssssssssssssssssssss")

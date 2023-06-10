@@ -163,7 +163,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'success',
+    path: 'pricing/:dentist_id/:payment_status',
     component: PaySuccessComponent,
     data: {
       title: 'Pay Success'

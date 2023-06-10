@@ -482,7 +482,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-</div> -->
+  </div> -->
 
   <!-- </div> -->
 
@@ -820,9 +820,10 @@
           <div class="pay-container">
             <!-- <h5 class="me-1">Proceed To:</h5> -->
             <!-- <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal> -->
-            <a class="btn pd-1 other-btn fw-bold paynow" [href]="this.filterLink[0]?.href" (click)="handleClick()">
+            <!-- [href]="this.filterLink[0]?.href" -->
+            <button class="btn pd-1 other-btn fw-bold paynow" (click)="handleClick()">
               Confirm & Pay
-            </a>
+            </button>
           </div>
         </ng-template>
       </div>

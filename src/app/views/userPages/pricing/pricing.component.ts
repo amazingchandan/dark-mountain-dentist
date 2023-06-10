@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, NgForm, ValidationErrors, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 import { HttpClient } from '@angular/common/http';
-import { DatePipe, Location } from '@angular/common';
+import { DatePipe, Location, DOCUMENT } from '@angular/common';
 import {
   IPayPalConfig,
 
@@ -15,6 +15,7 @@ import {
   IPayPalButtonStyle,
   ICreateSubscriptionRequest
 } from 'ngx-paypal';
+import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 import * as bootstrap from "bootstrap";
 import * as $AB from "jquery";
@@ -55,6 +56,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   lname: any;
   mail: any;
   checked: any;
+  localHost: string;
   public paypal_ID: any;
   public monthlyAllData: any = [];
   public yearlyAllData: any = [];
@@ -158,10 +160,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private el: ElementRef,
-    private titleService: Title,) {
+    private titleService: Title,
+    private _location: Location,
+    @Inject(DOCUMENT) private document: Document,
+    ) {
       titleService.setTitle(this.title);
       this.registerForm = this.formBuilder.group({})
       this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+      this.localHost = environment.LOCAL_HOST;
   }
 
   // private payPalButtonContainerElem?: ElementRef;
@@ -172,7 +178,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   // @ViewChild('paypalRef',{static: true}) public paypalRef: ElementRef;
   ngOnInit(): void {
     console.log(this.checked, this.subsId, this.userInfo);
-    this.userInfo.subscribed = true;
+    // this.userInfo.subscribed = true;
     console.log('window.paypal', this.userInfo);
     this.getIPAddress();
     // this.userService.getSubscriptionListPricing().subscribe((res: any) => {
@@ -710,6 +716,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     console.log(this.subsPaypalID)
     let token = JSON.parse(localStorage.getItem('p-data')).token;
     console.log(this.subsPaypalID)
+    console.log(`${this.localHost}pricing/${this.userId}/success`)
     let data = {
       "plan_id": this.subsPaypalID,
       // "start_time": "2018-11-01T00:00:00Z",
@@ -748,10 +755,10 @@ export class PricingComponent implements OnInit, AfterViewInit {
               "payer_selected": "PAYPAL",
               "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          "return_url": "https://darkmountain.blahworks.tech/success",
-          "cancel_url": "https://darkmountain.blahworks.tech/failure"
-          // "return_url": "http://localhost:4200/success",
-          // "cancel_url": "http://localhost:4200/failure"
+          // "return_url": "https://darkmountain.blahworks.tech/success",
+          // "cancel_url": "https://darkmountain.blahworks.tech/failure"
+          "return_url": `${this.localHost}pricing/${this.userId}/success`,
+          "cancel_url": `${this.localHost}pricing/${this.userId}/failure`
       }
     }
     this.userService.paypalPayment(data).subscribe((res: any) => {
@@ -1151,7 +1158,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
             //   text: res.message,
             //   icon: 'success',
             // });
-            this.userInfo.subscribed = true;
+            // this.userInfo.subscribed = true;
             // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
@@ -1168,16 +1175,19 @@ export class PricingComponent implements OnInit, AfterViewInit {
               country: this.subsCountry,
               paypal_ID: this.paypal_ID
             }
-            console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+            console.log(this.filterLink[0]?.href, this.userId, this.userPlanData)
+            localStorage.setItem('i', this.userId)
+            localStorage.setItem('sub', JSON.stringify(this.userPlanData));
+            // localStorage.removeItem('userInfo')
+            this._location.prepareExternalUrl(this.filterLink[0].href)
+            this.document.location.href = this.filterLink[0].href
             // return;
-            this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
-              console.log(res)
+            // this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+            //   console.log(res)
 
-              if (res.success) {
+            //   if (res.success) {
                 // this.userInfo.subscribed = true;
                 // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
-                localStorage.removeItem('userInfo')
-                localStorage.setItem('i', this.userId)
                 //this.toastr.success(res.message);
                 // this.IsmodelShow = false
                 // console.log(this.IsmodelShow);
@@ -1191,17 +1201,17 @@ export class PricingComponent implements OnInit, AfterViewInit {
                 // });
                 /*var modal= document.getElementById("launch_ad");
                   modal.style.display = "none";*/
-                if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
-                  console.log("iff")
+                // if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                //   console.log("iff")
 
                   // this.router.navigateByUrl("/dashboard")
-                }
-                else {
-                  console.log("elseee")
+                // }
+                // else {
+                  // console.log("elseee")
                   // this.router.navigateByUrl("/login")
-                }
-              }
-            })
+                // }
+            //   }
+            // })
 
           } else {
             Swal.fire({

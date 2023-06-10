@@ -1,22 +1,31 @@
-<ngx-bootstrap-spinner
-  bdColor="rgba(0, 0, 0, 0.8)"
-  loaderTemplate="<img  src='./assets/images/loader.gif' height='150px'>"
-  color="#fff"
-  type="border"
-  [fullScreen]="true"
-  loadingText=""
-></ngx-bootstrap-spinner>
-<div class="less-width">
-  <div class="less-wdith-container">
-    <h2 class="d-flex justify-content-center mb-4 fw-semibold">
-      Dark
-      <div class="mountain-color">Mountain</div>
-    </h2>
-    <div class="text">Payment successful.</div>
-    <div class="d-flex justify-content-center">
-      <!-- <button (click)="handleClick()" class="btn btn-primary btn-block p-2 fw-bold mt-3">
-        Continue
-      </button> -->
+<div class="container-fluid min-vh-100 bg m-0 my-container position-relative">
+  <div class="sub-container">
+    <div class="emptyDiv">
+      <h2
+        class="modal-title fw-bold d-flex justify-content-center fw-semibold"
+        id="exampleModalLongTitle"
+      >
+        Dark
+        <div class="mountain-color">Mountain</div>
+      </h2>
+    </div>
+    <div class="text mt-2" *ngIf="payment_status == 'success'; else dothat">
+      <h2>Payment successful.</h2>
+    </div>
+    <ng-template #dothat>
+      <div class="text mt-2">
+        <h2>Payment failed.</h2>
+      </div>
+    </ng-template>
+    <div>
+      <ngx-bootstrap-spinner
+        bdColor="rgba(0,0,0,0.0)"
+        size="default"
+        color="#000000"
+        type="border"
+        [fullScreen]="false"
+        [loadingText]="show_text"
+      ></ngx-bootstrap-spinner>
     </div>
   </div>
 </div>

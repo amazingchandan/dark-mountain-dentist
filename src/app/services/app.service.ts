@@ -158,10 +158,14 @@ export class AppService {
     if(JSON.parse(localStorage.getItem("userInfo"))?.role == 'dentist' && !JSON.parse(localStorage.getItem("userInfo"))?.subscribed){
       return true;
     } else {
-      this.UserService.getUserRecordById(JSON.parse(localStorage.getItem("userInfo")).id).subscribe((res: any) => {
-        console.log(res)
+      this.UserService.getUserRecordById(localStorage.getItem("i")).subscribe((res: any) => {
+        console.log(res, res.getData[0]?.role, !res.getData[0]?.subscription_details?.status)
+        if(res.getData[0]?.role == 'dentist' && !res.getData[0]?.subscription_details?.status){
+          return true
+        } else {
+          return false;
+        }
         // return true;
-        return false;
       })
     }
   }
@@ -186,11 +190,11 @@ export class AppService {
     //     return false
     //   }
     // })
-    if((JSON.parse(localStorage.getItem("userInfo")).role == 'admin') || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && JSON.parse(localStorage.getItem("userInfo")).subscribed)){
+    if((JSON.parse(localStorage.getItem("userInfo"))?.role == 'admin') || (JSON.parse(localStorage.getItem("userInfo"))?.role == 'dentist' && JSON.parse(localStorage.getItem("userInfo"))?.subscribed)){
       console.log(JSON.parse(localStorage.getItem("userInfo")).role, true)
       return true;
     } else {
-      console.log(JSON.parse(localStorage.getItem("userInfo")).role, false)
+      console.log(JSON.parse(localStorage.getItem("userInfo"))?.role, false)
       return false;
     }
     // || (JSON.parse(localStorage.getItem("userInfo")).role == 'dentist' && new Date(res?.getData[0]?.subscription_details?.end_date).getTime() > Date.now())

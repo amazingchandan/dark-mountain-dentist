@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   PAY_API: 'https://api-m.sandbox.paypal.com/v1/',
   API_HOST: 'https://apidarkmountain.blahworks.tech/',
+  LOCAL_HOST: 'https://darkmountain.blahworks.tech/',
   // ! paypal
   CLIENT_ID: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
   CLIENT_SECRET_KEY: 'EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU',
