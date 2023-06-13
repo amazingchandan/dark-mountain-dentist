@@ -2,10 +2,10 @@
   box-shadow: 0px 0px 2px 4px #02d9583e !important;
   background-color: #02d959;
   color: #fff !important;
-  transform: scale(1.03);
+  transform: scale(1);
 
   h4 {
-    color: #fff;
+    color: #000;
   }
 
   button {
@@ -14,13 +14,33 @@
   }
 }
 
-.cancel-selected {
-  background-color: var(--bs-gray) !important;
-  border: var(--bs-gray) !important;
-  font-size: 16px !important;
-  padding: 10px 14px !important;
+.card.hover-effect {
+  box-shadow: 0px 0px 8px 0px #e6e6e6 !important;
+  transform: inherit;
+  border-color: #dddddd !important;
+    border-radius: 6px !important;
+}
+.hover-effect:hover {
+  border-color: #02d959 !important;
+    background: transparent;
+    color: #000 !important;
 }
 
+
+.hover-effect:hover button {
+  background-color: #fff !important;
+  color: #02d959 !important;
+}
+
+.cancel-selected {
+  background-color: var(--bs-gray) !important;
+  border: 1px solid var(--bs-gray) !important;
+  font-size: 16px !important;
+  padding: 10px 30px !important;
+}
+.inside-sub-container .myCard .hover-effect:hover .cancel-selected {
+  border: 1px solid #02d959 !important;
+}
 .text-wrap {
   word-break: break-all;
 }
@@ -54,9 +74,7 @@ body {
 }
 
 .btn-position {
-
-  margin-left: 12rem;
-
+  // margin-left: 12rem;
 }
 
 .my-container {
@@ -77,7 +95,7 @@ body {
 }
 
 .btn-position {
-  background-color: #e5e5e5 !important;
+  background-color: #fff !important;
   border: none;
   outline: none;
   // position: absolute;
@@ -92,68 +110,101 @@ body {
 //   background-color: #45454523 !important;
 // }
 .myCard {
-  min-width: 220px !important;
-  max-width: 260px !important;
-  // height: 260px !important;
-  // height: 250px;
-  margin: 10px auto;
+  width: 100% !important;
+  // min-width: 280px !important;
+  // max-width: 310px !important;
+  // margin: 10px 30px !important;
+  // text-align: center;
 }
 
 .sub-container {
-  min-height: calc(100vh - 330px);
+  min-height: calc(95vh - 330px);
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  // justify-content: space-evenly;
   width: 100%;
   flex-direction: column;
   margin: 0 0 25px 0;
 }
 
-.monthly-plans-btn {
-  border-top-right-radius: 0% !important;
-  border-bottom-right-radius: 0% !important;
-  background-color: #fff !important;
-  border: 1px solid #02d959 !important;
-  color: #02d959 !important;
+
+// .monthly-plans-btn {
+//   border-top-right-radius: 0% !important;
+//   border-bottom-right-radius: 0% !important;
+//   background-color: #fff !important;
+//   border: 0px solid #02d959 !important;
+//   color: #000 !important;
+// }
+
+// .yearly-plans-btn {
+//   border-bottom-left-radius: 0% !important;
+//   border-top-left-radius: 0% !important;
+//   background-color: #fff !important;
+  
+//   color: #02d959 !important;
+// }
+
+// .monthly-plans-btn:hover,
+// .yearly-plans-btn:hover {
+//   background-color: transparent !important;
+//   color: #000 !important;
+  
+// }
+
+// .monthly-plans-true {
+//   border-top-right-radius: 0% !important;
+//     border-bottom-right-radius: 0% !important;
+//     background-color: #000 !important;
+//     color: #fff !important;
+//     border: 0px solid #02d959;
+// }
+
+// .yearly-plans-true {
+//   border-top-right-radius: 0% !important;
+//     border-bottom-right-radius: 0% !important;
+//     background-color: #000 !important;
+//     color: #fff !important;
+//     border: 0px solid #02d959;
+// }
+
+// .monthly-plans-true:hover {
+//   background-color: #fff !important;
+//   border: 1px solid #02d959 !important;
+//   color: #02d959 !important;
+// }
+.plantype {
+  border: 2px solid #3fd6a5;
+  padding: 2px;
+  border-radius: 40px;
+}
+.plantype .btn{
+  background: transparent !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 40px !important;
+  padding: 6px 19px !important;
+  font-size: 13px;
+  margin: 0px;
+}
+.plantype .btn.active{background: #000 !important; color: #fff !important;}
+p.price sub {
+  font-size: 50%;
+  color: #666666;
+  font-weight: 500;
+  bottom: -0.1em;
 }
 
-.yearly-plans-btn {
-  border-bottom-left-radius: 0% !important;
-  border-top-left-radius: 0% !important;
-  background-color: #fff !important;
-  border: 1px solid #02d959 !important;
-  color: #02d959 !important;
-}
-
-.monthly-plans-btn:hover,
-.yearly-plans-btn:hover {
-  background-color: #02d959 !important;
+.Subscription-btn{
+  background: transparent !important;
+  color: #999999 !important;
+  border-color: #999999 !important;
+  padding: 10px 30px !important;
+ }
+ .hover-effect:hover .Subscription-btn {
   color: #fff !important;
-  border: 1px solid #02d959;
+  background: #02d959 !important;
+  border-color: #02d959 !important;
 }
-
-.monthly-plans-true {
-  border-top-right-radius: 0% !important;
-  border-bottom-right-radius: 0% !important;
-  background-color: #02d959 !important;
-  color: #fff !important;
-  border: 1px solid #02d959;
-}
-
-.yearly-plans-true {
-  border-bottom-left-radius: 0% !important;
-  border-top-left-radius: 0% !important;
-  background-color: #02d959 !important;
-  color: #fff !important;
-  border: 1px solid #02d959;
-}
-
-.monthly-plans-true:hover {
-  background-color: #fff !important;
-  border: 1px solid #02d959 !important;
-  color: #02d959 !important;
-}
-
 .onlyHeight {
   min-height: calc(100vh - 208px) !important;
   display: flex;
@@ -173,6 +224,7 @@ body {
 
 .hand {
   cursor: pointer;
+  color: #00d957;
 }
 
 .paynow,
@@ -187,9 +239,30 @@ body {
 }
 
 .inside-sub-container {
-  width: 60%;
+  width: 80%;
+}
+.inside-sub-container > div {
+  min-width: 280px !important;
+  max-width: 310px !important;
+  width: 100% !important;
+  margin: 10px 15px !important;
+  text-align: center;
 }
 
+.included-sec h6 {
+  color: #000 !important;
+  font-weight: 600;
+  font-size: 14px;
+}
+.included-sec ul li {
+  border: 0;
+  padding: 4px 0;
+}
+.included-sec ul li i {
+  color: #02d959;
+  margin-right: 10px;
+  font-weight: 700;
+}
 .fontsizeTC {
   font-size: 1rem !important;
   display: flex;
@@ -344,7 +417,7 @@ input.lg-check {
   width: 200px;
 }
 .pay-container {
-  min-width: 320px;
+  min-width: 290px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -405,3 +478,7 @@ input.lg-check {
 //     bottom: 0%;
 //   }
 // }
+
+.text-center{text-align: center;}
+
+.swal2-title{    color: #000 !important;     font-size: 1.575em;}

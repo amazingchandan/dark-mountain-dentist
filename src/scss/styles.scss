@@ -83,10 +83,8 @@ $enable-rtl: true;
   color: white !important;
   background-color: #00d957 !important;
   border-color: #00d957 !important;
-  padding-left: 4px !important;
-  padding-right: 4px !important;
-  padding-top: 3px !important;
-  padding-bottom: 3px !important;
+  border-radius: 5px;
+  padding: 4px 3px !important;
 }
 .btn:hover, .dt-button:hover {
   color: #fff !important;
@@ -204,7 +202,7 @@ select:focus {
   border: none !important;
 }
 .icon-btn:hover {
-  background-color: var(--bs-gray-400) !important;
+  background-color: transparent !important;
 }
 
 .edit {
@@ -538,4 +536,91 @@ a.current{
 .less-wdith-container:hover{
   box-shadow: 0px 0px 6px 2px #00d9579e;
 }
+
+.my-container{background-color: #ffffff !important}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500&display=swap');
+// font-family: 'Montserrat', sans-serif;
+.login-register{position: relative;}
+.login-register .logo{position: absolute;  left: 40px;  top: 20px;  z-index: 999;}
+.login-register .bg {  background-color: #fff !important;}
+.login-register .wp-card{  width: 50% !important;    flex: none !important;}
+.login-register .card{ border: none; box-shadow:none !important;}
+.login-register .heading-sub{font-size: 16px;}
+.login-register ::placeholder {  color: #212121 !important;  font-size: 15px;}
+.login-register .text-right{text-align: right;}
+.login-register .input-group-text {  background: transparent;  margin: 7px auto;  border: none;  border-right: 1px solid #d9d9d9;  padding: 0px 8px;  text-align: center !important;}
+.login-register .input-group-text svg{}
+.login-register .btn{    min-width:-moz-available;min-width: -webkit-fill-available;min-width: fill-available;}
+.login-register .signup {  color: #00d957 !important;}
+.login-register .bg{  background-color: #ffffff;}
+.login-register .mountain-color {  color: #00d957;  font-size: inherit !important;}
+.login-register .right-sec {  background: #b9f0c1;   
+    background: url(../assets/images/bg.png);
+  }
+
+.login-register .right-sec .wp-card.card {  width: 60% !important;  padding: 50px;  background: #ffffff4f;  border-radius: 0 !important;}
+.login-register .right-sec p.sub-title {  font-size: 20px;  color: #00d957;  font-family: 'Montserrat', sans-serif;      font-weight: 800;  margin-bottom: 10px;}
+.login-register .right-sec .title{     font-size: 38px;  font-family: "Montserrat", sans-serif;  font-weight: 700;  color: #000000;}
+.login-register .right-sec p.des{    font-size: 16px;}
+.login-register .right-sec .btn{    min-width: auto;  padding: 4px 27px !important;}
+
+@media (max-width:1400px){
+  .login-register .wp-card{  width: 60% !important; }
+  .login-register .right-sec .wp-card.card {  width: 80% !important;     padding: 25px !important; }
+}
+@media (max-width:1200px){
+  .login-register .wp-card{  width: 60% !important; }
+  .login-register .right-sec .title{     font-size: 28px;}
+}
+@media (max-width:767px){
+  .login-register .right-sec{display: none !important}
+}
+@media (min-width:320px)and (max-width:990px){
+  .login-register .wp-card{
+        width: 90% !important;
+        padding: 13px !important;
+     }
+}
+
+
+.swal2-container #swal2-title {
+  font-size: 26px;
+  color: #000;
+}
+.swal2-container.swal2-center>.swal2-popup{
+  max-width: 420px;
+}
+.swal2-styled.swal2-default-outline:focus {
+  box-shadow: none !important;
+}
+
+.modal-header svg {
+  position: absolute;
+  right: -35px;
+  top: -32px;
+  color: #fff;
+  font-size: 2.5rem !important;
+}
+.billing-modal .modal-header {
+  border: none;
+  padding: 5px;
+}
+
+.input-group-text {  background: transparent;  margin: 7px auto;  border: none;  border-right: 1px solid #d9d9d9;  padding: 0px 8px;  text-align: center !important;}
+
+.SubscriptionDetails {
+  background: #efefef;
+  border-radius: 6px;
+  border-left: none !important;
+}
+
+.SubscriptionDetails h5 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+
+
 
