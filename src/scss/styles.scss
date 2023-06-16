@@ -111,14 +111,103 @@ $enable-rtl: true;
   border-radius: 10px !important;
 }
 .header {
-  background-color: #fff;
+  background-color: #0f2f48;
   box-shadow: 0 0 1px rgba(158, 155, 155, 0.2),
     0 1px 3px rgba(158, 155, 155, 0.2) !important;
   border-color: rgb(244 237 237) !important;
 }
-label {
-  font-weight: 700;
+.header-nav .nav-link c-avatar {
+  border: 0px solid #00d957 !important;
 }
+.header-nav .nav-link .fa-caret-down:before {
+  color: #fff;
+}
+.header-nav .nav-link  .user-name{    color: #fff;
+  font-size: 12px;
+  font-weight: 500;}
+
+  .header-nav .dropdown-menu {    width: 230px !important;}
+.header-nav ul.list-group.list-group-flush .list-group-item {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f2f48;
+    border-bottom: none;
+}
+.header-nav ul.list-group.list-group-flush .list-group-item a{width: 100px;}
+.header-nav ul.list-group.list-group-flush .list-group-item:last-child{
+  border-top: 1px solid #f1efef;
+}
+.header-nav ul.list-group.list-group-flush .list-group-item:hover{
+  background-color: #f1efef;
+}
+
+.header-nav ul.list-group.list-group-flush .list-group-item svg {
+  font-size: 22px;
+  margin-right: 4px;
+}
+.header-nav ul.list-group.list-group-flush .list-group-item.myprofile svg {
+  font-size: 17px;
+}
+.Subscription-popup .modal-header {
+  border-bottom: none;
+}
+.Subscription-popup .modal-header .modal-title{    font-size: 20px;
+  font-weight: 700 !important;}
+  .Subscription-popup .modal-footer {
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Subscription-popup .modal-footer button {
+  padding: 10px 35px !important;
+    font-weight: 700 !important;
+    font-size: 15px;
+    margin: 0 5px;
+}
+
+#myProfile.modal .save-btn {
+  padding: 10px 25px !important;
+}
+.modal .modal-header button.btn-close {
+  right: -25px;
+  top: -20px;
+  position: absolute;
+  z-index: 99999;
+  color: #fff !important;
+  opacity: 1;
+  fill: #fff;
+  font-size: 20px;
+}
+
+.logo_and_info * {
+  align-items: center;
+}
+.logo_and_info .info li .icon{width: 70px; height: 45px; text-align: center;}
+.logo_and_info .info li .icon img {  max-width: 45px;}
+.logo_and_info .info li .releted-info{width:auto;      margin-right: 10px;}
+.logo_and_info .info li .releted-info h6 {  color: #00d957;  font-size: 20px;  font-weight: 700;  margin-bottom: 0;}
+.logo_and_info .info li .releted-info p{    color: #fff;  font-size: 12px;     margin-bottom: 0; }
+
+.Uploaded-X-Rays .btn-danger{--cui-btn-color: #000015;background: #e55353 !important; border-color: #e55353 !important;}
+.Uploaded-X-Rays .btn-danger:hover {  color: #fff !important;  background-color: #bb2d3b  !important;  border-color: #b02a37  !important;}
+.Uploaded-X-Rays .other-btn {  font-size: 14px !important;  color: #fff !important;  padding: 12px 14px !important;}
+.Uploaded-X-Rays .sec-II h2 small{font-size: 70%;}
+.Uploaded-X-Rays .sec-II h6 {  font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important;}
+
+
+.evaluate-xray .btn-danger{--cui-btn-color: #000015;background: #e55353 !important; border-color: #e55353 !important; padding: 21px 14px !important; line-height: 0; }
+.evaluate-xray .btn-danger:hover {  color: #fff !important;  background-color: #bb2d3b  !important;  border-color: #b02a37  !important;}
+.evaluate-xray .icon-sec button {  font-size: 14px !important; }
+.evaluate-xray .icon-sec button svg{color: #fff !important;  fill: #fff !important;  font-size: 20px;}
+.evaluate-xray .sec-II h6 {  font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important;}
+
+.evaluate-xray .dentist-i {  color: rgb(0 217 87);}
+.evaluate-xray .refresh-btn{color: #fff;background: #009fff !important; border-color: #009fff !important; padding: 12px 14px !important; line-height: 0; }
+.evaluate-xray .refresh-btn:hover {  color: #fff !important;  background-color: #0383d2  !important;  border-color: #0383d2  !important;}
+
+
+label {  font-weight: 700;}
 sup {
   position: relative;
   top: -2px;
@@ -624,3 +713,30 @@ a.current{
 
 
 
+
+table.dataTable thead th, table.dataTable thead td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  color: #0f2f48 !important;
+}
+table.dataTable thead th{padding: 16px 20px !important; border-bottom: 0px solid #e6eaed !important;}
+table.dataTable tbody td{color: #0f2f48 !important; font-weight: 500;  font-size: 13px !important; }
+table.dataTable.row-border tbody th, 
+table.dataTable.row-border tbody td, 
+table.dataTable.display tbody th, 
+table.dataTable.display tbody td {
+  border-top: 1px solid #e6eaed !important;
+}
+table.dataTable.no-footer {
+  border-bottom: 1px solid #e6eaed !important;
+}
+table.dataTable tbody td {
+  padding: 7px 20px !important;
+}
+div#datatable_info {
+  padding-left: 20px;
+}
+.dataTables_paginate{padding-right: 20px;}
+.table-responsive .table-card {
+  margin-top: 1rem !important;
+}

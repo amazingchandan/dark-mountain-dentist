@@ -443,7 +443,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       if (res.success) {
         Swal.fire({
           text: res.message,
-          icon: 'success',
+          //icon: 'success',
+          imageUrl: '../../../../assets/images/success.png',
         });
         document.getElementById('close')?.click();
       } else {
