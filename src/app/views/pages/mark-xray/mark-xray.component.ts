@@ -538,7 +538,8 @@ margin-top: 90.5px;">
       if (res.success) {
         Swal.fire({
           text: res.message,
-          icon: 'success',
+          //icon: 'success',
+          imageUrl: '../../../../assets/images/success.png',
         });
        // this.createLabelStudio()
        document.getElementById('close')?.click();
