@@ -1,0 +1,31 @@
+<div class="container-fluid min-vh-100 bg m-0 my-container position-relative">
+  <div class="sub-container">
+    <div class="emptyDiv">
+      <h2
+        class="modal-title fw-bold d-flex justify-content-center fw-semibold"
+        id="exampleModalLongTitle"
+      >
+        Dark
+        <div class="mountain-color">Mountain</div>
+      </h2>
+    </div>
+    <div class="text mt-2" *ngIf="payment_status == 'success'; else dothat">
+      <h2>Payment successful.</h2>
+    </div>
+    <ng-template #dothat>
+      <div class="text mt-2">
+        <h2>Payment failed.</h2>
+      </div>
+    </ng-template>
+    <div>
+      <ngx-bootstrap-spinner
+        bdColor="rgba(0,0,0,0.0)"
+        size="default"
+        color="#000000"
+        type="border"
+        [fullScreen]="false"
+        [loadingText]="show_text"
+      ></ngx-bootstrap-spinner>
+    </div>
+  </div>
+</div>

@@ -223,7 +223,8 @@
                     data.type,
                     data.amount,
                     data.plan_name,
-                    data.country
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
@@ -259,7 +260,8 @@
                       data._id,
                       data.type,
                       data.amount,
-                      data.plan_name
+                      data.plan_name,
+                      data.paypalID
                     )
                   ">
                   Subscribe
@@ -267,7 +269,7 @@
               </div>
               <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
                 <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                    getSubscription(0, data.type, data.amount, data.plan_name)
+                    getSubscription(0, data.type, data.amount, data.plan_name, data.paypalID)
                   ">
                   Selected
                 </button>
@@ -279,7 +281,7 @@
       </div>
     </div>
 
-    <div *ngIf="yearlyAllData?.length != 0"
+    <div *ngIf="yearlyAllData?.length != 0 && !noPlans; else donoplans"
       class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
       <div *ngFor="let data of yearlyAllData; let i = index" >
       <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
@@ -317,7 +319,8 @@
                     data.type,
                     data.amount,
                     data.plan_name,
-                    data.country
+                    data.country,
+                    data.paypalID
                   )
                 ">
                 Subscribe <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
@@ -375,6 +378,13 @@
       </div>
 
     </div>
+    <ng-template #donoplans>
+      <div class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container" *ngIf="noPlans">
+        <div>
+          No plans available at moment!
+        </div>
+      </div>
+    </ng-template>
   </div>
 
   <!-- <section class="onlyHeight">
@@ -489,7 +499,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-</div> -->
+  </div> -->
 
   <!-- </div> -->
 

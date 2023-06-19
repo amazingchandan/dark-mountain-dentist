@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, NgForm, ValidationErrors, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -7,13 +7,15 @@ import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 import { HttpClient } from '@angular/common/http';
-import { DatePipe, Location } from '@angular/common';
+import { DatePipe, Location, DOCUMENT } from '@angular/common';
 import {
   IPayPalConfig,
 
   ICreateOrderRequest,
-  IPayPalButtonStyle
+  IPayPalButtonStyle,
+  ICreateSubscriptionRequest
 } from 'ngx-paypal';
+import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 import * as bootstrap from "bootstrap";
 import * as $AB from "jquery";
@@ -54,10 +56,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
   lname: any;
   mail: any;
   checked: any;
+  localHost: string;
+  public paypal_ID: any;
   public monthlyAllData: any = [];
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
   public yearlyPlan: any = false;
+  public noPlans: boolean = false;
   showSuccess: any;
   showCancel: any;
   showError: any;
@@ -67,6 +72,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public subsPrice: any;
   public subsTitle: any;
   public subsCountry: any;
+  public subsPaypalID: any;
+  public filterLink: any;
   public paypalView: any = false;
   public payData: any;
   public countryList: any = "-Select Country-";
@@ -153,10 +160,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private el: ElementRef,
-    private titleService: Title,) {
+    private titleService: Title,
+    private _location: Location,
+    @Inject(DOCUMENT) private document: Document,
+    ) {
       titleService.setTitle(this.title);
       this.registerForm = this.formBuilder.group({})
       this.userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+      this.localHost = environment.LOCAL_HOST;
   }
 
   // private payPalButtonContainerElem?: ElementRef;
@@ -167,21 +178,21 @@ export class PricingComponent implements OnInit, AfterViewInit {
   // @ViewChild('paypalRef',{static: true}) public paypalRef: ElementRef;
   ngOnInit(): void {
     console.log(this.checked, this.subsId, this.userInfo);
-    this.userInfo.subscribed = true;
+    // this.userInfo.subscribed = true;
     console.log('window.paypal', this.userInfo);
     this.getIPAddress();
-    this.userService.getSubscriptionListPricing().subscribe((res: any) => {
-      console.log(res, "response")
-      if (res.success) {
-        console.log("plan fetched successfully")
-        this.allData = res.getData
-      }
-      else {
-        console.log("plan not fetched successfully")
-      }
-    })
+    // this.userService.getSubscriptionListPricing().subscribe((res: any) => {
+    //   console.log(res, "response")
+    //   if (res.success) {
+    //     console.log("plan fetched successfully")
+    //     this.allData = res.getData
+    //   }
+    //   else {
+    //     console.log("plan not fetched successfully")
+    //   }
+    // })
     // console.log(this.appService.currentApprovalStageMessage.source['_value'], "------------");
-    // this.planList();
+
     setTimeout(() => {
       console.log(this.allData)
     }, 1000)
@@ -194,15 +205,15 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
     this.monthlyPlan = true;
     this.yearlyPlan = false;
-    if (this.monthlyPlan) {
-      setTimeout(() => {
-        if (this.countriesInHere.includes(this.country)) {
-          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
-        } else {
-          this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
-        }
-      }, 1000)
-    }
+    // if (this.monthlyPlan) {
+    //   setTimeout(() => {
+    //     if (this.countriesInHere.includes(this.country)) {
+    //       this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == this.country)
+    //     } else {
+    //       this.monthlyAllData = this.allData.filter(elem => elem.type === "Monthly" && elem.country == "Others")
+    //     }
+    //   }, 1000)
+    // }
     this.initConfig();
     this.registerForm = new FormGroup({
       first_name: new FormControl(this.fname, Validators.required),
@@ -246,12 +257,13 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //   country: '-Select-'
     // })
     this.registerForm.controls['country'].setValue('-Select Country-')
+    // this.monthly()
   }
   stateByCountry(e: any) {
     this.countryList = "-Select Country-"
-    console.log(e.target.value)
+    // console.log(e.target.value)
     this.userService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
-      console.log(res.getData[0].regions)
+      // console.log(res.getData[0].regions)
       this.registerForm.controls['state'].setValue('-Select State-')
       this.stateList = "-Select State-"
       this.allstates = res.getData[0].regions
@@ -262,7 +274,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
       const data = res;
       this.ipAddress = data.IPv4
       this.country = data.country;
-      console.log(this.country, "ipAddress", data, this.yearlyAllData)
+      console.log(this.country, "ipAddress", data, this.yearlyAllData, )
+      this.planList();
     });
   }
   @Input() set autofocus(condition: boolean)
@@ -293,7 +306,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
+      clientId: 'sb',
+      // clientId: 'AYCBFqGe2Tco1l33ZXvZXbdPKfPJVyqa2-NjAta0ytO1zR406yq2O66FkBI2_IdvKiRaUOcMPbTM-Ys_',
+      // sercet_Key: 'EB7iibKAc300PD34UVfZC_ESm6XWeJsCRK9GZq0ccemEGL4pmb4Py_PYyLuozAeJdkUVNQ1N-CmTroM6',
       // ! for orders on client side
       // onInit: (data, actions) => {
       //   console.log("OnInit", data, actions)
@@ -368,6 +383,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
         }
         // return actions.reject();
       },
+      createSubscription: (data) => <ICreateSubscriptionRequest>{
+        // plan_id: '123456789'
+      },
       createOrderOnClient: (data) => <ICreateOrderRequest>{
 
         intent: 'CAPTURE',
@@ -380,7 +398,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
                 currency_code: 'USD',
                 value: `${this.subsPrice}`
               }
-            }
+            },
           },
           items: [{
             name: 'Dark Mountain',
@@ -402,6 +420,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
         shape: 'rect',
         color: 'gold',
       },
+      // createOrderOnServer: (data) => fetch('/my-server/create-paypal-transaction')
+      //         .then((res) => res.json())
+      //         .then((order) => order.orderID),
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then(details => {
@@ -522,7 +543,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   }
   onchangeofthis(e: any){
     // console.log("THIS", e)
-    // console.log(this.registerForm.value)
+    console.log(this.registerForm.value)
     if(this.registerForm.value.first_name  && this.registerForm.value.last_name  && this.registerForm.value.email  && this.registerForm.value.contact_number  && this.registerForm.value.address1  && this.registerForm.value.city  && this.registerForm.value.country  && this.registerForm.value.state  && this.registerForm.value.pincode  && this.registerForm.value.license_no ){
       this.paypalBtn = true;
     } else {
@@ -536,6 +557,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   checkoutBtn() {
     this.IsmodelShow = true;
     console.log(this.IsmodelShow);
+    localStorage.setItem('i', this.userId)
   }
   resetStatus() {
     document.getElementById("launch_ad")?.click();
@@ -615,6 +637,9 @@ export class PricingComponent implements OnInit, AfterViewInit {
       if (res.success) {
         console.log("plan fetched successfully")
         this.allData = res.getData
+        setTimeout(() => {
+          this.monthly()
+        }, 1000)
       }
       else {
         console.log("plan not fetched successfully")
@@ -644,7 +669,12 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.yearlyAllData = []
     this.monthlyPlan = true;
     this.yearlyPlan = false;
-    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country);
+    setTimeout(() => {
+      if(this.monthlyAllData.length == 0){
+        this.yearly()
+      }
+    }, 1000);
+    console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.subsId, this.country, this.allData, this.monthlyAllData.length);
   }
 
   yearly() {
@@ -659,6 +689,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.monthlyAllData = [];
     this.monthlyPlan = false;
     this.yearlyPlan = true;
+    setTimeout(() => {
+      if(this.yearlyAllData.length == 0 && this.monthlyAllData.length == 0){
+        console.log("NOTHING FOUND")
+        this.noPlans = true;
+      } else {
+        this.noPlans = false;
+      }
+    }, 1500)
     console.log(this.allData, this.yearlyAllData, this.monthlyAllData, this.monthlyPlan, this.subsId);
   }
 
@@ -668,13 +706,111 @@ export class PricingComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  getSubscription(id, type, pricing_amount, title, country) {
+  getSubscription(id, type, pricing_amount, title, country, paypalID) {
     console.log(id, type, pricing_amount, title, country);
     this.subsId = id;
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
     this.subsCountry = country;
+    this.subsPaypalID = paypalID
+    console.log(this.subsPaypalID)
+    let token = JSON.parse(localStorage.getItem('p-data')).token;
+    console.log(this.subsPaypalID)
+    console.log(`${this.localHost}pricing/${this.userId}/success`)
+    let data = {
+      "plan_id": this.subsPaypalID,
+      // "start_time": "2018-11-01T00:00:00Z",
+      // "quantity": "20",
+      "auto_renewal": true,
+      "shipping_amount": {
+          "currency_code": "USD",
+          "value": "0"
+      },
+      "subscriber": {
+          "name": {
+              "given_name": "John",
+              "surname": "Doe"
+          },
+          "email_address": "sb-zhqmo25396320@personal.example.com",
+          "shipping_address": {
+              "name": {
+                  "full_name": "John Doe"
+              },
+              "address": {
+                  "address_line_1": "2211 N First Street",
+                  "address_line_2": "Building 17",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131",
+                  "country_code": "US"
+              }
+          }
+      },
+      "application_context": {
+          "brand_name": "ARTI",
+          "locale": "en-US",
+          "shipping_preference": "SET_PROVIDED_ADDRESS",
+          "user_action": "SUBSCRIBE_NOW",
+          "payment_method": {
+              "payer_selected": "PAYPAL",
+              "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+          },
+          // "return_url": "https://darkmountain.blahworks.tech/success",
+          // "cancel_url": "https://darkmountain.blahworks.tech/failure"
+          "return_url": `${this.localHost}pricing/${this.userId}/success`,
+          "cancel_url": `${this.localHost}pricing/${this.userId}/failure`
+      }
+    }
+    this.userService.paypalPayment(data).subscribe((res: any) => {
+      console.log(res)
+      this.paypal_ID = res.id;
+      this.filterLink = res.links.filter(elem => elem.rel == "approve")
+      // this.router.navigateByUrl(this.filterLink[0].href)
+      this.userPlanData = {
+        sub_id: '',
+        type: '',
+        name: '',
+        price: '',
+        country: '',
+        paypal_ID: res.id
+      }
+      console.log(this.filterLink[0].href, this.userId, this.userPlanData)
+      // return;
+      // this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+      //   console.log(res)
+
+      //   if (res.success) {
+      //     // this.userInfo.subscribed = true;
+      //     localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+      //     //this.toastr.success(res.message);
+      //     // this.IsmodelShow = false
+      //     // console.log(this.IsmodelShow);
+      //     // ($("#myModal") as any).modal("hide");
+      //     //  this.handleClick();
+      //     // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+      //     // Swal.fire({
+      //     //   text: "You have successfully subscribed",
+      //     //   icon: 'success',
+      //     // });
+      //     /*var modal= document.getElementById("launch_ad");
+      //       modal.style.display = "none";*/
+      //     if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+      //       console.log("iff")
+
+      //       // this.router.navigateByUrl("/dashboard")
+      //     }
+      //     else {
+      //       console.log("elseee")
+      //       // this.router.navigateByUrl("/login")
+      //     }
+      //   }
+      // })
+    })
+    localStorage.setItem('i', this.userId)
+
+
     // if(!this.checked){
     //   return Swal.fire({
     //     text: "Please accept the terms and conditions.",
@@ -946,7 +1082,58 @@ export class PricingComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
+  handleClickPayment(){
+    // let token = JSON.parse(localStorage.getItem('p-data')).token;
+    // console.log(this.subsPaypalID)
+    // let data = {
+    //   "plan_id": this.subsPaypalID,
+    //   // "start_time": "2018-11-01T00:00:00Z",
+    //   // "quantity": "20",
+    //   "shipping_amount": {
+    //       "currency_code": "USD",
+    //       "value": `${this.subsPrice}`
+    //   },
+    //   "subscriber": {
+    //       "name": {
+    //           "given_name": "John",
+    //           "surname": "Doe"
+    //       },
+    //       "email_address": "sb-zhqmo25396320@personal.example.com",
+    //       "shipping_address": {
+    //           "name": {
+    //               "full_name": "John Doe"
+    //           },
+    //           "address": {
+    //               "address_line_1": "2211 N First Street",
+    //               "address_line_2": "Building 17",
+    //               "admin_area_2": "San Jose",
+    //               "admin_area_1": "CA",
+    //               "postal_code": "95131",
+    //               "country_code": "US"
+    //           }
+    //       }
+    //   },
+    //   "application_context": {
+    //       "brand_name": "ARTI",
+    //       "locale": "en-US",
+    //       "shipping_preference": "SET_PROVIDED_ADDRESS",
+    //       "user_action": "SUBSCRIBE_NOW",
+    //       "payment_method": {
+    //           "payer_selected": "PAYPAL",
+    //           "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+    //       },
+    //       "return_url": "http://localhost:4200/dashboard",
+    //       "cancel_url": "http://localhost:4200/login"
+    //   }
+    // }
+    // this.userService.paypalPayment(data, token).subscribe((res: any) => {
+    //   console.log(res)
+    //   this.filterLink = res.links.filter(elem => elem.rel == "approve")
+    //   // this.router.navigateByUrl(this.filterLink[0].href)
+    //   console.log(this.filterLink[0].href)
+    //   return;
+    // })
+  }
   handleClick() {
     // if(!this.checked){
     //   this.displayStyle = "none"
@@ -972,12 +1159,60 @@ export class PricingComponent implements OnInit, AfterViewInit {
             //   text: res.message,
             //   icon: 'success',
             // });
+            // this.userInfo.subscribed = true;
+            // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
             console.log("DO HERE!!!!!!")
             this.paypalBtn = true;
             this.readOnly = true;
             document.getElementById("country").style.pointerEvents = 'none';
 
             //  this.router.navigateByUrl('/registered-dentists');
+
+            this.userPlanData = {
+              sub_id: this.subsId,
+              type: this.subsType,
+              name: this.subsTitle,
+              price: this.subsPrice,
+              country: this.subsCountry,
+              paypal_ID: this.paypal_ID
+            }
+            console.log(this.filterLink[0]?.href, this.userId, this.userPlanData)
+            localStorage.setItem('i', this.userId)
+            localStorage.setItem('sub', JSON.stringify(this.userPlanData));
+            // localStorage.removeItem('userInfo')
+            this._location.prepareExternalUrl(this.filterLink[0].href)
+            this.document.location.href = this.filterLink[0].href
+            // return;
+            // this.userService.getSubscription(this.userPlanData, this.userId).subscribe((res: any) => {
+            //   console.log(res)
+
+            //   if (res.success) {
+                // this.userInfo.subscribed = true;
+                // localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+                //this.toastr.success(res.message);
+                // this.IsmodelShow = false
+                // console.log(this.IsmodelShow);
+                // ($("#myModal") as any).modal("hide");
+                //  this.handleClick();
+                // <HTMLElement>document.getElementById('myModal').modal("hide")
+
+                // Swal.fire({
+                //   text: "You have successfully subscribed",
+                //   icon: 'success',
+                // });
+                /*var modal= document.getElementById("launch_ad");
+                  modal.style.display = "none";*/
+                // if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+                //   console.log("iff")
+
+                  // this.router.navigateByUrl("/dashboard")
+                // }
+                // else {
+                  // console.log("elseee")
+                  // this.router.navigateByUrl("/login")
+                // }
+            //   }
+            // })
 
           } else {
             Swal.fire({
