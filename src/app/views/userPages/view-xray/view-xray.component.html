@@ -1,8 +1,27 @@
+
 <section class="content">
+        <div class="row mb-1">
+            <h2 class="col fw-bold position-relative pt-2 mb-0"> X-Ray Evaluation Result</h2>
+            <div class="col-7 text-right icon-sec">
+                 <button type="button" class="btn fw-bold cancel-btn pd-1 ms-2"
+                    (click)="handleClick()">Close</button>
+                
+              </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mt-1 mb-3 icon-div fw-semibold">
+            <span><i class="fa-solid fa-circle dentist-i me-1"></i> Dentist Marking</span> &nbsp;&nbsp;
+            <span><i class="fa-solid fa-circle ai-i me-1"></i> AI (Confirmed) Marking</span> &nbsp;&nbsp;
+            <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span> 
+          </div>
+        </div>  
+
+
     <div class="container">
-        <h5 class=" mb-3 fw-bold">X-Ray Evaluation Result</h5>
-        <p><span class="border-bottom border-dark">*Legal Disclaimer :</span> There is a direct correlation of diagnosis and X-Ray quality.
-            This software is just an aid for the Dentists to help them identifies cavities easily.<br>It does not guarantee medical accuracy.</p>
+        
+      
+
+
             <div class="row">
                 <div class="col-12">
                     <div class="col-md-6 left-img">
@@ -28,21 +47,15 @@
                 </div>
             </div>
 
-        <div class="row ">
-            <div class="col fw-semibold icon-div">
-                <span><i class="fa-solid fa-circle dentist-i me-1"></i> Dentist Marking</span><br>
-                <span><i class="fa-solid fa-circle ai-i me-1"></i> AI (Confirmed) Marking</span><br>
-                <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span><br>
-            </div>
-            <div class="col-md-4 btn-div ">
-
-
-
-
-                <button type="button" class="btn btn-primary save-btn mt-n5 me-2 cancel-btn fw-bold other-btn pd-1"
-                    (click)="handleClick()">Close</button>
-
-            </div>
-        </div>
+       
     </div>
+
+    <div class="row sec-II">
+        <div class="col-12">
+          <h6>X-Ray Evaluation Result</h6>
+          <p><span class="border-bottom border-dark">*Legal Disclaimer :</span> There is a direct correlation of diagnosis and X-Ray quality.
+            This software is just an aid for the Dentists to help them identifies cavities easily.<br>It does not guarantee medical accuracy.</p>
+        </div>
+      </div>
+    
 </section>

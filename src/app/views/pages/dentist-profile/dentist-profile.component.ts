@@ -363,7 +363,8 @@ export class DentistProfileComponent implements OnInit {
             //this.toastr.success(res.message);
             Swal.fire({
               text: res.message,
-              icon: 'success',
+              //icon: 'success',
+              imageUrl: '../../../../assets/images/success.png',
             });
             //  this.router.navigateByUrl('/registered-dentists');
           } else {
@@ -394,11 +395,12 @@ export class DentistProfileComponent implements OnInit {
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to cancel subscription!",
-      icon: 'warning',
+      //icon: 'warning',
+      imageUrl: '../../../../assets/images/warning.png',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, cancel subscription!',
+      confirmButtonText: 'Yes, cancel subscription! <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
     }).then((result) => {
       if (result.isConfirmed) {
         if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
@@ -408,7 +410,8 @@ export class DentistProfileComponent implements OnInit {
                 //this.toastr.success(res.message);
                 Swal.fire({
                   text: res.message,
-                  icon: 'success',
+                  //icon: 'success',
+                  imageUrl: '../../../../assets/images/success.png',
                 });
                 this.apiService.getUserRecordById(this.dentistId).subscribe((res: any) => {
                   console.log(res, "*****");
@@ -501,11 +504,12 @@ export class DentistProfileComponent implements OnInit {
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to cancel subscription!",
-      icon: 'warning',
+      //icon: 'warning',
+      imageUrl: '../../../../assets/images/warning.png',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, cancel subscription!',
+      confirmButtonText: 'Yes, cancel subscription! <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
     }).then((result) => {
       if (result.isConfirmed) {
         console.log('first');
@@ -529,9 +533,9 @@ export class DentistProfileComponent implements OnInit {
                   timer: 3000,
                   title: 'Success!',
                   text: "Your subscription is cancelled successfully.",
-                  icon: 'success',
-                  confirmButtonColor: '#3085d6',
-                  confirmButtonText: 'Okay',
+                  //icon: 'success',
+                  imageUrl: '../../../../assets/images/success.png',
+
                 });
                 this.cancelBtn = true;
                 this.renewBtn = false;
@@ -775,7 +779,8 @@ export class DentistProfileComponent implements OnInit {
 
                   Swal.fire({
                     text: "You have successfully subscribed",
-                    icon: 'success',
+                    //icon: 'success',
+                    imageUrl: '../../../../assets/images/success.png',
                   });
                   /*var modal= document.getElementById("launch_ad");
                    modal.style.display = "none";*/

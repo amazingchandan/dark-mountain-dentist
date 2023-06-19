@@ -9,20 +9,14 @@
 <!-- </div> -->
 <div class="container-fluid min-vh-100 bg m-0 my-container position-relative">
 
-  <div class="headingContainer mb-4">
+  <div class="headingContainer">
     <div class="emptyDiv">
-      <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold" id="exampleModalLongTitle">
-
-        Dark
-
-        <div class="mountain-color">Mountain</div>
-
-      </h2>
+      <img src="../../../../assets/images/logo.png" />
+      
     </div>
 
-    <h2  *ngIf="this.userSubscription?.length==0 || this.buyNow==true"class="head m-0 text-center fw-bold mt-1">
-      Please Choose Your Subscription Plan
-    </h2>
+    
+
     <div *ngIf="this.userSubscription?.length>0 && this.buyNow==false" class="mt-5">
       <h2 class="head m-0 text-center fw-bold mt-1"> Your Subscription has expired! Please Buy a new plan</h2>
       <div class="w-100 d-flex justify-content-center mt-3">
@@ -36,22 +30,30 @@
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </div>
   </div>
+  <div class="mb-4">
+    <h2  *ngIf="this.userSubscription?.length==0 || this.buyNow==true"class="head m-0 text-center fw-bold mt-1">
+      Please Choose Your Subscription Plan
+    </h2>
+  </div>
+
   <div *ngIf="this.userSubscription?.length==0 || this.buyNow==true">
   <div class="w-100 d-flex justify-content-center mb-4">
-    <button (click)="monthly()" [class]="
-        monthlyPlan
-          ? 'btn monthly-plans-true pd-1 fw-semibold'
-          : 'btn monthly-plans-btn pd-1 fw-semibold'
-      ">
-      Monthly Plans
-    </button>
-    <button (click)="yearly()" [class]="
-        yearlyPlan
-          ? 'btn yearly-plans-true pd-1 fw-semibold'
-          : 'btn yearly-plans-btn pd-1 fw-semibold'
-      ">
-      Yearly Plans
-    </button>
+    <div class="plantype">
+        <button (click)="monthly()" [class]="
+            monthlyPlan
+              ? 'btn active monthly-plans-true pd-1 fw-semibold'
+              : 'btn monthly-plans-btn pd-1 fw-semibold'
+          ">
+          Monthly Plans
+        </button>
+        <button (click)="yearly()" [class]="
+            yearlyPlan
+              ? 'btn active yearly-plans-true pd-1 fw-semibold'
+              : 'btn yearly-plans-btn pd-1 fw-semibold'
+          ">
+          Yearly Plans
+        </button>
+      </div>
   </div>
   </div>
 
@@ -188,25 +190,34 @@
         <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-2">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
-          <div class="card-body text-start d-flex flex-column justify-content-between">
+          <div class="card-body text-center d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
 
             <h4>{{ data.plan_name | titlecase }}</h4>
+            <p class="mb-0">Try Dark Mountain free for 
+              3 days, no credit card required</p>
 
-            <p class="m-0 gst-sizing">
-              <i> {{ data.type }} pack </i>
-            </p>
-            <p class="m-0">Country: {{ data.country | titlecase }}</p>
-            <p class="m-0">Status: {{ data.status | titlecase }}</p>
+              <div class="d-flex justify-content-center align-items-center flex-column my-3">
+                <p class="price m-0 fw-bolder fs-2">${{ data.amount }}<sub>/monthly</sub></p>
+                <!-- <p class="m-0">Max: ${{ data.maximum }}</p> -->
+                <!-- <p class="m-0">Min: ${{ data.minimum }}</p> -->
+              </div>
+
+              <div class="col-12 col-md-12 included-sec">
+                <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6> 
+                <ul class="list-group text-start">
+                  <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
+                  <li class="list-group-item"><i>✔</i>Country: {{ data.country | titlecase }}</li>
+                  <li class="list-group-item"><i>✔</i>Status: {{ data.status | titlecase }}</li>
+                </ul>
+              </div>
+              
+           
             <p>{{ data.currency | titlecase }}</p>
-            <div class="d-flex justify-content-center align-items-start flex-column mt-3">
-              <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <!-- <p class="m-0">Max: ${{ data.maximum }}</p> -->
-              <!-- <p class="m-0">Min: ${{ data.minimum }}</p> -->
-            </div>
+            
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
-              <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+              <button class="pd-1 fw-bold btn btn-primary Subscription-btn" (click)="
                   getSubscription(
                     data._id,
                     data.type,
@@ -216,14 +227,14 @@
                     data.paypalID
                   )
                 ">
-                Subscribe
+                Subscribe <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
-              <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
+              <button class="pd-1 fw-bold btn btn-primary cancel-selected" (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
                 ">
-                Selected
+                Selected <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
             </div>
             <div class="position-absolute bottom-0 start-0 end-0"></div>
@@ -277,25 +288,32 @@
 
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
-          <div class="card-body text-start d-flex flex-column justify-content-between">
+          <div class="card-body text-center d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
 
             <h4>{{ data.plan_name | titlecase }}</h4>
-
-            <p class="m-0 gst-sizing">
-              <i> {{ data.type }} pack </i>
-            </p>
-            <p class="m-0">Country: {{ data.country | titlecase }}</p>
-            <p class="m-0">Status: {{ data.status | titlecase }}</p>
-            <p>{{ data.currency | titlecase }}</p>
-            <div class="d-flex justify-content-center align-items-start flex-column mt-3">
-              <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
+            <p class="mb-0">Try Dark Mountain free for 3 days, no credit card required</p>
+            <div class="d-flex justify-content-center align-items-center flex-column my-3">
+              <p class="price m-0 fw-bolder fs-2">${{ data.amount }}<sub>/yearly</sub></p>
               <!-- <p class="m-0">Max: ${{ data.maximum }}</p> -->
               <!-- <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>
 
+            <div class="col-12 col-md-12 included-sec">
+              <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6> 
+              <ul class="list-group text-start">
+                <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
+                <li class="list-group-item"><i>✔</i>Country: {{ data.country | titlecase }}</li>
+                <li class="list-group-item"><i>✔</i>Status: {{ data.status | titlecase }}</li>
+              </ul>
+            </div>
+
+
+            
+            <p>{{ data.currency | titlecase }}</p>
+
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
-              <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
+              <button class="pd-1 fw-bold btn btn-primary Subscription-btn" (click)="
                   getSubscription(
                     data._id,
                     data.type,
@@ -305,14 +323,14 @@
                     data.paypalID
                   )
                 ">
-                Subscribe
+                Subscribe <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
-              <button class="pd-1 fw-bold btn btn-primary w-100 cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
+              <button class="pd-1 fw-bold btn btn-primary cancel-selected" (click)="
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
                 ">
-                Selected
+                Selected <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
             </div>
             <div class="position-absolute bottom-0 start-0 end-0"></div>
@@ -439,8 +457,7 @@
         <input type="checkbox" name="check" id="" (change)="checking($event)"
           class="form-check-input m-0 me-2 checkbox lg-check" [(ngModel)]="checked" />
         <span>Yes, I agree to</span>&nbsp;<u class="hand" data-bs-toggle="modal"
-          data-bs-target="#exampleModalCenter">Terms</u>&nbsp;<span>&</span>&nbsp;<u class="hand" data-bs-toggle="modal"
-          data-bs-target="#exampleModalCenter">Conditions</u>&nbsp;<span>of</span>&nbsp;<span>this</span>&nbsp;<span>website.</span>
+          data-bs-target="#exampleModalCenter">Terms & Conditions</u>
       </span>
     </div>
     <div class="do-later-checkout-btn-container float-right mt-3">
@@ -580,12 +597,8 @@
   <div class="modal-dialog modal-dialog-centered modal-xl billing-modal" role="document">
     <div class="modal-content modal-tall">
       <div class="modal-header justify-content-between align-items-center">
-        <div></div>
-        <h2 class="modal-title fw-bold d-flex justify-content-center fw-semibold">
-          Dark
-          <div class="mountain-color">Mountain</div>
-        </h2>
-        <i class="fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i>
+        <!-- <i class="close fa-solid fa-xmark fs-5" data-bs-dismiss="modal" style="cursor: pointer"></i> -->
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144m224 0L144 368"></path></svg>
       </div>
       <div class="modal-body px-5 py-4">
         <div *ngIf="checked && subsId != 0" class="d-flex  align-items-start body-content">
@@ -594,8 +607,9 @@
             <form #register_form="ngForm" [formGroup]="registerForm" (change)="formChange($event)">
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
+                  <label class="form-label">First Name</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">First Name<sup>*</sup></label> -->
+                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilUser"></svg>
                     </span>
@@ -605,8 +619,9 @@
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
+                  <label class="form-label">Last Name</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Last Name<sup>*</sup></label> -->
+                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilUser"></svg>
                     </span>
@@ -618,8 +633,9 @@
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
+                  <label class="form-label">Email</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Email ID<sup>*</sup></label> -->
+                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilEnvelopeClosed"></svg>
                     </span>
@@ -629,8 +645,9 @@
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
+                  <label class="form-label">Contact Number</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
+                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
@@ -642,8 +659,8 @@
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
+                  <label class="form-label">Address</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilHome"></svg>
                     </span>
@@ -653,8 +670,8 @@
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
+                  <label class="form-label">City</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilLocationPin"></svg>
                     </span>
@@ -666,8 +683,8 @@
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2 ">
+                  <label class="form-label">Country</label>
                   <div class="w-100 d-flex position-relative">
-                    <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilMap"></svg>
                     </span>
@@ -686,6 +703,7 @@
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
+                  <label class="form-label">State</label>
                   <div class="w-100 d-flex position-relative">
                     <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
@@ -706,6 +724,7 @@
               </div>
               <div class="inputContainer">
                 <c-input-group class="mb-3 mt-2">
+                  <label class="form-label">Zip</label>
                   <div class="w-100 d-flex position-relative">
                     <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
@@ -717,6 +736,7 @@
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-3 mt-2 inputMargin">
+                  <label class="form-label">Registration/License Number</label>
                   <div class="w-100 d-flex position-relative">
                     <!-- <label class="mb-2">Password<sup>*</sup></label> -->
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
@@ -731,9 +751,12 @@
 
             </form>
           </div>
-          <div class="d-flex align-items-start flex-column sub-body-content border-start">
-            <h5 class="text-center fw-semibold ms-2">Subscription Details:</h5>
-            <ul class="proceed-details m-0 p-0 ms-2">
+          <div class="d-flex align-items-start flex-column sub-body-content">
+            <div class="SubscriptionDetails">
+            <h5 class="w-100 text-center fw-semibold">Subscription Details:</h5>
+            <p class="text-center px-3">Try Dark Mountain free for 3 days, 
+              no credit card required</p>
+            <ul class="proceed-details px-3">
               <!-- <li
                 class="fs-6 fw-semibold d-flex justify-content-between align-items-center"
               >
@@ -748,23 +771,57 @@
               >
                 <span>Email:</span>&nbsp;<span>{{ this.mail }}</span>
               </li> -->
-              <li class="fs-6 ms-2 mt-2 fw-semibold d-flex justify-content-between align-items-center">
+              <li class="fs-6 mt-3 fw-semibold d-flex justify-content-between align-items-center">
                 <span>Plan Name:</span>&nbsp;<span>{{
                   subsTitle | titlecase
                   }}</span>
               </li>
-              <li class="fs-6 ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+              <li class="fs-6 mt-3 fw-semibold d-flex justify-content-between align-items-center">
                 <span>Plan Type:</span>&nbsp;<span>{{
                   subsType | titlecase
                   }}</span>
               </li>
-              <li class="fs-6 ms-2 mt-4 fw-semibold d-flex justify-content-between align-items-center">
+              <li class="fs-6 mt-3 fw-semibold d-flex justify-content-between align-items-center">
                 <span>Price:</span>&nbsp;<span>${{ subsPrice }}</span>
               </li>
-              <li class="fs-6 ms-2 mt-4 fw-bold d-flex justify-content-between align-items-center border-top">
+              <li class="fs-6 mt-3 pt-3 pb-2 fw-bold d-flex justify-content-between align-items-center border-top">
                 <span>Total:</span>&nbsp;<span>${{ subsPrice }}</span>
               </li>
             </ul>
+          </div>
+          <div *ngIf="checked && subsId != 0" class="w-100">
+        
+            <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
+            <!-- (click)="payView()" -->
+            <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()" *ngIf="!paypalBtn"> -->
+              <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
+              </a> -->
+              <!-- Confirm & Pay -->
+              <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
+              <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
+            <!-- </button> -->
+            <!-- *ngIf="paypalBtn" -->
+            <div class="w-100" *ngIf="!paypalBtn; else dofalsething">
+              <button class="btn w-100 ms-0 mt-4 pd-1 other-btn fw-bold paynow" (click)="handleClick()" *ngIf="!dots; else dothisdots">
+                Confirm & Pay <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
+              </button>
+              <ng-template #dothisdots>
+                <button class="btn w-100 ms-0 mt-4 pd-1 other-btn fw-bold paynow" [disabled]="dots">
+                  <div class="span-container" >
+                    <span class="span-dots1"></span>
+                    <span class="span-dots2"></span>
+                    <span class="span-dots3"></span>
+                  </div>
+                </button>
+              </ng-template>
+            </div>
+            <ng-template #dofalsething>
+              <div class="pay-container">
+                <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn ms-0 mt-4">Order Now</ngx-paypal>
+              </div>
+            </ng-template>
+          </div>
+
           </div>
         </div>
         <div *ngIf="!checked && subsId != 0">
@@ -790,43 +847,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="checked && subsId != 0" class="modal-footer justify-content-between">
-        <small>&#169; All rights reserved</small>
-        <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
-        <!-- (click)="payView()" -->
-        <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()" *ngIf="!paypalBtn"> -->
-          <!-- <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HDZ3G3DH8MY7Q" target="_blank">
-          </a> -->
-          <!-- Confirm & Pay -->
-          <!-- <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn"></ngx-paypal> -->
-          <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
-        <!-- </button> -->
-        <!-- *ngIf="paypalBtn" -->
-        <div *ngIf="!paypalBtn; else dofalsething">
-          <button class="btn pd-1 other-btn fw-bold paynow" (click)="handleClick()" *ngIf="!dots; else dothisdots">
-            Confirm & Pay
-          </button>
-          <ng-template #dothisdots>
-            <button class="btn pd-1 other-btn fw-bold paynow" [disabled]="dots">
-              <div class="span-container" >
-                <span class="span-dots1"></span>
-                <span class="span-dots2"></span>
-                <span class="span-dots3"></span>
-              </div>
-            </button>
-          </ng-template>
-        </div>
-        <ng-template #dofalsething>
-          <div class="pay-container">
-            <!-- <h5 class="me-1">Proceed To:</h5> -->
-            <!-- <ngx-paypal [config]="payPalConfig" class="paypal-btn">Order Now</ngx-paypal> -->
-            <!-- [href]="this.filterLink[0]?.href" -->
-            <button class="btn pd-1 other-btn fw-bold paynow" (click)="handleClick()">
-              Confirm & Pay
-            </button>
-          </div>
-        </ng-template>
-      </div>
+     
     </div>
   </div>
 </div>
