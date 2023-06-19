@@ -28,10 +28,10 @@ export class SubscriptionListComponent implements OnInit {
   private pricingId: any;
   status: any;
   plan_name: string;
-  minimum:string;
-  maximum:string;
-  amount:number;
-  type:string;
+  minimum: string;
+  maximum: string;
+  amount: number;
+  type: string;
   public prod_id: any = environment.PROD_ID;
   // status: any;
   public showDelete: boolean = false;
@@ -64,17 +64,17 @@ export class SubscriptionListComponent implements OnInit {
     // setTimeout(() => this.showContent = true, 350);
     this.dtOptions = {
       language: {
-        search:"",
+        search: "",
         searchPlaceholder: 'Search ',
       },
-      buttons:[{
+      buttons: [{
         extend: 'csv',
         text: 'Download CSV'
       }],
-      info:true,
+      info: true,
       ordering: false,
-      responsive:true,
-      search:true,
+      responsive: true,
+      search: true,
       paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -219,10 +219,10 @@ export class SubscriptionListComponent implements OnInit {
       this.pricingId != null &&
       this.pricingId != ''
     ) {
-      console.log("update mode",this.pricingId)
+      console.log("update mode", this.pricingId)
       this.updatePlan(this.pricingId);
     }
-     else {
+    else {
       // let p_data = {
       //   token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
       //   prod_id: 'PROD-2SV05090KF783042A'
@@ -233,32 +233,32 @@ export class SubscriptionListComponent implements OnInit {
         "product_id": `${this.prod_id}`,
         "name": this.addPriceingForm.value.plan_name,
         "billing_cycles": [
-            {
-                "tenure_type": "REGULAR",
-                "sequence": 1,
-                "total_cycles": 999,
-                "frequency": {
-                    "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'DAY' // DAY, WEEK, MONTH, YEAR
-                },
-                "pricing_scheme": {
-                    "fixed_price": {
-                        "value": `${this.addPriceingForm.value.amount}`,
-                        "currency_code": "USD"
-                    }
-                }
+          {
+            "tenure_type": "REGULAR",
+            "sequence": 1,
+            "total_cycles": 999,
+            "frequency": {
+              "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'DAY' // DAY, WEEK, MONTH, YEAR
+            },
+            "pricing_scheme": {
+              "fixed_price": {
+                "value": `${this.addPriceingForm.value.amount}`,
+                "currency_code": "USD"
+              }
             }
+          }
         ],
         "payment_preferences": {
-            "auto_bill_outstanding": true,
-            "setup_fee_failure_action": "CONTINUE",
-            "setup_fee": {
-                "currency_code": "USD",
-                "value": 0
-            }
+          "auto_bill_outstanding": true,
+          "setup_fee_failure_action": "CONTINUE",
+          "setup_fee": {
+            "currency_code": "USD",
+            "value": 0
+          }
         },
         "taxes": {
-            "percentage": "1.5",
-            "inclusive": true
+          "percentage": "1.5",
+          "inclusive": true
         }
       }
       // console.log(data)
@@ -266,193 +266,195 @@ export class SubscriptionListComponent implements OnInit {
       let token = JSON.parse(localStorage.getItem('p-data')).token;
       this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
         console.log(res)
-        if(res.id){
-          let planData = {...this.addPriceingForm.value, paypalID: res.id}
+        if (res.id) {
+          let planData = { ...this.addPriceingForm.value, paypalID: res.id }
           console.log(planData)
           // return;
           this.userService.addPrice(planData).subscribe((res: any) => {
-              console.log(res);
-              if (res.success) {
-                //this.toastr.success(res.message);
-                // Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Success!', text: 'Subscripition Of this user ', icon: 'success', });
+            console.log(res);
+            if (res.success) {
+              //this.toastr.success(res.message);
+              // Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Success!', text: 'Subscripition Of this user ', icon: 'success', });
 
-                
+
+              Swal.fire({
+                text: res.message,
+                //icon: 'success',
+                imageUrl: '../../../../assets/images/success.png',
+              });
+            }
+          });
+        }
+      })
+    }
+  }
+  planList() {
+        this.userService.getSubscriptionList().subscribe((res: any) => {
+          console.log(res, "response")
+          this.allData = res.getData1;
+          // console.log(this.allData)
+          this.showContent = true;
+          if (this.isDtInitialized) {
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.destroy();
+              //  this.dtTrigger.next(undefined);
+            });
+          } else {
+            this.isDtInitialized = true;
+            // this.dtTrigger.next(undefined);
+          }
+        })
+
+      }
+
+  openModal(id) {
+        console.log(id, "plan id")
+    if(id!= null && id != undefined && id != ''){
+        this.showDelete = true;
+        this.deleteSubsId = id;
+        for (let i = 0; i < this.allData.length; i++) {
+          if (this.allData[i]._id === id) {
+            console.log(this.allData[i])
+            this.planStatus = this.allData[i].status
+            this.pricingId = id;
+            this.addPriceingForm.patchValue({
+              plan_name: this.allData[i].plan_name.trim(),
+            });
+
+            // this.addPriceingForm.patchValue({
+            //   minimum: this.allData[i].minimum,
+            // });
+            // this.addPriceingForm.patchValue({
+            //   maximum: this.allData[i].maximum,
+            // });
+            this.addPriceingForm.patchValue({
+              type: this.allData[i].type,
+            });
+            this.addPriceingForm.patchValue({
+              amount: this.allData[i].amount,
+            });
+            this.addPriceingForm.patchValue({
+              country: this.allData[i].country,
+            });
+            this.addPriceingForm.patchValue({
+              status: this.allData[i].status,
+            });
+            console.log(this.planStatus)
+          }
+        }
+      }
+    else {
+        this.showDelete = false;
+        console.log("no id")
+        this.addPriceingForm.patchValue({
+          plan_name: '',
+        });
+
+        // this.addPriceingForm.patchValue({
+        //   minimum: '',
+        // });
+        // this.addPriceingForm.patchValue({
+        //   maximum: '',
+        // });
+        this.addPriceingForm.patchValue({
+          type: '',
+        });
+        this.addPriceingForm.patchValue({
+          amount: '',
+        });
+        this.addPriceingForm.patchValue({
+          country: '',
+        });
+        this.addPriceingForm.patchValue({
+          status: '',
+        });
+        this.pricingId = null;
+      }
+    }
+    onClickInactive(){
+      console.log(this.deleteSubsId)
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to deactivate the plan?",
+        //icon: 'warning',
+        imageUrl: '../../../../assets/images/warning.png',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Confirm <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userService.deleteSubsById({ id: this.deleteSubsId }).subscribe((res: any) => {
+            console.log(res)
+            // this.router.navigateByUrl('/subscription-list');
+            window.location.reload();
+          })
+        }
+      });
+
+    }
+    onClickActive(){
+      console.log(this.deleteSubsId)
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to activate the plan?",
+        //icon: 'warning',
+        imageUrl: '../../../../assets/images/warning.png',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Confirm <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userService.activeSubsID({ id: this.deleteSubsId }).subscribe((res: any) => {
+            console.log(res)
+            // this.router.navigateByUrl('/subscription-list');
+            window.location.reload();
+          })
+        }
+      });
+    }
+    updatePlan(id){
+
+      this.userService.updatePlan(this.addPriceingForm.value, id)
+        .subscribe((res: any) => {
+          console.log(res)
+          if (res.success) {
+            //this.toastr.success(res.message);
             Swal.fire({
               text: res.message,
               //icon: 'success',
               imageUrl: '../../../../assets/images/success.png',
             });
-        }
-      });
-    }
-  }
-  planList() {
-    this.userService.getSubscriptionList().subscribe((res: any) => {
-      console.log(res, "response")
-      this.allData = res.getData1;
-      // console.log(this.allData)
-      this.showContent = true;
-      if (this.isDtInitialized) {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          dtInstance.destroy();
-        //  this.dtTrigger.next(undefined);
+            document.getElementById('launch_ad')?.click();
+            this.isDtInitialized = false;
+            this.planList();
+
+          }
+          else {
+            Swal.fire({
+              text: res.message,
+              icon: 'error',
+            });
+            //this.toastr.error(res.message);
+          }
         });
-      } else {
-        this.isDtInitialized = true;
-        // this.dtTrigger.next(undefined);
-      }
-    })
 
-  }
 
-  openModal(id) {
-    console.log(id, "plan id")
-    if(id!=null && id != undefined && id != ''){
-      this.showDelete = true;
-      this.deleteSubsId = id;
-      for (let i = 0; i < this.allData.length; i++) {
-        if (this.allData[i]._id === id) {
-          console.log(this.allData[i])
-          this.planStatus = this.allData[i].status
-          this.pricingId=id;
-          this.addPriceingForm.patchValue({
-            plan_name: this.allData[i].plan_name.trim(),
-          });
-
-          // this.addPriceingForm.patchValue({
-          //   minimum: this.allData[i].minimum,
-          // });
-          // this.addPriceingForm.patchValue({
-          //   maximum: this.allData[i].maximum,
-          // });
-          this.addPriceingForm.patchValue({
-            type: this.allData[i].type,
-          });
-          this.addPriceingForm.patchValue({
-            amount: this.allData[i].amount,
-          });
-          this.addPriceingForm.patchValue({
-            country: this.allData[i].country,
-          });
-          this.addPriceingForm.patchValue({
-            status: this.allData[i].status,
-          });
-          console.log(this.planStatus)
-        }
-      }
     }
-    else{
-      this.showDelete = false;
-      console.log("no id")
-      this.addPriceingForm.patchValue({
-        plan_name: '',
-      });
-
-      // this.addPriceingForm.patchValue({
-      //   minimum: '',
-      // });
-      // this.addPriceingForm.patchValue({
-      //   maximum: '',
-      // });
-      this.addPriceingForm.patchValue({
-        type: '',
-      });
-      this.addPriceingForm.patchValue({
-        amount: '',
-      });
-      this.addPriceingForm.patchValue({
-        country: '',
-      });
-      this.addPriceingForm.patchValue({
-        status: '',
-      });
-      this.pricingId=null;
+    openModal1(){
+      console.log("helo")
     }
-  }
-  onClickInactive(){
-    console.log(this.deleteSubsId)
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you want to deactivate the plan?",
-      //icon: 'warning',
-      imageUrl: '../../../../assets/images/warning.png',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Confirm <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService.deleteSubsById({id: this.deleteSubsId}).subscribe((res: any) => {
-          console.log(res)
-          // this.router.navigateByUrl('/subscription-list');
-          window.location.reload();
-        })
-      }
-    });
 
-  }
-  onClickActive(){
-    console.log(this.deleteSubsId)
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you want to activate the plan?",
-      //icon: 'warning',
-      imageUrl: '../../../../assets/images/warning.png',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Confirm <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService.activeSubsID({id: this.deleteSubsId}).subscribe((res: any) => {
-          console.log(res)
-          // this.router.navigateByUrl('/subscription-list');
-          window.location.reload();
-        })
-      }
-    });
-  }
-  updatePlan(id) {
+    //  ngAfterViewChecked(): void {
+    //   // this.setPrice();
+    //  }
+    onlyNumberKey(evt: KeyboardEvent) {
+      // Only ASCII character in that range allowed
+      let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+      return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
+    }
 
-    this.userService.updatePlan(this.addPriceingForm.value, id)
-      .subscribe((res: any) => {
-        console.log(res)
-        if (res.success) {
-          //this.toastr.success(res.message);
-          Swal.fire({
-            text: res.message,
-            //icon: 'success',
-            imageUrl: '../../../../assets/images/success.png',
-          });
-          document.getElementById('launch_ad')?.click();
-           this.isDtInitialized = false;
-           this.planList();
-
-        }
-         else {
-          Swal.fire({
-            text: res.message,
-            icon: 'error',
-          });
-          //this.toastr.error(res.message);
-        }
-      });
-
-
-  }
- openModal1(){
-  console.log("helo")
- }
-
-//  ngAfterViewChecked(): void {
-//   // this.setPrice();
-//  }
-onlyNumberKey(evt: KeyboardEvent) {
-  // Only ASCII character in that range allowed
-  let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
-  return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
-}
-
-  ngOnDestroy(): void {
-    // this.planList();
-    this.dtTrigger.unsubscribe();
-  }
+    ngOnDestroy(): void {
+      // this.planList();
+      this.dtTrigger.unsubscribe();
+    }
 }
