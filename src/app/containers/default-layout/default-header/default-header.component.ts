@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, Pipe } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppService } from 'src/app/services/app.service';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import Swal from 'sweetalert2';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,33 +11,117 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './default-header.component.html',
 })
 export class DefaultHeaderComponent extends HeaderComponent {
-
   @Input() sidebarId: string = "sidebar";
   @Output() toggleMenuSidebar: EventEmitter<any> = new EventEmitter<any>();
   toggle: boolean = true;
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
-  userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+  public userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   lName: any;
   fName: any;
   routerTo: any;
+  noOfXrayEval: any=0;
+  noOfAiCavity: any=0;
+  count: any =0;
+  amtEarned: any=0.00;
+  xrayCount: any=0;
+  subCount:any=0;
+  unsubCount:any=0;
+  planCount: any=0;
   public _router: any = "";
   public changeUrl: boolean = false;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
     private appService:AppService,
-    private userService :UserService) {
+    private userService :UserService,
+    private route: ActivatedRoute,
+    ) {
     super();
     this._router = this.router.url
   }
   ngOnInit(): void {
+    console.log(this.userInfo)
     this.userfirst();
+    this.allCounts();
+    this.allCountsAdmin();
     this.appService.currentUrl.subscribe((url: boolean) => {
       this.changeUrl = url
     })
     //this.admin()
+  }
+  allCounts(){
+    this.userService.noOfXrayEvalByID(this.userInfo.id).subscribe((res:any)=>
+    {
+      if(res.success){
+       this.noOfXrayEval=res.getData;
+       console.log("noOfXray",this.noOfXrayEval)
+      }
+    })
+    this.userService.noOfCavityByAI(this.userInfo.id).subscribe((res:any)=>
+    {
+      if(res.success){
+       this.noOfAiCavity=res.getData;
+       console.log("noOfXray",this.noOfAiCavity)
+      }
+      for(let i=0;i<this.noOfAiCavity.length;i++)
+      {
+        if(this.noOfAiCavity[i].evaluation?.length > 0){
+             let n=this.noOfAiCavity[i].evaluation[0]?.ai_identified_cavities?.color_labels?.length
+          if(n==undefined)
+       {
+           console.log(n
+          ,"***")
+
+        }
+        else{
+          this.count= this.count+this.noOfAiCavity[i].evaluation[0]?.ai_identified_cavities?.color_labels.length
+          console.log(this.count)
+        }
+      }
+    }
+     console.log(this.count)
+    })
+  }
+  allCountsAdmin(){
+    this.userService.totAmtEarned().subscribe((res:any)=>
+   {
+      console.log(res)
+     if(res.success){
+      this.amtEarned=res.getData;
+      this.amtEarned = this.amtEarned.toFixed(2)
+      console.log("amtEarned",this.amtEarned)
+     }
+   })
+   this.userService.noOfXrayEval().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.xrayCount=res.getData;
+      console.log("xraycount",this.xrayCount)
+     }
+   })
+   this.userService.noOfSubscriber().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.subCount=res.getData;
+      console.log("subcount",this.subCount)
+     }
+   })
+   this.userService.noOfUnsubscriber().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.unsubCount=res.getData;
+      console.log("unsubcount",this.unsubCount)
+     }
+   })
+   this.userService.noOfPlans().subscribe((res:any)=>
+   {
+     if(res.success){
+      this.planCount=res.getData;
+      console.log("plancount",this.planCount)
+     }
+   })
   }
   userfirst() {
     this.userInfo;

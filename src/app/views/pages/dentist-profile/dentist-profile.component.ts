@@ -147,11 +147,11 @@ export class DentistProfileComponent implements OnInit {
     this.dentistId = this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
     if (
-      this.dentistId != undefined &&
-      this.dentistId != null &&
-      this.dentistId != ''
+      this.userInfo.id != undefined &&
+      this.userInfo.id != null &&
+      this.userInfo.id != ''
     ) {
-      this.editadmin(this.dentistId);
+      this.editadmin(this.userInfo.id);
       console.log("errrr", this.dentistId)
     } else {
       // this.addSuperForm.get('status').setValue('active');
@@ -213,6 +213,7 @@ export class DentistProfileComponent implements OnInit {
     console.log(this.role);
   }
   editadmin(id) {
+    this.allCountryList();
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res, "*****");
       this.userData = res.getData;
@@ -294,12 +295,13 @@ export class DentistProfileComponent implements OnInit {
           city: res.getData[0].city,
         });
         this.addSuperForm.patchValue({
+          country: res.getData[0].country,
+        });
+        this.addSuperForm.controls['country'].setValue(res.getData[0].country)
+        this.addSuperForm.patchValue({
           state : res.getData[0].state,
         });
         this.addSuperForm.get('state').setValue(res.getData[0].state)
-        this.addSuperForm.patchValue({
-          country: res.getData[0].country,
-        });
         this.addSuperForm.patchValue({
           pincode: res.getData[0].pincode,
         });
@@ -355,17 +357,18 @@ export class DentistProfileComponent implements OnInit {
   }
   updateUser() {
     console.log("user")
-    if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
-      this.apiService.updateUser(this.addSuperForm.value, this.dentistId)
+    if (this.userInfo.id != "" && this.userInfo.id != undefined && this.userInfo.id != null) {
+      this.apiService.updateUser(this.addSuperForm.value, this.userInfo.id)
         .subscribe((res: any) => {
-          console.log("user1")
+          console.log(this.addSuperForm.value, res)
           if (res.success) {
             //this.toastr.success(res.message);
             Swal.fire({
               text: res.message,
               //icon: 'success',
-              imageUrl: '../../../../assets/images/success.png',
+              imageUrl: '../../../../assets/images/System_Accuracy.png',
             });
+            ($("#myProfile") as any).modal("hide");
             //  this.router.navigateByUrl('/registered-dentists');
           } else {
             Swal.fire({

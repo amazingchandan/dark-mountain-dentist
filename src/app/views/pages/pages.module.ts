@@ -30,6 +30,7 @@ import { environment } from 'src/environments/environment';
 import { PaySuccessComponent } from './pay-success/pay-success.component';
 import { PayFailureComponent } from './pay-failure/pay-failure.component';
 import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
     Page404Component,
     Page500Component,
     RegisteredDentistsComponent,
-    DentistProfileComponent,
+    // DentistProfileComponent,
     UploadedXraysComponent,
     SubscriptionListComponent,
     ManageSubscriptionComponent,
@@ -53,6 +54,7 @@ import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
     ViewAdminXrayComponent,
     PaySuccessComponent,
     PayFailureComponent,
+    // ResetPasswordComponent,
   ],
   imports: [
     CommonModule,

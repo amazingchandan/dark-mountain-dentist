@@ -22,7 +22,7 @@ export class AppService {
 
   updateWindowScreen(msg: any){
     this.windowScreen.next(msg)
-    console.log(msg)
+    // console.log(msg)
   }
 
   private approvalStageMessage = new BehaviorSubject(false);
@@ -110,7 +110,7 @@ export class AppService {
           let status = res.getData[0]?.subscription_details.status;
           console.log(status)
           if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/upload-xray/0');
           }
 
           //this.router.navigateByUrl('/dashboard');

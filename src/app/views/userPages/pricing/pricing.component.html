@@ -801,7 +801,8 @@
               <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
             <!-- </button> -->
             <!-- *ngIf="paypalBtn" -->
-            <div class="w-100" *ngIf="!paypalBtn; else dofalsething">
+            <!-- *ngIf="!paypalBtn; else dofalsething" -->
+            <div class="w-100">
               <button class="btn w-100 ms-0 mt-4 pd-1 other-btn fw-bold paynow" (click)="handleClick()" *ngIf="!dots; else dothisdots">
                 Confirm & Pay <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
@@ -815,11 +816,11 @@
                 </button>
               </ng-template>
             </div>
-            <ng-template #dofalsething>
+            <!-- <ng-template #dofalsething>
               <div class="pay-container">
                 <ngx-paypal [config]="payPalConfig" class="w-100 paypal-btn ms-0 mt-4">Order Now</ngx-paypal>
               </div>
-            </ng-template>
+            </ng-template> -->
           </div>
 
           </div>

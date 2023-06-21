@@ -8,9 +8,9 @@
     // margin-left: 51rem;
     // position: relative;
     position: absolute;
-    top: -15.5px;
+    top: 78.5px;
     height: 39px;
-    right: 17rem;
+    right: 9.7rem;
     z-index: 200 !important;
     line-break: strict;
 }
@@ -55,15 +55,15 @@ select.fade {
 }
 
 @media (max-width: 645px){
-  .add-btn{
-     position: absolute;
-     top: 28.5px;
-     height: 39px;
-     left: 0rem;
-     right: auto;
-     z-index: 200 !important;
-     line-break: strict;
- }
+//   .add-btn{
+//      position: absolute;
+//      top: 28.5px;
+//      height: 39px;
+//      left: 0rem;
+//      right: auto;
+//      z-index: 200 !important;
+//      line-break: strict;
+//  }
  .resposive-table {
   margin-top: 85px;
   }

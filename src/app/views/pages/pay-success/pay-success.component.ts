@@ -130,7 +130,7 @@ export class PaySuccessComponent implements OnInit {
           this.btnStatus = true;
           setTimeout(() => {
             this.spinner.hide();
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/upload-xray/0');
           }, 4000)
           // if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
             // this.appService.login(result);

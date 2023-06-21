@@ -21,6 +21,7 @@ export class EvaluateXrayComponent {
   markData: any;
   myThumbnail: any;
   myFullresImage: any;
+  evaluationResult: boolean = true;
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,
@@ -94,6 +95,14 @@ export class EvaluateXrayComponent {
     var file = new File([fileContent], "file name here", {type: fileFormat});
     console.log(file)
     return file;
+ }
+ handleSwitch(text: any){
+  if(text == 'show'){
+    this.evaluationResult = false;
+    this.displayImg();
+  } else if (text == 'hide'){
+    this.evaluationResult = true;
+  }
  }
   getXray(id) {
 
@@ -252,6 +261,8 @@ export class EvaluateXrayComponent {
           ]
         }
       }
+      console.log((element.coordinates[2] - element.coordinates[0]) * 100.0 / 480)
+      console.log((element.coordinates[3] - element.coordinates[1]) * 100.0 / 480)
 
       console.log(obj)
       return obj;
@@ -265,25 +276,24 @@ export class EvaluateXrayComponent {
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
         top: 0px; padding: 10px 14px; border-radius:4px}</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}
+     <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
-     <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;
-     margin-top: -14px; width:566px">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+     <Style> .ls-common</Style>
+      <View style="margin-top: -14px;">
+     <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px ; height:354px !important;  }</Style>
+     <Style> canvas { width:100% ; height:100% !important;  }</Style>
      </View>
-      <View style="float:right;visibility:hidden">
+      <View style="float:right;display:none">
       <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
       <Label value="1" background="#FF3131" />
       <Label value="2" background="#FFFF00" />
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 152px;
-      margin-top: 56px;">
+      <View style="flex: 10%;position: absolute;right: 405px;
+      top: -75px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Dentist Correction" background="green" />
       </RectangleLabels>
@@ -394,6 +404,8 @@ export class EvaluateXrayComponent {
           ]
         }
       }
+      console.log((element.coordinates[2] - element.coordinates[0]) * 100.0 / 480)
+      console.log((element.coordinates[3] - element.coordinates[1]) * 100.0 / 480)
 
       console.log(obj)
       return obj;
@@ -407,27 +419,26 @@ export class EvaluateXrayComponent {
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
         top: 0px; padding: 10px 14px; border-radius:4px}</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}
+     <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
-     <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;
-     margin-top: -14px; width:566px">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+     <Style> .ls-common </Style>
+      <View style="margin-top: -14px;">
+     <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px ; height:354px !important;  }</Style>
+     <Style> canvas { width:100% ; height:100% !important;  }</Style>
      </View>
-      <View style="float:right;visibility:hidden">
+      <View style="float:right;display:none">
       <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
       <Label value="1" background="#FF3131" />
       <Label value="2" background="#FFFF00" />
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 152px;
-      margin-top: 56px;">
+      <View style="flex: 10%;position: absolute;right: 405px;
+      top: -75px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Dentist Correction" background="green" />
+      <Label value="Dentist Correction" background="green"/>
       </RectangleLabels>
       </View>
       </View>

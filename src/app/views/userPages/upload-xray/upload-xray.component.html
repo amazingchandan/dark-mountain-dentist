@@ -64,12 +64,12 @@
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->
-          
+
           <button disabled type="button" class="btn btn-danger pd-1 fw-bold  ms-3" (click)="backdropModal()">
             Discard
           </button>
       </div>
-      
+
       </div>
     </div>
 
@@ -91,10 +91,10 @@
           <img class="mb-3" src="../../../../assets/images/upload_icon.png" />
           <p class="mb-1"><strong>Click to upload</strong> or drag and drop</p>
           <p><small> Maximum file size 50 MB.</small></p>
-          
-          
+
+
         </div>
-        
+
       </label>
     </div>
 
@@ -106,7 +106,7 @@
           class="inputFile btn btn-primary other-btn pd-1 fw-bold"
           appDragDrop
           (files)="filesDropped($event)"
-          >Upload X-Ray f</label
+          >Upload X-Ray</label
         >
         <input
           type="file"
@@ -269,11 +269,11 @@
     </div>
     <div class="col-12 col-md-7">
       <h2 class="fw-bold mb-2">
-        <small>Welcome to ART</small> <br>
+        <small>Welcome to ARTI</small> <br>
         Revolution Dental Diagnostics with the Power of AI
       </h2>
       <p>Transform your dental practice with Al-driven X-ray analysis, boosting diagnostic accuracy, patient trust, and practice revenue.</p>
-    
+
       <div class="row">
         <div class="col-12 col-md-4">
           <img src="../../../../assets/images/X-Ray-Evaluated.png"/>
@@ -317,17 +317,17 @@
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->
-          
+
           <button type="button" class="btn btn-danger pd-1 fw-bold  ms-3" (click)="backdropModal()">
             Discard
           </button>
       </div>
-      
+
       </div>
     </div>
   </div>
   <div class="uploaded-img mb-3">
-    <img src={{url}} alt="" class="img-fluid img-height">
+    <img src={{url}} alt="" class="img-fluid img-width">
   </div>
   <div class="row sec-II">
 
@@ -340,8 +340,8 @@
 
 
 
-  
-  
+
+
 
 
 <div class="table-responsive resposive-table mb-3" style="position: relative">
@@ -502,7 +502,7 @@
           ></i>
         </div>
         <div class="modal-body backdrop-body">
-        -- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" > 
+        -- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" >
           <img src={{url}} alt="" class="img-fluid img-height">
         </div>
         <div class="modal-footer backdrop-footer">

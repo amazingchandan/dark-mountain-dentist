@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   title = 'Dark Mountain - Login';
+  public userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public loginForm: FormGroup;
   public isAuthLoading = false;
   public statusSubs: any;

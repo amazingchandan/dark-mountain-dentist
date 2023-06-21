@@ -74,6 +74,9 @@ import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.compone
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.component';
 import { DragDropDirective } from './drag-drop.directive';
+import { DentistProfileComponent } from './views/pages/dentist-profile/dentist-profile.component';
+import { ResetPasswordComponent } from './views/pages/reset-password/reset-password.component';
+import { UploadListComponent } from './views/userPages/upload-list/upload-list.component'
 // import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -87,7 +90,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent, ViewXrayComponent, RenewSubComponent, DragDropDirective],
+  declarations: [AppComponent, ...APP_CONTAINERS, PricingComponent, DentistsComponent, UploadXrayComponent, EvaluateXrayComponent, ViewXrayComponent, RenewSubComponent, DragDropDirective, DentistProfileComponent, ResetPasswordComponent, UploadListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
