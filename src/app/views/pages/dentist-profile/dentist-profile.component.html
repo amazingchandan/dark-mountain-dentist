@@ -189,7 +189,7 @@
         <div class="sub-container d-none">
           <div class="sub-container mt-4">
             <!-- <h5 *ngIf="this.userID != this.dentistId">Subscription Details THIS</h5> -->
-            <div class="mt-3 w-100" *ngIf="this.userData[0]?.subscription_details.status == true || this.userData[0]?.subscription_details.status == false">
+            <div class="mt-3 w-100" *ngIf="this.userData[0]?.subscription_details?.status == true || this.userData[0]?.subscription_details?.status == false">
               <!--new code-->
               <!-- <div class="container xray-table-container border-top p-0" *ngIf="this.role == 'dentist'">
                 <div class="sub-coontainer mt-4 xray-row">

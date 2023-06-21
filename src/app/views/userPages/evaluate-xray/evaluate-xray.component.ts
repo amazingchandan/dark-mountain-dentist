@@ -225,6 +225,7 @@ export class EvaluateXrayComponent {
   createLabelStudio2() {
     console.log(true, "THIS IS THIRD TRUE");
     console.log(this.initAIResp)
+    this.evaluationResult = false;
     localStorage.setItem('labels', JSON.stringify(this.initAIResp))
     this.forTesting = true;
     let boxes = []
@@ -292,7 +293,7 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 405px;
+      <View style="flex: 10%;position: absolute;right: 418px;
       top: -75px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Dentist Correction" background="green" />
@@ -365,6 +366,7 @@ export class EvaluateXrayComponent {
   }
 
   createLabelStudio3() {
+    this.evaluationResult = false;
     console.log(true, "THIS IS FOURTH TRUE");
     this.initAIResp = JSON.parse(localStorage.getItem('labels'));
     console.log(this.initAIResp)
@@ -423,7 +425,7 @@ export class EvaluateXrayComponent {
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
      <Style> .ls-common </Style>
-      <View style="margin-top: -14px;">
+      <View style="margin-top: -14px; display: block;">
      <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
      <Style> canvas { width:100% ; height:100% !important;  }</Style>
@@ -435,7 +437,7 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 405px;
+      <View style="flex: 10%;position: absolute;right: 418px;
       top: -75px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Dentist Correction" background="green"/>

@@ -372,3 +372,9 @@ input[type='range']::-webkit-slider-thumb {
     left: 0%;
   }
 }
+div:has(div:ImageView_container__AOBmH){
+  display: block;
+}
+[style |= "position: relative; display: flex; align-items: flex-start; justify-content: space-between;"]{
+  display: block !important;
+}

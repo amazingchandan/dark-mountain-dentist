@@ -604,10 +604,22 @@ a.current {
 .paypal-btn .paypal-logo {
   display: none !important;
 }
-// .ngxImageZoomContainer, .ngxImageZoomContainer img, .ngxImageZoomFullContainer img, .ngxImageZoomThumbnail, .ngxImageZoomFullContainer, .ngxImageZoomFull {
-//   width: 100% !important;
-// }
-
+.ngxImageZoomContainer, .ngxImageZoomContainer > img{
+  width: 100% !important;
+}
+div:has(div:ImageView_container__AOBmH){
+  display: block;
+}
+[style |= "position: relative; display: flex; align-items: flex-start; justify-content: space-between;"]{
+  display: block !important;
+}
+.ImageView_container__AOBmH{
+  max-width: none !important;
+  width: 100% !important;
+}
+.Segment_block__1fyeG{
+  padding: 1em 0em !important;
+}
 // .owl-item  {
 //   max-width: 320px;
 // }

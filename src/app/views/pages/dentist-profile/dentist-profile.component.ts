@@ -147,13 +147,15 @@ export class DentistProfileComponent implements OnInit {
     this.dentistId = this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
     if (
-      this.userInfo.id != undefined &&
-      this.userInfo.id != null &&
-      this.userInfo.id != ''
+      this.dentistId != undefined &&
+      this.dentistId != null &&
+      this.dentistId != ''
+      // this.userInfo.id == this.dentistId
     ) {
-      this.editadmin(this.userInfo.id);
+      this.editadmin(this.dentistId);
       console.log("errrr", this.dentistId)
-    } else {
+    } else if(this.dentistId == undefined || this.dentistId == null || this.dentistId == ''){
+      this.editadmin(this.userInfo.id);
       // this.addSuperForm.get('status').setValue('active');
     }
 

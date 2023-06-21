@@ -310,7 +310,17 @@
         <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
           Evaluate
         </button>
-
+        <input
+          type="file"
+          id="inputFiles"
+          name="inputFiles"
+          class="file-upload custom-file-input fw-semibold inputFile d-none"
+          (change)="uploadFile($event)"
+          accept="image/*"
+          multiple
+          onclick="this.value = null"
+          [ngStyle]="fileStyle"
+        />
         <label for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3"
             >Re-Upload X-Ray</label
           >
