@@ -7,8 +7,16 @@
 
 
     <div class="row">
-      <div class="col-12">
-        <div class="col-md-6 left-img ">
+      <div class="col-12 d-flex ps-0">
+        <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn evaluate-btn ms-2" [class]="evaluationResult ? 'hide-btn':''" (click)="handleSwitch('show')">
+          Evaluation Result
+        </button>
+        <button type="button" class="btn btn-primary pd-1 fw-bold other-btn original-xray" [class]="!evaluationResult ? 'hide-btn':''" (click)="handleSwitch('hide')">
+          Original X-Ray
+        </button>
+      </div>
+      <div class="col-12 mt-4">
+        <div class="w-100" [hidden]="!evaluationResult">
           <!--<div class="ms-2 markDiv">
             <div *ngFor="let marker of this.userMark" class="user-marker" [style.left.px]=""
               [style.top.px]="marker.value.y">
@@ -33,7 +41,7 @@
          </lib-ngx-image-zoom>
           <label class="text-center w-100 mt-2 fw-bold dentist-mark-label">Original X-ray</label>
         </div>
-        <div class="col-md-6 right-img">
+        <div class="col-12 right-img" [hidden]="evaluationResult">
           <!--<div class="ms-2 markDiv">
             <div *ngFor="let marker of this.userMark" class="user-marker ms-1" [style.left.px]="marker.x"
               [style.top.px]="marker.y">

@@ -179,6 +179,7 @@ editadmin(id) {
     console.log(this.userData[0].subscription_details.end_date, "***")
     let d = new Date()
     this.planDetail = res.getData[0]
+    console.log(this.planDetail.subscription_details, "PLANDETAILS")
     // this.userService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((resp: any) => {
     //   console.log(resp)
     //   if (resp.success) {

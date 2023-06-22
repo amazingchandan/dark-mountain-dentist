@@ -199,6 +199,19 @@ input[type='range']::-webkit-slider-thumb {
 .input-w{
     width: 5%;
 }
+.hide-btn {
+  background-color: #cfcfcf !important;
+  border: 1px solid #cfcfcf !important;
+  color: #434343 !important;
+}
+.evaluate-btn {
+  border-top-right-radius: 0% !important;
+  border-bottom-right-radius: 0% !important;
+}
+.original-xray {
+  border-bottom-left-radius: 0% !important;
+  border-top-left-radius: 0% !important;
+}
 // ::ng-deep .ngxImageZoomContainer {
 //     max-height: 354px !important;
 //     max-width: 566px !important;

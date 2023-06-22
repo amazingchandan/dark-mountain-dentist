@@ -63,6 +63,7 @@ $enable-rtl: true;
 
 * {
   font-family: "Montserrat", sans-serif;
+  list-style-type: none;
 }
 
 // .btn{
@@ -619,6 +620,9 @@ div:has(div:ImageView_container__AOBmH){
 }
 .Segment_block__1fyeG{
   padding: 1em 0em !important;
+}
+.w-logo-header {
+  width: 80px !important;
 }
 // .owl-item  {
 //   max-width: 320px;
