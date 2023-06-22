@@ -85,7 +85,7 @@
           onclick="this.value = null"
           [ngStyle]="fileStyle"
         />
-      <label for="inputFiles" id="file-drag">
+      <label for="inputFiles" id="file-drag" appDragDrop (files)="filesDropped($event)">
         <img id="file-image" src="#" alt="Preview" class="hidden">
         <div id="start">
           <img class="mb-3" src="../../../../assets/images/upload_icon.png" />
