@@ -53,14 +53,12 @@
       <h2 class="col mb-n5 fw-bold position-relative pt-2">
         Upload X-Rays
       </h2>
-      <div class="col-7 text-right">
+      <div class="col-7 d-flex justify-content-end align-items-center">
         <button disabled type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
           Evaluate
         </button>
 
-        <button disabled for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3"
-            >Re-Upload X-Ray</button
-          >
+        <button disabled for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3">Re-Upload X-Ray</button>
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->
@@ -306,7 +304,7 @@
       <h2 class="col mb-n5 fw-bold position-relative pt-2">
         Uploaded X-Rays
       </h2>
-      <div class="col-7 text-right">
+      <div class="col-7 d-flex justify-content-end align-items-center">
         <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
           Evaluate
         </button>
@@ -321,9 +319,7 @@
           onclick="this.value = null"
           [ngStyle]="fileStyle"
         />
-        <label for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3"
-            >Re-Upload X-Ray</label
-          >
+        <label for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3">Re-Upload X-Ray</label>
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->

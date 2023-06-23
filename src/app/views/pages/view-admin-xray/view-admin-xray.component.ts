@@ -14,6 +14,7 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 })
 export class ViewAdminXrayComponent {
 
+  evaluationResult: boolean = false;
 
   markData: any=[];
   userMark: any=[];
@@ -149,11 +150,10 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
         <Style> .Hint_main__1Svrz { display:none; }</Style>
         <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
-       <View style="flex: 90%;
-       margin-top: -14px;">
-       <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+       <View style="margin-top: -14px;">
+       <Style> .ImageView_container__AOBmH img</Style>
        <Image name="img" value="$image" width="100%" height="100%" ></Image>
-       <Style> canvas { width:594px; height:354px !important }</Style>
+       <Style> canvas { width:100%; height:100% !important }</Style>
        </View>
  <View style="flex: 10%;float:right">
  <RectangleLabels name="label" toName="img" background="red">
@@ -216,6 +216,16 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
   }
 
+  handleSwitch(text: any){
+    if(text == 'show'){
+      this.evaluationResult = false;
+      // this.displayImg();
+      this.getMark(this.id);
+    } else if (text == 'hide'){
+      this.evaluationResult = true;
+    }
+   }
+
   createLabelStudio() {
     const resultArrUser = this.userMark.map((element: any) => {
       let obj = {
@@ -262,18 +272,17 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}</Style>
-     <View style="flex: 90%;
-     margin-top: -14px;">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+     <View style="margin-top: -14px;">
+     <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%" ></Image>
-     <Style> canvas { width:594px; height:354px !important }</Style>
+     <Style> canvas { width:100%; height:100% !important }</Style>
      </View>
 
- <View style="flex: 10%;float:right;visibility:hidden">
+ <View style="flex: 10%;float:right;display:none">
  <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
  <Label value="1" background="#FF3131" />
  <Label value="2" background="#FFFF00" />
- <Label value="Dentist Correction" background="green" />
+ <Label value="Edit" background="green" />
  <Label value="Admin Correction" background="#FF7420" />
  </RectangleLabels>
 

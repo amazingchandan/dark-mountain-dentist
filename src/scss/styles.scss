@@ -98,11 +98,15 @@ $enable-rtl: true;
   padding: 10px 14px !important;
   border-radius: 4px !important;
 }
+.pd-2 {
+  padding: 12px 14px !important;
+  border-radius: 4px !important;
+}
 .cancel-btn {
   background-color: var(--bs-gray) !important;
   border: var(--bs-gray) !important;
   font-size: 12px !important;
-  padding: 11px 15px !important;
+  padding: 12px 15px !important;
 }
 .cancel-btn:hover {
   background-color: var(--bs-gray-700) !important;
