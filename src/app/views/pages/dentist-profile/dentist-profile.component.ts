@@ -21,7 +21,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./dentist-profile.component.scss']
 })
 export class DentistProfileComponent implements OnInit {
-  title = 'Dark Mountain - Profile';
+  title = 'ARTI - Profile';
   dtOptions: DataTables.Settings = {};
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public userID = localStorage.getItem('id') || "";
@@ -706,7 +706,7 @@ export class DentistProfileComponent implements OnInit {
             }
           },
           items: [{
-            name: 'Dark Mountain',
+            name: 'ARTI',
             quantity: '1',
             category: 'DIGITAL_GOODS',
             unit_amount: {

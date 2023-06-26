@@ -20,7 +20,7 @@ const REGEX = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$
 })
 
 export class RegisterFormComponent {
-  title = 'Dark Mountain - Registration';
+  title = 'ARTI - Registration';
   public registerForm: FormGroup;
   newUser: any;
   isAuthLoading: boolean;

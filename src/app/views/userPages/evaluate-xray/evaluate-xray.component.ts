@@ -17,7 +17,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./evaluate-xray.component.scss']
 })
 export class EvaluateXrayComponent {
-  title = 'Dark Mountain - Evaluate X-Ray';
+  title = 'ARTI - Evaluate X-Ray';
   markData: any;
   myThumbnail: any;
   myFullresImage: any;
@@ -86,6 +86,7 @@ export class EvaluateXrayComponent {
     //  this.createLabelStudio()
     //  }, 3000);
     //this.createLabelStudio();
+    this.idUser = this.idUser ? this.idUser : this.userInfo.id
   }
   getPhoto() {
     var base64 = localStorage["file"];
@@ -134,8 +135,8 @@ export class EvaluateXrayComponent {
 
   displayImg() {
     console.log(this.file, this.idUser, this.file?.name, this.file?.type)
+    // console.log(JSON.parse(localStorage.getItem('file')))
     if (this.file) {
-      // console.log(JSON.parse(localStorage.getItem('file')))
       var reader = new FileReader();
       // console.log(JSON.parse(localStorage.getItem('file')));
       reader.readAsDataURL(this.file);
@@ -157,6 +158,7 @@ export class EvaluateXrayComponent {
         this.createLabelStudio2()
         this.forTesting = false
       })
+      this.retrievingFile();
     } else {
       this.appService.updateGetUrl(true);
       console.log(JSON.parse(localStorage.getItem('filepath')));
@@ -220,6 +222,17 @@ export class EvaluateXrayComponent {
     //   console.log(err)
     // })
 
+  }
+
+  retrievingFile(){
+    console.log(JSON.parse(localStorage.getItem('filepath')))
+    let base64 = JSON.parse(localStorage.getItem('filepath'))
+    var base64Parts = base64.split(",");
+    var fileFormat = base64Parts[0].split(";")[1];
+    var fileContent = base64Parts[1];
+    var file = new File([fileContent], "file name here", {type: fileFormat});
+    console.log(file)
+    // return file;
   }
 
   createLabelStudio2() {
@@ -916,7 +929,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         console.log(markInfo1, AiMarks)
         const xray_info: any = {
           // xray_id: this.id,
-          user_id: this.idUser,
+          user_id: this.idUser ? this.idUser : this.userInfo.id,
           marker: markInfo,
           total_cavities: markInfo.length
         }

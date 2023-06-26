@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./pay-failure.component.scss']
 })
 export class PayFailureComponent implements OnInit {
-  title = 'Dark Mountain - Failure';
+  title = 'ARTI - Failure';
   public id: any = localStorage.getItem('i') || '';
 
   constructor(private router: Router, private titleService: Title,){

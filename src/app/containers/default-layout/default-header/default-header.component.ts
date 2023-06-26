@@ -61,6 +61,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     })
     this.userService.noOfCavityByAI(this.userInfo.id).subscribe((res:any)=>
     {
+      console.log(res)
       if(res.success){
        this.noOfAiCavity=res.getData;
        console.log("noOfXray",this.noOfAiCavity)

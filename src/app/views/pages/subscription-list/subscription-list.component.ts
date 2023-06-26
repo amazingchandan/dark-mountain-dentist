@@ -22,7 +22,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./subscription-list.component.scss']
 })
 export class SubscriptionListComponent implements OnInit {
-  title = 'Dark Mountain - Subscription List';
+  title = 'ARTI - Subscription List';
   dtOptions: any = {};
   addPriceingForm: FormGroup;
   private pricingId: any;

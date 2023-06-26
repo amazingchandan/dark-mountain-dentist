@@ -12,7 +12,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
-  title = 'Dark Mountain - Forgot Password';
+  title = 'ARTI - Forgot Password';
   display: any = `00:00`;
   public resetState = false;
   setNewPass = false;
@@ -87,6 +87,7 @@ export class ForgetPasswordComponent implements OnInit {
           this.timePassed = false;
           this.timer(10);
         } else {
+        (<HTMLInputElement>document.getElementById('email')).disabled = false;
           Swal.fire({
             text: `An account with email address ${this.emailReset} does not exists, please register.`,
             icon: 'error'

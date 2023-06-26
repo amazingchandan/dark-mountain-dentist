@@ -16,7 +16,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./upload-xray.component.scss']
 })
 export class UploadXrayComponent implements OnInit {
-  title = 'Dark Mountain - Uploaded X-Rays';
+  title = 'ARTI - Uploaded X-Rays';
   public allData: Array<any> = [];
   // dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
@@ -122,6 +122,15 @@ export class UploadXrayComponent implements OnInit {
     this.files = files;
     console.log(this.files, this.files[0].file);
     let allImages: Array<string> = ['png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG'];
+
+    if(this.files[0].file.size > 50000000){
+      Swal.fire({
+        text: 'Image size exceed 50mb.',
+        icon: 'warning'
+      });
+      return false;
+    }
+
     if (allImages.indexOf(this.files[0].file.name.split(".")[1]) === -1) {
 
       Swal.fire({
@@ -193,9 +202,17 @@ export class UploadXrayComponent implements OnInit {
   }
   uploadFile(event: any) {
     console.log(event)
-    console.log(event.target.files[0])
+    console.log(event.target.files[0], event.target.files[0].size)
     console.log(event.target.files[0].name.split(".")[1], "type")
     let allImages: Array<string> = ['png', 'jpg', 'jpeg', 'gif', 'JPG', 'PNG', 'JPEG'];
+
+    if(event.target.files[0].size > 50000000){
+      Swal.fire({
+        text: 'Image size exceed 50mb.',
+        icon: 'warning'
+      });
+      return false;
+    }
 
     if (allImages.indexOf(event.target.files[0].name.split(".")[1]) === -1) {
 
@@ -219,6 +236,9 @@ export class UploadXrayComponent implements OnInit {
       formData.append('user_id', this.userInfo.id);
 
       console.log(event.target.files[0], formData)
+      setTimeout(() => {
+        localStorage.setItem('file', JSON.stringify(formData))
+      }, 1000)
       this.myFormData = formData
       this.myFiles = event.target.files[0]
       //  const formData={

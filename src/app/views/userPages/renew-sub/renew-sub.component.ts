@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./renew-sub.component.scss']
 })
 export class RenewSubComponent implements OnInit {
-  title = 'Dark Mountain - Renew Subscription';
+  title = 'ARTI - Renew Subscription';
   public monthlyAllData: any = [];
   public yearlyAllData: any = [];
   public monthlyPlan: any = false;
@@ -616,7 +616,7 @@ export class RenewSubComponent implements OnInit {
             }
           },
           items: [{
-            name: 'Dark Mountain',
+            name: 'ARTI',
             quantity: '1',
             category: 'DIGITAL_GOODS',
             unit_amount: {

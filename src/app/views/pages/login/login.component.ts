@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  title = 'Dark Mountain - Login';
+  title = 'ARTI - Login';
   public userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public loginForm: FormGroup;
   public isAuthLoading = false;

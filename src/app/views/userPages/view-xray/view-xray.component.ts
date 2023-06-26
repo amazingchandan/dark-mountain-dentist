@@ -19,7 +19,7 @@ export class ViewXrayComponent {
   markData: any=[];
   userMark: any=[];
   AIMarkData: any;
-  title = 'Dark Mountain - View X-Ray';
+  title = 'ARTI - View X-Ray';
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,

@@ -572,7 +572,7 @@ top: -59.5px;">
     }
   }
   handleClick() {
-    this.router.navigateByUrl('/uploaded-xray');
+    this.router.navigateByUrl('/uploaded-xray/0');
   }
   flag(){
     const flagData={

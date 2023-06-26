@@ -24,7 +24,7 @@ interface IUser {
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  title = 'Dark Mountain - Dashboard';
+  title = 'ARTI - Dashboard';
   role: any;
   expTime: any;
   diffDays: any;

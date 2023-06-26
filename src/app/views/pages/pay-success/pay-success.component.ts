@@ -17,7 +17,7 @@ export class PaySuccessComponent implements OnInit {
   public userId: any;
   public token: any = localStorage.getItem('token');
   public btnStatus: boolean = false;
-  title = 'Dark Mountain - Success';
+  title = 'ARTI - Success';
   public apiHost: any = 'http://localhost:4200/failure';
   public payment_status: any;
   public show_text: any;

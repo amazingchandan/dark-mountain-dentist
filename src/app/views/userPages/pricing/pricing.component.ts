@@ -47,7 +47,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   public registerForm: FormGroup;
   public isAuthLoading = false;
   public allData: any = [];
-  title = 'Dark Mountain - Pricing';
+  title = 'ARTI - Pricing';
   userData: any;
   userPlanData: any;
   userInfo: any;
@@ -128,8 +128,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
     //key: 'rzp_live_bGBd6XL9krEnCa', // Enter the Key live ID generated from the Dashboard
     amount: '',
     currency: 'INR',
-    name: 'Dark Mountain',
-    description: 'Dark Mountain Subscription payment',
+    name: 'ARTI',
+    description: 'ARTI Subscription payment',
     order_id: 'ORDERID_FROM_BACKEND',
     // image: 'https://digitalpehchan.in/assets/images/DP%20LOGO%20BW.png',
     handler: function (response) {
@@ -401,7 +401,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
             },
           },
           items: [{
-            name: 'Dark Mountain',
+            name: 'ARTI',
             quantity: '1',
             category: 'DIGITAL_GOODS',
             unit_amount: {

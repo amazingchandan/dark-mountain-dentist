@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
 export class RegisteredDentistsComponent {
   //dtOptions: DataTables.Settings = {};
   dtOptions: any = {};
-  title = 'Dark Mountain - Dentist List';
+  title = 'ARTI - Dentist List';
 
  public allData: any;
  public userCount: Array<any> = [];

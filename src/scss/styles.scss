@@ -118,10 +118,11 @@ $enable-rtl: true;
   border-radius: 10px !important;
 }
 .header {
-  background-color: #0f2f48;
+  // background-color: #0f2f48;
   box-shadow: 0 0 1px rgba(158, 155, 155, 0.2),
     0 1px 3px rgba(158, 155, 155, 0.2) !important;
   border-color: rgb(244 237 237) !important;
+  background-image: linear-gradient(90deg, white 13%, white, #0f2f48 13%, #0f2f48);
 }
 .header-nav .nav-link c-avatar {
   border: 0px solid #00d957 !important;
@@ -626,6 +627,9 @@ div:has(div:ImageView_container__AOBmH){
   padding: 1em 0em !important;
 }
 .w-logo-header {
+  width: 150px !important;
+}
+.w-logo-header-inner {
   width: 80px !important;
 }
 // .owl-item  {

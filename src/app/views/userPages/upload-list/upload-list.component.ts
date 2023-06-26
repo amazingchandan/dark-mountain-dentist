@@ -13,7 +13,7 @@ import { Observable, Subject } from 'rxjs';
   styleUrls: ['./upload-list.component.scss']
 })
 export class UploadListComponent implements OnInit {
-  title = 'Dark Mountain - Uploaded X-Rays';
+  title = 'ARTI - Uploaded X-Rays';
   showContent: boolean;
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public allData: any = []

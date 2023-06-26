@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./uploaded-xrays.component.scss']
 })
 export class UploadedXraysComponent {
-  title = 'Dark Mountain - Uploaded X-Rays';
+  title = 'ARTI - Uploaded X-Rays';
   dtOptions: any = {};
   public subsEndDate: any[] = [];
   public allData: any;
