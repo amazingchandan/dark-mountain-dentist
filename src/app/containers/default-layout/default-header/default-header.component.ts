@@ -31,6 +31,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   planCount: any=0;
   public _router: any = "";
   public changeUrl: boolean = false;
+  public dentist_count: any = 0;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
@@ -54,9 +55,20 @@ export class DefaultHeaderComponent extends HeaderComponent {
   allCounts(){
     this.userService.noOfXrayEvalByID(this.userInfo.id).subscribe((res:any)=>
     {
+      console.log(res, res.dentist)
       if(res.success){
        this.noOfXrayEval=res.getData;
        console.log("noOfXray",this.noOfXrayEval)
+       res.dentist.map((elem: any) => {
+        console.log(elem)
+        elem.evaluation[0].dentist_correction.map((item: any) => {
+          console.log(item.value.rectanglelabels[0])
+          if(item.value.rectanglelabels[0] == "Edit"){
+            this.dentist_count += 1
+          }
+        })
+       })
+       console.log(this.dentist_count)
       }
     })
     this.userService.noOfCavityByAI(this.userInfo.id).subscribe((res:any)=>

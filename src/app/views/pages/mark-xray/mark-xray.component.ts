@@ -552,7 +552,8 @@ top: -59.5px;">
         });
        // this.createLabelStudio()
        document.getElementById('close')?.click();
-        this.router.navigateByUrl('/uploaded-xray/0');
+        // this.router.navigateByUrl('/uploaded-xray/0');
+        window.location.href="/uploaded-xray/0"
         return true;
       } else {
         Swal.fire({

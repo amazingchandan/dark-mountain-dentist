@@ -962,7 +962,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
               text: "X-Ray evaluated successfully.",
               icon: 'success',
             });
-            this.router.navigateByUrl('/upload-xray/0')
+            // this.router.navigateByUrl('/upload-xray/0')
+            window.location.href="/upload-xray/0"
           } else {
             Swal.fire({
               title: 'Error Occurred',

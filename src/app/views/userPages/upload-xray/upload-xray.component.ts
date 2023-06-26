@@ -59,6 +59,7 @@ export class UploadXrayComponent implements OnInit {
   xRayData: any = [];
 
   public ngOnInit() {
+
     this.gettingUserDetails(this.id)
 
     this.appService.currentApprovalStageMessage.subscribe(msg => console.log(msg))
