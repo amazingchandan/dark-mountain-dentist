@@ -18,7 +18,7 @@
     color:#FFFF00
 }
 .btn{
-    // float: right;
+    float: right;
     top: -10%;
     position: relative;
 }
@@ -193,7 +193,6 @@ input[type='range']::-webkit-slider-thumb {
     max-height: 354px !important;
     max-width: 566px !important;
     height: 354px !important;
-    float: left;
 
   }
   ::ng-deep .ngxImageZoomContainer >img{
@@ -206,19 +205,6 @@ input[type='range']::-webkit-slider-thumb {
   // .ngxImageZoomContainer .ngxImageZoomThumbnail {
   //   opacity: 0.5 !important;
   // }
-  .Segment_block{    padding-left: 0;}
-  .nav-pills .nav-link {
-    background: #e4e1e1;
-    color: #212121;
-    border-radius: 0;
-}
-.nav-pills .nav-link.active {color: #fff;}
-.nav-pills #pills-Original-tab {
-  border-radius: 4px 0 0 4px !important;
-}
-.nav-pills #pills-Evaluated-tab {
-  border-radius: 0 4px 4px 0 !important;
-}
 
   .scan {
     position: relative;
