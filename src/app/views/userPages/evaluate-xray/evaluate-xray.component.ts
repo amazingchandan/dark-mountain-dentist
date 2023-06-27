@@ -261,7 +261,7 @@ export class EvaluateXrayComponent {
       config: `
       <View style="display:row; flex-direction: column;">
       <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
-      <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
+      <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important;   }</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
         top: 0px; padding: 10px 14px; border-radius:4px}</Style>
@@ -403,7 +403,7 @@ export class EvaluateXrayComponent {
       config: `
       <View style="display:row; flex-direction: column;">
       <Style> .Controls_wrapper__1Zdbo { display:none; }</Style>
-      <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
+      <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important;  padding-left: 0px !important;}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
         top: 0px; padding: 10px 14px; border-radius:4px}</Style>
