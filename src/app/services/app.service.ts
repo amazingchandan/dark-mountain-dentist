@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppService {
 
+  public accuracySys: any = 0;
   public user = {
     firstName: 'Alexander',
     lastName: 'Pierce',
@@ -25,6 +26,9 @@ export class AppService {
     // console.log(msg)
   }
 
+  private accuracyPer = new BehaviorSubject(this.accuracySys)
+  currentAccuracy = this.accuracyPer.asObservable();
+
   private approvalStageMessage = new BehaviorSubject(false);
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
 
@@ -38,6 +42,11 @@ export class AppService {
 
   private getUrl = new BehaviorSubject(false)
   currentUrl = this.getUrl.asObservable();
+
+  updateAccuracy(num: any){
+    this.accuracyPer.next(num)
+    console.log(num)
+  }
 
   updateGetUrl(url: boolean){
     this.getUrl.next(url)
@@ -62,6 +71,16 @@ export class AppService {
     } else {
       return false
     }
+  }
+
+  getAccuracy(){
+    this.UserService.getAccuracyOfSys().subscribe((res: any) => {
+      console.log(res)
+      if(res.success){
+        this.accuracySys = res.accuracy
+        this.updateAccuracy(res.accuracy)
+      }
+    })
   }
 
   login(getLoginDetail) {

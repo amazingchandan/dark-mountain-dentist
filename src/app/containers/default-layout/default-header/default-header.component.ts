@@ -32,6 +32,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public _router: any = "";
   public changeUrl: boolean = false;
   public dentist_count: any = 0;
+  public accuracyOfSys: any = 0;
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
@@ -43,6 +44,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this._router = this.router.url
   }
   ngOnInit(): void {
+    this.appService.getAccuracy();
     console.log(this.userInfo)
     this.userfirst();
     this.allCounts();
@@ -51,6 +53,10 @@ export class DefaultHeaderComponent extends HeaderComponent {
       this.changeUrl = url
     })
     //this.admin()
+    this.appService.currentAccuracy.subscribe((acc: any)=> {
+      console.log(acc)
+      this.accuracyOfSys = acc
+    })
   }
   allCounts(){
     this.userService.noOfXrayEvalByID(this.userInfo.id).subscribe((res:any)=>

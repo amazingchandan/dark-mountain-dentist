@@ -14,6 +14,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
   styleUrls: ['./mark-xray.component.scss']
 })
 export class MarkXrayComponent {
+  systemAccuracy: any = 0;
   xRayData: any = [];
   id: string;
   markData: any = [];

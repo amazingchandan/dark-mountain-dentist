@@ -60,12 +60,14 @@ export class UserService {
  deleteSubs: String;
  planDeleteErr: String;
  activeSubs: String;
+ accuracyOfSys: String;
 
  // ! paypal subscription
  paypalToken: String;
  paypalProdID: String;
  paypalPlans: String;
  paypalUserSubs: String;
+ failureTransaction: String;
 
  // * country api
  country: String;
@@ -114,6 +116,7 @@ export class UserService {
     this.totXrayById = this.apiHost + 'noOfXrayById';
     this.totXrayEvalById = this.apiHost + 'noOfXrayEvalById';
     this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
+    this.accuracyOfSys = this.apiHost + 'accuracyPercentageSystem';
     this.userPlanById = this.apiHost + 'userPlanById';
     this.rstPwd = this.apiHost + 'resetPassword';
     this.renewSub = this.apiHost + 'getSubscriptionRenew';
@@ -132,6 +135,7 @@ export class UserService {
     this.paypalProdID = this.payApi + 'catalogs/products';
     this.paypalPlans = this.payApi + 'billing/plans';
     this.paypalUserSubs = this.payApi + 'billing/subscriptions';
+    this.failureTransaction = this.apiHost + 'failureTrans'
   }
   onLogin(requestParameters: string) {
     return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
@@ -299,6 +303,9 @@ export class UserService {
   activeSubsID(id: any){
     return this.http.post(`${this.activeSubs}`, id, {})
   }
+  getAccuracyOfSys(){
+    return this.http.get(`${this.accuracyOfSys}`);
+  }
 
   // ! paypal subscription
   payPalTokenGen(requestParameters: any){
@@ -401,5 +408,8 @@ export class UserService {
       })
     };
     return this.http.get(`${this.paypalUserSubs}/${id}/transactions?start_time=2018-01-21T07:50:20.940Z&end_time=2023-08-21T07:50:20.940Z`,  httpOptions)
+  }
+  handleFailedTransaction(id: any){
+    return this.http.post(`${this.failureTransaction}`, id, {})
   }
 }

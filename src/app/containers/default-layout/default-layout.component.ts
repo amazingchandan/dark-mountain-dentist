@@ -49,6 +49,7 @@ export class DefaultLayoutComponent {
     this.addSuperForm = this.formBuilder.group({})
   }
   ngOnInit(){
+    this.appService.getAccuracy()
     console.log(window.innerWidth);
     this.appService.currentWindowScreen.subscribe((res: any) => {
       // console.log(res)

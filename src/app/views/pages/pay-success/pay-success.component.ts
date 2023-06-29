@@ -17,7 +17,7 @@ export class PaySuccessComponent implements OnInit {
   public userId: any;
   public token: any = localStorage.getItem('token');
   public btnStatus: boolean = false;
-  title = 'ARTI - Success';
+  title = 'ARTI';
   public apiHost: any = 'http://localhost:4200/failure';
   public payment_status: any;
   public show_text: any;
@@ -50,6 +50,12 @@ export class PaySuccessComponent implements OnInit {
     } else if (this.payment_status == 'failure'){
       this.show_text = 'Please waiting, You are being redirected to pricing page...';
       console.log(this.renew_subs)
+      this.userService.handleFailedTransaction({id: this.userId}).subscribe((res: any) => {
+        console.log(res)
+        if(res.success){
+
+        }
+      })
       setTimeout(() => {
         this.spinner.hide()
         if(localStorage.getItem('renew_sub')){
