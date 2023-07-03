@@ -26,21 +26,29 @@
         <div class="card h-100 p-2 hover-effect">
           <div class="card-body text-start d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
-
-            <h4>{{ data.plan_name | titlecase }}</h4>
-
-            <p class="m-0 gst-sizing">
-              <i> {{ data.type }} pack </i>
+            <div class="col-12 col-md-12 included-sec">
+              <h6 style="text-align: center;"> {{ data.plan_name | titlecase }}</h6>
+            </div>
+           
+            <ul class="dynamic-div list-group text-start">
+              <li class="list-group-item"><i>✔</i>{{ data.type }} pack</li>
+              <li class="list-group-item">
+                <i>✔</i>Country: {{ data.country | titlecase }}
+              </li>
+              <li class="list-group-item">
+                <i>✔</i>Status: {{ data.status | titlecase }}
+              </li>
+            </ul>
+            <!-- <p class="m-0 gst-sizing">
+              <i> {{ data.type }} pack </i> 
             </p>
             <p class="m-0">Country: {{ data.country | titlecase }}</p>
-            <p class="m-0">Status: {{ data.status | titlecase }}</p>
+            <p class="m-0">Status: {{ data.status | titlecase }}</p> -->
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
               <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
-              <!-- <p class="m-0">Max: ${{ data.maximum }}</p>
-              <p class="m-0">Min: ${{ data.minimum }}</p> -->
-            </div>
 
+            </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
               <button class="pd-1 fw-bold btn btn-primary w-100" (click)="
                   getSubscription(
@@ -79,16 +87,28 @@
           <div class="card-body text-start d-flex flex-column justify-content-between">
             <!-- <img src="" alt="" /> -->
 
-            <h4>{{ data.plan_name | titlecase }}</h4>
+            <div class="col-12 col-md-12 included-sec">
+              <h6 style="text-align: center;"> {{ data.plan_name | titlecase }}</h6>
+            </div>
 
-            <p class="m-0 gst-sizing">
+            <ul class="dynamic-div list-group text-start">
+              <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
+              <li class="list-group-item">
+                <i>✔</i>Country: {{ data.country | titlecase }}
+              </li>
+              <li class="list-group-item">
+                <i>✔</i>Status: {{ data.status | titlecase }}
+              </li>
+            </ul>
+
+            <!-- <p class="m-0 gst-sizing">
               <i> {{ data.type }} pack </i>
             </p>
             <p class="m-0">Country: {{ data.country | titlecase }}</p>
-            <p class="m-0">Status: {{ data.status | titlecase }}</p>
+            <p class="m-0">Status: {{ data.status | titlecase }}</p> -->
             <p>{{ data.currency | titlecase }}</p>
             <div class="d-flex justify-content-center align-items-start flex-column mt-3">
-              <p class="price m-0 fw-bolder fs-2">${{ data.amount }}</p>
+              <p class="price m-0 fw-bolder fs-2">${{ data.amount}}</p>
               <!-- <p class="m-0">Max: ${{ data.maximum }}</p>
               <p class="m-0">Min: ${{ data.minimum }}</p> -->
             </div>

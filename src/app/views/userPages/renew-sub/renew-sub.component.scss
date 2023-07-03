@@ -81,3 +81,13 @@
     align-items: center;
     justify-content: flex-end;
   }
+
+  .included-sec  ul li {
+    border: 0;
+    padding: 4px 0;
+  }
+  .included-sec  ul li i {
+    color: #02d959;
+    margin-right: 10px;
+    font-weight: 700;
+  }

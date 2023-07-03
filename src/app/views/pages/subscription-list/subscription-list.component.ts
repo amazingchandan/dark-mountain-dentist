@@ -100,6 +100,7 @@ export class SubscriptionListComponent implements OnInit {
       type: ['', [Validators.required]],
       country: ['', [Validators.required]],
       status: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
     this.pricingId = this.route.snapshot.paramMap.get('pricing_id');
     if (
@@ -215,6 +216,18 @@ export class SubscriptionListComponent implements OnInit {
       // return false;
     }
     if (
+      this.addPriceingForm.value.description == undefined ||
+      this.addPriceingForm.value.description == ''
+    ) {
+      Swal.fire({
+        text: 'Please enter description',
+        icon: 'warning'
+      });
+      return false;
+      // this.toastr.error('Please enter subscription days');
+      // return false;
+    }
+    if (
       this.pricingId != undefined &&
       this.pricingId != null &&
       this.pricingId != ''
@@ -269,14 +282,19 @@ export class SubscriptionListComponent implements OnInit {
         if (res.id) {
           let planData = { ...this.addPriceingForm.value, paypalID: res.id }
           console.log(planData)
-          // return;
+          //return;
           this.userService.addPrice(planData).subscribe((res: any) => {
             console.log(res);
             if (res.success) {
-              //this.toastr.success(res.message);
-              // Swal.fire({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: 'Success!', text: 'Subscripition Of this user ', icon: 'success', });
-
-
+              Swal.fire({
+                text: res.message,
+                //icon: 'success',
+                imageUrl: '../../../../assets/images/success.png',
+              });
+              document.getElementById('launch_ad')?.click();
+              this.isDtInitialized = false;
+              this.planList();
+            }else{
               Swal.fire({
                 text: res.message,
                 //icon: 'success',
@@ -339,6 +357,9 @@ export class SubscriptionListComponent implements OnInit {
             this.addPriceingForm.patchValue({
               status: this.allData[i].status,
             });
+            this.addPriceingForm.patchValue({
+              description: this.allData[i].description,
+            });
             console.log(this.planStatus)
           }
         }
@@ -367,6 +388,9 @@ export class SubscriptionListComponent implements OnInit {
         });
         this.addPriceingForm.patchValue({
           status: '',
+        });
+        this.addPriceingForm.patchValue({
+          description: '',
         });
         this.pricingId = null;
       }
@@ -427,7 +451,6 @@ export class SubscriptionListComponent implements OnInit {
             document.getElementById('launch_ad')?.click();
             this.isDtInitialized = false;
             this.planList();
-
           }
           else {
             Swal.fire({

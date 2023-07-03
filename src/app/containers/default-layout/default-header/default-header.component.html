@@ -16,14 +16,14 @@
       *ngIf="userInfo.role == 'dentist'; else adminHeader"
     >
       <ul class="navbar justify-content-start info mb-0 p-0">
-        <li class="nav-item">
+        <li class="nav-item" [routerLink]="'/upload-xray/0'">
           <a class="nav-link d-flex">
             <div class="icon">
               <img src="../../../../assets/images/X-Ray-Evaluated.png" />
             </div>
             <div class="releted-info">
-              <h6>$ {{count * 50}}</h6>
-              <p>Revenue Earned</p>
+              <h6>Uploaded X-Rays</h6>
+              <!-- <p>Home</p> -->
             </div>
           </a>
         </li>
@@ -33,7 +33,7 @@
               <img src="../../../../assets/images/X-Ray-Evaluated.png" />
             </div>
             <div class="releted-info">
-              <h6>{{ noOfXrayEval }}</h6>
+              <h6>150000</h6>
               <p>X-Rays Evaluated</p>
             </div>
           </a>
@@ -44,12 +44,12 @@
               <img src="../../../../assets/images/Identified_By_AI.png" />
             </div>
             <div class="releted-info">
-              <h6>{{ count }}</h6>
-              <p>Cavities Detected bt AI</p>
+              <h6>450000</h6>
+              <p>Cavities Detected by AI</p>
             </div>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link d-flex">
             <div class="icon">
               <img src="../../../../assets/images/Identified_By_Dentist.png" />
@@ -59,15 +59,15 @@
               <p>Cavities Detected by you</p>
             </div>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link d-flex">
             <div class="icon">
               <img src="../../../../assets/images/System_Accuracy.png" />
             </div>
             <div class="releted-info">
-              <h6>{{accuracyOfSys}}%</h6>
-              <p>Current ARTI accuracy</p>
+              <h6>98.5%</h6>
+              <p>Accuracy by  ARTI </p>
             </div>
           </a>
         </li>

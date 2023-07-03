@@ -3,18 +3,11 @@
     <div class="col-12">
       <div class="col head-div position-relative">
         <!-- <h5 class="mb-n5 fw-bold">Subscription Plans</h5> -->
-
-        <button
-          type="button"
-          class="btn btn-primary add-btn pd-1 other-btn fw-bolder"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModalCenter"
-          (click)="openModal(null)"
-        >
+        <button type="button" class="btn btn-primary add-btn pd-1 other-btn fw-bolder" data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter" (click)="openModal(null)">
           Add New Plan
         </button>
       </div>
-
       <div class="table-responsive resposive-table" style="position: relative">
         <div class="col-12">
           <div class="row mx-0 my-4">
@@ -25,13 +18,7 @@
         </div>
         <div class="card pt-0 table-card">
           <div class="card-body" style="overflow-x: auto">
-            <table
-              *ngIf="showContent"
-              datatable="ng"
-              datatable
-              [dtOptions]="dtOptions"
-              class="row-border hover"
-            >
+            <table *ngIf="showContent" datatable="ng" datatable [dtOptions]="dtOptions" class="row-border hover">
               <thead>
                 <tr>
                   <th class="text-nowrap width-th">Plan Name</th>
@@ -60,14 +47,8 @@
                   <td class="text-center">
                     <!-- <button type="button" class="btn btn-danger edit" (click)="openModal(data._id)" title="Edit"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i
                     class="fa-regular fa-pen-to-square mt-2" ></i></button> -->
-                    <button
-                      title="View"
-                      type="button"
-                      class="btn btn-primary pd-1 view-btn fw-bolder"
-                      (click)="openModal(data._id)"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModalCenter"
-                    >
+                    <button title="View" type="button" class="btn btn-primary pd-1 view-btn fw-bolder"
+                      (click)="openModal(data._id)" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                       Edit
                     </button>
                   </td>
@@ -98,14 +79,8 @@
 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div
-  class="modal fade modal-lg"
-  id="exampleModalCenter"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
->
+<div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,26 +94,13 @@
             <div class="row mb-2">
               <div class="col-md-6 form-group my-2">
                 <label class="mb-2">Plan Name<sup>*</sup></label>
-                <input
-                  type="text"
-                  placeholder="Plan Name"
-                  formControlName="plan_name"
-                  class="form-control"
-                  [value]="plan_name"
-                  maxlength="15"
-                />
+                <input type="text" placeholder="Plan Name" formControlName="plan_name" class="form-control"
+                  [value]="plan_name" maxlength="15" />
               </div>
               <div class="col-md-6 form-group my-2">
                 <label class="mb-2">Amount($)<sup>*</sup></label>
-                <input
-                  type="text"
-                  placeholder="Amount"
-                  formControlName="amount"
-                  class="form-control"
-                  [value]="amount"
-                  maxlength="10"
-                  (keypress)="onlyNumberKey($event)"
-                />
+                <input type="text" placeholder="Amount" formControlName="amount" class="form-control" [value]="amount"
+                  maxlength="10" />
               </div>
               <!-- <div class="col-md-4 form-group">
                 <label class="mb-2">Minimum<sup>*</sup></label>
@@ -166,12 +128,7 @@
             <div class="row mb-2">
               <div class="col-md-6 form-group my-2">
                 <label class="mb-2" for="inputState">Type<sup>*</sup></label>
-                <select
-                  class="form-select"
-                  formControlName="type"
-                  aria-label="Default select example"
-                  [value]="type"
-                >
+                <select class="form-select" formControlName="type" aria-label="Default select example" [value]="type">
                   <option value="" [selected]="true" [disabled]="true">
                     Select option
                   </option>
@@ -181,12 +138,8 @@
               </div>
               <div class="col-md-6 form-group country-col my-2">
                 <label class="mb-2" for="inputState">Country<sup>*</sup></label>
-                <select
-                  class="form-select"
-                  formControlName="country"
-                  aria-label="Default select example"
-                  [value]="country"
-                >
+                <select class="form-select" formControlName="country" aria-label="Default select example"
+                  [value]="country">
                   <option value="" [selected]="true" [disabled]="true">
                     Select option
                   </option>
@@ -202,12 +155,8 @@
             <div class="row mb-2">
               <div class="col-md-6 form-group my-2">
                 <label class="mb-2" for="inputState">Status<sup>*</sup></label>
-                <select
-                  class="form-select"
-                  formControlName="status"
-                  aria-label="Default select example"
-                  [value]="status"
-                >
+                <select class="form-select" formControlName="status" aria-label="Default select example"
+                  [value]="status">
                   <option value="" [selected]="true" [disabled]="true">
                     Select option
                   </option>
@@ -215,17 +164,17 @@
                   <option value="inactive">Inactive</option>
                 </select>
               </div>
+              <div class="col-md-6 form-group my-2">
+                <label class="mb-2" for="inputState">Description<sup>*</sup></label>
+                <textarea formControlName="description" cFormControl id="exampleFormControlTextarea1"
+                  rows="3"></textarea>
+              </div>
             </div>
             <!-- <div class="modal-footer">
              <button id="launch_ad" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Close</button>
-
-
-
-
                   <button type="button" class="btn btn-primary btn-save" (click)="setPrice()">Save&nbsp;<i
                       class="fa-sharp fa-regular fa-floppy-disk"></i></button>
-
             </div> -->
           </form>
         </div>
@@ -235,19 +184,10 @@
         <ng-template #dootherplan>
           <button class="btn btn-save pd-1 fw-bold other-btn delete-btn" *ngIf="showDelete && planStatus == 'inactive'" (click)="onClickActive()">Activate</button>
         </ng-template> -->
-        <button
-          id="launch_ad"
-          type="button"
-          class="btn btn-secondary cancel-btn fw-bold pd-1"
-          data-bs-dismiss="modal"
-        >
+        <button id="launch_ad" type="button" class="btn btn-secondary cancel-btn fw-bold pd-1" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="button"
-          class="btn btn-save pd-1 fw-bold other-btn"
-          (click)="setPrice()"
-        >
+        <button type="button" class="btn btn-save pd-1 fw-bold other-btn" (click)="setPrice()">
           Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
         </button>
       </div>

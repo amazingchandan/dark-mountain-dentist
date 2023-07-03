@@ -30,7 +30,7 @@
         <tbody *ngIf="allData?.length != 0 &&n==0">
           <tr *ngFor="let data of allData; let i = index">
             <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-            <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+            <td>{{data?.created_at | date : 'MM/dd/yyyy'}}</td>
             <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
             <!-- <td>{{data.city | titlecase}}</td> -->
             <!-- <td>{{data.contact_number}}</td> -->

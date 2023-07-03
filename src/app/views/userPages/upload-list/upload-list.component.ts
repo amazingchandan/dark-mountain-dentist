@@ -53,9 +53,9 @@ export class UploadListComponent implements OnInit {
       // ordering: false,
       responsive: true,
       // dom: 'Bfrtip',
-      order: [[0, "date", "desc"]
+      // order: [[0, "date", "desc"]
 
-      ],
+      // ],
       "columnDefs": [{
         "targets": [1, 2, 3],
 

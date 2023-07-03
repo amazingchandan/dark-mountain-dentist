@@ -127,9 +127,7 @@ export class DentistProfileComponent implements OnInit {
       contact_number: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
       email: [
         '',
-
         [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')],
-
       ],
       address1: ['', [Validators.required]],
       address2: ['', [Validators.required]],
@@ -140,10 +138,6 @@ export class DentistProfileComponent implements OnInit {
       // age: ['', [Validators.required]],
       license_no: ['', [Validators.required]],
     });
-
-
-    this.addSuperForm.controls['email'].disable();
-
     this.dentistId = this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
     if (
@@ -158,10 +152,8 @@ export class DentistProfileComponent implements OnInit {
       this.editadmin(this.userInfo.id);
       // this.addSuperForm.get('status').setValue('active');
     }
-
-    console.log(this.userInfo)
+    this.addSuperForm.controls['email'].disable();
     let jwt = this.userInfo.token
-
     let jwtData = jwt.split('.')[1]
     let decodedJwtJsonData = window.atob(jwtData)
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
@@ -205,7 +197,7 @@ export class DentistProfileComponent implements OnInit {
     this.apiService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
       console.log(res.getData[0].regions, this.stateList)
       this.stateList = "-Select State-"
-      this.addSuperForm.controls['state'].setValue("-Select State-");
+      this.addSuperForm.controls['state']?.setValue("-Select State-");
       this.allstates = res.getData[0].regions
       // console.log(this.allstates)
     })

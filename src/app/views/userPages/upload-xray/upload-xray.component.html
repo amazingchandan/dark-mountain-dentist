@@ -89,13 +89,11 @@
           <img class="mb-3" src="../../../../assets/images/upload_icon.png" />
           <p class="mb-1"><strong>Click to upload</strong></p>
           <p class="mb-1">or drag and drop your X-Ray file here</p>
-          <p class="mb-1"><small> Maximum file size 50 MB.</small></p>
+          <p class="mb-1"><small> Maximum file size 50 MB.</small></p>&nbsp;
           <div class="col-12">
             <p class="fs-6 mb-1"><strong>Disclaimers:</strong>&nbsp;The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
           </div>
-
         </div>
-
       </label>
     </div>
 
@@ -151,7 +149,7 @@
               <tbody *ngIf="allData?.length != 0 &&n==0">
                 <tr *ngFor="let data of allData; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-                  <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data?.created_at | date : 'MM/dd/yyyy'}}</td>
                   <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
@@ -205,7 +203,7 @@
               <tbody *ngIf="user_eval?.length != 0 && n==1">
                 <tr *ngFor="let data of this.user_eval; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-                  <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
                   <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
@@ -270,10 +268,10 @@
     </div>
     <div class="col-12 col-md-7">
       <h2 class="fw-bold mb-2">
-        <small>Welcome to ARTI</small> <br>
-        Revolution Dental Diagnostics with the Power of AI
+        <small>4eDentalAI</small> <br>
+        Welcome Arti is here to assist the doctor
       </h2>
-      <p>Transform your dental practice with Al-driven X-ray analysis, boosting diagnostic accuracy, patient trust, and practice revenue.</p>
+      <p>Artifical Intelligence is here to help identify dental disease. Your dentists is using every tool available to deliver top care to all patients.</p>
 
       <div class="row">
         <div class="col-12 col-md-4">
@@ -293,10 +291,10 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
+    <!-- <div class="col-12">
       <h6>Disclaimers </h6>
       <p>The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -385,7 +383,7 @@
         <tbody *ngIf="allData?.length != 0 &&n==0">
           <tr *ngFor="let data of allData; let i = index">
             <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-            <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+            <td>{{data?.created_at | date : 'MM/dd/yyyy'}}</td>
             <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
             <!-- <td>{{data.city | titlecase}}</td> -->
             <!-- <td>{{data.contact_number}}</td> -->
@@ -439,7 +437,7 @@
         <tbody *ngIf="user_eval?.length != 0 && n==1">
           <tr *ngFor="let data of this.user_eval; let i = index">
             <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-            <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+            <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
             <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
             <!-- <td>{{data.city | titlecase}}</td> -->
             <!-- <td>{{data.contact_number}}</td> -->

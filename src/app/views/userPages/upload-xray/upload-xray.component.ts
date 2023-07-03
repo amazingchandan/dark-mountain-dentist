@@ -68,8 +68,10 @@ export class UploadXrayComponent implements OnInit {
     // this.n =this.route.snapshot.paramMap.get('n');
 
     this.dtOptions = {
-      search: true,
-      searching: true,
+      searching: false, 
+      paging: false,
+      // search: true,
+      // searching: true,
       language: {
         search: "",
         searchPlaceholder: 'Search ',
@@ -78,15 +80,15 @@ export class UploadXrayComponent implements OnInit {
         sExtends: 'CSV',
         text: 'Download CSV'
       }],
-      paging: true,
+      //paging: true,
       pagingType: 'full_numbers',
       pageLength: 10,
       // ordering: false,
       responsive: true,
       // dom: 'Bfrtip',
-      order: [[0, "date", "desc"]
+      // order: [[0, "date", "desc"]
 
-      ],
+      // ],
       "columnDefs": [{
         "targets": [1, 2, 3],
 
