@@ -216,7 +216,7 @@
                 </h6>
                 <!-- <div class="dynamic-div" [innerHTML]="data.description"></div> -->
                 <ul class="list-group text-start">
-                  <li *ngFor="let points of data.description" class="list-group-item">
+                  <li *ngFor="let points of data.description.split(',')" class="list-group-item">
                     <i>✔</i>{{points.trim()}}
                   </li>
                 </ul>
@@ -341,7 +341,7 @@
                 </h6>
                 <!-- <div class="dynamic-div" [innerHTML]="data.description"></div> -->
                 <ul class="list-group text-start">
-                  <li *ngFor="let points of data.description" class="list-group-item">
+                  <li *ngFor="let points of data.description.split(',')" class="list-group-item">
                     <i>✔</i>{{points.trim()}}
                   </li>
                 </ul>

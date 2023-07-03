@@ -281,7 +281,10 @@ export class SubscriptionListComponent implements OnInit {
       this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
         console.log(res)
         if (res.id) {
-          let planData = { ...this.addPriceingForm.value, paypalID: res.id, description: this.addPriceingForm.value.description.split(',')}
+          if(this.addPriceingForm.value.description.length){
+            console.log(this.addPriceingForm.value.description)
+          }
+          let planData = { ...this.addPriceingForm.value, paypalID: res.id, description: this.addPriceingForm.value.description}
           console.log(planData)
           // return;
           this.userService.addPrice(planData).subscribe((res: any) => {
@@ -332,6 +335,7 @@ export class SubscriptionListComponent implements OnInit {
         this.showDelete = true;
         this.deleteSubsId = id;
         for (let i = 0; i < this.allData.length; i++) {
+          console.log(this.allData[i].description)
           if (this.allData[i]._id === id) {
             console.log(this.allData[i])
             this.planStatus = this.allData[i].status
@@ -359,7 +363,7 @@ export class SubscriptionListComponent implements OnInit {
               status: this.allData[i].status,
             });
             this.addPriceingForm.patchValue({
-              description: this.allData[i].description.join(','),
+              description: this.allData[i].description,
             });
             console.log(this.planStatus)
           }
