@@ -6,7 +6,7 @@
       <ul class="navbar-nav logo">
         <li class="nav-item w-logo-header-inner" [routerLink]="'upload-xray/0'">
           <a class="nav-link p-0">
-            <img src="../../../../assets/images/arti-image.png" class="w-100"/>
+            <img src="../../../../assets/images/arti_new.png" class="w-100"/>
           </a>
         </li>
       </ul>
@@ -22,8 +22,8 @@
               <img src="../../../../assets/images/X-Ray-Evaluated.png" />
             </div>
             <div class="releted-info">
-              <h6>Uploaded X-Rays</h6>
-              <!-- <p>Home</p> -->
+              <h6>Home</h6>
+              <p>Upload X-Ray</p>
             </div>
           </a>
         </li>
@@ -33,7 +33,7 @@
               <img src="../../../../assets/images/X-Ray-Evaluated.png" />
             </div>
             <div class="releted-info">
-              <h6>150000</h6>
+              <h6>{{150000 + this.count}}</h6>
               <p>X-Rays Evaluated</p>
             </div>
           </a>
@@ -44,7 +44,7 @@
               <img src="../../../../assets/images/Identified_By_AI.png" />
             </div>
             <div class="releted-info">
-              <h6>450000</h6>
+              <h6>{{450000 + +this.countCavity}}</h6>
               <p>Cavities Detected by AI</p>
             </div>
           </a>
@@ -66,7 +66,7 @@
               <img src="../../../../assets/images/System_Accuracy.png" />
             </div>
             <div class="releted-info">
-              <h6>98.5%</h6>
+              <h6>{{((+'98.7' + +accuracyOfSys)/2).toFixed(2)}}%</h6>
               <p>Accuracy by  ARTI </p>
             </div>
           </a>
@@ -135,7 +135,7 @@
                 <img src="../../../../assets/images/System_Accuracy.png" />
               </div>
               <div class="releted-info">
-                <h6>{{accuracyOfSys}}%</h6>
+                <h6>{{((+'98.7' + +accuracyOfSys)/2).toFixed(2)}}%</h6>
                 <p>System Accuracy</p>
               </div>
             </a>

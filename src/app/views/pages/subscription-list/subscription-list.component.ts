@@ -241,7 +241,8 @@ export class SubscriptionListComponent implements OnInit {
       //   prod_id: 'PROD-2SV05090KF783042A'
       // }
       // localStorage.setItem('p-data', JSON.stringify(p_data))
-      console.log(this.addPriceingForm.value);
+      console.log(this.addPriceingForm.value, this.addPriceingForm.value.description.split(','));
+      // return;
       let data = {
         "product_id": `${this.prod_id}`,
         "name": this.addPriceingForm.value.plan_name,
@@ -280,9 +281,9 @@ export class SubscriptionListComponent implements OnInit {
       this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
         console.log(res)
         if (res.id) {
-          let planData = { ...this.addPriceingForm.value, paypalID: res.id }
+          let planData = { ...this.addPriceingForm.value, paypalID: res.id, description: this.addPriceingForm.value.description.split(',')}
           console.log(planData)
-          //return;
+          // return;
           this.userService.addPrice(planData).subscribe((res: any) => {
             console.log(res);
             if (res.success) {
@@ -358,7 +359,7 @@ export class SubscriptionListComponent implements OnInit {
               status: this.allData[i].status,
             });
             this.addPriceingForm.patchValue({
-              description: this.allData[i].description,
+              description: this.allData[i].description.join(','),
             });
             console.log(this.planStatus)
           }

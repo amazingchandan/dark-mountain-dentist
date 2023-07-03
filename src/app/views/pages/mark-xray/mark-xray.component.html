@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-12 d-flex">
         <div class="col-6 d-flex ps-0">
-          <button
+          <!-- <button
             type="button"
             class="btn btn-primary save-btn pd-1 fw-bold other-btn evaluate-btn"
             [class]="evaluationResult ? 'hide-btn' : ''"
@@ -22,7 +22,7 @@
             (click)="handleSwitch('hide')"
           >
             Original X-Ray
-          </button>
+          </button> -->
         </div>
         <div class="col-6 mb-0 d-flex justify-content-end align-items-center">
           <button *ngIf="!evaluationResult" type="button" class="btn fw-bold cancel-btn-dlt pd-1 me-2" (click)="delete()"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><g><path fill="none" d="M0 0h24v24H0z"></path><path d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8zm2 2v10h12V10H6zm3 2h2v6H9v-6zm4 0h2v6h-2v-6zM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5zm2-1v1h6V4H9z"></path></g></svg></button>
@@ -53,8 +53,8 @@
           </button>
         </div>
       </div>
-      <div class="col-12 mt-2">
-        <div class="w-100" [hidden]="!evaluationResult">
+      <div class="col-12 mt-2 d-flex justify-content-between ps-0">
+        <div class="col-6 me-1">
           <!--<div class="ms-2 markDiv">
             <div *ngFor="let marker of this.userMark" class="user-marker" [style.left.px]=""
               [style.top.px]="marker.value.y">
@@ -78,11 +78,11 @@
             [circularLens]="true"
           >
           </lib-ngx-image-zoom>
-          <label class="text-center w-100 mt-2 fw-bold dentist-mark-label"
+          <!-- <label class="text-center w-100 mt-2 fw-bold dentist-mark-label"
             >Original X-ray</label
-          >
+          > -->
         </div>
-        <div class="col-12 right-img" [hidden]="evaluationResult">
+        <div class="col-6 ms-1">
           <!--<div class="ms-2 markDiv">
             <div *ngFor="let marker of this.userMark" class="user-marker ms-1" [style.left.px]="marker.x"
               [style.top.px]="marker.y">
@@ -96,9 +96,17 @@
           </div>-->
           <div id="label-studio"></div>
 
-          <label class="text-center w-100 mt-2 fw-bold mark-label"
+          <!-- <label class="text-center w-100 mt-2 fw-bold mark-label"
             >Evaluated X-Ray</label
-          >
+          > -->
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-between ps-0">
+        <div class="text-center col-6 fw-bold">
+          Original X-Ray
+        </div>
+        <div class="text-center col-6 fw-bold">
+          Evaluated X-Ray
         </div>
       </div>
     </div>

@@ -33,6 +33,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public changeUrl: boolean = false;
   public dentist_count: any = 0;
   public accuracyOfSys: any = 0;
+  public countCavity: any = 0
 
   constructor(private classToggler: ClassToggleService,
    private router:Router,
@@ -48,6 +49,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     console.log(this.userInfo)
     this.userfirst();
     this.allCounts();
+    this.cavityCount();
     this.allCountsAdmin();
     this.appService.currentUrl.subscribe((url: boolean) => {
       this.changeUrl = url
@@ -101,6 +103,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
     }
      console.log(this.count)
+    })
+  }
+  cavityCount(){
+    this.userService.handleTotalCavityCount().subscribe((res: any) => {
+      console.log(res, res.AICountF)
+      if(res.success){
+        this.countCavity = res.AICountF
+      }
     })
   }
   allCountsAdmin(){

@@ -61,6 +61,7 @@ export class UserService {
  planDeleteErr: String;
  activeSubs: String;
  accuracyOfSys: String;
+ totalCavityCount: String;
 
  // ! paypal subscription
  paypalToken: String;
@@ -126,6 +127,7 @@ export class UserService {
     this.deleteSubs = this.apiHost + 'deleteSubsById';
     this.planDeleteErr = this.apiHost + 'deletePlanIfErrByID';
     this.activeSubs = this.apiHost + 'activateSubsById';
+    this.totalCavityCount = this.apiHost + 'cavitiesCountOfAI';
 
     this.country = this.apiHost + 'countries';
     this.states = this.apiHost + 'countries-states';
@@ -305,6 +307,9 @@ export class UserService {
   }
   getAccuracyOfSys(){
     return this.http.get(`${this.accuracyOfSys}`);
+  }
+  handleTotalCavityCount(){
+    return this.http.get(`${this.totalCavityCount}`)
   }
 
   // ! paypal subscription

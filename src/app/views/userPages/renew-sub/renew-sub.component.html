@@ -29,8 +29,8 @@
             <div class="col-12 col-md-12 included-sec">
               <h6 style="text-align: center;"> {{ data.plan_name | titlecase }}</h6>
             </div>
-           
-            <ul class="dynamic-div list-group text-start">
+
+            <!-- <ul class="dynamic-div list-group text-start">
               <li class="list-group-item"><i>✔</i>{{ data.type }} pack</li>
               <li class="list-group-item">
                 <i>✔</i>Country: {{ data.country | titlecase }}
@@ -38,9 +38,25 @@
               <li class="list-group-item">
                 <i>✔</i>Status: {{ data.status | titlecase }}
               </li>
-            </ul>
+            </ul> -->
+            <div class="col-12 col-md-12 included-sec">
+              <h6 class="text-muted text-start">
+                What's included on {{ data.plan_name | titlecase }}
+              </h6>
+              <!-- <div class="dynamic-div" [innerHTML]="data.description"></div> -->
+              <ul class="list-group text-start">
+                <li *ngFor="let points of data.description" class="list-group-item">
+                  <i>✔</i>{{points.trim()}}
+                </li>
+              </ul>
+              <!-- <ul class="list-group text-start">
+                <li class="list-group-item"><i>✔</i>Normal size office</li>
+                <li class="list-group-item"><i>✔</i>Single Doctor access</li>
+                <li class="list-group-item"><i>✔</i>Available from any computer</li>
+              </ul> -->
+            </div>
             <!-- <p class="m-0 gst-sizing">
-              <i> {{ data.type }} pack </i> 
+              <i> {{ data.type }} pack </i>
             </p>
             <p class="m-0">Country: {{ data.country | titlecase }}</p>
             <p class="m-0">Status: {{ data.status | titlecase }}</p> -->
@@ -91,15 +107,22 @@
               <h6 style="text-align: center;"> {{ data.plan_name | titlecase }}</h6>
             </div>
 
-            <ul class="dynamic-div list-group text-start">
-              <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
-              <li class="list-group-item">
-                <i>✔</i>Country: {{ data.country | titlecase }}
-              </li>
-              <li class="list-group-item">
-                <i>✔</i>Status: {{ data.status | titlecase }}
-              </li>
-            </ul>
+            <div class="col-12 col-md-12 included-sec">
+              <h6 class="text-muted text-start">
+                What's included on {{ data.plan_name | titlecase }}
+              </h6>
+              <!-- <div class="dynamic-div" [innerHTML]="data.description"></div> -->
+              <ul class="list-group text-start">
+                <li *ngFor="let points of data.description" class="list-group-item">
+                  <i>✔</i>{{points.trim()}}
+                </li>
+              </ul>
+              <!-- <ul class="list-group text-start">
+                <li class="list-group-item"><i>✔</i>Normal size office</li>
+                <li class="list-group-item"><i>✔</i>Single Doctor access</li>
+                <li class="list-group-item"><i>✔</i>Available from any computer</li>
+              </ul> -->
+            </div>
 
             <!-- <p class="m-0 gst-sizing">
               <i> {{ data.type }} pack </i>

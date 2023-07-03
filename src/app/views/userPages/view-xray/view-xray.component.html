@@ -26,7 +26,7 @@
     <div class="row">
       <div class="col-12 d-flex ps-0">
         <div class="col-6 d-flex ps-0">
-          <button
+          <!-- <button
             type="button"
             class="btn btn-primary save-btn pd-1 fw-bold other-btn evaluate-btn ms-2"
             [class]="evaluationResult ? 'hide-btn' : ''"
@@ -41,7 +41,7 @@
             (click)="handleSwitch('hide')"
           >
             Original X-Ray
-          </button>
+          </button> -->
         </div>
         <div class="col-6 text-right icon-sec">
           <button
@@ -53,8 +53,8 @@
           </button>
         </div>
       </div>
-      <div class="col-12 mt-2">
-        <div class="w-100" [hidden]="!evaluationResult">
+      <div class="col-12 mt-2 d-flex justify-content-between ps-0">
+        <div class="col-6 me-1">
           <!-- <img [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100" >
                         <label class="text-center w-100 mt-3 fw-bold">Original X-ray</label>-->
           <div id="label-studio1"></div>
@@ -62,7 +62,7 @@
             >Original X-Ray</label
           > -->
         </div>
-        <div class="col-12 right-img" [hidden]="evaluationResult">
+        <div class="col-6 ms-1">
           <!--
                         <img  [src]="renderImage(this.xRayData[0]?.xray_image.path)" alt="" class="w-100 ms-2"
                         (click)="addMarker($event)" >
@@ -77,11 +77,11 @@
           > -->
         </div>
       </div>
-      <div class="col-12">
-        <div *ngIf="evaluationResult" class="text-center w-100 mt-3 fw-bold">
+      <div class="col-12 d-flex justify-content-between ps-0">
+        <div class="text-center col-6 fw-bold">
           Original X-Ray
         </div>
-        <div *ngIf="!evaluationResult" class="text-center w-100 fw-bold">
+        <div class="text-center col-6 fw-bold">
           Evaluated X-Ray
         </div>
       </div>
@@ -90,11 +90,11 @@
 
   <div class="row sec-II">
     <div class="col-12">
-      <h6>Disclaimers </h6>
+      <h6>Disclaimers: </h6>
           <p>The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
     </div>
     <!-- <div class="col-12">
-      
+
       <h6>ARTI Evaluation Result</h6>
       <p>
         <span class="border-bottom border-dark">*Legal Disclaimer :</span> There

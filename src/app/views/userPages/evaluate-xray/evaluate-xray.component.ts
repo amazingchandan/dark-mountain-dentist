@@ -289,7 +289,7 @@ export class EvaluateXrayComponent {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 12px 14px; border-radius:4px;}</Style>
+        top: 0px; padding: 13px 14px; border-radius:4px;}</Style>
      <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
@@ -306,8 +306,8 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 406px;
-      top: -72px;">
+      <View style="flex: 10%;position: absolute;right: 430px;
+      top: -78px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Edit" background="green" />
       </RectangleLabels>
@@ -433,7 +433,7 @@ export class EvaluateXrayComponent {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 12px 14px; border-radius:4px; font-size: 14px !important}</Style>
+        top: 0px; padding: 13px 14px; border-radius:4px; font-size: 14px !important}</Style>
      <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
@@ -450,8 +450,8 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 406px;
-      top: -72px;">
+      <View style="flex: 10%;position: absolute;right: 430px;
+      top: -78px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
       <Label value="Edit" background="green"/>
       </RectangleLabels>
@@ -775,7 +775,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 12px 14px; border-radius:4px}</Style>
+        top: 0px; padding: 13px 14px; border-radius:4px}</Style>
      <Style> .App_menu__X-A5N{visibility:hidden}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
