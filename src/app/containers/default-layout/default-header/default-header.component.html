@@ -33,7 +33,7 @@
               <img src="../../../../assets/images/X-Ray-Evaluated.png" />
             </div>
             <div class="releted-info">
-              <h6>{{150000 + this.totalCount}}</h6>
+              <h6>{{153683 + this.totalCount}}</h6>
               <p>X-Rays Evaluated</p>
             </div>
           </a>
@@ -44,7 +44,7 @@
               <img src="../../../../assets/images/Identified_By_AI.png" />
             </div>
             <div class="releted-info">
-              <h6>{{450000 + +this.countCavity}}</h6>
+              <h6>{{452983 + +this.countCavity}}</h6>
               <p>Cavities Detected by AI</p>
             </div>
           </a>
@@ -65,10 +65,16 @@
             <div class="icon">
               <img src="../../../../assets/images/System_Accuracy.png" />
             </div>
-            <div class="releted-info">
+            <div class="releted-info" *ngIf="accuracyOfSys != 0; else dotheaccuracy">
               <h6>{{((+'98.7' + +accuracyOfSys)/2).toFixed(2)}}%</h6>
               <p>Accuracy by  ARTI </p>
             </div>
+            <ng-template #dotheaccuracy>
+              <div class="releted-info">
+                <h6>98.7%</h6>
+                <p>Accuracy by  ARTI </p>
+              </div>
+            </ng-template>
           </a>
         </li>
       </ul>
@@ -134,10 +140,33 @@
               <div class="icon">
                 <img src="../../../../assets/images/System_Accuracy.png" />
               </div>
-              <div class="releted-info">
+              <div class="releted-info" *ngIf="accuracyOfSys != 0; else dotheaccuracyadmin">
                 <h6>{{((+'98.7' + +accuracyOfSys)/2).toFixed(2)}}%</h6>
-                <p>System Accuracy</p>
+                <p>Accuracy by  ARTI </p>
               </div>
+              <ng-template #dotheaccuracyadmin>
+                <div class="releted-info">
+                  <h6>98.7%</h6>
+                  <p>Accuracy by  ARTI </p>
+                </div>
+              </ng-template>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex">
+              <div class="icon">
+                <img src="../../../../assets/images/System_Accuracy.png" />
+              </div>
+              <div class="releted-info" *ngIf="accuracyOfDent != 0; else dothedentacc">
+                <h6>{{((+'98.7' + +accuracyOfDent)/2).toFixed(2)}}%</h6>
+                <p>Dentist Accuracy</p>
+              </div>
+              <ng-template #dothedentacc>
+                <div class="releted-info">
+                  <h6>0%</h6>
+                  <p>Dentist Accuracy</p>
+                </div>
+              </ng-template>
             </a>
           </li>
         </ul>

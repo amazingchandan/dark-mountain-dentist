@@ -12,6 +12,7 @@ import { UserService } from './user.service';
 export class AppService {
 
   public accuracySys: any = 0;
+  public accuracySysDent: any = 0;
   public user = {
     firstName: 'Alexander',
     lastName: 'Pierce',
@@ -29,6 +30,9 @@ export class AppService {
   private accuracyPer = new BehaviorSubject(this.accuracySys)
   currentAccuracy = this.accuracyPer.asObservable();
 
+  private accuracyPerDent = new BehaviorSubject(this.accuracySysDent)
+  currentAccuracyDent = this.accuracyPerDent.asObservable();
+
   private approvalStageMessage = new BehaviorSubject(false);
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
 
@@ -45,6 +49,11 @@ export class AppService {
 
   updateAccuracy(num: any){
     this.accuracyPer.next(num)
+    console.log(num)
+  }
+
+  updateAccuracyDent(num: any){
+    this.accuracyPerDent.next(num)
     console.log(num)
   }
 
@@ -79,6 +88,7 @@ export class AppService {
       if(res.success){
         this.accuracySys = res.accuracy
         this.updateAccuracy(res.accuracy)
+        this.updateAccuracyDent(res.accuracy_dentist)
       }
     })
   }
@@ -138,7 +148,7 @@ export class AppService {
             this.router.navigateByUrl('/pricing/' + getLoginDetail.userInfo.id);
           }
         }
-        else {
+        else if (res.getData[0]?.role == 'admin'){
           this.router.navigateByUrl('/dashboard');
         }
       })

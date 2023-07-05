@@ -306,10 +306,10 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 430px;
-      top: -78px;">
+      <View style="flex: 10%;position: absolute;right: 657.5px;
+      top: -78px;" >
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Edit" background="green" />
+      <Label value="Edit Marking" background="green" title="Click on edit to start marking X-Ray"/>
       </RectangleLabels>
       </View>
       </View>
@@ -326,7 +326,6 @@ export class EvaluateXrayComponent {
         // "annotations:delete",
         //"predictions:menu",*/
       ],
-
       /* user: {
          pk: 1,
          firstName: "James",
@@ -450,10 +449,10 @@ export class EvaluateXrayComponent {
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 430px;
+      <View style="flex: 10%;position: absolute;right: 657.5px;
       top: -78px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Edit" background="green"/>
+      <Label value="Edit Marking" background="green" title="Click on edit to start marking X-Ray"/>
       </RectangleLabels>
       </View>
       </View>
@@ -726,7 +725,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
       });
 
-    console.log(true, "THIS IS SECOND TRUE");
+    console.log(true, "THIS IS SECOND TRUE", this.labelStudio);
 
 
     return this.labelStudio;

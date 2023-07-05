@@ -5,7 +5,7 @@ import { ActivatedRoute ,Router} from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { navItems ,navItemsUser } from './_nav';
 import { UserService } from 'src/app/services/user.service';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +39,9 @@ export class DefaultLayoutComponent {
   public changeUrl: boolean = false;
   public windowWidth: boolean = false;
   public windowInnerWidth: any;
-
+  localHost: any;
+  paypal_user_ID: any;
+  filterLink: any;
   public perfectScrollbarConfig = {
     suppressScrollX: true,
   };
@@ -47,6 +49,7 @@ export class DefaultLayoutComponent {
   constructor( private appService:AppService, private router: Router, private route: ActivatedRoute, private userService: UserService, private formBuilder: FormBuilder,) {
     this.URL = this.router.url.split('/')[0]
     this.addSuperForm = this.formBuilder.group({})
+    this.localHost = environment.LOCAL_HOST;
   }
   ngOnInit(){
     this.appService.getAccuracy()
@@ -233,27 +236,103 @@ editadmin(id) {
     }
   });
 }
-handleRenew(){
-  ($("#exampleModal") as any).modal("hide");
-  console.log("RENEW")
-  Swal.fire({
-    title: 'Renew Subscription',
-    text: "In case of upgrade, the new plan will be active only after the current plan expires.",
-    //icon: 'warning',
-    imageUrl: '../../../../assets/images/warning.png',
-    showCancelButton: true,
-    confirmButtonColor: '#00d957',
-    cancelButtonColor: '#0f2f48',
-    cancelButtonText: 'Upgrade To A New Plan',
-    confirmButtonText: 'Renew Existing Plan <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.router.navigateByUrl(`/renew-sub/${this.dentistId}`);
+handleRenew(id){
+  this.userService.getSubPlanById(id).subscribe((resp: any) => {
+    console.log(resp.getData[0].paypalID);
+    if(resp.success){
+      let data = {
+        "plan_id": resp.getData[0].paypalID,
+        // "start_time": "2018-11-01T00:00:00Z",
+        // "quantity": "20",
+        "auto_renewal": true,
+        "shipping_amount": {
+            "currency_code": "USD",
+            "value": "0"
+        },
+        "subscriber": {
+            "name": {
+                "given_name": "John",
+                "surname": "Doe"
+            },
+            "email_address": "sb-zhqmo25396320@personal.example.com",
+            "shipping_address": {
+                "name": {
+                    "full_name": "John Doe"
+                },
+                "address": {
+                    "address_line_1": "2211 N First Street",
+                    "address_line_2": "Building 17",
+                    "admin_area_2": "San Jose",
+                    "admin_area_1": "CA",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            }
+        },
+        "application_context": {
+            "brand_name": "ARTI",
+            "locale": "en-US",
+            "shipping_preference": "SET_PROVIDED_ADDRESS",
+            "user_action": "SUBSCRIBE_NOW",
+            "payment_method": {
+                "payer_selected": "PAYPAL",
+                "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+            },
+            // "return_url": "https://darkmountain.blahworks.tech/success",
+            // "cancel_url": "https://darkmountain.blahworks.tech/failure"
+            "return_url": `${this.localHost}pricing/${this.userInfo.id}/success`,
+            "cancel_url": `${this.localHost}pricing/${this.userInfo.id}/failure`
+        }
+      };
+      this.userService.paypalPayment(data).subscribe((res: any) => {
+        ($("#exampleModal") as any).modal("hide");
+        console.log(res)
+        this.paypal_user_ID = res.id;
+        let userPlanData = {
+          sub_id: this.planDetail.subscription_details.subscription_id,
+          type: this.planDetail.subscription_details.type,
+          name: this.planDetail.subscription_details.name,
+          price: this.planDetail.subscription_details.price,
+          country: this.planDetail.subscription_details.country,
+          paypal_ID: this.paypal_user_ID
+        }
+        localStorage.setItem('i', this.userInfo.id)
+        localStorage.setItem('sub', JSON.stringify(userPlanData));
+        this.filterLink = res.links.filter(elem => elem.rel == "approve")
+        console.log(this.filterLink[0].href);
+        console.log("RENEW")
+
+        Swal.fire({
+          title: 'Renew Subscription',
+          text: "In case of upgrade, the new plan will be active only after the current plan expires.",
+          //icon: 'warning',
+          imageUrl: '../../../../assets/images/warning.png',
+          showCancelButton: false,
+          confirmButtonColor: '#00d957',
+          cancelButtonColor: '#0f2f48',
+          denyButtonColor: '#0f2f48',
+          cancelButtonText: 'Cancel',
+          denyButtonText: 'Upgrade To A New Plan',
+          confirmButtonText: 'Renew Existing Plan <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
+          showCloseButton: true,
+          showDenyButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // this.router.navigateByUrl(`/renew-sub/${this.dentistId}`);
+            window.location.href = this.filterLink[0].href;
+            console.log(result);
+          } else if(result.isDenied){
+            console.log(result)
+            this.router.navigateByUrl(`/renew-sub/${this.dentistId}`);
+          } else if(result.isDismissed){
+            ($("#exampleModal") as any).modal("show");
+            console.log(result)
+          }
+        });
+      });
     }
-    else {
-      this.router.navigateByUrl(`/renew-sub/${this.dentistId}`);
-    }
-  });
+    // return
+  })
 }
 handleCancel(){
   ($("#exampleModal") as any).modal("hide");

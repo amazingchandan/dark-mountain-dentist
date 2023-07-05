@@ -340,8 +340,8 @@
       <div class="modal-footer pb-4">
         <button
           type="button"
-          class="btn btn-primary p-2 fw-bold"
-          (click)="handleRenew()"
+          class="btn btn-primary p-2 fw-bold width-btn"
+          (click)="handleRenew(this.planDetail.subscription_details.subscription_id)"
         >
           Renew
           <svg
@@ -359,12 +359,20 @@
           </svg>
         </button>
         <button
-          type="button btn"
-          class="btn btn-secondary fw-semibold pd-1 cancel-btn font-size"
+          type="button"
+          class="btn btn-secondary fw-semibold pd-1 cancel-btn font-size btnDanger width-btn price-font"
           data-bs-dismiss="modal"
           (click)="handleCancel()"
         >
           Cancel
+        </button>
+        <!-- (click)="handleCancel()" -->
+        <button
+          type="button"
+          class="btn btn-secondary fw-semibold pd-1 cancel-btn font-size width-btn price-font"
+          data-bs-dismiss="modal"
+        >
+          Close
         </button>
       </div>
     </div>

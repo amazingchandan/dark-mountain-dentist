@@ -256,7 +256,7 @@ export class MarkXrayComponent {
  </View>
  <View style="float:right;display:none">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
- <Label value="Edit" background="green" strokeColor="#000000"/>
+ <Label value="Edit Marking" background="green" strokeColor="#000000"/>
  <Label value="1" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="2" background="#FFFF00" />
  <Label value="Admin Mark" background="#00008B" />

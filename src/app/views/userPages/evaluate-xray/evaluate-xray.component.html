@@ -1,8 +1,13 @@
 <section class="content evaluate-xray">
   <div class="row mb-1">
-    <h2 class="col fw-bold position-relative pt-2 mb-0">
+    <h2 class="col fw-bold position-relative pt-2 mb-0" *ngIf="!forTesting; else dootherheading">
       ARTI Evaluation Result
     </h2>
+    <ng-template #dootherheading>
+      <h2 class="col fw-bold position-relative pt-2 mb-0">
+        ARTI Evaluating Result
+      </h2>
+    </ng-template>
     <div
       class="col-md-7 mt-1 mb-2 icon-div fw-semibold d-flex justify-content-end align-items-end"
     >
@@ -51,7 +56,9 @@
         type="button"
         class="btn fw-bold cancel-btn pd-1 ms-2"
         (click)="delete()"
+        title="Click on delete marking to delete"
       >
+        Delete Marking
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -75,7 +82,9 @@
         type="button"
         class="btn fw-bold refresh-btn pd-1 ms-2"
         (click)="refresh()"
+        title="Remove all your marking"
       >
+        Reset Marking
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -99,6 +108,7 @@
         type="button"
         class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2 pd-2"
         (click)="saveMarks()"
+        title="Save your changes & submit for review"
       >
         Commit Correction&nbsp;
         <svg
@@ -121,6 +131,7 @@
         class="btn me-2 btn-danger fw-bold other-btn pd-1 ms-2 discard h-100"
         id="close"
         (click)="handleClick('/upload-xray/0')"
+        title="Discard this evaluation"
       >
         Discard
       </button>
@@ -196,9 +207,9 @@
 
   <div class="row sec-II">
     <div class="col-12">
-      <h6>ARTI Evaluation Result</h6>
+      <h6>Disclaimers: </h6>
       <p>
-        <span class="border-bottom border-dark">*Legal Disclaimer :</span> The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.
+        The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.
       </p>
     </div>
   </div>
