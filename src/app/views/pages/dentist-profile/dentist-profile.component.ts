@@ -564,47 +564,48 @@ export class DentistProfileComponent implements OnInit {
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
   }
   resetUser() {
-    this.addSuperForm.patchValue({
-      first_name: "",
-    });
-    this.addSuperForm.patchValue({
-      last_name: "",
-    });
+    ($("#myProfile") as any).modal("hide");
+    // this.addSuperForm.patchValue({
+    //   first_name: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   last_name: "",
+    // });
 
-    this.addSuperForm.patchValue({
-      contact_number: "",
-    });
+    // this.addSuperForm.patchValue({
+    //   contact_number: "",
+    // });
 
     /* this.addSuperForm.patchValue({
        email: "",
      });*/
 
 
-    this.addSuperForm.patchValue({
-      address1: "",
-    });
+    // this.addSuperForm.patchValue({
+    //   address1: "",
+    // });
 
-    this.addSuperForm.patchValue({
-      address2: "",
-    });
-    this.addSuperForm.patchValue({
-      city: "",
-    });
-    this.addSuperForm.patchValue({
-      state: "",
-    });
-    this.addSuperForm.patchValue({
-      country: "",
-    });
-    this.addSuperForm.patchValue({
-      pincode: "",
-    });
-    this.addSuperForm.patchValue({
-      age: '',
-    });
-    this.addSuperForm.patchValue({
-      license_no: '',
-    })
+    // this.addSuperForm.patchValue({
+    //   address2: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   city: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   state: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   country: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   pincode: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   age: '',
+    // });
+    // this.addSuperForm.patchValue({
+    //   license_no: '',
+    // })
 
 
   }
