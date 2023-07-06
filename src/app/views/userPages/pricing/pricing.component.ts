@@ -706,14 +706,20 @@ export class PricingComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  getSubscription(id, type, pricing_amount, title, country, paypalID) {
-    console.log(id, type, pricing_amount, title, country);
+  getSubscription(id, type, pricing_amount, title, country, paypalID, paypalIDFree) {
+    console.log(id, type, pricing_amount, title, country, this.userSubscription, paypalID, paypalIDFree);
     this.subsId = id;
     this.subsType = type;
     this.subsPrice = pricing_amount;
     this.subsTitle = title;
     this.subsCountry = country;
-    this.subsPaypalID = paypalID
+    if(this.userSubscription == 0){
+      this.subsPaypalID = paypalIDFree;
+      console.log("NO LENGTH")
+    } else if (this.userSubscription.length > 0){
+      this.subsPaypalID = paypalID
+      console.log("LENGTH HERE")
+    }
     console.log(this.subsPaypalID)
     let token = JSON.parse(localStorage.getItem('p-data')).token;
     console.log(this.subsPaypalID)

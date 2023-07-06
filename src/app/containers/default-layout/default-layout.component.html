@@ -297,21 +297,21 @@
               class="fs-6 ms-2 mt-0 fw-semibold d-flex justify-content-between align-items-center"
             >
               <span>Plan Name:</span>&nbsp;<span class="me-2">{{
-                this.planDetail?.subscription_details?.name | titlecase
+                this.planDetail?.all_subscription_details[this.planDetail?.all_subscription_details.length - 1]?.name | titlecase
               }}</span>
             </li>
             <li
               class="fs-6 ms-2 mt-3 fw-semibold d-flex justify-content-between align-items-center"
             >
               <span>Plan Type:</span>&nbsp;<span class="me-2">{{
-                this.planDetail?.subscription_details?.type | titlecase
+                this.planDetail?.all_subscription_details[this.planDetail?.all_subscription_details.length - 1]?.type | titlecase
               }}</span>
             </li>
             <li
               class="fs-6 ms-2 mt-3 fw-semibold d-flex justify-content-between align-items-center"
             >
               <span>Price:</span>&nbsp;<span class="me-2"
-                >${{ this.planDetail?.subscription_details?.price }}</span
+                >${{ this.planDetail?.all_subscription_details[this.planDetail?.all_subscription_details.length - 1]?.price }}</span
               >
             </li>
             <li
@@ -319,7 +319,7 @@
             >
               <span>Start Date:</span>&nbsp;<span class="me-2"
                 >&nbsp;{{
-                  this.planDetail?.subscription_details?.start_date
+                  this.planDetail?.all_subscription_details[this.planDetail?.all_subscription_details.length - 1]?.start_date
                     | date : "dd/MM/yyyy hh:mm a"
                 }}</span
               >
@@ -329,7 +329,7 @@
             >
               <span>End Date:</span>&nbsp;<span class="me-2"
                 >&nbsp;{{
-                  this.planDetail?.subscription_details?.end_date
+                  this.planDetail?.all_subscription_details[this.planDetail?.all_subscription_details.length - 1]?.end_date
                     | date : "dd/MM/yyyy hh:mm a"
                 }}</span
               >
@@ -341,7 +341,7 @@
         <button
           type="button"
           class="btn btn-primary p-2 fw-bold width-btn"
-          (click)="handleRenew(this.planDetail.subscription_details.subscription_id)"
+          (click)="handleRenew(this.planDetail.all_subscription_details[this.planDetail?.all_subscription_details.length - 1].subscription_id)"
         >
           Renew
           <svg

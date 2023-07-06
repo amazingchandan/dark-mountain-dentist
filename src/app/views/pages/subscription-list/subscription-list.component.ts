@@ -14,7 +14,7 @@ import { type } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
-
+import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 
 @Component({
   selector: 'app-subscription-list',
@@ -56,6 +56,7 @@ export class SubscriptionListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private titleService: Title,
+    private spinner: NgxSpinnerService
   ) {
     titleService.setTitle(this.title);
   }
@@ -129,6 +130,7 @@ export class SubscriptionListComponent implements OnInit {
       });
     }*/
   setPrice() {
+    this.spinner.show();
     console.log(this.addPriceingForm.value)
     if (
       this.addPriceingForm.value.plan_name == undefined ||
@@ -275,38 +277,88 @@ export class SubscriptionListComponent implements OnInit {
           "inclusive": true
         }
       }
+      let data1 = {
+        "product_id": `${this.prod_id}`,
+        "name": this.addPriceingForm.value.plan_name,
+        "billing_cycles": [
+          {
+            "frequency": {
+                "interval_unit": "DAY",
+                // "interval_count": 1
+            },
+            "tenure_type": "TRIAL",
+            "sequence": 1,
+            "total_cycles": 3,
+            "pricing_scheme": {
+                "fixed_price": {
+                    "value": "0",
+                    "currency_code": "USD"
+                }
+            }
+        },
+          {
+            "tenure_type": "REGULAR",
+            "sequence": 2,
+            "total_cycles": 999,
+            "frequency": {
+              "interval_unit": this.addPriceingForm.value.type == 'Monthly' ? 'MONTH' : 'DAY' // DAY, WEEK, MONTH, YEAR
+            },
+            "pricing_scheme": {
+              "fixed_price": {
+                "value": `${this.addPriceingForm.value.amount}`,
+                "currency_code": "USD"
+              }
+            }
+          }
+        ],
+        "payment_preferences": {
+          "auto_bill_outstanding": true,
+          "setup_fee_failure_action": "CONTINUE",
+          "setup_fee": {
+            "currency_code": "USD",
+            "value": 0
+          }
+        },
+        "taxes": {
+          "percentage": "1.5",
+          "inclusive": true
+        }
+      }
       // console.log(data)
       // return;
       let token = JSON.parse(localStorage.getItem('p-data')).token;
       this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
         console.log(res)
-        if (res.id) {
-          if(this.addPriceingForm.value.description.length){
-            console.log(this.addPriceingForm.value.description)
-          }
-          let planData = { ...this.addPriceingForm.value, paypalID: res.id, description: this.addPriceingForm.value.description}
-          console.log(planData)
-          // return;
-          this.userService.addPrice(planData).subscribe((res: any) => {
-            console.log(res);
-            if (res.success) {
-              Swal.fire({
-                text: res.message,
-                //icon: 'success',
-                imageUrl: '../../../../assets/images/success.png',
-              });
-              document.getElementById('launch_ad')?.click();
-              this.isDtInitialized = false;
-              this.planList();
-            }else{
-              Swal.fire({
-                text: res.message,
-                //icon: 'success',
-                imageUrl: '../../../../assets/images/success.png',
-              });
+        this.userService.paypalCreatePlan(data1, token).subscribe((resp:any) => {
+          if (res.id && resp.id) {
+            if(this.addPriceingForm.value.description.length){
+              console.log(this.addPriceingForm.value.description)
             }
-          });
-        }
+            let planData = { ...this.addPriceingForm.value, paypalID: res.id, paypalID_free: resp.id, description: this.addPriceingForm.value.description}
+            console.log(planData)
+            // return;
+            this.userService.addPrice(planData).subscribe((res: any) => {
+              this.spinner.hide();
+              console.log(res);
+              if (res.success) {
+                Swal.fire({
+                  text: res.message,
+                  //icon: 'success',
+                  imageUrl: '../../../../assets/images/success.png',
+                });
+                document.getElementById('launch_ad')?.click();
+                this.isDtInitialized = false;
+                this.planList();
+              }else{
+                Swal.fire({
+                  text: res.message,
+                  //icon: 'success',
+                  imageUrl: '../../../../assets/images/success.png',
+                });
+              }
+            });
+          }
+        })
       })
     }
   }

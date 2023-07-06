@@ -84,5 +84,6 @@ export class ResetPasswordComponent {
       return false;
 
     }
+    ($("#ResetPassModal") as any).modal("hide");
   }
 }
