@@ -81,15 +81,15 @@ $enable-rtl: true;
 // }
 .btn, .dt-button {
   color: white !important;
-  background-color: #00d957 !important;
-  border-color: #00d957 !important;
+  background-color: #e53a34 !important;
+  border-color: #e53a34 !important;
   border-radius: 5px;
-  padding: 4px 3px !important;
+  padding: 5px 3px !important;
 }
 .btn:hover, .dt-button:hover {
   color: #fff !important;
-  background-color: #02c24f !important;
-  border-color: #02c24f !important;
+  background-color: #ce1812 !important;
+  border-color: #ce1812 !important;
 }
 .pd-1 {
   padding: 10px 14px !important;
@@ -641,17 +641,17 @@ a.current{
 .login-register .input-group-text {  background: transparent;  margin: 7px auto;  border: none;  border-right: 1px solid #d9d9d9;  padding: 0px 8px;  text-align: center !important;}
 .login-register .input-group-text svg{}
 .login-register .btn{    min-width:-moz-available;min-width: -webkit-fill-available;min-width: fill-available;}
-.login-register .signup {  color: #00d957 !important;}
+.login-register .signup {  color: #009ace !important;}
 .login-register .bg{  background-color: #ffffff;}
 .login-register .mountain-color {  color: #00d957;  font-size: inherit !important;}
 .login-register .right-sec {  background: #b9f0c1;   
     background: url(../assets/images/bg.png);
   }
 
-.login-register .right-sec .wp-card.card {  width: 60% !important;  padding: 50px;  background: #ffffff4f;  border-radius: 0 !important;}
-.login-register .right-sec p.sub-title {  font-size: 20px;  color: #00d957;  font-family: 'Montserrat', sans-serif;      font-weight: 800;  margin-bottom: 10px;}
-.login-register .right-sec .title{     font-size: 38px;  font-family: "Montserrat", sans-serif;  font-weight: 700;  color: #000000;}
-.login-register .right-sec p.des{    font-size: 16px;}
+.login-register .right-sec .wp-card.card {  width: 60% !important;  padding: 50px;  background: #004380;  border-radius: 0 !important;}
+.login-register .right-sec p.sub-title {  font-size: 20px;  color: #f7f950;  font-family: 'Montserrat', sans-serif;      font-weight: 800;  margin-bottom: 10px;}
+.login-register .right-sec .title{     font-size: 38px;  font-family: "Montserrat", sans-serif;  font-weight: 700;  color: #fff;}
+.login-register .right-sec p.des{    font-size: 16px; color: #fff;}
 .login-register .right-sec .btn{    min-width: auto;  padding: 4px 27px !important;}
 
 @media (max-width:1400px){
