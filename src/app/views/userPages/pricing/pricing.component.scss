@@ -15,21 +15,26 @@
 }
 
 .card.hover-effect {
-  box-shadow: 0px 0px 8px 0px #e6e6e6 !important;
+  // box-shadow: 0px 0px 8px 0px #e6e6e6 !important;
+   box-shadow: none !important;
+  
   transform: inherit;
   border-color: #dddddd !important;
     border-radius: 6px !important;
+    border: 1px solid transparent;
 }
 .hover-effect:hover {
-  border-color: #02d959 !important;
-    background: transparent;
+  border-color: #ce1812 !important;
+    background: #fff;
     color: #000 !important;
 }
-
+.card.hover-effect p,.card.hover-effect h4{
+  color: #000 !important;
+}
 
 .hover-effect:hover button {
-  background-color: #fff !important;
-  color: #02d959 !important;
+  color: #fff !important;
+  background-color: #6c757d !important;
 }
 
 .cancel-selected {
@@ -39,7 +44,7 @@
   padding: 10px 30px !important;
 }
 .inside-sub-container .myCard .hover-effect:hover .cancel-selected {
-  border: 1px solid #02d959 !important;
+  border: 1px solid #6c757d !important;
 }
 .text-wrap {
   word-break: break-all;
@@ -72,7 +77,9 @@ body {
   // content: '';
   margin-top: -0.2rem;
 }
-
+.emptyDiv img {
+  max-width: 120px;
+}
 .btn-position {
   // margin-left: 12rem;
 }
@@ -95,7 +102,7 @@ body {
 }
 
 .btn-position {
-  background-color: #fff !important;
+  background-color: transparent;
   border: none;
   outline: none;
   // position: absolute;
@@ -173,7 +180,7 @@ body {
 //   color: #02d959 !important;
 // }
 .plantype {
-  border: 2px solid #3fd6a5;
+  border: 2px solid #e53a34;
   padding: 2px;
   border-radius: 40px;
 }
@@ -195,15 +202,15 @@ p.price sub {
 }
 
 .Subscription-btn{
-  background: transparent !important;
-  color: #999999 !important;
-  border-color: #999999 !important;
+  background: #e53a34 !important;
+  color: #fff !important;
+  border-color: #e53a34 !important;
   padding: 10px 30px !important;
  }
  .hover-effect:hover .Subscription-btn {
   color: #fff !important;
-  background: #02d959 !important;
-  border-color: #02d959 !important;
+  background: #ce1812 !important;
+  border-color: #ce1812 !important;
 }
 .onlyHeight {
   min-height: calc(100vh - 208px) !important;
@@ -218,13 +225,13 @@ p.price sub {
 }
 
 .mountain-color {
-  color: #00d957;
+  color: #009ace;
   font-size: inherit !important;
 }
 
 .hand {
   cursor: pointer;
-  color: #00d957;
+  color: #009ace;
 }
 
 .paynow,
@@ -259,7 +266,7 @@ p.price sub {
   padding: 4px 0;
 }
 .included-sec ul li i {
-  color: #02d959;
+  color: #e53a34;
   margin-right: 10px;
   font-weight: 700;
 }
@@ -268,6 +275,7 @@ p.price sub {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  color: #fff;
 
   u,
   span {
