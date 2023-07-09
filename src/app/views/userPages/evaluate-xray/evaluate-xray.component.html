@@ -4,13 +4,13 @@
     <h2 class="col fw-bold position-relative pt-2 mb-0">
       X-Ray Evaluation Result
     </h2>
-  
+
     <div class="col-7 text-right icon-sec"  *ngIf="!forTesting">
 
-      
+
 
       <button type="button" class="btn me-2 btn-danger fw-bold other-btn pd-1 ms-2 discard" id="close"
-      (click)="handleClick(this.xray, this.imgName)">Discard</button>
+      (click)="handleClick('/upload-xray/0')">Discard</button>
 
       <button type="button" class="btn btn-primary save-btn pd-1 fw-bold other-btn ms-2" (click)="saveMarks()">Commit Correction&nbsp;  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg></button>
 
@@ -26,10 +26,10 @@
       <div class="col-md-12 mt-1 mb-3 icon-div fw-semibold">
         <span><i class="fa-solid fa-circle dentist-i me-1"></i> Dentist Marking</span> &nbsp;&nbsp;
         <span><i class="fa-solid fa-circle ai-i me-1"></i> AI (Confirmed) Marking</span> &nbsp;&nbsp;
-        <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span> 
+        <span><i class="fa-solid fa-circle aiprob-i me-1"></i> AI (Probable) Marking</span>
       </div>
-    </div>    
-    
+    </div>
+
 
     <div class="row">
       <div class="col-12">

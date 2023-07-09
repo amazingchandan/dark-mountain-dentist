@@ -12,10 +12,10 @@
   <div class="headingContainer">
     <div class="emptyDiv">
       <img src="../../../../assets/images/logo.png" />
-      
+
     </div>
 
-    
+
 
     <div *ngIf="this.userSubscription?.length>0 && this.buyNow==false" class="mt-5">
       <h2 class="head m-0 text-center fw-bold mt-1"> Your Subscription has expired! Please Buy a new plan</h2>
@@ -194,7 +194,7 @@
             <!-- <img src="" alt="" /> -->
 
             <h4>{{ data.plan_name | titlecase }}</h4>
-            <p class="mb-0">Try Dark Mountain free for 
+            <p class="mb-0">Try Dark Mountain free for
               3 days, no credit card required</p>
 
               <div class="d-flex justify-content-center align-items-center flex-column my-3">
@@ -204,17 +204,17 @@
               </div>
 
               <div class="col-12 col-md-12 included-sec">
-                <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6> 
+                <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6>
                 <ul class="list-group text-start">
                   <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
                   <li class="list-group-item"><i>✔</i>Country: {{ data.country | titlecase }}</li>
                   <li class="list-group-item"><i>✔</i>Status: {{ data.status | titlecase }}</li>
                 </ul>
               </div>
-              
-           
+
+
             <p>{{ data.currency | titlecase }}</p>
-            
+
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
               <button class="pd-1 fw-bold btn btn-primary Subscription-btn" (click)="
@@ -232,7 +232,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
                 ">
                 Selected <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
@@ -300,7 +300,7 @@
             </div>
 
             <div class="col-12 col-md-12 included-sec">
-              <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6> 
+              <h6 class="text-muted text-start">What's included on {{ data.plan_name | titlecase }}</h6>
               <ul class="list-group text-start">
                 <li class="list-group-item"><i>✔</i>{{ data.type }} pack </li>
                 <li class="list-group-item"><i>✔</i>Country: {{ data.country | titlecase }}</li>
@@ -309,7 +309,6 @@
             </div>
 
 
-            
             <p>{{ data.currency | titlecase }}</p>
 
             <div class="text-center mt-3 w-100" *ngIf="data._id !== subsId">
@@ -328,7 +327,7 @@
             </div>
             <div class="text-center mt-3 w-100" *ngIf="data._id === subsId">
               <button class="pd-1 fw-bold btn btn-primary cancel-selected" (click)="
-                  getSubscription(0, data.type, data.amount, data.plan_name, data.country)
+                  getSubscription(0, data.type, data.amount, data.plan_name, data.country, data.paypalID)
                 ">
                 Selected <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>
               </button>
@@ -609,7 +608,6 @@
                 <c-input-group class="mb-3 mt-2">
                   <label class="form-label">First Name</label>
                   <div class="w-100 d-flex position-relative">
-                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilUser"></svg>
                     </span>
@@ -621,7 +619,6 @@
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <label class="form-label">Last Name</label>
                   <div class="w-100 d-flex position-relative">
-                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilUser"></svg>
                     </span>
@@ -635,7 +632,6 @@
                 <c-input-group class="mb-3 mt-2">
                   <label class="form-label">Email</label>
                   <div class="w-100 d-flex position-relative">
-                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilEnvelopeClosed"></svg>
                     </span>
@@ -647,7 +643,6 @@
                 <c-input-group class="mb-3 mt-2 inputMargin">
                   <label class="form-label">Contact Number</label>
                   <div class="w-100 d-flex position-relative">
-                    
                     <span cInputGroupText class="rounded-0 rounded-start icon-position">
                       <svg cIcon name="cilSpreadsheet"></svg>
                     </span>
@@ -754,7 +749,7 @@
           <div class="d-flex align-items-start flex-column sub-body-content">
             <div class="SubscriptionDetails">
             <h5 class="w-100 text-center fw-semibold">Subscription Details:</h5>
-            <p class="text-center px-3">Try Dark Mountain free for 3 days, 
+            <p class="text-center px-3">Try Dark Mountain free for 3 days,
               no credit card required</p>
             <ul class="proceed-details px-3">
               <!-- <li
@@ -790,7 +785,6 @@
             </ul>
           </div>
           <div *ngIf="checked && subsId != 0" class="w-100">
-        
             <!-- *ngIf="checked && subsId != 0 && !paypalView" -->
             <!-- (click)="payView()" -->
             <!-- <button class="btn btn-primary pd-1 fw-bold fs-6" (click)="handleClick()" *ngIf="!paypalBtn"> -->
@@ -847,7 +841,6 @@
           </div>
         </div>
       </div>
-     
     </div>
   </div>
 </div>
