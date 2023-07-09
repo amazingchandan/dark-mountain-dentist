@@ -67,8 +67,8 @@ export class UploadXrayComponent implements OnInit {
     // this.n =this.route.snapshot.paramMap.get('n');
 
     this.dtOptions = {
-      search: false,
-      searching: false,
+      search: true,
+      searching: true,
       language: {
         search: "",
         searchPlaceholder: 'Search ',

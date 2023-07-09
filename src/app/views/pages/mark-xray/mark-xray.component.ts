@@ -466,8 +466,8 @@ margin-top: 90.5px;">
       });
     });
    console.log(markInfo3.length ,this.userMark.length,markInfo4.length,"remain")
-  // const delCavity1= markInfo3.length+markInfo4.length
-  const delCavity1 =this.userMark.length-markInfo3.length
+    // const delCavity1= markInfo3.length+markInfo4.length
+    const delCavity1 =this.userMark.length-markInfo3.length
     //end for cavity label
 
     const markInfo1 = this.markInfo.filter((elem) => {
@@ -488,13 +488,13 @@ margin-top: 90.5px;">
     this.avgPer= ((this.markInfo.length-(this.delCavity+this.adminMark))*100/this.markInfo.length).toFixed(1);
     console.log("avgPer",this.avgPer)
     this.valInput= this.avgPer;
-  this.leftPos = this.avgPer;
+    this.leftPos = this.avgPer;
   }
 
   saveMarks() {
     // const newArr = this.AIMarkData._id.concat(this.userMark.id)
     //console.log(newArr,"new")
-  /*  this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
+    /*  this.markInfo = JSON.parse(localStorage.getItem('markInfo') || '[]');
     console.log(this.markInfo)
     console.log(this.userMark)
 

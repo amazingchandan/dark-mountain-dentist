@@ -35,6 +35,7 @@ export class DentistProfileComponent implements OnInit {
   year: any;
   xrayData: any = {};
   country: any;
+  paypal_ID: any;
   // state: any;
   // userInfo:any;
   role: any;
@@ -53,7 +54,8 @@ export class DentistProfileComponent implements OnInit {
 
   public paypalView: any = false;
   public payData: any;
-
+  public renewBtn: boolean = false;
+  public cancelBtn: boolean = false;
   public allcountries: any;
   public stateList: any = '-Select State-';
   public allstates: any;
@@ -64,6 +66,8 @@ export class DentistProfileComponent implements OnInit {
   showError: any;
   subsType: any;
   subsPrice: any;
+  subsCountry: any;
+  subsName: any;
   // userPlanData: {
   //   sub_id: any;
   //   //
@@ -190,7 +194,7 @@ export class DentistProfileComponent implements OnInit {
   }
   allCountryList() {
     this.apiService.getCountries().subscribe((res: any) => {
-      console.log(res.getData)
+      // console.log(res.getData)
       this.allcountries = res.getData
     })
   }
@@ -229,8 +233,28 @@ export class DentistProfileComponent implements OnInit {
       }
       this.year =  null;
       }*/
-      console.log(this.date, "/", this.month, "/", this.year);
+      // console.log(this.date, "/", this.month, "/", this.year);
+      if(!res.getData[0].subscription_details.status){
+        this.cancelBtn = true
+        this.renewBtn = false
+      } else {
+        this.cancelBtn = false
+        this.renewBtn = true
+      }
+      let d = new Date()
+      // console.log(res.getData[0].subscription_details.end_date, new Date(res.getData[0].subscription_details.end_date).getTime(), new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10), new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime(), res.getData[0].all_subscription_details[res.getData[0].all_subscription_details.length - 1].end_date, new Date(res.getData[0].all_subscription_details[res.getData[0].all_subscription_details.length - 1].end_date).getTime())
 
+      // * for renewal before 10 days of plan expiry
+      // if(new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res.getData[0].subscription_details.end_date).getTime() && new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res?.getData[0]?.all_subscription_details[res?.getData[0]?.all_subscription_details?.length - 1]?.end_date).getTime()){
+      //   console.log("subs 10, renew 10")
+      //   this.renewBtn = true;
+      // } else if (new Date(d.getTime() + 60 * 60 * 24 * 1000 * 10).getTime() > new Date(res?.getData[0]?.subscription_details?.end_date).getTime() && res?.getData[0]?.all_subscription_details[res?.getData[0]?.all_subscription_details?.length - 1]?.end_date == undefined) {
+      //   console.log("subs 10, renew not 10")
+      //   this.renewBtn = true;
+      // } else {
+      //   console.log("subs 10, renew not 10, FaLSE")
+      //   this.renewBtn = false;
+      // }
       //Plan-details
       this.apiService.getSubPlanById(this.userData[0].subscription_details.subscription_id).subscribe((resp: any) => {
         console.log(resp)
@@ -412,8 +436,69 @@ export class DentistProfileComponent implements OnInit {
         }
       }
     })
-
-
+  }
+  handleRenew(){
+    if(this.userID){
+      this.router.navigateByUrl("/renew-sub/"+this.userID)
+    }
+  }
+  handleCOnfirmPay(){
+    this.apiService.getUserRecordById(this.userID).subscribe((res: any) => {
+      console.log(res, "resssssssssssssssssssssssssssssssssssssss")
+      this.userData = res.getData;
+      console.log(this.userData, this.userInfo, this.userInfo.token)
+      if (res.success) {
+        var end_date;
+        var now = new Date();
+        console.log(this.subsType)
+        if (this.subsType == "Monthly") {
+          end_date = new Date(now.setMonth(now.getMonth() + 1));
+          end_date = new Date(now.setMinutes(now.getMinutes() + 5));
+          console.log(end_date, "Date", new Date());
+        }
+        else if (this.subsType === "Yearly") {
+          end_date = new Date(now.setMonth(now.getMonth() + 12));
+          console.log(end_date, "Date", new Date());
+        }
+      }
+      const userPlanData = {
+        sub_id: this.subsId,
+        type: this.subsType,
+        pre_start_date: this.preStart_date,
+        pre_end_date: this.preEnd_date,
+        pre_plan_name: this.subsName,
+        pre_plan_country: this.subsCountry,
+        pre_plan_price: this.subsPrice,
+        paypal_ID: this.paypal_ID
+      }
+      // return
+      this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((resp: any) => {
+        console.log(resp)
+        if (resp.success) {
+          let dataToSend = {
+            reason: "Subscription renewed."
+          }
+          this.apiService.paypalActivate(dataToSend, this.userData[0].paypal_ID).subscribe((result: any) => {
+            console.log(result, "paypal")
+          })
+          this.IsmodelShow = false
+          console.log(this.IsmodelShow);
+          ($("#myModal") as any).modal("hide");
+          Swal.fire({
+            text: "You have successfully subscribed",
+            icon: 'success',
+          });
+          if (this.userInfo.token != null && this.userInfo.token != undefined && this.userInfo.token != '') {
+            console.log("iff")
+            this.router.navigateByUrl("/dashboard")
+          }
+          else {
+            console.log("elseee")
+            this.router.navigateByUrl("/login")
+          }
+        }
+      })
+    })
   }
   cancelSubfromUser() {
     Swal.fire({
@@ -427,21 +512,33 @@ export class DentistProfileComponent implements OnInit {
       confirmButtonText: 'Yes, cancel subscription! <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9z"></path></svg>',
     }).then((result) => {
       if (result.isConfirmed) {
-
+        console.log('first');
         if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
+          console.log('second');
           this.apiService.cancelUserPlan(this.dentistId)
             .subscribe((res: any) => {
+              console.log(res.userData, res.userData?.paypal_ID)
               if (res.success) {
+                let data = {
+                  reason: "Not satisfied with the service"
+                }
+                // let token = "A21AAJO4flEg2MEs201bjXb8Ca_sCo-D3v-xBALryI6nvKvBaMX6edwe9AoiucwH-8z6ONrhZB4HnVtgCj1pJM1ItqT3J-mhA";
+                this.apiService.paypalSuspend(data, res.userData?.paypal_ID).subscribe((res: any) => {
+                  console.log(res)
+                })
                 Swal.fire({
                   // toast: true,
                   // position: 'top-end',
-                  showConfirmButton: false,
+                  showConfirmButton: true,
                   timer: 3000,
                   title: 'Success!',
                   text: "Your subscription is cancelled successfully.",
                   //icon: 'success',
                   imageUrl: '../../../../assets/images/success.png',
+
                 });
+                this.cancelBtn = true;
+                this.renewBtn = false;
                 // this.appService.logout();
               }
               else {
@@ -559,9 +656,14 @@ export class DentistProfileComponent implements OnInit {
         this.subsId = this.curPlanDetail?.subscription_details?.subscription_id?._id;
         this.preStart_date = this.curPlanDetail?.subscription_details?.start_date;
         this.preEnd_date = this.curPlanDetail?.subscription_details?.end_date;
+        this.subsCountry = this.curPlanDetail?.subscription_details?.country;
+        this.subsName = this.curPlanDetail?.subscription_details?.name;
+        this.paypal_ID = this.curPlanDetail?.paypal_ID;
+        this.apiService.paypalTransactions(res.getData.paypal_ID).subscribe((resp: any) => {
+          console.log(resp)
+        })
 
-
-        console.log("***", this.preEnd_date)
+        console.log("***", this.preEnd_date, this.subsId)
         console.log("planDetail", res)
       }
       else {
@@ -581,7 +683,7 @@ export class DentistProfileComponent implements OnInit {
 
     this.payPalConfig = {
       currency: 'USD',
-      clientId: 'sb',
+      clientId: 'AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr',
       // ! for orders on client side
 
       createOrderOnClient: (data) => <ICreateOrderRequest>{
@@ -658,7 +760,10 @@ export class DentistProfileComponent implements OnInit {
                 sub_id: this.subsId,
                 type: this.subsType,
                 pre_start_date: this.preStart_date,
-                pre_end_date: this.preEnd_date
+                pre_end_date: this.preEnd_date,
+                pre_plan_name: this.subsName,
+                pre_plan_country: this.subsCountry,
+                pre_plan_price: this.subsPrice,
               }
 
               this.apiService.getSubscriptionRenew(userPlanData, this.userID).subscribe((res: any) => {

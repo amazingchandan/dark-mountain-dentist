@@ -1,8 +1,14 @@
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import {  LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+// import { RecaptchaModule } from "ng-recaptcha";
+
+// ! change environment variable before making build
+import { environment } from '../environments/environment';
+
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -68,6 +74,7 @@ import { ViewXrayComponent } from './views/userPages/view-xray/view-xray.compone
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { RenewSubComponent } from './views/userPages/renew-sub/renew-sub.component';
 import { DragDropDirective } from './drag-drop.directive';
+// import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -96,6 +103,9 @@ const APP_CONTAINERS = [
     PerfectScrollbarModule,
     NavModule,
     ButtonModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    RecaptchaV3Module,
     FormModule,
     UtilitiesModule,
     ButtonGroupModule,
@@ -129,7 +139,22 @@ const APP_CONTAINERS = [
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     IconSetService,
-    Title
+    Title,
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
+    },
+    // {
+    //   provide: RECAPTCHA_V3_SITE_KEY,
+    //   useValue: environment.recaptcha.siteKey,
+    // },
+    // {
+    //   provide: NG_VALUE_ACCESSOR,
+    //   multi: true,
+    //   useExisting: RegisterFormComponent,
+    // }
   ],
   bootstrap: [AppComponent],
 })

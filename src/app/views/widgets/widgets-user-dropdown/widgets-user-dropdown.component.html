@@ -85,7 +85,7 @@
         <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <div class="d-flex justify-content-between flex-column div-height">
 
-          <h6 class="text-white fw-bold">Number Of Cavities Identified By AI</h6>
+          <h6 class="text-white fw-bold">Number Of Cavities Detected by AI</h6>
           <h6 class="text-white fw-bold">{{this.count}}</h6>
         </div>
         </ng-template>
@@ -246,6 +246,29 @@
 
       </c-widget-stat-a>
     </c-col>
+    <c-col sm="6" xl="3" class="mb-3 min-h" [routerLink]="'/upload-xray/0'">
+      <c-widget-stat-a
+      class="mb-4 p-2 myclass min-height bg-my-background h-100 position-relative"
+      [title]="''"
+      >
+        <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <div class="d-flex justify-content-between flex-column div-height">
+
+          <h6 class="text-white fw-bold my">
+           Upload X-Ray
+          </h6>
+          <h6 class="text-white fw-bold my">
+            Upload here
+          </h6>
+        </div>
+        </ng-template>
+        <h6 class="text-white rotate fw-bold fs-6 title-pos m-0 py-2 px-4 rounded-3 text-center" [routerLink]="'/upload-xray/0'">
+          Start Here
+        </h6>
+        <img src="../../../../assets/images/photo.png" class="image my">
+
+      </c-widget-stat-a>
+    </c-col>
   </c-row>
 
   <!--My Plan Modal-->
@@ -295,6 +318,7 @@
                   </li>
                   <li class=" fs-6  ms-2 mt-3 fw-semibold d-flex justify-content-between align-items-center">
                     <span>End Date:</span>&nbsp;<span class="me-2">&nbsp;{{ this.planDetail?.subscription_details?.end_date |date : 'dd/MM/yyyy hh:mm a'}}</span>
+
                   </li>
                 </ul>
               </div>

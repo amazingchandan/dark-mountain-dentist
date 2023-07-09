@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, ValidationErrors, Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 const ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
 const ALPHA_NUMERIC_VALIDATION_ERROR = { alphaNumericError: 'only alpha numeric values are allowed' }
@@ -29,12 +31,19 @@ export class RegisterFormComponent {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private appService: AppService
+    private appService: AppService,
+    private fb: FormBuilder,
+    // private recaptchaV3Service: ReCaptchaV3Service,
   ) {
     titleService.setTitle(this.title);
   }
 
   ngOnInit() {
+    let p_data = {
+      token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
+      prod_id: 'PROD-2SV05090KF783042A'
+    }
+    localStorage.setItem('p-data', JSON.stringify(p_data))
     function alphaNumericValidator(control: FormControl): ValidationErrors | null {
       return ALPHA_NUMERIC_REGEX.test(control.value) ? null : ALPHA_NUMERIC_VALIDATION_ERROR;
     }
@@ -51,11 +60,17 @@ export class RegisterFormComponent {
       // country: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
       repassword: new FormControl(null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]),
+      recaptcha: new FormControl(null, [Validators.required]),
       // age: new FormControl(null, Validators.required)
     });
-    // if (localStorage.getItem('token')) {
-    //   this.router.navigateByUrl("/dashboard")
-    // }
+    // this.registerForm = this.fb.group({
+    //   first_name: [null, Validators.required],
+    //   last_name: [null, Validators.required],
+    //   email: [null, [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')]],
+    //   password: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]],
+    //   repassword: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), alphaNumericValidator]],
+    //   recaptcha: [null, [Validators.required]],
+    // })
   }
   onSomeAction(event: any) {
     if (event.key == "Enter") {
@@ -66,6 +81,9 @@ export class RegisterFormComponent {
     // Only ASCII character in that range allowed
     let ASCIICode = (evt.which) ? evt.which : evt.keyCode;
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
+  }
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
   register() {
     console.log(this.registerForm.value, !this.registerForm.value.email != true)
@@ -211,6 +229,11 @@ export class RegisterFormComponent {
 
     this.userService.addUser(this.registerForm.value).subscribe((res: any) => {
       if (res.success) {
+        // this.userService.payPalTokenGen(null).subscribe((res: any) => {
+        //   if(res.access_token){
+        //     localStorage.setItem('p-token', res.access_token)
+        //   }
+        // })
         //this.toastr.success(res.message);
      /*   Swal.fire({
           text: res.message,

@@ -78,7 +78,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
             //icon: 'success',
             imageUrl: '../../../../assets/images/success.png',
           });
-          if(e){
+          if(e == true){
             console.log(this.userInfo.id, 'dentist-profile')
             this.appService.updateGetUrl(false)
             this.router.navigateByUrl(`/dentist-profile/${this.userInfo.id}`);
