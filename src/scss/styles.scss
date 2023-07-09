@@ -65,6 +65,15 @@ $enable-rtl: true;
   font-family: "Montserrat", sans-serif;
 }
 
+.footer{
+  --cui-footer-color: #004380;
+  --cui-footer-bg: #004380;
+  --cui-footer-border-color: #004380;
+  --cui-footer-border: 1px solid #004380;
+}
+.header-nav ul.list-group.list-group-flush {
+  background: #fff;
+}
 // .btn{
 //     color: white;
 //     background-color: #17A2B8;
@@ -186,21 +195,21 @@ $enable-rtl: true;
 .logo_and_info .info li .icon{width: 70px; height: 45px; text-align: center;}
 .logo_and_info .info li .icon img {  max-width: 45px;}
 .logo_and_info .info li .releted-info{width:auto;      margin-right: 10px;}
-.logo_and_info .info li .releted-info h6 {  color: #00d957;  font-size: 20px;  font-weight: 700;  margin-bottom: 0;}
+.logo_and_info .info li .releted-info h6 {  color: #fff;  font-size: 20px;  font-weight: 700;  margin-bottom: 0;}
 .logo_and_info .info li .releted-info p{    color: #fff;  font-size: 12px;     margin-bottom: 0; }
 
 .Uploaded-X-Rays .btn-danger{--cui-btn-color: #000015;background: #e55353 !important; border-color: #e55353 !important;}
 .Uploaded-X-Rays .btn-danger:hover {  color: #fff !important;  background-color: #bb2d3b  !important;  border-color: #b02a37  !important;}
 .Uploaded-X-Rays .other-btn {  font-size: 14px !important;  color: #fff !important;  padding: 12px 14px !important;}
 .Uploaded-X-Rays .sec-II h2 small{font-size: 70%;}
-.Uploaded-X-Rays .sec-II h6 {  font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important;}
+.Uploaded-X-Rays .sec-II h6 {     color: #fff; font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important; color: #fff !important;     margin-top: 15px;}
 
 
 .evaluate-xray .btn-danger{--cui-btn-color: #000015;background: #e55353 !important; border-color: #e55353 !important; padding: 21px 14px !important; line-height: 0; }
 .evaluate-xray .btn-danger:hover {  color: #fff !important;  background-color: #bb2d3b  !important;  border-color: #b02a37  !important;}
 .evaluate-xray .icon-sec button {  font-size: 14px !important; }
 .evaluate-xray .icon-sec button svg{color: #fff !important;  fill: #fff !important;  font-size: 20px;}
-.evaluate-xray .sec-II h6 {  font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important;}
+.evaluate-xray .sec-II h6 {     color: #fff; font-weight: 700;  font-size: 18px;  margin-bottom: 0.5rem !important;}
 
 .evaluate-xray .dentist-i {  color: rgb(0 217 87);}
 .evaluate-xray .refresh-btn{color: #fff;background: #009fff !important; border-color: #009fff !important; padding: 12px 14px !important; line-height: 0; }
@@ -260,12 +269,12 @@ table thead {
 // }
 
 input:checked {
-  background-color: #00d957 !important;
-  border-color: #00d957 !important;
+  background-color: #e53a34 !important;
+  border-color: #e53a34 !important;
 }
 
 .swal2-actions button {
-  background-color: #00d957 !important;
+  background-color: #e53a34 !important;
 }
 
 input[type="text"]:focus,
@@ -276,7 +285,7 @@ input[type="checkbox"]:focus,
 .form-control:focus,
 .dataTables_wrapper .dataTables_filter input:focus,
 select:focus {
-  box-shadow: 0px 0px 2px 4px #02d9583e !important;
+  box-shadow: 0px 0px 2px 2px rgb(0 67 128 / 26%) !important;
   border: 1px solid #ced4da !important;
   outline: none;
 }
@@ -314,10 +323,16 @@ select:focus {
 .icon-color {
   color: #043049 !important;
 }
+.btn-position .icon-color {
+  color: #fff !important;
+}
+h1,h2,h3,h4,h5,h5,p{
+  color: #fff !important;
+}
 h5 {
   // color: #000000B8 !important;
   font-size: 18px !important;
-  color: #043049 !important;
+  color: #fff !important;
 }
 .dataTables_filter {
   top: -55px;
@@ -358,7 +373,7 @@ tr td {
 }
 
 .color-bg {
-  background-color: #f4f4f4;
+  background-color: #004380;
 }
 
 .icon-position {
@@ -626,12 +641,13 @@ a.current{
   box-shadow: 0px 0px 6px 2px #00d9579e;
 }
 
-.my-container{background-color: #ffffff !important}
+.my-container{background-color: #004380 !important}
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500&display=swap');
 // font-family: 'Montserrat', sans-serif;
 .login-register{position: relative;}
 .login-register .logo{position: absolute;  left: 40px;  top: 20px;  z-index: 999;}
+.login-register .logo, .login-register .logo img { width: 150px !important;}
 .login-register .bg {  background-color: #fff !important;}
 .login-register .wp-card{  width: 50% !important;    flex: none !important;}
 .login-register .card{ border: none; box-shadow:none !important;}
@@ -648,7 +664,7 @@ a.current{
     background: url(../assets/images/bg.png);
   }
 
-.login-register .right-sec .wp-card.card {  width: 60% !important;  padding: 50px;  background: #004380;  border-radius: 0 !important;}
+.login-register .right-sec .wp-card.card {  width: 60% !important;  padding: 50px;  background: #00225f;  border-radius: 0 !important;}
 .login-register .right-sec p.sub-title {  font-size: 20px;  color: #f7f950;  font-family: 'Montserrat', sans-serif;      font-weight: 800;  margin-bottom: 10px;}
 .login-register .right-sec .title{     font-size: 38px;  font-family: "Montserrat", sans-serif;  font-weight: 700;  color: #fff;}
 .login-register .right-sec p.des{    font-size: 16px; color: #fff;}
@@ -703,11 +719,12 @@ a.current{
   border-radius: 6px;
   border-left: none !important;
 }
-
+.SubscriptionDetails h5,.SubscriptionDetails p {color: #043049 !important;}
 .SubscriptionDetails h5 {
   margin-top: 25px;
   margin-bottom: 10px;
   justify-content: center;
+  
 }
 
 
