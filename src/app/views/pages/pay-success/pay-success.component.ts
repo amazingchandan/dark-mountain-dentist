@@ -17,7 +17,7 @@ export class PaySuccessComponent implements OnInit {
   public userId: any;
   public token: any = localStorage.getItem('token');
   public btnStatus: boolean = false;
-  title = 'Dark Mountain - Success';
+  title = 'ARTI';
   public apiHost: any = 'http://localhost:4200/failure';
   public payment_status: any;
   public show_text: any;
@@ -50,6 +50,12 @@ export class PaySuccessComponent implements OnInit {
     } else if (this.payment_status == 'failure'){
       this.show_text = 'Please waiting, You are being redirected to pricing page...';
       console.log(this.renew_subs)
+      this.userService.handleFailedTransaction({id: this.userId}).subscribe((res: any) => {
+        console.log(res)
+        if(res.success){
+
+        }
+      })
       setTimeout(() => {
         this.spinner.hide()
         if(localStorage.getItem('renew_sub')){
@@ -130,7 +136,7 @@ export class PaySuccessComponent implements OnInit {
           this.btnStatus = true;
           setTimeout(() => {
             this.spinner.hide();
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/upload-xray/0');
           }, 4000)
           // if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
             // this.appService.login(result);

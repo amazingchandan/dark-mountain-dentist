@@ -14,6 +14,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
   styleUrls: ['./mark-xray.component.scss']
 })
 export class MarkXrayComponent {
+  systemAccuracy: any = 0;
   xRayData: any = [];
   id: string;
   markData: any = [];
@@ -28,6 +29,8 @@ export class MarkXrayComponent {
   avgPer: any=0;
   myThumbnail: string;
   myFullresImage: string;
+  evaluationResult: boolean = false;
+
   constructor(private route: ActivatedRoute,
     private userService: UserService,
     private router: Router,
@@ -76,6 +79,15 @@ export class MarkXrayComponent {
       }
     })
   }
+
+  handleSwitch(text: any){
+    if(text == 'show'){
+      this.evaluationResult = false;
+      this.getMark(this.id);
+    } else if (text == 'hide'){
+      this.evaluationResult = true;
+    }
+   }
 
   getMark(id) {
 
@@ -233,27 +245,26 @@ export class MarkXrayComponent {
   <Style> .Hint_main__1Svrz { display:none; }</Style>
   <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
     top: -7px; padding: 10px 14px; border-radius:4px}</Style>
- <Style> .App_menu__X-A5N{visibility:hidden}
+ <Style> .App_menu__X-A5N{display:none}
  .Entity_row__3Ii1C {display:none}
  .ant-card-small>.ant-card-body{height:20px}</Style>
- <Style> .ls-common {height:354px !important}</Style>
-  <View style="flex: 90%;
- margin-top: -14px; width:566px">
- <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+ <Style> .ls-common</Style>
+  <View style="margin-top: -14px;">
+ <Style> .ImageView_container__AOBmH img</Style>
  <Image name="img" value="$image" width="100%" height="100%"></Image>
- <Style> canvas { width:566px ; height:354px !important;  }</Style>
+ <Style> canvas { width:100% ; height:100% !important;  }</Style>
  </View>
- <View style="float:right;visibility:hidden">
+ <View style="float:right;display:none">
  <RectangleLabels name="label" toName="img" background="green" editable="false" readOnly="true" strokeColor="#000000" canRotate="false" opacity="0.5" strokeWidth="6">
- <Label value="Dentist Correction" background="green" strokeColor="#000000"/>
+ <Label value="Edit Marking" background="green" strokeColor="#000000"/>
  <Label value="1" background="#FF3131" editable="false"  readOnly="true"/>
  <Label value="2" background="#FFFF00" />
  <Label value="Admin Mark" background="#00008B" />
  <!--<Label value="Admin Mark1" background="#00008B" readOnly="false" />-->
  </RectangleLabels>
  </View>
-<View style="flex: 10%;position: absolute;left: 81px;
-margin-top: 90.5px;">
+<View style="flex: 10%;position: absolute;right: 351.5px;
+top: -59.5px;">
  <RectangleLabels name="label1" toName="img" background="red" editable="false" readOnly="true" opacity="0.5" strokeWidth="6" strokeColor="#ff0000">
 <Label value="Admin Correction" background="#FF7420" opacity="0.3" strokeColor="#ff0000" strokeWidth="8"/>
 </RectangleLabels>
@@ -359,12 +370,11 @@ margin-top: 90.5px;">
   <Style>.ant-tag {background-color:#02d959 !important; color:white !important; font-weight:bold !important;border:none !important}
   .ImageView_block__3BAO- {margin-left:-49px}
   </Style>
- <View style="flex: 90%;
- margin-top: -14px;">
- <Style> .ImageView_container__AOBmH img {  height:354px !important }</Style>
+ <View style="margin-top: -14px;">
+ <Style> .ImageView_container__AOBmH img</Style>
 
  <Image name="img" value="$image" width="100%" height="100%" zoom="true" zoomControl="true" ></Image>
- <Style> canvas { width:594px; height:354px !important }</Style>
+ <Style> canvas { width:100%; height:100% !important }</Style>
  </View>
  <View style="flex: 10%;float:right">
  <RectangleLabels name="tag" toName="img">
@@ -543,7 +553,8 @@ margin-top: 90.5px;">
         });
        // this.createLabelStudio()
        document.getElementById('close')?.click();
-        this.router.navigateByUrl('/uploaded-xray/0');
+        // this.router.navigateByUrl('/uploaded-xray/0');
+        window.location.href="/uploaded-xray/0"
         return true;
       } else {
         Swal.fire({
@@ -563,7 +574,7 @@ margin-top: 90.5px;">
     }
   }
   handleClick() {
-    this.router.navigateByUrl('/uploaded-xray');
+    this.router.navigateByUrl('/uploaded-xray/0');
   }
   flag(){
     const flagData={

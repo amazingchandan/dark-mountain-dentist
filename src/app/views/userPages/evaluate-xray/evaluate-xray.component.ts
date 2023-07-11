@@ -17,10 +17,11 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./evaluate-xray.component.scss']
 })
 export class EvaluateXrayComponent {
-  title = 'Dark Mountain - Evaluate X-Ray';
+  title = 'ARTI - Evaluate X-Ray';
   markData: any;
   myThumbnail: any;
   myFullresImage: any;
+  evaluationResult: boolean = true;
   // is equal to default value of input range
   constructor(private route: ActivatedRoute,
     private userService: UserService,
@@ -85,6 +86,7 @@ export class EvaluateXrayComponent {
     //  this.createLabelStudio()
     //  }, 3000);
     //this.createLabelStudio();
+    this.idUser = this.idUser ? this.idUser : this.userInfo.id
   }
   getPhoto() {
     var base64 = localStorage["file"];
@@ -94,6 +96,14 @@ export class EvaluateXrayComponent {
     var file = new File([fileContent], "file name here", {type: fileFormat});
     console.log(file)
     return file;
+ }
+ handleSwitch(text: any){
+  if(text == 'show'){
+    this.evaluationResult = false;
+    this.displayImg();
+  } else if (text == 'hide'){
+    this.evaluationResult = true;
+  }
  }
   getXray(id) {
 
@@ -125,8 +135,8 @@ export class EvaluateXrayComponent {
 
   displayImg() {
     console.log(this.file, this.idUser, this.file?.name, this.file?.type)
+    // console.log(JSON.parse(localStorage.getItem('file')))
     if (this.file) {
-      // console.log(JSON.parse(localStorage.getItem('file')))
       var reader = new FileReader();
       // console.log(JSON.parse(localStorage.getItem('file')));
       reader.readAsDataURL(this.file);
@@ -148,6 +158,7 @@ export class EvaluateXrayComponent {
         this.createLabelStudio2()
         this.forTesting = false
       })
+      this.retrievingFile();
     } else {
       this.appService.updateGetUrl(true);
       console.log(JSON.parse(localStorage.getItem('filepath')));
@@ -213,9 +224,21 @@ export class EvaluateXrayComponent {
 
   }
 
+  retrievingFile(){
+    console.log(JSON.parse(localStorage.getItem('filepath')))
+    let base64 = JSON.parse(localStorage.getItem('filepath'))
+    var base64Parts = base64.split(",");
+    var fileFormat = base64Parts[0].split(";")[1];
+    var fileContent = base64Parts[1];
+    var file = new File([fileContent], "file name here", {type: fileFormat});
+    console.log(file)
+    // return file;
+  }
+
   createLabelStudio2() {
     console.log(true, "THIS IS THIRD TRUE");
     console.log(this.initAIResp)
+    this.evaluationResult = false;
     localStorage.setItem('labels', JSON.stringify(this.initAIResp))
     this.forTesting = true;
     let boxes = []
@@ -252,6 +275,8 @@ export class EvaluateXrayComponent {
           ]
         }
       }
+      console.log((element.coordinates[2] - element.coordinates[0]) * 100.0 / 480)
+      console.log((element.coordinates[3] - element.coordinates[1]) * 100.0 / 480)
 
       console.log(obj)
       return obj;
@@ -264,28 +289,27 @@ export class EvaluateXrayComponent {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 10px 14px; border-radius:4px}</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}
+        top: 0px; padding: 13px 14px; border-radius:4px;}</Style>
+     <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
-     <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;
-     margin-top: -14px; width:566px">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+     <Style> .ls-common</Style>
+      <View style="margin-top: -14px;">
+     <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px ; height:354px !important;  }</Style>
+     <Style> canvas { width:100% ; height:100% !important;  }</Style>
      </View>
-      <View style="float:right;visibility:hidden">
+      <View style="float:right;display:none">
       <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
       <Label value="1" background="#FF3131" />
       <Label value="2" background="#FFFF00" />
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 152px;
-      margin-top: 56px;">
+      <View style="flex: 10%;position: absolute;right: 657.5px;
+      top: -78px;" >
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Dentist Correction" background="green" />
+      <Label value="Edit Marking" background="green" title="Click on edit to start marking X-Ray"/>
       </RectangleLabels>
       </View>
       </View>
@@ -302,7 +326,6 @@ export class EvaluateXrayComponent {
         // "annotations:delete",
         //"predictions:menu",*/
       ],
-
       /* user: {
          pk: 1,
          firstName: "James",
@@ -355,6 +378,7 @@ export class EvaluateXrayComponent {
   }
 
   createLabelStudio3() {
+    this.evaluationResult = false;
     console.log(true, "THIS IS FOURTH TRUE");
     this.initAIResp = JSON.parse(localStorage.getItem('labels'));
     console.log(this.initAIResp)
@@ -394,6 +418,8 @@ export class EvaluateXrayComponent {
           ]
         }
       }
+      console.log((element.coordinates[2] - element.coordinates[0]) * 100.0 / 480)
+      console.log((element.coordinates[3] - element.coordinates[1]) * 100.0 / 480)
 
       console.log(obj)
       return obj;
@@ -406,28 +432,27 @@ export class EvaluateXrayComponent {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 10px 14px; border-radius:4px}</Style>
-     <Style> .App_menu__X-A5N{visibility:hidden}
+        top: 0px; padding: 13px 14px; border-radius:4px; font-size: 14px !important}</Style>
+     <Style> .App_menu__X-A5N{display:none}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
-     <Style> .ls-common {height:354px !important}</Style>
-      <View style="flex: 90%;
-     margin-top: -14px; width:566px">
-     <Style> .ImageView_container__AOBmH img {  height:354px !important; width:566px }</Style>
+     <Style> .ls-common </Style>
+      <View style="margin-top: -14px; display: block;">
+     <Style> .ImageView_container__AOBmH img</Style>
      <Image name="img" value="$image" width="100%" height="100%"></Image>
-     <Style> canvas { width:566px ; height:354px !important;  }</Style>
+     <Style> canvas { width:100% ; height:100% !important;  }</Style>
      </View>
-      <View style="float:right;visibility:hidden">
+      <View style="float:right;display:none">
       <RectangleLabels name="label" toName="img" background="red" opacity="0.5" strokeWidth="6">
       <Label value="1" background="#FF3131" />
       <Label value="2" background="#FFFF00" />
       </RectangleLabels>
 
       </View>
-      <View style="flex: 10%;position: absolute;right: 152px;
-      margin-top: 56px;">
+      <View style="flex: 10%;position: absolute;right: 657.5px;
+      top: -78px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Dentist Correction" background="green" />
+      <Label value="Edit Marking" background="green" title="Click on edit to start marking X-Ray"/>
       </RectangleLabels>
       </View>
       </View>
@@ -700,7 +725,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
 
       });
 
-    console.log(true, "THIS IS SECOND TRUE");
+    console.log(true, "THIS IS SECOND TRUE", this.labelStudio);
 
 
     return this.labelStudio;
@@ -749,7 +774,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <Style>.Segment_block__1fyeG {background:transparent !important; border:none; margin-right:0px !important}</Style>
       <Style> .Hint_main__1Svrz { display:none; }</Style>
       <Style>#label-studio .ant-tag {background-color:#02d959 !important;color:white !important; font-weight:bold !important;border:none !important; position: relative;
-        top: 0px; padding: 10px 14px; border-radius:4px}</Style>
+        top: 0px; padding: 13px 14px; border-radius:4px}</Style>
      <Style> .App_menu__X-A5N{visibility:hidden}
      .Entities_treelabels__1eXl8{height:20px;overflow-y:hidden}
      .Entity_row__3Ii1C {display:none}</Style>
@@ -770,7 +795,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
       <View style="flex: 10%;position: absolute;left: -35%;
       margin-top: 78px;">
       <RectangleLabels name="label1" toName="img" background="red" opacity="0.5" strokeWidth="8">
-      <Label value="Dentist Correction" background="green" />
+      <Label value="Edit" background="green" />
       </RectangleLabels>
       </View>
       </View>
@@ -903,7 +928,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         console.log(markInfo1, AiMarks)
         const xray_info: any = {
           // xray_id: this.id,
-          user_id: this.idUser,
+          user_id: this.idUser ? this.idUser : this.userInfo.id,
           marker: markInfo,
           total_cavities: markInfo.length
         }
@@ -936,7 +961,8 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
               text: "X-Ray evaluated successfully.",
               icon: 'success',
             });
-            this.router.navigateByUrl('/upload-xray/0')
+            // this.router.navigateByUrl('/upload-xray/0')
+            window.location.href="/upload-xray/0"
           } else {
             Swal.fire({
               title: 'Error Occurred',

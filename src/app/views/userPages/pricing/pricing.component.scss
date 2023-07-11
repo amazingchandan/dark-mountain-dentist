@@ -67,7 +67,7 @@ body {
 .headingContainer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .emptyDiv {
@@ -147,7 +147,7 @@ body {
 //   border-bottom-left-radius: 0% !important;
 //   border-top-left-radius: 0% !important;
 //   background-color: #fff !important;
-  
+
 //   color: #02d959 !important;
 // }
 
@@ -155,7 +155,7 @@ body {
 // .yearly-plans-btn:hover {
 //   background-color: transparent !important;
 //   color: #000 !important;
-  
+
 // }
 
 // .monthly-plans-true {
@@ -261,12 +261,14 @@ p.price sub {
   font-weight: 600;
   font-size: 14px;
 }
-.included-sec ul li {
+.included-sec  ul li {
   border: 0;
   padding: 4px 0;
 }
+
 .included-sec ul li i {
   color: #e53a34;
+
   margin-right: 10px;
   font-weight: 700;
 }
@@ -490,3 +492,4 @@ input.lg-check {
 .text-center{text-align: center;}
 
 .swal2-title{    color: #000 !important;     font-size: 1.575em;}
+

@@ -11,6 +11,8 @@ import { UserService } from './user.service';
 })
 export class AppService {
 
+  public accuracySys: any = 0;
+  public accuracySysDent: any = 0;
   public user = {
     firstName: 'Alexander',
     lastName: 'Pierce',
@@ -22,8 +24,14 @@ export class AppService {
 
   updateWindowScreen(msg: any){
     this.windowScreen.next(msg)
-    console.log(msg)
+    // console.log(msg)
   }
+
+  private accuracyPer = new BehaviorSubject(this.accuracySys)
+  currentAccuracy = this.accuracyPer.asObservable();
+
+  private accuracyPerDent = new BehaviorSubject(this.accuracySysDent)
+  currentAccuracyDent = this.accuracyPerDent.asObservable();
 
   private approvalStageMessage = new BehaviorSubject(false);
   currentApprovalStageMessage = this.approvalStageMessage.asObservable();
@@ -38,6 +46,16 @@ export class AppService {
 
   private getUrl = new BehaviorSubject(false)
   currentUrl = this.getUrl.asObservable();
+
+  updateAccuracy(num: any){
+    this.accuracyPer.next(num)
+    console.log(num)
+  }
+
+  updateAccuracyDent(num: any){
+    this.accuracyPerDent.next(num)
+    console.log(num)
+  }
 
   updateGetUrl(url: boolean){
     this.getUrl.next(url)
@@ -62,6 +80,17 @@ export class AppService {
     } else {
       return false
     }
+  }
+
+  getAccuracy(){
+    this.UserService.getAccuracyOfSys().subscribe((res: any) => {
+      console.log(res)
+      if(res.success){
+        this.accuracySys = res.accuracy
+        this.updateAccuracy(res.accuracy)
+        this.updateAccuracyDent(res.accuracy_dentist)
+      }
+    })
   }
 
   login(getLoginDetail) {
@@ -110,7 +139,7 @@ export class AppService {
           let status = res.getData[0]?.subscription_details.status;
           console.log(status)
           if (status == true || new Date(res.getData[0].subscription_details.end_date).getTime() > Date.now()) {
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/upload-xray/0');
           }
 
           //this.router.navigateByUrl('/dashboard');
@@ -119,7 +148,7 @@ export class AppService {
             this.router.navigateByUrl('/pricing/' + getLoginDetail.userInfo.id);
           }
         }
-        else {
+        else if (res.getData[0]?.role == 'admin'){
           this.router.navigateByUrl('/dashboard');
         }
       })

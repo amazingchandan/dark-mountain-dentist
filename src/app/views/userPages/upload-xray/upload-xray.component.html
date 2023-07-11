@@ -51,25 +51,23 @@
     <div class="col-12">
       <div class="row mb-4">
       <h2 class="col mb-n5 fw-bold position-relative pt-2">
-        Upload X-Rays
+        Upload X-Ray
       </h2>
-      <div class="col-7 text-right">
+      <div class="col-7 d-flex justify-content-end align-items-center">
         <button disabled type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
           Evaluate
         </button>
 
-        <button disabled for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3"
-            >Re-Upload X-Ray</button
-          >
+        <button disabled for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3">Re-Upload X-Ray</button>
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->
-          
+
           <button disabled type="button" class="btn btn-danger pd-1 fw-bold  ms-3" (click)="backdropModal()">
             Discard
           </button>
       </div>
-      
+
       </div>
     </div>
 
@@ -85,16 +83,17 @@
           onclick="this.value = null"
           [ngStyle]="fileStyle"
         />
-      <label for="inputFiles" id="file-drag">
+      <label for="inputFiles" id="file-drag" appDragDrop (files)="filesDropped($event)">
         <img id="file-image" src="#" alt="Preview" class="hidden">
         <div id="start">
           <img class="mb-3" src="../../../../assets/images/upload_icon.png" />
-          <p class="mb-1"><strong>Click to upload</strong> or drag and drop</p>
-          <p><small> Maximum file size 50 MB.</small></p>
-          
-          
+          <p class="mb-1"><strong>Click to upload</strong></p>
+          <p class="mb-1">or drag and drop your X-Ray file here</p>
+          <p class="mb-1"><small> Maximum file size 50 MB.</small></p>&nbsp;
+          <div class="col-12">
+            <p class="fs-6 mb-1"><strong>Disclaimers:</strong>&nbsp;The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
+          </div>
         </div>
-        
       </label>
     </div>
 
@@ -106,7 +105,7 @@
           class="inputFile btn btn-primary other-btn pd-1 fw-bold"
           appDragDrop
           (files)="filesDropped($event)"
-          >Upload X-Ray f</label
+          >Upload X-Ray</label
         >
         <input
           type="file"
@@ -150,7 +149,7 @@
               <tbody *ngIf="allData?.length != 0 &&n==0">
                 <tr *ngFor="let data of allData; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-                  <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data?.created_at | date : 'MM/dd/yyyy'}}</td>
                   <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
@@ -204,7 +203,7 @@
               <tbody *ngIf="user_eval?.length != 0 && n==1">
                 <tr *ngFor="let data of this.user_eval; let i = index">
                   <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-                  <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+                  <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
                   <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
                   <!-- <td>{{data.city | titlecase}}</td> -->
                   <!-- <td>{{data.contact_number}}</td> -->
@@ -269,11 +268,11 @@
     </div>
     <div class="col-12 col-md-7">
       <h2 class="fw-bold mb-2">
-        <small>Welcome to ART</small> <br>
-        Revolution Dental Diagnostics with the Power of AI
+        <small>4eDentalAI</small> <br>
+        Welcome Arti is here to assist the doctor
       </h2>
-      <p>Transform your dental practice with Al-driven X-ray analysis, boosting diagnostic accuracy, patient trust, and practice revenue.</p>
-    
+      <p>Artifical Intelligence is here to help identify dental disease. Your dentists is using every tool available to deliver top care to all patients.</p>
+
       <div class="row">
         <div class="col-12 col-md-4">
           <img src="../../../../assets/images/X-Ray-Evaluated.png"/>
@@ -292,10 +291,10 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
+    <!-- <div class="col-12">
       <h6>Disclaimers </h6>
       <p>The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -304,35 +303,44 @@
     <div class="col-12">
       <div class="row mb-4">
       <h2 class="col mb-n5 fw-bold position-relative pt-2">
-        Uploaded X-Rays
+        Uploaded X-Ray
       </h2>
-      <div class="col-7 text-right">
+      <div class="col-7 d-flex justify-content-end align-items-center">
         <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="saveNdEval()">
           Evaluate
         </button>
-
-        <label for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3"
-            >Re-Upload X-Ray</label
-          >
+        <input
+          type="file"
+          id="inputFiles"
+          name="inputFiles"
+          class="file-upload custom-file-input fw-semibold inputFile d-none"
+          (change)="uploadFile($event)"
+          accept="image/*"
+          multiple
+          onclick="this.value = null"
+          [ngStyle]="fileStyle"
+        />
+        <label for="inputFiles" class="btn-save pd-1 cancel-btn fw-bold other-btn ms-3">Re-Upload X-Ray</label>
           <!-- <button type="button" class="btn btn-save pd-1 fw-bold other-btn ms-3" (click)="handleSave()">
             Save&nbsp;<i class="fa-sharp fa-regular fa-floppy-disk ms-2"></i>
           </button> -->
-          
+
           <button type="button" class="btn btn-danger pd-1 fw-bold  ms-3" (click)="backdropModal()">
             Discard
           </button>
       </div>
-      
+
       </div>
     </div>
   </div>
-  <div class="uploaded-img mb-3">
-    <img src={{url}} alt="" class="img-fluid img-height">
+  <!-- center - my-0 mx-auto -->
+  <div class="uploaded-img mb-3 w-50">
+    <img src={{url}} alt="" class="img-fluid img-width">
   </div>
   <div class="row sec-II">
 
     <div class="col-12">
-      <h6>Disclaimers </h6>
+      <h6>Disclaimers: </h6>
           <p>The final diagnosis remains the responsibility of the dentist. ARTI serves as an additional diagnostic tool, enhancing the accuracy and efficiency of dental professionals Decay is deeper then it appears. Your dentist will assess treatment accordingly.</p>
     </div>
   </div>
@@ -340,8 +348,8 @@
 
 
 
-  
-  
+
+
 
 
 <div class="table-responsive resposive-table mb-3" style="position: relative">
@@ -376,7 +384,7 @@
         <tbody *ngIf="allData?.length != 0 &&n==0">
           <tr *ngFor="let data of allData; let i = index">
             <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-            <td>{{data?.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+            <td>{{data?.created_at | date : 'MM/dd/yyyy'}}</td>
             <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
             <!-- <td>{{data.city | titlecase}}</td> -->
             <!-- <td>{{data.contact_number}}</td> -->
@@ -430,7 +438,7 @@
         <tbody *ngIf="user_eval?.length != 0 && n==1">
           <tr *ngFor="let data of this.user_eval; let i = index">
             <td>{{data?.xray_image?.path.split('/')[1]}}</td>
-            <td>{{data.created_at | date : 'MM/dd/yyyy hh:mm a'}}</td>
+            <td>{{data.created_at | date : 'MM/dd/yyyy'}}</td>
             <!-- <td>{{data?.updated_at | date : 'MM/dd/yyyy hh:mm a'}}</td> -->
             <!-- <td>{{data.city | titlecase}}</td> -->
             <!-- <td>{{data.contact_number}}</td> -->
@@ -502,7 +510,7 @@
           ></i>
         </div>
         <div class="modal-body backdrop-body">
-        -- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" > 
+        -- <img [src]="renderImage(this.uploadedXray)" alt="" class="w-100" >
           <img src={{url}} alt="" class="img-fluid img-height">
         </div>
         <div class="modal-footer backdrop-footer">

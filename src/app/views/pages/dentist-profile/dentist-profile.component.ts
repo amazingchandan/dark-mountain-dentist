@@ -21,7 +21,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./dentist-profile.component.scss']
 })
 export class DentistProfileComponent implements OnInit {
-  title = 'Dark Mountain - Profile';
+  title = 'ARTI - Profile';
   dtOptions: DataTables.Settings = {};
   userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
   public userID = localStorage.getItem('id') || "";
@@ -127,9 +127,7 @@ export class DentistProfileComponent implements OnInit {
       contact_number: ['', [Validators.pattern('[- +()0-9]{10,12}')]],
       email: [
         '',
-
         [Validators.pattern('^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+).[a-zA-Z]{2,4}$')],
-
       ],
       address1: ['', [Validators.required]],
       address2: ['', [Validators.required]],
@@ -140,26 +138,22 @@ export class DentistProfileComponent implements OnInit {
       // age: ['', [Validators.required]],
       license_no: ['', [Validators.required]],
     });
-
-
-    this.addSuperForm.controls['email'].disable();
-
     this.dentistId = this.route.snapshot.paramMap.get('dentist_id');
     console.log("dentist id", this.dentistId)
     if (
       this.dentistId != undefined &&
       this.dentistId != null &&
       this.dentistId != ''
+      // this.userInfo.id == this.dentistId
     ) {
       this.editadmin(this.dentistId);
       console.log("errrr", this.dentistId)
-    } else {
+    } else if(this.dentistId == undefined || this.dentistId == null || this.dentistId == ''){
+      this.editadmin(this.userInfo.id);
       // this.addSuperForm.get('status').setValue('active');
     }
-
-    console.log(this.userInfo)
+    this.addSuperForm.controls['email'].disable();
     let jwt = this.userInfo.token
-
     let jwtData = jwt.split('.')[1]
     let decodedJwtJsonData = window.atob(jwtData)
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
@@ -203,7 +197,7 @@ export class DentistProfileComponent implements OnInit {
     this.apiService.getStateByCountries({ name: e.target.value }).subscribe((res: any) => {
       console.log(res.getData[0].regions, this.stateList)
       this.stateList = "-Select State-"
-      this.addSuperForm.controls['state'].setValue("-Select State-");
+      this.addSuperForm.controls['state']?.setValue("-Select State-");
       this.allstates = res.getData[0].regions
       // console.log(this.allstates)
     })
@@ -213,6 +207,7 @@ export class DentistProfileComponent implements OnInit {
     console.log(this.role);
   }
   editadmin(id) {
+    this.allCountryList();
     this.apiService.getUserRecordById(id).subscribe((res: any) => {
       console.log(res, "*****");
       this.userData = res.getData;
@@ -294,12 +289,13 @@ export class DentistProfileComponent implements OnInit {
           city: res.getData[0].city,
         });
         this.addSuperForm.patchValue({
+          country: res.getData[0].country,
+        });
+        this.addSuperForm.controls['country'].setValue(res.getData[0].country)
+        this.addSuperForm.patchValue({
           state : res.getData[0].state,
         });
         this.addSuperForm.get('state').setValue(res.getData[0].state)
-        this.addSuperForm.patchValue({
-          country: res.getData[0].country,
-        });
         this.addSuperForm.patchValue({
           pincode: res.getData[0].pincode,
         });
@@ -355,17 +351,18 @@ export class DentistProfileComponent implements OnInit {
   }
   updateUser() {
     console.log("user")
-    if (this.dentistId != "" && this.dentistId != undefined && this.dentistId != null) {
-      this.apiService.updateUser(this.addSuperForm.value, this.dentistId)
+    if (this.userInfo.id != "" && this.userInfo.id != undefined && this.userInfo.id != null) {
+      this.apiService.updateUser(this.addSuperForm.value, this.userInfo.id)
         .subscribe((res: any) => {
-          console.log("user1")
+          console.log(this.addSuperForm.value, res)
           if (res.success) {
             //this.toastr.success(res.message);
             Swal.fire({
               text: res.message,
               //icon: 'success',
-              imageUrl: '../../../../assets/images/success.png',
+              imageUrl: '../../../../assets/images/System_Accuracy.png',
             });
+            ($("#myProfile") as any).modal("hide");
             //  this.router.navigateByUrl('/registered-dentists');
           } else {
             Swal.fire({
@@ -567,47 +564,48 @@ export class DentistProfileComponent implements OnInit {
     return (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) ? false : true;
   }
   resetUser() {
-    this.addSuperForm.patchValue({
-      first_name: "",
-    });
-    this.addSuperForm.patchValue({
-      last_name: "",
-    });
+    ($("#myProfile") as any).modal("hide");
+    // this.addSuperForm.patchValue({
+    //   first_name: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   last_name: "",
+    // });
 
-    this.addSuperForm.patchValue({
-      contact_number: "",
-    });
+    // this.addSuperForm.patchValue({
+    //   contact_number: "",
+    // });
 
     /* this.addSuperForm.patchValue({
        email: "",
      });*/
 
 
-    this.addSuperForm.patchValue({
-      address1: "",
-    });
+    // this.addSuperForm.patchValue({
+    //   address1: "",
+    // });
 
-    this.addSuperForm.patchValue({
-      address2: "",
-    });
-    this.addSuperForm.patchValue({
-      city: "",
-    });
-    this.addSuperForm.patchValue({
-      state: "",
-    });
-    this.addSuperForm.patchValue({
-      country: "",
-    });
-    this.addSuperForm.patchValue({
-      pincode: "",
-    });
-    this.addSuperForm.patchValue({
-      age: '',
-    });
-    this.addSuperForm.patchValue({
-      license_no: '',
-    })
+    // this.addSuperForm.patchValue({
+    //   address2: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   city: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   state: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   country: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   pincode: "",
+    // });
+    // this.addSuperForm.patchValue({
+    //   age: '',
+    // });
+    // this.addSuperForm.patchValue({
+    //   license_no: '',
+    // })
 
 
   }
@@ -701,7 +699,7 @@ export class DentistProfileComponent implements OnInit {
             }
           },
           items: [{
-            name: 'Dark Mountain',
+            name: 'ARTI',
             quantity: '1',
             category: 'DIGITAL_GOODS',
             unit_amount: {

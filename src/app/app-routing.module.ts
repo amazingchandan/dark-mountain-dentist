@@ -34,6 +34,7 @@ import { NonUserAuthGuard } from './guard/non-user-auth.guard';
 import { PricingGuardGuard } from './guard/pricing-guard.guard';
 import { PaySuccessComponent } from './views/pages/pay-success/pay-success.component';
 import { PayFailureComponent } from './views/pages/pay-failure/pay-failure.component';
+import { UploadListComponent } from './views/userPages/upload-list/upload-list.component';
 const routes: Routes = [
 
   // {
@@ -337,6 +338,14 @@ const routes: Routes = [
         },
         canActivate: [UserAuthGuard, UserRoleDentistGuard, SubsAuthGuard]
       },
+      {
+        path: 'upload-xray-list',
+        component: UploadListComponent,
+        data: {
+          title: 'Upload X-Rays'
+        },
+        canActivate: [UserAuthGuard, UserRoleDentistGuard, SubsAuthGuard]
+      }
 
 
     ],
