@@ -164,18 +164,18 @@
   width: 100%;
   padding: 2rem 1.5rem;
   text-align: center;
-  background: #e9f6ee;
+  background: rgb(15 47 72 / 56%) !important;
   border-radius: 7px;
-  border: 1px dashed #00d957;
+  border: 1px dashed #e53a34;
   transition: all 0.2s ease;
   user-select: none;
   cursor: pointer;
 }
 .uploader label:hover {
-  border-color: #00d957;
+  border-color: #e53a34;
 }
 .uploader label.hover {
-  border: 1px dashed #00d957;
+  border: 1px dashed #e53a34;
   box-shadow: inset 0 0 0 6px #eee;
 }
 .uploader label.hover #start i.fa {

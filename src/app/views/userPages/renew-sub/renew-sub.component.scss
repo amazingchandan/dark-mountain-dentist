@@ -81,13 +81,33 @@
     align-items: center;
     justify-content: flex-end;
   }
-
+ 
   .included-sec  ul li {
     border: 0;
     padding: 4px 0;
   }
   .included-sec  ul li i {
-    color: #02d959;
+    color: #e53a34;
     margin-right: 10px;
     font-weight: 700;
   }
+  .plantype {
+    border: 2px solid #e53a34;
+    padding: 2px;
+    border-radius: 40px;
+  }
+  .plantype .btn{
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 40px !important;
+    padding: 6px 19px !important;
+    font-size: 13px;
+    margin: 0px;
+  }
+  .plantype .btn.yearly-plans-true,.plantype .btn.monthly-plans-true{background: #000 !important; color: #fff !important;}
+
+  app-dashboard .wrapper .card-body h4, app-dashboard .wrapper .card-body h6, app-dashboard .wrapper .card-body .price {
+    color: #043049 !important;
+}
+.card-body{max-width: 350px;}

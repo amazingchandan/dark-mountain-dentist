@@ -3,6 +3,7 @@
 </h2>
 
 <div class="w-100 d-flex justify-content-center mb-4">
+  <div class="plantype">
   <button (click)="monthly()" [class]="
       monthlyPlan
         ? 'btn monthly-plans-true pd-1 fw-semibold'
@@ -17,6 +18,7 @@
     ">
     Yearly Plans
   </button>
+</div>
 </div>
 <div class="sub-container">
   <div *ngIf="monthlyAllData?.length != 0" class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">

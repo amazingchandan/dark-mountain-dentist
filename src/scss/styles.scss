@@ -83,16 +83,16 @@ $enable-rtl: true;
 .btn,
 .dt-button {
   color: white !important;
-  background-color: #00d957 !important;
-  border-color: #00d957 !important;
+  background-color: #e53a34 !important;
+  border-color: #e53a34 !important;
   border-radius: 5px;
   padding: 4px 3px !important;
 }
 .btn:hover,
 .dt-button:hover {
   color: #fff !important;
-  background-color: #02c24f !important;
-  border-color: #02c24f !important;
+  background-color: #bd231e !important;
+  border-color: #bd231e !important;
 }
 .pd-1 {
   padding: 10px 14px !important;
@@ -165,6 +165,26 @@ $enable-rtl: true;
 .header-nav ul.list-group.list-group-flush .list-group-item.myprofile svg {
   font-size: 17px;
 }
+
+app-dashboard .wrapper{
+  background: #004380;
+}
+.wrapper app-default-footer{
+  background: #004380;
+  border: none;
+}
+app-dashboard .wrapper #label-studio .ant-tag{background-color: #e53a34 !important;}
+app-dashboard .wrapper #label-studio .ant-tag:hover{ opacity: 1;   background-color: #bd231e !important;  border-color: #bd231e !important;}
+app-dashboard .wrapper h1,
+app-dashboard .wrapper h2,
+app-dashboard .wrapper h3,
+app-dashboard .wrapper h4,
+app-dashboard .wrapper h5,
+app-dashboard .wrapper h6,
+app-dashboard .wrapper p{color: #ffffff !important;}
+app-dashboard .wrapper .card-body h4, app-dashboard .wrapper .card-body h6, app-dashboard .wrapper .card-body .price {
+  color: #043049 !important;
+}
 .Subscription-popup .modal-header {
   border-bottom: none;
 }
@@ -226,7 +246,7 @@ $enable-rtl: true;
   margin-right: 10px;
 }
 .logo_and_info .info li .releted-info h6 {
-  color: #00d957;
+  color: #fff;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 0;
@@ -259,6 +279,7 @@ $enable-rtl: true;
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 0.5rem !important;
+  margin-top: 10px;
 }
 
 .evaluate-xray .btn-danger {
@@ -358,12 +379,12 @@ table thead {
 // }
 
 input:checked {
-  background-color: #00d957 !important;
-  border-color: #00d957 !important;
+  background-color: #e53a34 !important;
+  border-color: #e53a34 !important;
 }
 
 .swal2-actions button {
-  background-color: #00d957 !important;
+  background-color: #e53a34 !important;
 }
 
 input[type="text"]:focus,
@@ -374,7 +395,7 @@ input[type="checkbox"]:focus,
 .form-control:focus,
 .dataTables_wrapper .dataTables_filter input:focus,
 select:focus {
-  box-shadow: 0px 0px 2px 4px #02d9583e !important;
+  box-shadow: 0px 0px 2px 1px #009ace !important;
   border: 1px solid #ced4da !important;
   outline: none;
 }
@@ -802,13 +823,13 @@ div:has(div:ImageView_container__AOBmH){
   min-width: fill-available;
 }
 .login-register .signup {
-  color: #00d957 !important;
+  color: #009ace !important;
 }
 .login-register .bg {
   background-color: #ffffff;
 }
 .login-register .mountain-color {
-  color: #00d957;
+  color: #009ace;
   font-size: inherit !important;
 }
 .login-register .right-sec {
@@ -819,12 +840,12 @@ div:has(div:ImageView_container__AOBmH){
 .login-register .right-sec .wp-card.card {
   width: 60% !important;
   padding: 50px;
-  background: #ffffff4f;
+  background: #00225f;
   border-radius: 0 !important;
 }
 .login-register .right-sec p.sub-title {
   font-size: 20px;
-  color: #00d957;
+  color: #ff0;
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   margin-bottom: 10px;
@@ -833,10 +854,11 @@ div:has(div:ImageView_container__AOBmH){
   font-size: 38px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  color: #000000;
+  color: #fff;
 }
 .login-register .right-sec p.des {
   font-size: 16px;
+  color: #d9d9d9;
 }
 .login-register .right-sec .btn {
   min-width: auto;
