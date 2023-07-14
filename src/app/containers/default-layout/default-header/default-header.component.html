@@ -67,7 +67,7 @@
             </div>
             <div class="releted-info" *ngIf="accuracyOfSys != 0; else dotheaccuracy">
               <h6>{{((+'98.7' + +accuracyOfSys)/2).toFixed(2)}}%</h6>
-              <p>Accuracy by  ARTI </p>
+              <p>Avg. Accuracy by  ARTI </p>
             </div>
             <ng-template #dotheaccuracy>
               <div class="releted-info">
