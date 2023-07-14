@@ -106,7 +106,7 @@
                 <img src="../../../../assets/images/X-Ray-Evaluated.png" />
               </div>
               <div class="releted-info">
-                <h6>{{ xrayCount }}</h6>
+                <h6>{{ 153683 + this.totalCount }}</h6>
                 <p>X-Rays Evaluated</p>
               </div>
             </a>
@@ -124,7 +124,7 @@
               </div>
             </a>
           </li>
-          <li class="nav-item" [routerLink]="'subscription-list'">
+          <!-- <li class="nav-item" [routerLink]="'subscription-list'">
             <a class="nav-link d-flex">
               <div class="icon">
                 <img src="../../../../assets/images/Identified_By_AI.png" />
@@ -134,7 +134,7 @@
                 <p>Subscription Plans</p>
               </div>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link d-flex">
               <div class="icon">
@@ -152,7 +152,7 @@
               </ng-template>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link d-flex">
               <div class="icon">
                 <img src="../../../../assets/images/System_Accuracy.png" />
@@ -168,7 +168,7 @@
                 </div>
               </ng-template>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </ng-template>
@@ -338,6 +338,17 @@
       <!-- Menu Footer-->
 
       <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item myprofile"
+          role="button"
+          [routerLink]="'dashboard'"
+          *ngIf="userInfo.role != 'dentist'"
+        >
+          <a>
+            <svg cIcon name="cilNotes"></svg>
+            Dashboard
+          </a>
+        </li>
         <li
           class="list-group-item myprofile"
           data-bs-toggle="modal"

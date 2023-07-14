@@ -36,6 +36,7 @@
                 <tr>
                   <th class="text-nowrap">Dentist Name</th>
                   <th>License Number</th>
+                  <th>Accuracy</th>
                   <th>City</th>
 
                   <th class="text-nowrap">Subscription End Date</th>
@@ -52,6 +53,7 @@
                     {{ user.last_name | titlecase }}
                   </td>
                   <td>{{ user.license_no }}</td>
+                  <td>{{ user.accuracy || 0 }}%</td>
                   <td>{{ user.city | titlecase }}</td>
 
                   <td class="">
@@ -92,6 +94,7 @@
                     {{ user.last_name | titlecase }}
                   </td>
                   <td>{{ user.license_no }}</td>
+                  <td>{{ user.accuracy || 0 }}%</td>
                   <td>{{ user.city | titlecase }}</td>
 
                   <td class="">
@@ -132,6 +135,7 @@
                     {{ user.last_name | titlecase }}
                   </td>
                   <td>{{ user.license_no }}</td>
+                  <td>{{ user.accuracy || 0 }}%</td>
                   <td>{{ user.city | titlecase }}</td>
 
                   <td class="">
@@ -170,6 +174,7 @@
                   <td colspan="8" class="no-data-available text-center">
                     No data
                   </td>
+                  <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
                   <td colspan="0" class="no-data-available p-0"></td>
