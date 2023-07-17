@@ -10,9 +10,9 @@
           <h6 class="text-white  my fw-bold" >${{this.amtEarned}}</h6>
         </div>
       </ng-template>
-      <h6 class="text-white rotate fw-bold title-pos m-0 py-2 px-4 rounded-3 text-center">
+      <!-- <h6 class="text-white rotate fw-bold title-pos m-0 py-2 px-4 rounded-3 text-center">
       Click Here
-      </h6>
+      </h6> -->
       <img src="../../../../assets/images/money.png" class="image my"  >
       <!-- <i class="fa-solid fa-circle-dollar-to-slot image my"></i> -->
     </c-widget-stat-a>
@@ -41,7 +41,7 @@
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <div class="d-flex justify-content-between flex-column div-height">
-          <h6 class="text-white  my fw-bold"  [routerLink]="'/subscription-list'">Number Of Subscription Plans</h6>
+          <h6 class="text-white  my fw-bold"  [routerLink]="'/subscription-list'">Subscription Plans</h6>
           <h6 class="text-white  my fw-bold"  [routerLink]="'/subscription-list'">{{this.planCount}}</h6>
         </div>
       </ng-template>
@@ -78,7 +78,7 @@
         <div class="d-flex justify-content-between flex-column div-height">
 
           <h6 class="text-white fw-bold my "  [routerLink]="'/uploaded-xray/2'">
-            Number of X-Rays Evaluated
+             X-Rays Evaluated
           </h6>
           <h6 class="text-white fw-bold my "  [routerLink]="'/uploaded-xray/2'">
             {{this.xrayCount}}
@@ -115,7 +115,7 @@
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <div class="d-flex justify-content-between flex-column div-height">
-          <h6 class="text-white fw-bold my "  [routerLink]="'/uploaded-xray/1'">Pending Evaluation</h6>
+          <h6 class="text-white fw-bold my "  [routerLink]="'/uploaded-xray/1'">Pending Evaluations</h6>
           <h6 class="text-white fw-bold my "  [routerLink]="'/uploaded-xray/1'">{{this.xrayNotCount}}</h6>
         </div>
       </ng-template>
@@ -244,5 +244,29 @@
 
     </c-widget-stat-a>
   </c-col>
+
+  
+
+  <c-col sm="6" xl="3" class="mb-3 min-h">
+    <c-widget-stat-a
+      [title]="''"
+      class="mb-4 p-2 bg-success h-100 position-relative"
+    >
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <div class="d-flex justify-content-between flex-column div-height">
+          <h6 class="text-white  my fw-bold" >Cavities Detected by ARTI</h6>
+          <h6 class="text-white  my fw-bold" >99</h6>
+        </div>
+      </ng-template>
+      <h6 class="text-white rotate fw-bold title-pos m-0 py-2 px-4 rounded-3 text-center">
+       Click Here
+      </h6>
+      <img src="../../../../assets/images/done.png" class="image my" >
+     
+    </c-widget-stat-a>
+  </c-col>
+
+
+
 </c-row>
 

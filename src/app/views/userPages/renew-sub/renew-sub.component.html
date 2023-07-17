@@ -21,9 +21,8 @@
 </div>
 </div>
 <div class="sub-container">
-  <div *ngIf="monthlyAllData?.length != 0" class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
-    <div *ngFor="let data of monthlyAllData; let i = index">
-      <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-0 p-2 w-100">
+  <div *ngIf="monthlyAllData?.length != 0" class="row align-items-start justify-content-center flex-wrap inside-sub-container">
+      <div *ngFor="let data of monthlyAllData; let i = index" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-0 p-2 w-100">
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
           <div class="card-body text-start d-flex flex-column justify-content-between">
@@ -91,14 +90,12 @@
             <div class="position-absolute bottom-0 start-0 end-0"></div>
           </div>
         </div>
-      </div>
+      
     </div>
   </div>
 
-  <div *ngIf="yearlyAllData?.length != 0"
-    class="d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
-    <div *ngFor="let data of yearlyAllData; let i = index">
-      <div class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-0 p-2 w-100">
+  <div *ngIf="yearlyAllData?.length != 0" class="w-100 d-flex align-items-center justify-content-center flex-wrap inside-sub-container">
+      <div *ngFor="let data of yearlyAllData; let i = index" class="col-3 col-sm-3 col-md-3 col-lg-2 myCard m-0 p-2 w-100">
 
         <!-- <div class="col-md-3 mb-3"></div> -->
         <div class="card h-100 p-2 hover-effect">
@@ -163,8 +160,7 @@
           </div>
         </div>
       </div>
-    </div>
-
+    
   </div>
 </div>
 <div class="d-flex justify-content-center align-items-center pricingFooter mb-3">

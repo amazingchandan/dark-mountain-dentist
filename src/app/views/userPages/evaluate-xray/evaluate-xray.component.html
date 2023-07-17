@@ -29,8 +29,8 @@
 
   <div class="row mt-4 mb-2">
     <!-- *ngIf="!forTesting" -->
-    <div class="col-6 d-flex p-0">
-      <!-- <button
+    <!--<div class="col-6 d-flex p-0">
+       <button
         type="button"
         class="btn btn-primary save-btn pd-1 fw-bold other-btn evaluate-btn ms-2"
         [class]="evaluationResult ? 'hide-btn' : ''"
@@ -45,10 +45,10 @@
         (click)="handleSwitch('hide')"
       >
         Original X-Ray
-      </button> -->
-    </div>
+      </button> 
+    </div>-->
     <div
-      class="col-6 d-flex justify-content-end align-items-center icon-sec p-0"
+      class="col-12 d-flex justify-content-end align-items-center icon-sec p-0"
       *ngIf="!forTesting"
     >
       <button
@@ -84,7 +84,7 @@
         (click)="refresh()"
         title="Remove all your marking"
       >
-        Reset Marking
+      Reset to AI Marking
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -128,7 +128,7 @@
 
       <button
         type="button"
-        class="btn me-2 btn-danger fw-bold other-btn pd-1 ms-2 discard h-100"
+        class="btn me-0 btn-danger fw-bold other-btn pd-1 ms-2 discard h-100"
         id="close"
         (click)="handleClick('/upload-xray/0')"
         title="Discard this evaluation"
