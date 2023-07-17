@@ -998,3 +998,22 @@ div#datatable_info {
 .price-font {
   font-size: 14px !important;
 }
+.modal-dialog .btn-close,.modal .modal-header button.btn-close, .btn-close {
+  z-index: 99999999;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  left: auto;
+  font-size: 16px;
+}
+app-default-header .logo_and_info {
+  width: 73%;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1300px) {
+  .header {
+    background-image: linear-gradient(90deg, white 10%, white, #0f2f48 9%, #0f2f48);
+}
+}
