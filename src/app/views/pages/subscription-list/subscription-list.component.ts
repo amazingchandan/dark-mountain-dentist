@@ -283,12 +283,12 @@ export class SubscriptionListComponent implements OnInit {
         "billing_cycles": [
           {
             "frequency": {
-                "interval_unit": "DAY",
+                "interval_unit": "MONTH",
                 // "interval_count": 1
             },
             "tenure_type": "TRIAL",
             "sequence": 1,
-            "total_cycles": 3,
+            "total_cycles": 1,
             "pricing_scheme": {
                 "fixed_price": {
                     "value": "0",

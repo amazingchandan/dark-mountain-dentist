@@ -36,6 +36,7 @@ export class DentistProfileComponent implements OnInit {
   xrayData: any = {};
   country: any;
   paypal_ID: any;
+  check_Id:any;
   // state: any;
   // userInfo:any;
   role: any;
@@ -88,6 +89,7 @@ export class DentistProfileComponent implements OnInit {
     this.addSuperForm = this.formBuilder.group({})
   }
   ngOnInit(): void {
+    this.check_Id = this.route.snapshot.paramMap.get('dentist_id');
     this.addSuperForm = new FormGroup({
       firstname: new FormControl(),
       lastname: new FormControl(),
@@ -565,6 +567,11 @@ export class DentistProfileComponent implements OnInit {
   }
   resetUser() {
     ($("#myProfile") as any).modal("hide");
+    // console.log("CLOSE", this.check_Id);
+    if(this.check_Id){
+      console.log("CLOSE", this.check_Id);
+      this.router.navigate(['/registered-dentists'])
+    }
     // this.addSuperForm.patchValue({
     //   first_name: "",
     // });

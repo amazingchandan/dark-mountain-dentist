@@ -39,7 +39,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex">
+          <a class="nav-link d-flex anchor-tag">
             <div class="icon">
               <img src="../../../../assets/images/Identified_By_AI.png" />
             </div>
@@ -61,7 +61,7 @@
           </a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link d-flex">
+          <a class="nav-link d-flex anchor-tag">
             <div class="icon">
               <img src="../../../../assets/images/System_Accuracy.png" />
             </div>
@@ -89,7 +89,18 @@
           </li>
         </ul> -->
         <ul class="navbar justify-content-start info mb-0 p-0">
-          <li class="nav-item">
+          <li class="nav-item" [routerLink]="'/dashoard'">
+            <a class="nav-link d-flex">
+              <div class="icon">
+                <img src="../../../../assets/images/X-Ray-Evaluated.png" />
+              </div>
+              <div class="releted-info">
+                <h6>Home</h6>
+                <p>Dashboard</p>
+              </div>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link d-flex">
               <div class="icon">
                 <img src="../../../../assets/images/X-Ray-Evaluated.png" />
@@ -99,7 +110,7 @@
                 <p>Revenue Earned</p>
               </div>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item" [routerLink]="'uploaded-xray/0'">
             <a class="nav-link d-flex">
               <div class="icon">
@@ -108,6 +119,17 @@
               <div class="releted-info">
                 <h6>{{ 153683 + this.totalCount }}</h6>
                 <p>X-Rays Evaluated</p>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex anchor-tag">
+              <div class="icon">
+                <img src="../../../../assets/images/Identified_By_AI.png" />
+              </div>
+              <div class="releted-info">
+                <h6>{{452983 + +this.countCavity}}</h6>
+                <p>Cavities Detected by AI</p>
               </div>
             </a>
           </li>
@@ -136,7 +158,7 @@
             </a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link d-flex">
+            <a class="nav-link d-flex anchor-tag">
               <div class="icon">
                 <img src="../../../../assets/images/System_Accuracy.png" />
               </div>
@@ -342,7 +364,7 @@
           class="list-group-item myprofile"
           role="button"
           [routerLink]="'dashboard'"
-          
+          *ngIf="userInfo.role == 'admin'"
         >
           <a>
             <svg cIcon name="cilNotes"></svg>
@@ -391,8 +413,8 @@
           </a>
         </li>
 
-        <li class="list-group-item" 
-        *ngIf="userInfo.role == 'dentist'" 
+        <li class="list-group-item"
+        *ngIf="userInfo.role == 'dentist'"
         role="button"
         [routerLink]="'/renew-sub/'+this.userInfo.id"
         >

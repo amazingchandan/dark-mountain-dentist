@@ -1017,3 +1017,7 @@ app-default-header .logo_and_info {
     background-image: linear-gradient(90deg, white 10%, white, #0f2f48 9%, #0f2f48);
 }
 }
+
+.anchor-tag {
+  cursor: context-menu !important;
+}

@@ -17,7 +17,7 @@
 .card.hover-effect {
   // box-shadow: 0px 0px 8px 0px #e6e6e6 !important;
    box-shadow: none !important;
-  
+
   transform: inherit;
   border-color: #dddddd !important;
     border-radius: 6px !important;
@@ -30,6 +30,10 @@
 }
 .card.hover-effect p,.card.hover-effect h4{
   color: #000 !important;
+}
+
+.card.hover-effect .text-highlight {
+  color: #004380 !important;
 }
 
 .hover-effect:hover button {
@@ -147,7 +151,7 @@ body {
 //   border-bottom-left-radius: 0% !important;
 //   border-top-left-radius: 0% !important;
 //   background-color: #fff !important;
-  
+
 //   color: #02d959 !important;
 // }
 
@@ -155,7 +159,7 @@ body {
 // .yearly-plans-btn:hover {
 //   background-color: transparent !important;
 //   color: #000 !important;
-  
+
 // }
 
 // .monthly-plans-true {

@@ -52,8 +52,12 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.appService.getAccuracy();
     console.log(this.userInfo)
     this.userfirst();
+    // this.cavityCount();
+    setInterval(()=>{
+      this.allCountsAdmin();
+      this.allCounts();
+    }, 15000)
     this.allCounts();
-    this.cavityCount();
     this.allCountsAdmin();
     this.appService.currentUrl.subscribe((url: boolean) => {
       this.changeUrl = url
@@ -62,16 +66,17 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.accuracyData()
   }
   accuracyData(){
+
+  }
+  allCounts() {
     this.appService.currentAccuracy.subscribe((acc: any) => {
-      console.log(acc)
+      console.log(acc, "ACCURACY")
       this.accuracyOfSys = acc
     })
     this.appService.currentAccuracyDent.subscribe((dent: any) => {
       console.log(dent)
       this.accuracyOfDent = dent
     })
-  }
-  allCounts() {
     this.userService.noOfXrayEvalByID(this.userInfo.id).subscribe((res: any) => {
       console.log(res, res.dentist)
       if (res.success) {
@@ -111,16 +116,22 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
       console.log(this.count)
     })
-  }
-  cavityCount() {
     this.userService.handleTotalCavityCount().subscribe((res: any) => {
-      console.log(res, res.AICountF)
+      console.log(res, res.AICountF, "TOTAL CAVITY")
       if (res.success) {
+        this.appService.updateCavitiesDetectedAI(res.AICountF)
+        this.appService.currentCavitiesDetectedAI.subscribe((res: any) => {
+          console.log("UPDATIG HERE", res)
+          // this.countCavity = res.AICountF
+        })
         this.countCavity = res.AICountF
         this.totalCount = res.length
         // this.countDCavity = res.
       }
     })
+  }
+  cavityCount() {
+
   }
   allCountsAdmin() {
     this.userService.totAmtEarned().subscribe((res: any) => {

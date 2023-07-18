@@ -954,6 +954,7 @@ fetch("https://admin-scm.blahworks.tech/upload/image", {
         formData.append('user_id', this.idUser);
         formData.append('ai_data', JSON.stringify(ai_data));
         formData.append('xray_data', JSON.stringify(xray_info));
+        // return console.log(this.file, this.idUser, ai_data, xray_info);
         this.userService.sendXrayData(formData).subscribe((res: any) => {
           console.log(res)
           if (res.success) {

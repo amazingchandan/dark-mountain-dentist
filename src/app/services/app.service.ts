@@ -27,6 +27,9 @@ export class AppService {
     // console.log(msg)
   }
 
+  private cavitiesDetectedAI = new BehaviorSubject(452983)
+  currentCavitiesDetectedAI = this.cavitiesDetectedAI.asObservable();
+
   private accuracyPer = new BehaviorSubject(this.accuracySys)
   currentAccuracy = this.accuracyPer.asObservable();
 
@@ -46,6 +49,11 @@ export class AppService {
 
   private getUrl = new BehaviorSubject(false)
   currentUrl = this.getUrl.asObservable();
+
+  updateCavitiesDetectedAI(num: any){
+    this.cavitiesDetectedAI.next(num)
+    console.log("CAVITY UPDATE", num)
+  }
 
   updateAccuracy(num: any){
     this.accuracyPer.next(num)
@@ -84,7 +92,7 @@ export class AppService {
 
   getAccuracy(){
     this.UserService.getAccuracyOfSys().subscribe((res: any) => {
-      console.log(res)
+      console.log(res, "ACCURACY ALL")
       if(res.success){
         this.accuracySys = res.accuracy
         this.updateAccuracy(res.accuracy)
