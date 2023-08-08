@@ -43,9 +43,7 @@ export class DefaultLayoutComponent {
   localHost: any;
   paypal_user_ID: any;
   filterLink: any;
-  public perfectScrollbarConfig = {
-    suppressScrollX: true,
-  };
+
 
   constructor(private appService: AppService, private router: Router, private route: ActivatedRoute, private userService: UserService, private formBuilder: FormBuilder, private spinner: NgxSpinnerService) {
     this.URL = this.router.url.split('/')[0]

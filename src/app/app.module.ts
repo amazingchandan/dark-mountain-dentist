@@ -12,11 +12,6 @@ import { environment } from '../environments/environment';
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
-  PerfectScrollbarModule,
-} from 'ngx-perfect-scrollbar';
 
 
 import {  } from 'ngx-toastr';
@@ -80,9 +75,6 @@ import { ResetPasswordComponent } from './views/pages/reset-password/reset-passw
 import { UploadListComponent } from './views/userPages/upload-list/upload-list.component'
 // import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true,
-};
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -104,7 +96,6 @@ const APP_CONTAINERS = [
     HeaderModule,
     SidebarModule,
     IconModule,
-    PerfectScrollbarModule,
     NavModule,
     ButtonModule,
     RecaptchaModule,
@@ -137,10 +128,6 @@ const APP_CONTAINERS = [
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy,
-    },
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     IconSetService,
     Title,
