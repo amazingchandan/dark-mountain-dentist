@@ -1,4 +1,4 @@
-import { NgModule, forwardRef } from '@angular/core';
+import { NgModule, forwardRef, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {  LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +34,7 @@ import {
 } from './containers';
 
 // import owl
-import { CarouselModule } from 'ngx-owl-carousel-o';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import {
   AvatarModule,
@@ -63,7 +63,8 @@ import {
 // paypal
 import { NgxPayPalModule } from 'ngx-paypal';
 
-import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
+// import Ngx
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { PricingComponent } from './views/userPages/pricing/pricing.component';
@@ -124,7 +125,7 @@ const APP_CONTAINERS = [
     DataTablesModule,
     HttpClientModule,
     FormsModule,
-    CarouselModule,
+    // CarouselModule,
     NgxImageZoomModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
@@ -160,6 +161,7 @@ const APP_CONTAINERS = [
     // }
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
 }

@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +30,7 @@ import { RecaptchaModule, RecaptchaFormsModule, RecaptchaV3Module, RECAPTCHA_V3_
 import { environment } from 'src/environments/environment';
 import { PaySuccessComponent } from './pay-success/pay-success.component';
 import { PayFailureComponent } from './pay-failure/pay-failure.component';
-import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
@@ -74,6 +75,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     NgxPayPalModule,
     NgxSpinnerModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // providers: [
   //   {
   //     provide: RECAPTCHA_V3_SITE_KEY,

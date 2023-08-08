@@ -20,62 +20,62 @@ export class UserService {
   getPlanById: string;
   updateUserById: string;
   updatePlanById: String;
-  userRegister:string;
-  userSubscription:string;
-  uploadXray:string;
+  userRegister: string;
+  userSubscription: string;
+  uploadXray: string;
   forgotPass: string;
   otpVerify: string;
   setNewPass: string;
-  cancelUserSub:string;
-  userXrayById:string;
-  xrayList:string;
+  cancelUserSub: string;
+  userXrayById: string;
+  xrayList: string;
   getXrayById: string;
   setEvalData: string;
   setEvalDataFromAdmin: any;
-  getEvaluationById:string;
+  getEvaluationById: string;
   testApi: string;
   subscriptionorderuser: string;
   subscriptioncompleteorder: string;
 
   paypalReq: string;
   getUserAllSubsById: any;
-  AIData:string;
-  newAIData:String;
-  flag:String;
-  subscriberCount:String;
+  AIData: string;
+  newAIData: String;
+  flag: String;
+  subscriberCount: String;
   xrayEvalCount: String;
-  planCount : String;
-  amtEarned : String;
-  xrayNotEval :String;
-  unsubscriberCount : String;
- totXrayById : String;
- totXrayEvalById:String;
- totCavityByAI : String;
- userPlanById :String;
- rstPwd : String;
- renewSub : String;
- sub_expire_time:String;
- deleteXray: String;
- setXrayData: String;
- deleteSubs: String;
- planDeleteErr: String;
- activeSubs: String;
- accuracyOfSys: String;
- totalCavityCount: String;
+  planCount: String;
+  amtEarned: String;
+  xrayNotEval: String;
+  unsubscriberCount: String;
+  totXrayById: String;
+  totXrayEvalById: String;
+  totCavityByAI: String;
+  userPlanById: String;
+  rstPwd: String;
+  renewSub: String;
+  sub_expire_time: String;
+  deleteXray: String;
+  setXrayData: String;
+  deleteSubs: String;
+  planDeleteErr: String;
+  activeSubs: String;
+  accuracyOfSys: String;
+  totalCavityCount: String;
 
- // ! paypal subscription
- paypalToken: String;
- paypalProdID: String;
- paypalPlans: String;
- paypalUserSubs: String;
- failureTransaction: String;
+  // ! paypal subscription
+  paypalToken: String;
+  paypalProdID: String;
+  paypalPlans: String;
+  paypalUserSubs: String;
+  failureTransaction: String;
 
- // * country api
- country: String;
- states: String;
+  // * country api
+  country: String;
+  states: String;
   constructor(private http: HttpClient) {
     this.apiHost = environment.API_HOST;
-    this.payApi = environment.PAY_API;
+    this.payApi = environment.PAYPAL_API;
     this.login = this.apiHost + `login`;
     this.logout = this.apiHost + `admin/logout`;
     this.addAdmin = this.apiHost + 'adminRegister';
@@ -99,29 +99,29 @@ export class UserService {
     this.getXrayById = this.apiHost + 'getXrayById';
     this.setEvalData = this.apiHost + 'setEvaluatedData';
     this.setEvalDataFromAdmin = this.apiHost + 'setEvaluatedDataFromAdmin'
-    this.getEvaluationById = this.apiHost +'getEvaluationById';
+    this.getEvaluationById = this.apiHost + 'getEvaluationById';
     this.testApi = this.apiHost + 'testApi';
     this.subscriptionorderuser = this.apiHost + 'order';
     this.subscriptioncompleteorder = this.apiHost + 'subscriptionOrder';
     this.getUserAllSubsById = this.apiHost + 'getUserAllSubListById'
     this.paypalReq = this.apiHost + 'create_payment';
-    this.AIData = this.apiHost +'loadAIMarking';
-    this.newAIData = this. apiHost + 'updateAIMarking';
+    this.AIData = this.apiHost + 'loadAIMarking';
+    this.newAIData = this.apiHost + 'updateAIMarking';
     this.flag = this.apiHost + 'setFlag';
-    this.subscriberCount = this.apiHost +'noOfSubscriber';
-    this.xrayEvalCount = this.apiHost +'noOfXrayEval';
+    this.subscriberCount = this.apiHost + 'noOfSubscriber';
+    this.xrayEvalCount = this.apiHost + 'noOfXrayEval';
     this.planCount = this.apiHost + 'noOfPlans';
     this.amtEarned = this.apiHost + 'amtEarned';
     this.xrayNotEval = this.apiHost + 'noOfXrayNotEval';
     this.unsubscriberCount = this.apiHost + 'noOfUnsubscriber';
     this.totXrayById = this.apiHost + 'noOfXrayById';
     this.totXrayEvalById = this.apiHost + 'noOfXrayEvalById';
-    this.totCavityByAI =this.apiHost + 'noOfCavitiesByAIofUser';
+    this.totCavityByAI = this.apiHost + 'noOfCavitiesByAIofUser';
     this.accuracyOfSys = this.apiHost + 'accuracyPercentageSystem';
     this.userPlanById = this.apiHost + 'userPlanById';
     this.rstPwd = this.apiHost + 'resetPassword';
     this.renewSub = this.apiHost + 'getSubscriptionRenew';
-    this.sub_expire_time=this.apiHost + 'sub-expiration-time'
+    this.sub_expire_time = this.apiHost + 'sub-expiration-time'
     this.deleteXray = this.apiHost + 'delete-xray';
     this.setXrayData = this.apiHost + 'saveEvaluation';
     this.deleteSubs = this.apiHost + 'deleteSubsById';
@@ -182,19 +182,19 @@ export class UserService {
   updatePlan(requestParameters, id) {
     return this.http.post(`${this.updatePlanById}?id=${id}`, requestParameters, {});
   }
-  cancelUserPlan( id) {
-    return this.http.post(`${this.cancelUserSub}?dentist_id=${id}`,{});
+  cancelUserPlan(id) {
+    return this.http.post(`${this.cancelUserSub}?dentist_id=${id}`, {});
   }
-  getSubscription(requestParameters , id) {
-    return this.http.post(`${this.userSubscription}?id=${id}`,requestParameters,{})
+  getSubscription(requestParameters, id) {
+    return this.http.post(`${this.userSubscription}?id=${id}`, requestParameters, {})
   }
-  getSubscriptionRenew(requestParameters , id) {
-    return this.http.post(`${this.renewSub}?id=${id}`,requestParameters,{})
+  getSubscriptionRenew(requestParameters, id) {
+    return this.http.post(`${this.renewSub}?id=${id}`, requestParameters, {})
   }
-  addXray(requestParameters){
-    return this.http.post(`${this.uploadXray}`,requestParameters,{});
+  addXray(requestParameters) {
+    return this.http.post(`${this.uploadXray}`, requestParameters, {});
   }
-  getXray(id){
+  getXray(id) {
     return this.http.get(`${this.getXrayById}?xray_id=${id}`);
   }
   addEvalData(requestParameters) {
@@ -206,17 +206,17 @@ export class UserService {
   getEvalById(id) {
     return this.http.get(`${this.getEvaluationById}?xray_id=${id}`);
   }
-  forgotPassword(requestParameters){
-    return this.http.post(`${this.forgotPass}`, requestParameters,{});
+  forgotPassword(requestParameters) {
+    return this.http.post(`${this.forgotPass}`, requestParameters, {});
   }
-  VerifyingOTP(requestParameters){
+  VerifyingOTP(requestParameters) {
     return this.http.post(`${this.otpVerify}`, requestParameters, {});
   }
-  setNewPassword(requestParameters){
+  setNewPassword(requestParameters) {
     return this.http.put(`${this.setNewPass}`, requestParameters, {});
   }
-  allWebUser(){
-    return this.http.get(`https://api.glabol.com/admin/get-all-website-user`);
+  allWebUser() {
+    return;
   }
   order(requestParameter: any) {
     return this.http.post(`${this.subscriptionorderuser}`, requestParameter, {});
@@ -226,10 +226,10 @@ export class UserService {
     return this.http.post(`${this.subscriptioncompleteorder}`, requestParameter, {});
   }
 
-  paypalOrderReq(requestParameter: any){
+  paypalOrderReq(requestParameter: any) {
     return this.http.post(`${this.paypalReq}`, requestParameter, {})
   }
-  generateAIData(requestParameter: any){
+  generateAIData(requestParameter: any) {
     var myHeaders = new HttpHeaders();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Access-Control-Allow-Origin", "*");
@@ -237,18 +237,18 @@ export class UserService {
     const requestOptions = {
       headers: myHeaders,
     };
-    return this.http.post(`https://c602-52-173-187-78.ngrok-free.app/predict`, requestParameter, requestOptions)
+    return this.http.post(environment.AI_URL, requestParameter, requestOptions)
   }
-  sendXrayData(data: any){
+  sendXrayData(data: any) {
     return this.http.post(`${this.setXrayData}`, data, {})
   }
-  loadAIData(requestParameters: any){
+  loadAIData(requestParameters: any) {
     return this.http.post(`${this.AIData}`, requestParameters, {});
   }
-  updateAIData(requestParameters: any){
+  updateAIData(requestParameters: any) {
     return this.http.post(`${this.newAIData}`, requestParameters, {});
   }
-  setFlag(requestParameters:any){
+  setFlag(requestParameters: any) {
     return this.http.post(`${this.flag}`, requestParameters, {});
   }
   noOfSubscriber() {
@@ -275,146 +275,136 @@ export class UserService {
   noOfXrayEvalByID(id) {
     return this.http.get(`${this.totXrayEvalById}?dentist_id=${id}`);
   }
- noOfCavityByAI(id) {
+  noOfCavityByAI(id) {
     return this.http.get(`${this.totCavityByAI}?dentist_id=${id}`);
   }
   getUserPlanById(id) {
     return this.http.get(`${this.userPlanById}?dentist_id=${id}`);
   }
-  resetPassword(requestParameters){
-    return this.http.post(`${this.rstPwd}`,requestParameters,{});
+  resetPassword(requestParameters) {
+    return this.http.post(`${this.rstPwd}`, requestParameters, {});
   }
   getUserSubExpireTime(id) {
     return this.http.get(`${this.sub_expire_time}?dentist_id=${id}`);
   }
-  getCountries(){
+  getCountries() {
     return this.http.get(`${this.country}`);
   }
-  getStateByCountries(requestParameters){
+  getStateByCountries(requestParameters) {
     return this.http.post(`${this.states}`, requestParameters, {});
   }
-  deleteXrayByID(id: any, name: any){
+  deleteXrayByID(id: any, name: any) {
     return this.http.post(`${this.deleteXray}/${id}`, name, {});
   }
-  deleteSubsById(id: any){
+  deleteSubsById(id: any) {
     return this.http.post(`${this.deleteSubs}`, id, {})
   }
-  planDeleteDueToErr(id: any){
+  planDeleteDueToErr(id: any) {
     return this.http.post(`${this.planDeleteErr}`, id)
   }
-  activeSubsID(id: any){
+  activeSubsID(id: any) {
     return this.http.post(`${this.activeSubs}`, id, {})
   }
-  getAccuracyOfSys(){
+  getAccuracyOfSys() {
     return this.http.get(`${this.accuracyOfSys}`);
   }
-  handleTotalCavityCount(){
+  handleTotalCavityCount() {
     return this.http.get(`${this.totalCavityCount}`)
   }
 
   // ! paypal subscription
-  payPalTokenGen(requestParameters: any){
+  payPalTokenGen(requestParameters: any) {
     const body = new URLSearchParams();
     body.set("grant_type", "client_credentials")
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalToken}`, body, httpOptions)
   }
-  paypalGenProdID(requestParameter: any, token: any){
+  paypalGenProdID(requestParameter: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalProdID}`, requestParameter, httpOptions)
   }
-  paypalDataByProdID(id: any, token: any){
+  paypalDataByProdID(id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.get(`${this.paypalProdID}/${id}`, httpOptions)
   }
-  paypalCreatePlan(requestParameter: any, token: any){
+  paypalCreatePlan(requestParameter: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Basic ' + btoa('AeKffQqEC4lR2FtZBUdTIlOz6vMXajfBakTU2IIqdmA18KxLwV7FHpfMagXrAqf0RAwc7evqE3_HcvKr:EPNEGNEQmmqoQ3-Re3U7gyVkH3jIPS1h8Ai_mti1fBdMwkpIu2GeQxqFxg3Oy4JetoMQM-PLMK4yjBLU')
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalPlans}`, requestParameter, httpOptions)
   }
-  paypalPayment(requestParameter: any){
+  paypalPayment(requestParameter: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalUserSubs}`, requestParameter, httpOptions)
   }
-  paypalSuspend(requestParameter: any, id: any){
+  paypalSuspend(requestParameter: any, id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/suspend`, requestParameter, httpOptions)
   }
-  paypalActivate(requestParameter: any, id: any){
+  paypalActivate(requestParameter: any, id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/activate`, requestParameter, httpOptions)
   }
-  paypalRevise(requestParameter: any, id: any){
+  paypalRevise(requestParameter: any, id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/revise`, requestParameter, httpOptions)
   }
-  paypalCancel(requestParameter: any, id: any){
+  paypalCancel(requestParameter: any, id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
     return this.http.post(`${this.paypalUserSubs}/${id}/cancel`, requestParameter, httpOptions)
   }
-  paypalTransactions(id: any){
+  paypalTransactions(id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET_KEY}`)
-        // 'Authorization': 'Bearer ' + token
+        'Authorization': 'Basic ' + btoa(`${environment.PAYPAL_CLIENT_ID}:${environment.PAYPAL_CLIENT_SECRET_KEY}`)
       })
     };
-    return this.http.get(`${this.paypalUserSubs}/${id}/transactions?start_time=2018-01-21T07:50:20.940Z&end_time=2023-08-21T07:50:20.940Z`,  httpOptions)
+    return this.http.get(`${this.paypalUserSubs}/${id}/transactions?start_time=2018-01-21T07:50:20.940Z&end_time=2023-08-21T07:50:20.940Z`, httpOptions)
   }
-  handleFailedTransaction(id: any){
+  handleFailedTransaction(id: any) {
     return this.http.post(`${this.failureTransaction}`, id, {})
   }
 }

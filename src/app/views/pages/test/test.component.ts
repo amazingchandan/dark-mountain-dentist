@@ -5,7 +5,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-// import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+// import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class TestComponent {
       dom: 'Bfrtip',
     };
 
-    this.User();
+    // this.User();
 
 
   }
@@ -51,22 +51,22 @@ export class TestComponent {
   User() {
     // console.log(this.addLanguageListForm.value)
     // this.spinner.show();
-    this.apiService.allWebUser().subscribe((resp: any) => {
-      console.log(resp);
-      this.allData = resp.getData;
-      if (this.isDtInitialized) {
-        // this.spinner.hide();
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          dtInstance.destroy();
-          // this.dtTrigger.next();
+    // this.apiService.allWebUser().subscribe((resp: any) => {
+    //   console.log(resp);
+    //   this.allData = resp.getData;
+    //   if (this.isDtInitialized) {
+    //     // this.spinner.hide();
+    //     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    //       dtInstance.destroy();
+    //       // this.dtTrigger.next();
 
-        });
-      } else {
-        // this.spinner.hide();
-        this.isDtInitialized = true;
-        // this.dtTrigger.next();
-      }
-    });
+    //     });
+    //   } else {
+    //     // this.spinner.hide();
+    //     this.isDtInitialized = true;
+    //     // this.dtTrigger.next();
+    //   }
+    // });
   }
 
   async Weblist(id, status) {

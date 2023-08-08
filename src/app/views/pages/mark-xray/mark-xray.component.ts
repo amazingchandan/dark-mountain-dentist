@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import LabelStudio from 'label-studio';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 

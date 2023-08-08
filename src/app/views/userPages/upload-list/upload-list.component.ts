@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AppService } from 'src/app/services/app.service';
 import { UserService } from 'src/app/services/user.service';
 import { DataTableDirective } from 'angular-datatables';

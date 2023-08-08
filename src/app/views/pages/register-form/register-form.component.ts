@@ -6,7 +6,7 @@ import { AppService } from 'src/app/services/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 // import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 const ALPHA_NUMERIC_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{7,20}$/;
@@ -39,11 +39,11 @@ export class RegisterFormComponent {
   }
 
   ngOnInit() {
-    let p_data = {
-      token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
-      prod_id: 'PROD-2SV05090KF783042A'
-    }
-    localStorage.setItem('p-data', JSON.stringify(p_data))
+    // let p_data = {
+    //   token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
+    //   prod_id: 'PROD-2SV05090KF783042A'
+    // }
+    // localStorage.setItem('p-data', JSON.stringify(p_data))
     function alphaNumericValidator(control: FormControl): ValidationErrors | null {
       return ALPHA_NUMERIC_REGEX.test(control.value) ? null : ALPHA_NUMERIC_VALIDATION_ERROR;
     }

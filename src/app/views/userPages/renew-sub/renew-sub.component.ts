@@ -220,7 +220,7 @@ export class RenewSubComponent implements OnInit {
     }
   }
   getIPAddress() {
-    this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res: any) => {
+    this.http.get(environment.GEO_LOCATION).subscribe((res: any) => {
       const data = res;
       this.ipAddress = data.IPv4
       this.country = data.country;

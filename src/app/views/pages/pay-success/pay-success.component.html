@@ -4,7 +4,7 @@
       <ul class="logo">
         <li class="w-logo-header">
           <a class="nav-link p-0">
-            <img src="../../../../assets/images/arti_new.png" class="w-100"/>
+            <img src="../../../../assets/images/arti_new.png" class="w-100" />
           </a>
         </li>
       </ul>
@@ -18,14 +18,13 @@
       </div>
     </ng-template>
     <div>
-      <ngx-bootstrap-spinner
-        bdColor="rgba(0,0,0,0.0)"
-        size="default"
-        color="#000000"
-        type="border"
-        [fullScreen]="false"
-        [loadingText]="show_text"
-      ></ngx-bootstrap-spinner>
+      <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+        template="<img  src='./assets/images/loader.gif' height='150px'>"
+        color="#fff"
+        [fullScreen]="true"
+        loadingText=""
+      ></ngx-spinner>
     </div>
   </div>
 </div>

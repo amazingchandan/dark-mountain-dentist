@@ -85,14 +85,13 @@
   <div class="body flex-grow-1">
     <c-container breakpoint="lg" class="h-auto">
       <router-outlet></router-outlet>
-      <ngx-bootstrap-spinner
-        bdColor="rgba(0, 0, 0, 0.8)"
-        loaderTemplate="<img  src='./assets/images/loader.gif' height='150px'>"
+      <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+        template="<img  src='./assets/images/loader.gif' height='150px'>"
         color="#fff"
-        type="border"
         [fullScreen]="true"
         loadingText=""
-      ></ngx-bootstrap-spinner>
+      ></ngx-spinner>
     </c-container>
   </div>
   <!--app footer-->

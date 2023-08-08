@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import LabelStudio from 'label-studio';
 import { event } from 'jquery';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { AppService } from '../../../services/app.service';
 import { DomSanitizer } from '@angular/platform-browser';

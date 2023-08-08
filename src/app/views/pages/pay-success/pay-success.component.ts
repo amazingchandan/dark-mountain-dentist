@@ -4,7 +4,7 @@ import { AppService } from 'src/app/services/app.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
-import { NgxSpinnerService } from "ngx-bootstrap-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({

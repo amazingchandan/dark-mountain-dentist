@@ -2,10 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, Directive, Inp
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, NgForm, ValidationErrors, Validators, FormBuilder } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+// import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserService } from 'src/app/services/user.service';
 import { AppService } from 'src/app/services/app.service';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location, DOCUMENT } from '@angular/common';
 import {
@@ -89,39 +89,6 @@ export class PricingComponent implements OnInit, AfterViewInit {
   focus: any;
   public dots: boolean = false;
   //route: any;
-  public customOptions: OwlOptions = {
-    center: true,
-    // items: 3,
-    margin: 15,
-    // animateOut: 'fadeOut',
-    loop: true,
-    // autoWidth: true,
-    // autoHeight: true,
-    autoplay: false,
-    autoplayTimeout: 1000,
-    autoplaySpeed: 6000,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 1500,
-    navText: ['<i class="fa fa-angle-left left-arrow" aria-hidden="true"></i>', '<i class="fa fa-angle-right right-arrow" aria-hidden="true"></i>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 2
-      },
-      950: {
-        items: 3
-      },
-      2400: {
-        items: 5
-      }
-    },
-    nav: true,
-  }
 
   private razorPayOptions: any = {
     key: 'rzp_test_llXrMfq95r3LMF', // Enter the test Key ID generated from the Dashboard
@@ -270,7 +237,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
     })
   }
   getIPAddress() {
-    this.http.get("https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364").subscribe((res: any) => {
+    this.http.get(environment.GEO_LOCATION).subscribe((res: any) => {
       const data = res;
       this.ipAddress = data.IPv4
       this.country = data.country;
@@ -721,7 +688,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       console.log("LENGTH HERE")
     }
     console.log(this.subsPaypalID)
-    let token = JSON.parse(localStorage.getItem('p-data')).token;
+    // let token = JSON.parse(localStorage.getItem('p-data')).token;
     console.log(this.subsPaypalID)
     console.log(`${this.localHost}pricing/${this.userId}/success`)
     let data = {

@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FileHandle } from '../../../drag-drop.directive';
 import { AppService } from '../../../services/app.service';
 import { Title } from '@angular/platform-browser';

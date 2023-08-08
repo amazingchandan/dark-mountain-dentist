@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('token')) {
       this.router.navigateByUrl("/dashboard")
     }
-    let p_data = {
-      token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
-      prod_id: 'PROD-2SV05090KF783042A'
-    }
-    localStorage.setItem('p-data', JSON.stringify(p_data))
+    // let p_data = {
+    //   token: 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg',
+    //   prod_id: 'PROD-2SV05090KF783042A'
+    // }
+    // localStorage.setItem('p-data', JSON.stringify(p_data))
     // ! to create productID
     // this.apiService.payPalTokenGen(null).subscribe((res: any) => {
     //   console.log(res)
@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     //     console.log(res)
     //   })
     // })
-    this.apiService.paypalDataByProdID('PROD-2SV05090KF783042A', 'A21AAIkrNT4uw6k5IbT5mFWZT0Fefx_kDg767QqDDf9hP-L1hkAiINAtTtAgC6B6yu-KHHMu3_Ovs4pDRtONOYULiY9ggR2Mg').subscribe((res: any) => {
-      console.log(res)
-    })
+    // this.apiService.paypalDataByProdID('PROD-2SV05090KF783042A').subscribe((res: any) => {
+    //   console.log(res)
+    // })
   }
 
   onSomeAction(event: any) {
@@ -88,15 +88,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       };
       // this.appService.updateApprovalMessage(loginData)
       this.apiService.onLogin(JSON.stringify(loginData)).subscribe((result: any) => {
-        console.log(result);
         // let id= result.userInfo.id;
         if (result.success) {
+          console.log(result);
           this.apiService.payPalTokenGen(null).subscribe((res: any) => {
             if (res.access_token) {
               localStorage.setItem('p-token', res.access_token)
             }
           })
-          console.log(result.userInfo.subscribed)
+          console.log(result.userInfo.subscribed, result.userInfo.id)
           let id = result.userInfo.id;
           this.apiService.getUserRecordById(id).subscribe((res: any) => {
             console.log(res, "*****");

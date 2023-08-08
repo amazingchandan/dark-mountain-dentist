@@ -14,7 +14,7 @@ import { type } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
-import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-subscription-list',
@@ -326,10 +326,10 @@ export class SubscriptionListComponent implements OnInit {
       }
       // console.log(data)
       // return;
-      let token = JSON.parse(localStorage.getItem('p-data')).token;
-      this.userService.paypalCreatePlan(data, token).subscribe((res: any) => {
+      // let token = JSON.parse(localStorage.getItem('p-data')).token;
+      this.userService.paypalCreatePlan(data).subscribe((res: any) => {
         console.log(res)
-        this.userService.paypalCreatePlan(data1, token).subscribe((resp:any) => {
+        this.userService.paypalCreatePlan(data1).subscribe((resp:any) => {
           if (res.id && resp.id) {
             if(this.addPriceingForm.value.description.length){
               console.log(this.addPriceingForm.value.description)
