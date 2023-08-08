@@ -18,7 +18,6 @@ export class PaySuccessComponent implements OnInit {
   public token: any = localStorage.getItem('token');
   public btnStatus: boolean = false;
   title = 'ARTI';
-  public apiHost: any = 'http://localhost:4200/failure';
   public payment_status: any;
   public show_text: any;
   public subs_detail: any;
