@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   PAYPAL_API: 'https://api-m.sandbox.paypal.com/v1/',
-  API_HOST: 'https://apidarkmountain.blahworks.tech/',
+  API_HOST: '/api/',
   LOCAL_HOST: 'https://arti.blahworks.tech/',
   AI_URL: 'https://c602-52-173-187-78.ngrok-free.app/predict',
   GEO_LOCATION: "https://ipgeolocation.abstractapi.com/v1/?api_key=57a0cd43f17f4cf1a1dfa5e126095364",
@@ -14,3 +14,4 @@ export const environment = {
     siteKey: '6Ld7TU0mAAAAAFjH7axIGjhz4hCyTVTkAzGOtUfs'
   },
 };
+// https://apidarkmountain.blahworks.tech

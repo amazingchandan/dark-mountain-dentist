@@ -3,6 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { AppService } from '../services/app.service';
 import { UserService } from '../services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthinterceptorInterceptor implements HttpInterceptor {
@@ -13,6 +14,10 @@ export class AuthinterceptorInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if(request.url.indexOf(environment.PAYPAL_API) > -1)
+    {
+      return next.handle(request);
+    }
     let modifiedRequist = request;
     if (this.appService.getToken()) {
       modifiedRequist = request.clone({
