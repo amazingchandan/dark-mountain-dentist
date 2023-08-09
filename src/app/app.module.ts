@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 
 import { DataTablesModule } from 'angular-datatables';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import {  } from 'ngx-toastr';
@@ -74,6 +74,7 @@ import { DentistProfileComponent } from './views/pages/dentist-profile/dentist-p
 import { ResetPasswordComponent } from './views/pages/reset-password/reset-password.component';
 import { UploadListComponent } from './views/userPages/upload-list/upload-list.component'
 // import { RegisterFormComponent } from './views/pages/register-form/register-form.component';
+import { AuthinterceptorInterceptor } from 'src/app/utils/authinterceptor.interceptor'
 
 
 const APP_CONTAINERS = [
@@ -125,6 +126,11 @@ const APP_CONTAINERS = [
     NgxSpinnerModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthinterceptorInterceptor,
+      multi: true,
+    },
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy,

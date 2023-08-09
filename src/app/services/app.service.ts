@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppService {
 
+  public userInfo = JSON.parse(localStorage.getItem('userInfo'))
   public accuracySys: any = 0;
   public accuracySysDent: any = 0;
   public user = {
@@ -49,6 +50,17 @@ export class AppService {
 
   private getUrl = new BehaviorSubject(false)
   currentUrl = this.getUrl.asObservable();
+
+  getToken(){
+    if(this.userInfo && this.userInfo.token){
+      return this.userInfo.token;
+    }
+  }
+
+  setToken(text: any, data: any){
+
+    // return true;
+  }
 
   updateCavitiesDetectedAI(num: any){
     this.cavitiesDetectedAI.next(num)

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent, HttpEventType } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { AuthinterceptorInterceptor } from '../utils/authinterceptor.interceptor';
 @Injectable({
   providedIn: 'root',
 })
@@ -140,9 +141,8 @@ export class UserService {
     this.failureTransaction = this.apiHost + 'failureTrans'
   }
   onLogin(requestParameters: string) {
-    return this.http.post(`${this.login}`, JSON.parse(requestParameters), {});
+    return this.http.post(`${this.login}`, JSON.parse(requestParameters));
   }
-
   addUser(requestParameters) {
     return this.http.post(`${this.userRegister}`, requestParameters, {});
   }
@@ -150,7 +150,7 @@ export class UserService {
     return this.http.get(`${this.logout}`);
   }
   getUserList() {
-    return this.http.get(`${this.addAdminList}`);
+    return this.http.get(`${this.addAdminList}`, {});
   }
   getUserRecordById(id) {
     return this.http.get(`${this.getUsersRecordById}?dentist_id=${id}`);

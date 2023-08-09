@@ -32,6 +32,8 @@ import { PaySuccessComponent } from './pay-success/pay-success.component';
 import { PayFailureComponent } from './pay-failure/pay-failure.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AuthinterceptorInterceptor } from 'src/app/utils/authinterceptor.interceptor';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -76,12 +78,17 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     NgxSpinnerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  // providers: [
-  //   {
-  //     provide: RECAPTCHA_V3_SITE_KEY,
-  //     useValue: environment.recaptcha.siteKey
-  //   }
-  // ]
+  providers: [
+    // {
+    //   provide: RECAPTCHA_V3_SITE_KEY,
+    //   useValue: environment.recaptcha.siteKey
+    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthinterceptorInterceptor,
+      multi: true,
+    },
+  ]
 })
 export class PagesModule {
 }
